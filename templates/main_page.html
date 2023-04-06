@@ -31,29 +31,26 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if (Model.Rows.Count == 0)
-                        {
+                        {{if .Name}}
+                        {{$counter := set 0}}
+                        {{range .Protocols}}
+                        {{$counter := inc}}
                         <tr class="cell-centered">
-                            <td colspan="@(showEditing ? 6 : 5)">Протоколы не найдены</td>
-                        </tr>
-                        }
-                        @foreach (ProtocolTableRowModel protocol in Model.Rows)
-                        {
-                        counter++;
-                        <tr class="cell-centered">
-                            @if (showEditing)
-                            {
+                     
                             <td>
                                 <a class="btn btn-sm btn-warning" asp-controller="Protocol" asp-action="Edit"
                                     asp-route-id="@protocol.Id">
                                     <i class="bi bi-pencil-fill"></i>
                                 </a>
                             </td>
-                            }
-                            <td>@counter</td>
-                            <td>@protocol.Name</td>
-                            <td>@protocol.CenterName</td>
-                            <td>@protocol.Status.GetDisplayName()</td>
+                    
+                        <div>
+
+                        </div>
+                            <td> {{$counter}} </td>
+                            <td>{{.Name}}</td>
+                            <td>{{.CenterId}}</td>
+                            <td>{{.Status}}</td>
                             <td>
                                 <a class="btn btn-sm btn-primary" asp-controller="Protocol" asp-action="Index"
                                     asp-route-id="@protocol.Id">
@@ -61,7 +58,17 @@
                                 </a>
                             </td>
                         </tr>
-                        }
+                        {{end}}
+                        {{else}}
+                        <tr class="cell-centered">
+                            <td colspan="@(showEditing ? 6 : 5)">Протоколы не найдены</td>
+                        </tr>
+
+
+                        {{end}}
+
+
+
                     </tbody>
                 </table>
             </div>

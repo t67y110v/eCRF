@@ -2,6 +2,7 @@ package server
 
 import (
 	"fmt"
+	"html/template"
 	"net/http"
 
 	"github.com/gofiber/fiber/v2"
@@ -29,6 +30,11 @@ type server struct {
 func newServer(pgstore store.PostgresStore, mgstore store.MongoStore, config *config.Config, log logging.Logger) *server {
 	//ViewsLayout: "shared/headers/main_header"
 	engine := html.New("./templates", ".html")
+	var st state
+	engine.AddFuncMap(template.FuncMap{
+		"set": st.Set,
+		"inc": st.Inc,
+	})
 	fmt.Println(&engine)
 	s := &server{
 		router:   fiber.New(fiber.Config{Views: engine, ViewsLayout: "shared/main_layout", ServerHeader: "software engineering course api", AppName: "Api v1.0.1"}),
@@ -57,6 +63,7 @@ func (s *server) configureRouter() {
 
 	s.router.Get("/swagger/*", swagger.HandlerDefault)
 
+	s.router.Get("/protocol", s.handlers.GetProtocols())
 	///////// USER GROUP ///////////////
 	////////////////////////////////////
 	user := s.router.Group("/user")
@@ -75,4 +82,17 @@ func (s *server) configureRouter() {
 	pages.Get("auth", s.handlers.AuthPage())
 	pages.Get("main", s.handlers.MainPage())
 
+}
+func (s *state) Set(n int) int {
+	s.n = n
+	return n
+}
+
+func (s *state) Inc() int {
+	s.n++
+	return s.n
+}
+
+type state struct {
+	n int
 }

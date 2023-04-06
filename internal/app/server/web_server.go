@@ -62,9 +62,9 @@ func newPostgresDB(c *config.Config) (*gorm.DB, error) {
 
 	db.AutoMigrate(&userModel.User{})
 	db.AutoMigrate(&protocolModel.Protocol{})
-	db.AutoMigrate(subjectModel.Subject{})
-	db.AutoMigrate(subjectModel.DemographySubject{})
-	db.AutoMigrate(centerModlel.Center{})
+	db.AutoMigrate(&subjectModel.Subject{})
+	db.AutoMigrate(&subjectModel.DemographySubject{})
+	db.AutoMigrate(&centerModlel.Center{})
 	return db, nil
 }
 

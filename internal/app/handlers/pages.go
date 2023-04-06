@@ -20,6 +20,11 @@ func (h *Handlers) AuthPage() fiber.Handler {
 
 func (h *Handlers) MainPage() fiber.Handler {
 	return func(c *fiber.Ctx) error {
+		p, err := h.pgStore.UserRepository().GetProtocols()
+		if err != nil {
+			return err
+		}
+
 		cookie := c.Cookies("JWT")
 		if cookie == "" {
 			return c.Redirect("/auth")
@@ -28,7 +33,7 @@ func (h *Handlers) MainPage() fiber.Handler {
 
 		claims := jwt.MapClaims{}
 
-		_, err := jwt.ParseWithClaims(tokenString, claims, func(token *jwt.Token) (interface{}, error) {
+		_, err = jwt.ParseWithClaims(tokenString, claims, func(token *jwt.Token) (interface{}, error) {
 			return []byte("secret"), nil
 		})
 
@@ -47,8 +52,9 @@ func (h *Handlers) MainPage() fiber.Handler {
 		}
 
 		return c.Render("main_page", fiber.Map{
-			"Name": u.Name,
-			"Role": u.Role,
+			"Name":      u.Name,
+			"Role":      u.Role,
+			"Protocols": p,
 		})
 	}
 }

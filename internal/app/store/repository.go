@@ -2,13 +2,15 @@ package store
 
 import (
 	mongoModel "github.com/t67y110v/web/internal/app/model/product"
-	postgresModel "github.com/t67y110v/web/internal/app/model/user"
+	postgresModelProtocol "github.com/t67y110v/web/internal/app/model/protocol"
+	postgresModelUser "github.com/t67y110v/web/internal/app/model/user"
 )
 
 type PostgresStoreRepository interface {
-	Create(*postgresModel.User) error
-	FindByEmail(string) (*postgresModel.User, error)
-	FindByID(string) (*postgresModel.User, error)
+	Create(*postgresModelUser.User) error
+	FindByEmail(string) (*postgresModelUser.User, error)
+	FindByID(string) (*postgresModelUser.User, error)
+	GetProtocols() ([]postgresModelProtocol.Protocol, error)
 }
 
 type MongoStoreRepository interface {
