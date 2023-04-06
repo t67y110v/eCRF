@@ -9,7 +9,11 @@ import (
 
 	"github.com/t67y110v/web/internal/app/config"
 	"github.com/t67y110v/web/internal/app/logging"
-	model "github.com/t67y110v/web/internal/app/model/user"
+	centerModlel "github.com/t67y110v/web/internal/app/model/center"
+	protocolModel "github.com/t67y110v/web/internal/app/model/protocol"
+	subjectModel "github.com/t67y110v/web/internal/app/model/subject"
+	userModel "github.com/t67y110v/web/internal/app/model/user"
+
 	"github.com/t67y110v/web/internal/app/store/nosqlstore"
 	store "github.com/t67y110v/web/internal/app/store/sqlstore"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -55,8 +59,12 @@ func newPostgresDB(c *config.Config) (*gorm.DB, error) {
 	if err != nil {
 		return nil, err
 	}
-	db.AutoMigrate(&model.User{})
 
+	db.AutoMigrate(&userModel.User{})
+	db.AutoMigrate(&protocolModel.Protocol{})
+	db.AutoMigrate(subjectModel.Subject{})
+	db.AutoMigrate(subjectModel.DemographySubject{})
+	db.AutoMigrate(centerModlel.Center{})
 	return db, nil
 }
 

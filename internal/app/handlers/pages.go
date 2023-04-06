@@ -45,13 +45,10 @@ func (h *Handlers) MainPage() fiber.Handler {
 		if err != nil {
 			return err
 		}
-		var role string = "Менеджер"
-		if u.Isadmin {
-			role = "Администратор"
-		}
+
 		return c.Render("main_page", fiber.Map{
 			"Name": u.Name,
-			"Role": role,
+			"Role": u.Role,
 		})
 	}
 }

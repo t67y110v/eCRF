@@ -1,10 +1,70 @@
-<div>
-    <div class="container">
-        <div class="row">
-            <div class="col-3"></div>
-            <div class="col-6">
-                <h2>{{.Name}}</h2>
+<section>
+    <partial name="_ShadeHeaderPartial" />
+    <div class="container-fluid">
+        <div class="shadow-sm p-3 bg-white rounded">
+            <div class="row mb-1">
+                <form class="col-3" asp-controller="Protocol" asp-action="List" method="get">
+                    <select asp-for="Status" class="form-select" asp-items="@Html.GetEnumSelectList<ProtocolStatus>()"
+                        onchange="this.form.submit()">
+                        <option value="null">Не фильтровать</option>
+                    </select>
+                </form>
+                <div class="col-9">
+                    <div class="h-100 d-flex justify-content-right align-items-end">
+                        <a class="btn btn-outline-primary" asp-controller="Protocol" asp-action="Create"><i
+                                class="bi bi-plus-lg"></i> Добавить протокол</a>
+                    </div>
+                </div>
+            </div>
+            <div class="scroll-block">
+                <table class="table table-primary table-bordered table-sm mb-0">
+                    <thead>
+                        <tr class="cell-centered">
+
+                            <th scope="col">Действие</th>
+
+                            <th сlass="number-column" scope="col">№ п/п</th>
+                            <th scope="col">Название</th>
+                            <th scope="col">Клинический центр</th>
+                            <th scope="col">Статус</th>
+                            <th scope="col">Перейти</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Rows.Count == 0)
+                        {
+                        <tr class="cell-centered">
+                            <td colspan="@(showEditing ? 6 : 5)">Протоколы не найдены</td>
+                        </tr>
+                        }
+                        @foreach (ProtocolTableRowModel protocol in Model.Rows)
+                        {
+                        counter++;
+                        <tr class="cell-centered">
+                            @if (showEditing)
+                            {
+                            <td>
+                                <a class="btn btn-sm btn-warning" asp-controller="Protocol" asp-action="Edit"
+                                    asp-route-id="@protocol.Id">
+                                    <i class="bi bi-pencil-fill"></i>
+                                </a>
+                            </td>
+                            }
+                            <td>@counter</td>
+                            <td>@protocol.Name</td>
+                            <td>@protocol.CenterName</td>
+                            <td>@protocol.Status.GetDisplayName()</td>
+                            <td>
+                                <a class="btn btn-sm btn-primary" asp-controller="Protocol" asp-action="Index"
+                                    asp-route-id="@protocol.Id">
+                                    <i class="bi bi-database-fill"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
-</div>
+</section>

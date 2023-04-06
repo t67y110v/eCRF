@@ -43,10 +43,9 @@ func (h *Handlers) Register() fiber.Handler {
 		}
 		log.Println(req)
 		u := &model.User{
-			Email:       req.Email,
-			Password:    req.Password,
-			Name:        req.Name,
-			SeccondName: req.SeccondName,
+			Email:    req.Email,
+			Password: req.Password,
+			Name:     req.Name,
 		}
 
 		if err := h.pgStore.UserRepository().Create(u); err != nil {
