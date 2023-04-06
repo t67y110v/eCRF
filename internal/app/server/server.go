@@ -1,6 +1,7 @@
 package server
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/gofiber/fiber/v2"
@@ -13,6 +14,7 @@ import (
 
 	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/gofiber/swagger" // swagger handler
+	"github.com/gofiber/template/html"
 )
 
 type server struct {
@@ -25,8 +27,11 @@ type server struct {
 }
 
 func newServer(pgstore store.PostgresStore, mgstore store.MongoStore, config *config.Config, log logging.Logger) *server {
+	//ViewsLayout: "shared/headers/main_header"
+	engine := html.New("./templates", ".html")
+	fmt.Println(&engine)
 	s := &server{
-		router:   fiber.New(fiber.Config{ServerHeader: "software engineering course api", AppName: "Api v1.0.1"}),
+		router:   fiber.New(fiber.Config{Views: engine, ViewsLayout: "shared/main_layout", ServerHeader: "software engineering course api", AppName: "Api v1.0.1"}),
 		logger:   log,
 		pgStore:  pgstore,
 		mgStore:  mgstore,
@@ -64,5 +69,10 @@ func (s *server) configureRouter() {
 	user.Post("/login", s.handlers.Login())
 	user.Post("/check", s.handlers.CheckJWT())
 	//////////////////////////////////////
+
+	pages := s.router.Group("/")
+	pages.Static("/public", "./public")
+	pages.Get("auth", s.handlers.AuthPage())
+	pages.Get("main", s.handlers.MainPage())
 
 }
