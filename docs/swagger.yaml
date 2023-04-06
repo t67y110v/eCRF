@@ -1,0 +1,147 @@
+definitions:
+  requests.CheckToken:
+    properties:
+      token:
+        type: string
+    type: object
+  requests.Login:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    type: object
+  requests.Registration:
+    properties:
+      email:
+        type: string
+      name:
+        type: string
+      password:
+        type: string
+      seccond_name:
+        type: string
+    type: object
+  responses.Error:
+    properties:
+      message:
+        type: string
+    type: object
+  responses.Login:
+    properties:
+      Email:
+        type: string
+      Name:
+        type: string
+      token:
+        type: string
+    type: object
+  responses.Registration:
+    properties:
+      Email:
+        type: string
+      ID:
+        type: integer
+      Isadmin:
+        type: boolean
+      Name:
+        type: string
+      Password:
+        type: string
+      SeccondName:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /user/check:
+    post:
+      consumes:
+      - application/json
+      description: Validation user token
+      parameters:
+      - description: Check token
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/requests.CheckToken'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.Login'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.Error'
+      summary: Check session
+      tags:
+      - User
+  /user/login:
+    post:
+      consumes:
+      - application/json
+      description: authentification user in the system
+      parameters:
+      - description: login
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/requests.Login'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.Login'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.Error'
+      summary: User Login
+      tags:
+      - User
+  /user/register:
+    post:
+      consumes:
+      - application/json
+      description: registration of user
+      parameters:
+      - description: registration
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/requests.Registration'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.Registration'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.Error'
+      summary: User Registration
+      tags:
+      - User
+swagger: "2.0"
