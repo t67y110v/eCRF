@@ -1,5 +1,14 @@
 <section>
-    <partial name="_ShadeHeaderPartial" />
+    <div class="container-fluid mb-3">
+        <div class="row justify-content-center">
+            <div class="col-8 p-0">
+                <div class="shadow p-3 mb-3 bg-white rounded">
+                    <h2 class="text-center">Список протоколов</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="container-fluid">
         <div class="shadow-sm p-3 bg-white rounded">
             <div class="row mb-1">
@@ -11,8 +20,9 @@
                 </form>
                 <div class="col-9">
                     <div class="h-100 d-flex justify-content-right align-items-end">
-                        <a class="btn btn-outline-primary" asp-controller="Protocol" asp-action="Create"><i
-                                class="bi bi-plus-lg"></i> Добавить протокол</a>
+                        <a href="/protocol/">  
+                            <button class="btn btn-outline-primary">Добавить протокол</button>  
+                          </a>
                     </div>
                 </div>
             </div>
@@ -21,7 +31,7 @@
                     <thead>
                         <tr class="cell-centered">
 
-                            <th scope="col">Действие</th>
+                            <th scope="col">Изменить</th>
 
                             <th сlass="number-column" scope="col">№ п/п</th>
                             <th scope="col">Название</th>
@@ -36,26 +46,26 @@
                         {{range .Protocols}}
                         {{$counter := inc}}
                         <tr class="cell-centered">
-                     
-                            <td>
-                                <a class="btn btn-sm btn-warning" asp-controller="Protocol" asp-action="Edit"
-                                    asp-route-id="@protocol.Id">
-                                    <i class="bi bi-pencil-fill"></i>
-                                </a>
-                            </td>
-                    
-                        <div>
 
-                        </div>
-                            <td> {{$counter}} </td>
+                            <td>
+                                
+
+                                <a href="/protocol/edit/{{$counter}}">  
+                                    <button class="btn-outline-warning">🖊</button>  
+                                  </a>
+                            </td>
+
+                            <div>
+
+                            </div>
+                            <td> {{.Id}} </td>
                             <td>{{.Name}}</td>
                             <td>{{.CenterId}}</td>
                             <td>{{.Status}}</td>
                             <td>
-                                <a class="btn btn-sm btn-primary" asp-controller="Protocol" asp-action="Index"
-                                    asp-route-id="@protocol.Id">
-                                    <i class="bi bi-database-fill"></i>
-                                </a>
+                                <a href="/protocol/{{$counter}}">  
+                                    <button class="btn-outline-primary">📑</button>  
+                                  </a>
                             </td>
                         </tr>
                         {{end}}

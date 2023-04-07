@@ -1,0 +1,152 @@
+
+<section>
+    <div class="container-fluid mb-3">
+        <div class="row justify-content-center">
+            <div class="col-8 p-0">
+                <div class="shadow p-3 mb-3 bg-white rounded">
+                    <h2 class="text-center">{{.Protocol.Name}}</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <partial name="_ShadeHeaderPartial" />
+    <div class="row">
+        <div class="col-2 h-63vh shadow-sm p-3 bg-white rounded">
+            <h5 class="text-center">Субъекты</h5>
+            <div id="subject-select">
+                <div class="d-flex" id="load">
+                    <select class="form-select px-1" id="subject" onchange="OnSelectSubjectChange()">
+                        <option value="null">Не выбрано</option>
+                        {{range .Subjects}}
+                            <option value="@subject.Id">Субъект № .Number</option>
+                        {{end}}
+                    </select>
+                    @if (canAdd)
+                    {
+                        <button class="btn btn-sm btn-warning" id="edit-button" hidden><i class="bi bi-pencil-fill"></i></button>
+                        <button class="btn btn-sm btn-primary" onclick="OpenCreateSubjectModal()"><i class="bi bi-plus-lg"></i></button>
+                    }
+                </div>
+            </div>
+            <div class="grey rounded mt-1" id="menu">
+                <ul>
+                    <li>Скрининг</li>
+                    <li style="list-style-type: none;">
+                        <ul>
+                            <li>Начало визита</li>
+                            <li>Информ. согласие</li>
+                            <li>Демография</li>
+                        </ul>
+                    </li>
+                    <li>Период 1</li>
+                    <li>Период 2</li>
+                    <li>Заключительное обследование</li>
+                    <li>Внеплановый визит №1</li>
+                    <li>Внеплановый визит №2</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-8 px-2" id="center">
+            <div class="shadow-sm p-3 bg-white rounded h-100">
+                <h5 class="text-center">Демография</h5>
+                <hr>
+                <div class="row">
+                    <div class="col-7">
+                        <div class="mb-1">
+                            <label class="form-label">Пол</label>
+                            <select class="form-select" asp-items="@Html.GetEnumSelectList<Sex>()"></select>
+                        </div>
+                        <div class="mb-1">
+                            <label class="form-label">Раса</label>
+                            <select class="form-select" asp-items="@Html.GetEnumSelectList<Race>()"></select>
+                        </div>
+                        <div class="mb-1">
+                            <label class="form-label">Дата рождения</label>
+                            <input class="form-control" type="date">
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">Сохранить</button>
+                        </div>
+                    </div>
+                    <div class="col-5 grey rounded">
+                        <table>
+                            <thead>
+                                <tr class="cell-centered">
+                                    <th>Первичная валидация</th>
+                                    <th>Верификация монитором</th>
+                                    <th>Верификация Дата Менеджером</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="cell-centered">
+                                    <td><h2><i class="bi bi-check-square-fill text-success"></i></h2></td>
+                                    <td><h2><i class="bi bi-check-square-fill text-success"></i></h2></td>
+                                    <td><h2><i class="bi bi-x-square-fill text-danger"></i></h2></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-2 shadow-sm p-3 bg-white rounded" id="right">
+            <h5 class="text-center">Обсуждения</h5>
+        </div>
+    </div>
+</section>
+
+<div class="modal fade" id="Modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="false">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="ModalHeader"></h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" id="ModalBody">
+            </div>
+        </div>
+    </div>
+</div>
+    <script>
+        function OnSelectSubjectChange() {
+            let value = document.getElementById('subject').value;
+            let editButton = document.getElementById('edit-button');
+            if (value == null) {
+                $("#center").empty();
+                $("#right").empty();
+                $("#menu").empty();
+                editButton.setAttribute('hidden', 'hidden');
+            }
+            else {
+                $("#menu").load(`/Subject/Options/${value}`);
+                $("#right").load(`/Subject/Messages/${value}`);
+                editButton.setAttribute('onclick', `OpenEditSubjectModal(${value})`);
+                editButton.removeAttribute('hidden');
+            }
+        }
+        function OpenCreateSubjectModal(protocol) {
+            $('#ModalBody').load(`${location.protocol}//${location.host}/Subject/Create?protocol=${protocol}`, function (response, status, xhr) {
+                if (status == "error") {
+                    $('#ModalBody').html('<span class="text-danger">Ошибка загрузки формы</span>');
+                }
+                else {
+                    document.getElementById('ModalHeader').innerHTML = "Создание субъекта";
+                }
+            });
+            $('#Modal').modal('show');
+        }
+        function OpenEditSubjectModal(id) {
+            $('#ModalBody').load(`${location.protocol}//${location.host}/Subject/Edit/${id}`, function (response, status, xhr) {
+                if (status == "error") {
+                    $('#ModalBody').html('<span class="text-danger">Ошибка загрузки формы</span>');
+                }
+                else {
+                    document.getElementById('ModalHeader').innerHTML = "Изменение субъекта";
+                }
+            });
+            $('#Modal').modal('show');
+        }
+    </script>

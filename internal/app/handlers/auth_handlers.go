@@ -2,7 +2,6 @@ package handlers
 
 import (
 	"bytes"
-	"fmt"
 	"log"
 
 	"strconv"
@@ -80,21 +79,33 @@ func (h *Handlers) Login() fiber.Handler {
 		password := c.FormValue("password")
 		u, err := h.pgStore.UserRepository().FindByEmail(email)
 		if err != nil {
-			return err
+
+			er := &fiber.Cookie{
+				Name:  "error",
+				Value: "login",
+			}
+			c.Cookie(er)
+			return c.RedirectBack("/auth")
 		}
 
 		if !u.ComparePassword(password) {
 			c.Status(fiber.StatusUnauthorized)
-			return c.JSON(fiber.Map{
-				"message": "wrong password",
-			})
+			er := &fiber.Cookie{
+				Name:  "error",
+				Value: "password",
+			}
+			c.Cookie(er)
+			return c.RedirectBack("/auth")
 		}
 
 		if u.Id == 0 {
 			c.Status(fiber.StatusNotFound)
-			return c.JSON(fiber.Map{
-				"message": "user not found",
-			})
+			er := &fiber.Cookie{
+				Name:  "error",
+				Value: "login",
+			}
+			c.Cookie(er)
+			return c.RedirectBack("/auth")
 		}
 
 		secret := "11we$*9sd*(@!)"
@@ -197,56 +208,6 @@ func (h *Handlers) Logout() fiber.Handler {
 
 		return c.JSON(fiber.Map{
 			"message": "success",
-		})
-	}
-
-}
-
-func (h *Handlers) LoginForTemplate() fiber.Handler {
-
-	return func(c *fiber.Ctx) error {
-
-		email := c.FormValue("email")
-		password := c.FormValue("password")
-		u, err := h.pgStore.UserRepository().FindByEmail(email)
-		if err != nil {
-			return err
-		}
-		fmt.Println(email, "-", password)
-		if !u.ComparePassword(password) {
-			c.Status(fiber.StatusUnauthorized)
-			return c.JSON(fiber.Map{
-				"message": "wrong password",
-			})
-		}
-		if u.Id == 0 {
-			c.Status(fiber.StatusNotFound)
-			return c.JSON(fiber.Map{
-				"message": "user not found",
-			})
-		}
-
-		secret := "11we$*9sd*(@!)"
-
-		minutesCount, _ := strconv.Atoi("15")
-
-		claims := jwt.MapClaims{}
-
-		claims["exp"] = time.Now().Add(time.Minute * time.Duration(minutesCount)).Unix()
-
-		claims["id"] = u.Id
-
-		token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-
-		t, err := token.SignedString([]byte(secret))
-		if err != nil {
-			return err
-		}
-
-		return c.JSON(fiber.Map{
-			"token": t,
-			"name":  u.Name,
-			"email": u.Email,
 		})
 	}
 

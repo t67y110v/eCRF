@@ -63,7 +63,6 @@ func (s *server) configureRouter() {
 
 	s.router.Get("/swagger/*", swagger.HandlerDefault)
 
-	s.router.Get("/protocol", s.handlers.GetProtocols())
 	///////// USER GROUP ///////////////
 	////////////////////////////////////
 	user := s.router.Group("/user")
@@ -73,7 +72,7 @@ func (s *server) configureRouter() {
 		AllowHeaders:     "Origin, Content-Type, Accept",
 	}))
 	user.Post("/register", s.handlers.Register())
-	user.Post("/login", s.handlers.Login())
+	user.Post("/login", s.handlers.Login(), s.handlers.AuthPage())
 	user.Post("/check", s.handlers.CheckJWT())
 	//////////////////////////////////////
 
@@ -81,7 +80,13 @@ func (s *server) configureRouter() {
 	pages.Static("/public", "./public")
 	pages.Get("auth", s.handlers.AuthPage())
 	pages.Get("main", s.handlers.MainPage())
+	pages.Get("protocol/:id", s.handlers.ProtocolPage())
+	pages.Get("protocol/edit/:id", s.handlers.ProtocolEdit())
+	pages.Post("protocol/save", s.handlers.ProtocolSave())
+	pages.Get("protocol/", s.handlers.NewProtocol())
+	pages.Post("protocol/add", s.handlers.AddProtocol())
 
+	//s.router.Get("/protocol/", s.handlers.NewProtocol())
 }
 func (s *state) Set(n int) int {
 	s.n = n

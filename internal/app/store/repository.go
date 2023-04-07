@@ -11,6 +11,9 @@ type PostgresStoreRepository interface {
 	FindByEmail(string) (*postgresModelUser.User, error)
 	FindByID(string) (*postgresModelUser.User, error)
 	GetProtocols() ([]postgresModelProtocol.Protocol, error)
+	GetProtocolById(ID int) (*postgresModelProtocol.Protocol, error)
+	UpdateProtocolById(ID, status int, name string, centerId int) error
+	AddProtocol(name string, status, centerID int) error
 }
 
 type MongoStoreRepository interface {

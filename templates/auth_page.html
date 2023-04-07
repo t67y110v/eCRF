@@ -5,16 +5,28 @@
     
         <div class="mb-2">
 
-          <span>Логин</span>
+      
           <input id="email" type="text" class="form-control" name="email" placeholder="Логин">
 
         </div>
       
       <div class="mb-2">
         
-          <span>Пароль</span>
-          <input id="password" type="text" class="form-control" name="password" placeholder="Пароль">
       
+          <input id="password" type="text" class="form-control" name="password" placeholder="Пароль">
+          {{if .WrongPassword}}
+          <br>
+          <div class="mb-2">
+            <h5 class="text-center mb-2 text-danger">Неправильный пароль</h5>
+          </div>
+          
+          {{else if .WrongLogin}}
+          <br>
+          <div class="mb-2">
+            <h5 class="text-center mb-2 text-danger">Неправильный логин</h5>
+          </div>
+          
+          {{end}}
       </div>
       <div class="d-grid gap-2">
         <input type="submit" value="Войти" class="btn btn-primary">
