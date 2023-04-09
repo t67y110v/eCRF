@@ -29,7 +29,7 @@ type server struct {
 
 func newServer(pgstore store.PostgresStore, mgstore store.MongoStore, config *config.Config, log logging.Logger) *server {
 
-	engine := html.New("./templates", ".html")
+	engine := html.New("./templates", ".gohtml")
 	var st state
 	engine.AddFuncMap(template.FuncMap{
 		"set": st.Set,
