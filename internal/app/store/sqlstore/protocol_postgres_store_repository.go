@@ -15,6 +15,33 @@ func (r *PostgresStoreRepository) GetProtocols() ([]model.Protocol, error) {
 
 }
 
+func (r *PostgresStoreRepository) GetProtocolsByFilter(filter string) ([]model.Protocol, error) {
+	p := []model.Protocol{}
+	var f string
+	if filter == "=1" {
+		//name
+		f = "name"
+	} else if filter == "=2" {
+		//status
+		f = "status"
+	} else if filter == "=3" {
+		//center
+		f = "center_id"
+	} else {
+		if result := r.store.db.Order("id").Find(&p); result.Error != nil {
+			return nil, result.Error
+		}
+
+		return p, nil
+	}
+	if result := r.store.db.Order(f).Find(&p); result.Error != nil {
+		return nil, result.Error
+	}
+
+	return p, nil
+
+}
+
 func (r *PostgresStoreRepository) GetProtocolById(ID int) (*model.Protocol, error) {
 	p := &model.Protocol{}
 	if result := r.store.db.First(&model.Protocol{Id: ID}).Scan(p); result.Error != nil {

@@ -12,17 +12,29 @@
     <div class="container-fluid">
         <div class="shadow-sm p-3 bg-white rounded">
             <div class="row mb-1">
-                <form class="col-3" asp-controller="Protocol" asp-action="List" method="get">
-                    <select asp-for="Status" class="form-select" asp-items="@Html.GetEnumSelectList<ProtocolStatus>()"
-                        onchange="this.form.submit()">
-                        <option value="null">Не фильтровать</option>
+                <div class="col-3">
+                    <select id="filter" name="filter" class="form-select" onchange="gotopage(this)">
+                        <option value="" selected >Фильтр</option>
+                        <option value="/main/filter=0">По номеру</option>
+                        <option value="/main/filter=1">По имени</option>
+                        <option value="/main/filter=3">По клиническому центру</option>
+                        <option value="/main/filter=2">По статусу</option>
+                       
                     </select>
-                </form>
+                </div>
+                <script type="text/javascript">
+                    function gotopage(selval) {
+                        var value = selval.options[selval.selectedIndex].value;
+                        window.location.href = value;
+                    }
+                </script>
+
+
                 <div class="col-9">
                     <div class="h-100 d-flex justify-content-right align-items-end">
-                        <a href="/protocol/">  
-                            <button class="btn btn-outline-primary">Добавить протокол</button>  
-                          </a>
+                        <a href="/protocol/">
+                            <button class="btn btn-outline-primary">Добавить протокол</button>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -48,11 +60,11 @@
                         <tr class="cell-centered">
 
                             <td>
-                                
 
-                                <a href="/protocol/edit/{{$counter}}">  
-                                    <button class="btn-outline-warning">🖊</button>  
-                                  </a>
+
+                                <a href="/protocol/edit/{{$counter}}">
+                                    <button class="btn-outline-warning">🖊</button>
+                                </a>
                             </td>
 
                             <div>
@@ -63,9 +75,9 @@
                             <td>{{.CenterId}}</td>
                             <td>{{.Status}}</td>
                             <td>
-                                <a href="/protocol/{{$counter}}">  
-                                    <button class="btn-outline-primary">📑</button>  
-                                  </a>
+                                <a href="/protocol/{{$counter}}">
+                                    <button class="btn-outline-primary">📑</button>
+                                </a>
                             </td>
                         </tr>
                         {{end}}

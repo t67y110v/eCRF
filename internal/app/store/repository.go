@@ -14,6 +14,7 @@ type PostgresStoreRepository interface {
 	GetProtocolById(ID int) (*postgresModelProtocol.Protocol, error)
 	UpdateProtocolById(ID, status int, name string, centerId int) error
 	AddProtocol(name string, status, centerID int) error
+	GetProtocolsByFilter(filter string) ([]postgresModelProtocol.Protocol, error)
 }
 
 type MongoStoreRepository interface {

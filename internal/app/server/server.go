@@ -77,9 +77,10 @@ func (s *server) configureRouter() {
 	//////////////////////////////////////
 
 	pages := s.router.Group("/")
+	pages.Use(logger.New())
 	pages.Static("/public", "./public")
 	pages.Get("auth", s.handlers.AuthPage())
-	pages.Get("main", s.handlers.MainPage())
+	pages.Get("main/filter:filter", s.handlers.MainPage())
 	pages.Get("protocol/:id", s.handlers.ProtocolPage())
 	pages.Get("protocol/edit/:id", s.handlers.ProtocolEdit())
 	pages.Post("protocol/save", s.handlers.ProtocolSave())

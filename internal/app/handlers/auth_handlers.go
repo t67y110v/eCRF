@@ -129,7 +129,7 @@ func (h *Handlers) Login() fiber.Handler {
 			Value: t,
 		}
 		c.Cookie(cookie)
-		return c.Redirect("/main")
+		return c.Redirect("/main/filter=0")
 		// return c.JSON(fiber.Map{
 		// 	"token": t,
 		// 	"name":  u.Name,
