@@ -1,7 +1,7 @@
 package store
 
 type PostgresStore interface {
-	UserRepository() PostgresStoreRepository
+	Repository() PostgresStoreRepository
 }
 
 type MongoStore interface {

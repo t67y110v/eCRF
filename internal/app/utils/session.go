@@ -23,7 +23,7 @@ package utils
 // 		}
 
 // 		id := float64(claims["id"].(float64))
-//         u, err :=   store.PostgresStore.UserRepository().FindByID(strconv.Itoa(int(id)))
+//         u, err :=   store.PostgresStore.Repository.FindByID(strconv.Itoa(int(id)))
 
 // 		if err != nil {
 // 			return err

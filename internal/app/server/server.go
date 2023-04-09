@@ -28,7 +28,7 @@ type server struct {
 }
 
 func newServer(pgstore store.PostgresStore, mgstore store.MongoStore, config *config.Config, log logging.Logger) *server {
-	//ViewsLayout: "shared/headers/main_header"
+
 	engine := html.New("./templates", ".html")
 	var st state
 	engine.AddFuncMap(template.FuncMap{
@@ -57,9 +57,6 @@ func (s *server) configureRouter() {
 		AllowCredentials: true,
 		AllowHeaders:     "Origin, Content-Type, Accept",
 	}))
-	//api := s.router.Group("/api")
-	//api.Use(logger.New())
-	// localhost:4000/user/register
 
 	s.router.Get("/swagger/*", swagger.HandlerDefault)
 
@@ -77,17 +74,18 @@ func (s *server) configureRouter() {
 	//////////////////////////////////////
 
 	pages := s.router.Group("/")
-	pages.Use(logger.New())
 	pages.Static("/public", "./public")
 	pages.Get("auth", s.handlers.AuthPage())
 	pages.Get("main/filter:filter", s.handlers.MainPage())
 	pages.Get("protocol/:id", s.handlers.ProtocolPage())
 	pages.Get("protocol/edit/:id", s.handlers.ProtocolEdit())
-	pages.Post("protocol/save", s.handlers.ProtocolSave())
-	pages.Get("protocol/", s.handlers.NewProtocol())
-	pages.Post("protocol/add", s.handlers.AddProtocol())
+	pages.Get("protocol/", s.handlers.ProtocolNew())
 
-	//s.router.Get("/protocol/", s.handlers.NewProtocol())
+	protocol := s.router.Group("/protocols")
+	protocol.Use(logger.New())
+	protocol.Post("/save", s.handlers.SaveProtocol())
+	protocol.Post("/add", s.handlers.AddProtocol())
+
 }
 func (s *state) Set(n int) int {
 	s.n = n

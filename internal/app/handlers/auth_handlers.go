@@ -47,7 +47,7 @@ func (h *Handlers) Register() fiber.Handler {
 			Name:     req.Name,
 		}
 
-		if err := h.pgStore.UserRepository().Create(u); err != nil {
+		if err := h.pgStore.Repository().Create(u); err != nil {
 			return err
 		}
 
@@ -77,52 +77,22 @@ func (h *Handlers) Login() fiber.Handler {
 
 		email := c.FormValue("email")
 		password := c.FormValue("password")
-		u, err := h.pgStore.UserRepository().FindByEmail(email)
+		u, err := h.pgStore.Repository().FindByEmail(email)
 		if err != nil {
-
-			er := &fiber.Cookie{
-				Name:  "error",
-				Value: "login",
-			}
-			c.Cookie(er)
-			return c.RedirectBack("/auth")
+			return loginError(c)
 		}
 
 		if !u.ComparePassword(password) {
-			c.Status(fiber.StatusUnauthorized)
-			er := &fiber.Cookie{
-				Name:  "error",
-				Value: "password",
-			}
-			c.Cookie(er)
-			return c.RedirectBack("/auth")
+			return passwordError(c)
 		}
 
 		if u.Id == 0 {
-			c.Status(fiber.StatusNotFound)
-			er := &fiber.Cookie{
-				Name:  "error",
-				Value: "login",
-			}
-			c.Cookie(er)
-			return c.RedirectBack("/auth")
+			return loginError(c)
 		}
 
-		secret := "11we$*9sd*(@!)"
-
-		minutesCount, _ := strconv.Atoi("15")
-
-		claims := jwt.MapClaims{}
-
-		claims["exp"] = time.Now().Add(time.Minute * time.Duration(minutesCount)).Unix()
-
-		claims["id"] = u.Id
-
-		token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-
-		t, err := token.SignedString([]byte(secret))
+		t, err := createToken(u.Id)
 		if err != nil {
-			return err
+			return loginError(c) // 502 internal
 		}
 		cookie := &fiber.Cookie{
 			Name:  "JWT",
@@ -182,7 +152,7 @@ func (h *Handlers) CheckJWT() fiber.Handler {
 
 		id := float64(claims["id"].(float64))
 
-		u, err := h.pgStore.UserRepository().FindByID(strconv.Itoa(int(id)))
+		u, err := h.pgStore.Repository().FindByID(strconv.Itoa(int(id)))
 		if err != nil {
 			return err
 		}

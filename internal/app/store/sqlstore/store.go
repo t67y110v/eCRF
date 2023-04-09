@@ -20,7 +20,7 @@ func NewPostgresDB(db *gorm.DB) *Store {
 	}
 }
 
-func (s *Store) UserRepository() store.PostgresStoreRepository {
+func (s *Store) Repository() store.PostgresStoreRepository {
 	if s.postgresStoreRepository != nil {
 		return s.postgresStoreRepository
 	}
