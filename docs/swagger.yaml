@@ -13,14 +13,18 @@ definitions:
     type: object
   requests.Registration:
     properties:
+      center_id:
+        type: integer
       email:
         type: string
       name:
         type: string
       password:
         type: string
-      seccond_name:
-        type: string
+      role:
+        type: integer
+      user_id:
+        type: integer
     type: object
   responses.Error:
     properties:

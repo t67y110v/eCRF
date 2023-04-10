@@ -29,10 +29,6 @@ func (h *Handlers) MainPage() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		filter := c.Params("filter")
 		c.ClearCookie("error")
-		p, err := h.pgStore.Repository().GetProtocolsByFilter(filter)
-		if err != nil {
-			return err //404
-		}
 
 		id, err := checkToken(c.Cookies("JWT"))
 		if err != nil {
@@ -42,11 +38,18 @@ func (h *Handlers) MainPage() fiber.Handler {
 		if err != nil {
 			return loginError(c)
 		}
-
+		p, err := h.pgStore.Repository().GetProtocolsByFilter(filter, u.CenterID)
+		if err != nil {
+			return err //404
+		}
+		cName, err := h.pgStore.Repository().GetCenterName(u.CenterID)
+		if err != nil {
+			return err
+		}
 		return c.Render("main_page", fiber.Map{
 			"Name":         u.Name,
-			"Role":         u.Role,
-			"CLinicCenter": u.CenterID,
+			"Role":         getUserRole(u.Role),
+			"CLinicCenter": cName,
 			"Protocols":    p,
 		})
 	}

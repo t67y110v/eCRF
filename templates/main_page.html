@@ -33,7 +33,7 @@
                 <div class="col-9">
                     <div class="h-100 d-flex justify-content-right align-items-end">
                         <a href="/protocol/">
-                            <button class="btn btn-outline-primary">Добавить протокол</button>
+                            <button class="btn btn-primary">Добавить протокол</button>
                         </a>
                     </div>
                 </div>
@@ -54,6 +54,7 @@
                     </thead>
                     <tbody>
                         {{if .Name}}
+                        {{$c :=.CLinicCenter }}
                         {{$counter := set 0}}
                         {{range .Protocols}}
                         {{$counter := inc}}
@@ -63,7 +64,7 @@
 
 
                                 <a href="/protocol/edit/{{$counter}}">
-                                    <button class="btn-outline-warning">🖊</button>
+                                    <button class="btn btn-sm btn-outline-warning">🖊</button>
                                 </a>
                             </td>
 
@@ -72,11 +73,17 @@
                             </div>
                             <td> {{.Id}} </td>
                             <td>{{.Name}}</td>
-                            <td>{{.CenterId}}</td>
-                            <td>{{.Status}}</td>
+                            <td>{{$c}}</td>
+                            {{$s := set .Status}}
+                            {{$t := com $s}}
+                            <td>{{$t}}</td>
+                        
+                        
+                    
+                    
                             <td>
                                 <a href="/protocol/{{$counter}}">
-                                    <button class="btn-outline-primary">📑</button>
+                                    <button class="btn btn-sm  btn-outline-primary">📑</button>
                                 </a>
                             </td>
                         </tr>

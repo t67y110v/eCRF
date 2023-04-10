@@ -1,4 +1,3 @@
-
 <section>
     <div class="container-fluid mb-3">
         <div class="row justify-content-center">
@@ -21,14 +20,9 @@
                     <select class="form-select px-1" id="subject" onchange="OnSelectSubjectChange()">
                         <option value="null">Не выбрано</option>
                         {{range .Subjects}}
-                            <option value="@subject.Id">Субъект № .Number</option>
+                        <option value="@subject.Id">Субьект №{{.Number}}</option>
                         {{end}}
                     </select>
-                    @if (canAdd)
-                    {
-                        <button class="btn btn-sm btn-warning" id="edit-button" hidden><i class="bi bi-pencil-fill"></i></button>
-                        <button class="btn btn-sm btn-primary" onclick="OpenCreateSubjectModal()"><i class="bi bi-plus-lg"></i></button>
-                    }
                 </div>
             </div>
             <div class="grey rounded mt-1" id="menu">
@@ -56,19 +50,42 @@
                 <div class="row">
                     <div class="col-7">
                         <div class="mb-1">
-                            <label class="form-label">Пол</label>
-                            <select class="form-select" asp-items="@Html.GetEnumSelectList<Sex>()"></select>
-                        </div>
-                        <div class="mb-1">
-                            <label class="form-label">Раса</label>
-                            <select class="form-select" asp-items="@Html.GetEnumSelectList<Race>()"></select>
-                        </div>
-                        <div class="mb-1">
-                            <label class="form-label">Дата рождения</label>
-                            <input class="form-control" type="date">
-                        </div>
-                        <div class="d-grid gap-2">
-                            <button type="submit" class="btn btn-primary">Сохранить</button>
+
+
+                            <form id="demography" method="POST" action="/subject/demography/new">
+
+                                <div class="mb-1">
+                                    <div class="mb-1">
+                                        <label class="form-label">Пол</label>
+                                        <select id="sex" name="center" class="form-select">
+                                            <option value="1">Мужчина</option>
+                                            <option value="2">Женщина</option>
+
+                                        </select>
+                                    </div>
+                                    <div class="mb-2">
+
+
+                                        <label class="form-label">Раса</label>
+                                        <select id="sex" name="center" class="form-select">
+                                            <option value="1">Европеоидная</option>
+                                            <option value="2">Негроидная</option>
+                                            <option value="3">Монголоидная</option>
+                                            <option value="4">Американоидная</option>
+                                            <option value="5">Австралоидная</option>
+
+                                        </select>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label class="form-label">Дата рождения</label>
+                                        <input class="form-control" type="date">
+                                    </div>
+
+                                    <div class="d-grid gap-2">
+                                        <input type="submit" value="Сохранить" class="btn btn-primary">
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                     <div class="col-5 grey rounded">
@@ -82,16 +99,28 @@
                             </thead>
                             <tbody>
                                 <tr class="cell-centered">
-                                    <td><h2><i class="bi bi-check-square-fill text-success"></i></h2></td>
-                                    <td><h2><i class="bi bi-check-square-fill text-success"></i></h2></td>
-                                    <td><h2><i class="bi bi-x-square-fill text-danger"></i></h2></td>
+                                    <td>
+                                        <h2>✅</h2>
+                                    </td>
+                                    <td>
+                                        <h2>✅</h2>
+                                    </td>
+                                    <td>
+                                        <h2>⛔</h2>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
+
+
             </div>
         </div>
+
+
+
+
         <div class="col-2 shadow-sm p-3 bg-white rounded" id="right">
             <h5 class="text-center">Обсуждения</h5>
         </div>
@@ -110,43 +139,3 @@
         </div>
     </div>
 </div>
-    <script>
-        function OnSelectSubjectChange() {
-            let value = document.getElementById('subject').value;
-            let editButton = document.getElementById('edit-button');
-            if (value == null) {
-                $("#center").empty();
-                $("#right").empty();
-                $("#menu").empty();
-                editButton.setAttribute('hidden', 'hidden');
-            }
-            else {
-                $("#menu").load(`/Subject/Options/${value}`);
-                $("#right").load(`/Subject/Messages/${value}`);
-                editButton.setAttribute('onclick', `OpenEditSubjectModal(${value})`);
-                editButton.removeAttribute('hidden');
-            }
-        }
-        function OpenCreateSubjectModal(protocol) {
-            $('#ModalBody').load(`${location.protocol}//${location.host}/Subject/Create?protocol=${protocol}`, function (response, status, xhr) {
-                if (status == "error") {
-                    $('#ModalBody').html('<span class="text-danger">Ошибка загрузки формы</span>');
-                }
-                else {
-                    document.getElementById('ModalHeader').innerHTML = "Создание субъекта";
-                }
-            });
-            $('#Modal').modal('show');
-        }
-        function OpenEditSubjectModal(id) {
-            $('#ModalBody').load(`${location.protocol}//${location.host}/Subject/Edit/${id}`, function (response, status, xhr) {
-                if (status == "error") {
-                    $('#ModalBody').html('<span class="text-danger">Ошибка загрузки формы</span>');
-                }
-                else {
-                    document.getElementById('ModalHeader').innerHTML = "Изменение субъекта";
-                }
-            });
-            $('#Modal').modal('show');
-        }
-    </script>

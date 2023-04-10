@@ -29,11 +29,12 @@ type server struct {
 
 func newServer(pgstore store.PostgresStore, mgstore store.MongoStore, config *config.Config, log logging.Logger) *server {
 
-	engine := html.New("./templates", ".gohtml")
+	engine := html.New("./templates", ".html")
 	var st state
 	engine.AddFuncMap(template.FuncMap{
 		"set": st.Set,
 		"inc": st.Inc,
+		"com": st.Com,
 	})
 	fmt.Println(&engine)
 	s := &server{
@@ -90,6 +91,13 @@ func (s *server) configureRouter() {
 func (s *state) Set(n int) int {
 	s.n = n
 	return n
+}
+
+func (s *state) Com(t int) string {
+	if t == 1 {
+		return "Активные"
+	}
+	return "Неактивные"
 }
 
 func (s *state) Inc() int {

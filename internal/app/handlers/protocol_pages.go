@@ -30,11 +30,20 @@ func (h *Handlers) ProtocolPage() fiber.Handler {
 		if err != nil {
 			return c.Redirect("/auth")
 		}
+		s, err := h.pgStore.Repository().GetSubjects()
+		if err != nil {
+			return c.Redirect("/auth") // 502
+		}
+		cName, err := h.pgStore.Repository().GetCenterName(u.CenterID)
+		if err != nil {
+			return err
+		}
 		return c.Render("protocol/protocol_index", fiber.Map{
 			"Name":         u.Name,
-			"Role":         u.Role,
-			"CLinicCenter": u.CenterID,
+			"Role":         getUserRole(u.Role),
+			"CLinicCenter": cName,
 			"Protocol":     p,
+			"Subjects":     s,
 		})
 
 	}
@@ -65,11 +74,14 @@ func (h *Handlers) ProtocolEdit() fiber.Handler {
 		if err != nil {
 			return c.Redirect("/auth") // 404
 		}
-
+		cName, err := h.pgStore.Repository().GetCenterName(u.CenterID)
+		if err != nil {
+			return err
+		}
 		return c.Render("protocol/protocol_edit", fiber.Map{
 			"Name":         u.Name,
-			"Role":         u.Role,
-			"CLinicCenter": u.CenterID,
+			"Role":         getUserRole(u.Role),
+			"CLinicCenter": cName,
 			"Protocol":     p,
 		})
 	}
@@ -89,11 +101,14 @@ func (h *Handlers) ProtocolNew() fiber.Handler {
 		if err != nil {
 			return c.Redirect("/auth")
 		}
-
+		cName, err := h.pgStore.Repository().GetCenterName(u.CenterID)
+		if err != nil {
+			return err
+		}
 		return c.Render("protocol/protocol_new", fiber.Map{
 			"Name":         u.Name,
-			"Role":         u.Role,
-			"CLinicCenter": u.CenterID,
+			"Role":         getUserRole(u.Role),
+			"CLinicCenter": cName,
 		})
 	}
 }

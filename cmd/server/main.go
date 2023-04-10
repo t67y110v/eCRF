@@ -15,6 +15,7 @@ func main() {
 
 		l.Fatal(err)
 	}
+
 	l.Infoln("Starting api server on addr :%s", config.Port)
 	if err := server.Start(&config); err != nil {
 		l.Fatal(err)

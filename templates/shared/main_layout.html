@@ -9,6 +9,18 @@
 </head>
 
 <body>
+  <style>
+    .btn-primary{
+      background-color: var(--color2) !important;
+    }
+
+  
+    .btn-primary:hover,
+    .btn-primary:active,
+    .btn-primary:visited {
+      background-color: var(--color1) !important;
+    }
+  </style>
 
   <header>
     {{if .Name }}
@@ -28,9 +40,9 @@
       <div class="col-2">
         <div class="h-100 d-flex flex-column justify-content-center align-items-center mx-1">
           <ul class="list-group w-100">
-            <li class="list-group-item"><b>ФИО:</b> {{.Name}}</li>
-            <li class="list-group-item"><b>Клинический центр:{{.CLinicCenter}}</b><br></li>
-            <li class="list-group-item"><b>Роль:</b>{{.Role}} </li>
+            <li class="list-group-item"><b>ФИО:&nbsp</b> {{.Name}}</li>
+            <li class="list-group-item"><b>Клинический центр:&nbsp</b>{{.CLinicCenter}}<br></li>
+            <li class="list-group-item"><b>Роль:&nbsp</b>{{.Role}} </li>
           </ul>
         </div>
       </div>

@@ -178,6 +178,9 @@ const docTemplate = `{
         "requests.Registration": {
             "type": "object",
             "properties": {
+                "center_id": {
+                    "type": "integer"
+                },
                 "email": {
                     "type": "string"
                 },
@@ -187,8 +190,11 @@ const docTemplate = `{
                 "password": {
                     "type": "string"
                 },
-                "seccond_name": {
-                    "type": "string"
+                "role": {
+                    "type": "integer"
+                },
+                "user_id": {
+                    "type": "integer"
                 }
             }
         },

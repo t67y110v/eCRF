@@ -2,7 +2,6 @@ package handlers
 
 import (
 	"bytes"
-	"log"
 
 	"strconv"
 
@@ -40,11 +39,12 @@ func (h *Handlers) Register() fiber.Handler {
 		if err := json.NewDecoder(reader).Decode(req); err != nil {
 			h.logger.Warningf("handle register, status :%d, error :%e", fiber.StatusBadRequest, err)
 		}
-		log.Println(req)
 		u := &model.User{
 			Email:    req.Email,
 			Password: req.Password,
 			Name:     req.Name,
+			Role:     req.Role,
+			CenterID: req.CenterID,
 		}
 
 		if err := h.pgStore.Repository().Create(u); err != nil {
