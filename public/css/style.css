@@ -3,6 +3,10 @@
     --color1: #184163;
 }
 
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+    background-color: var(--color1) !important;
+}
+
 .top-header {
     padding-top: 5px;
     padding-bottom: 5px;
