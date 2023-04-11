@@ -31,20 +31,26 @@ import (
 func (h *Handlers) Register() fiber.Handler {
 
 	return func(c *fiber.Ctx) error {
-
-		req := &requests.Registration{}
-
-		reader := bytes.NewReader(c.Body())
-
-		if err := json.NewDecoder(reader).Decode(req); err != nil {
-			h.logger.Warningf("handle register, status :%d, error :%e", fiber.StatusBadRequest, err)
+		cookie := c.Cookies("JWT")
+		_, err := checkToken(cookie)
+		if err != nil {
+			return loginError(c)
 		}
+		role, err := strconv.Atoi(c.FormValue("role"))
+		if err != nil {
+			return err
+		}
+		centerID, err := strconv.Atoi(c.FormValue("center_id"))
+		if err != nil {
+			return err
+		}
+
 		u := &model.User{
-			Email:    req.Email,
-			Password: req.Password,
-			Name:     req.Name,
-			Role:     req.Role,
-			CenterID: req.CenterID,
+			Email:    c.FormValue("email"),
+			Password: c.FormValue("password"),
+			Name:     c.FormValue("name"),
+			Role:     role,
+			CenterID: centerID,
 		}
 
 		if err := h.pgStore.Repository().Create(u); err != nil {
@@ -53,10 +59,37 @@ func (h *Handlers) Register() fiber.Handler {
 
 		u.Sanitize()
 
-		return c.JSON(u)
+		return c.Redirect("/admin/panel")
 
 	}
 
+}
+
+func (h *Handlers) Update() fiber.Handler {
+	return func(c *fiber.Ctx) error {
+		cookie := c.Cookies("JWT")
+		_, err := checkToken(cookie)
+		if err != nil {
+			return loginError(c)
+		}
+		role, err := strconv.Atoi(c.FormValue("role"))
+		if err != nil {
+			return err
+		}
+		centerID, err := strconv.Atoi(c.FormValue("center_id"))
+		if err != nil {
+			return err
+		}
+		userID, err := strconv.Atoi(c.FormValue("center_id"))
+		if err != nil {
+			return err
+		}
+
+		if err := h.pgStore.Repository().UpdateUser(userID, role, centerID, c.FormValue("email"), c.FormValue("name"), c.FormValue("password")); err != nil {
+			return err
+		}
+		return c.Redirect("/admin/panel")
+	}
 }
 
 // @Summary User Login

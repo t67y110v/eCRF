@@ -1,0 +1,61 @@
+<section>
+    <div class="container-fluid mb-3">
+        <div class="row justify-content-center">
+            <div class="col-8 p-0">
+                <div class="shadow p-3 mb-3 bg-white rounded">
+                    <h2 class="text-center">Изменение {{.User.Name}}</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="row justify-content-center mt-3">
+        <form id="new-form" method="POST" action="/user/update" class="col-12 col-lg-6 col-md-8 col-sm-10 rounded">
+            <div class="m-3">
+                <div class="mb-2">
+                    <label class="form-label">Логин</label>
+                    <input id="email" type="text" class="form-control" name="email" value="{{.User.Email}}">
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">Пароль</label>
+                    <input id="password" type="text" class="form-control" name="password" value="{{.User.Password}}">
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">Имя</label>
+                    <input id="name" type="text" class="form-control" name="name" value="{{.User.Name}}">
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">Роль</label>
+                    <select id="role" name="role" class="form-select">
+                        <option value="1">Администратор</option>
+                        <option value="2">Исследователь</option>
+                        <option value="3">Главный исследователь</option>
+                        <option value="4">Монитор</option>
+                        <option value="5">Дата менеджер</option>
+                        <option value="6">Ауидитор контроля качества</option>
+                        <option value="7">Медицинский монитор</option>
+                        <option value="8">Специалист по фармаконадзору</option>
+
+                    </select>
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">Центр</label>
+                    <select id="center_id" name="center_id" class="form-select">
+                        {{$counter := set 0}}
+                        {{range .Centers }}
+                        {{$counter := inc}}
+                        <option value="{{$counter}}">{{.Name}}</option>
+                        {{end}}
+                    </select>
+                </div>
+                <div class="d-grid gap-2">
+                    <br>
+                    <input type="submit" value="Сохранить" class="btn btn-primary">
+                </div>
+            </div>
+        </form>
+    </div>
+
+</section>

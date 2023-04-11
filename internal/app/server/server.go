@@ -1,7 +1,6 @@
 package server
 
 import (
-	"fmt"
 	"html/template"
 	"net/http"
 
@@ -31,12 +30,14 @@ func newServer(pgstore store.PostgresStore, mgstore store.MongoStore, config *co
 
 	engine := html.New("./templates", ".html")
 	var st state
+	st.store = pgstore
 	engine.AddFuncMap(template.FuncMap{
-		"set": st.Set,
-		"inc": st.Inc,
-		"com": st.Com,
+		"set":    st.Set,
+		"inc":    st.Inc,
+		"com":    st.Com,
+		"role":   st.Role,
+		"center": st.Center,
 	})
-	fmt.Println(&engine)
 	s := &server{
 		router:   fiber.New(fiber.Config{Views: engine, ViewsLayout: "shared/main_layout", ServerHeader: "software engineering course api", AppName: "Api v1.0.1"}),
 		logger:   log,
@@ -72,6 +73,7 @@ func (s *server) configureRouter() {
 	user.Post("/register", s.handlers.Register())
 	user.Post("/login", s.handlers.Login(), s.handlers.AuthPage())
 	user.Post("/check", s.handlers.CheckJWT())
+	user.Post("/update", s.handlers.Update())
 	//////////////////////////////////////
 
 	pages := s.router.Group("/")
@@ -87,24 +89,8 @@ func (s *server) configureRouter() {
 	protocol.Post("/save", s.handlers.SaveProtocol())
 	protocol.Post("/add", s.handlers.AddProtocol())
 
-}
-func (s *state) Set(n int) int {
-	s.n = n
-	return n
-}
+	adminPanel := s.router.Group("/admin")
+	adminPanel.Get("/panel", s.handlers.AdminPage())
+	adminPanel.Get("/update/:email", s.handlers.UpdatePage())
 
-func (s *state) Com(t int) string {
-	if t == 1 {
-		return "Активные"
-	}
-	return "Неактивные"
-}
-
-func (s *state) Inc() int {
-	s.n++
-	return s.n
-}
-
-type state struct {
-	n int
 }

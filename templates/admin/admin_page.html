@@ -1,0 +1,173 @@
+<section>
+    <div class="container-fluid mb-3">
+        <div class="row justify-content-center">
+            <div class="col-8 p-0">
+                <div class="shadow p-3 mb-3 bg-white rounded">
+                    <h2 class="text-center">Панель администратора</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-4">
+                <h4 class="text-center">Работа с центрами</h4>
+                <div class="row justify-content-center">
+
+                    <div class="shadow p-3 mb-3 bg-white rounded">
+                        <div class="btn-group">
+                            <a href="#" class="btn btn-primary">Добавить клинический центр</a>
+                            <a href="#" class="btn btn-primary">Обновить клиническому центр</a>
+                            <a href="#" class="btn btn-primary">Удалить клинический центр</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-4">
+                <h4 class="text-center">Работа с пользователями</h4>
+                <div class="row justify-content-center">
+
+                    <div class="shadow p-3 mb-3 bg-white rounded">
+                        <div class="btn-group">
+
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#registrationModal">
+                                Добавление пользователя
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="registrationModal" data-bs-backdrop="static"
+                                data-bs-keyboard="false" tabindex="-1" aria-labelledby="registrationModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-xl">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="registrationModalLabel">Регистрация пользователя
+                                            </h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row justify-content-center mt-3">
+                                                <form id="new-form" method="POST" action="/user/register"
+                                                    class="col-12 col-lg-6 col-md-8 col-sm-10 rounded">
+                                                    <div class="m-3">
+                                                        <div class="mb-2">
+                                                            <label class="form-label">Логин</label>
+                                                            <input id="email" type="text" class="form-control"
+                                                                name="email">
+                                                        </div>
+                                                        <div class="mb-2">
+                                                            <label class="form-label">Пароль</label>
+                                                            <input id="password" type="text" class="form-control"
+                                                                name="password">
+                                                        </div>
+                                                        <div class="mb-2">
+                                                            <label class="form-label">Имя</label>
+                                                            <input id="name" type="text" class="form-control"
+                                                                name="name">
+                                                        </div>
+                                                        <div class="mb-2">
+                                                            <label class="form-label">Роль</label>
+                                                            <select id="role" name="role" class="form-select">
+                                                                <option value="1">Администратор</option>
+                                                                <option value="2">Исследователь</option>
+                                                                <option value="3">Главный исследователь</option>
+                                                                <option value="4">Монитор</option>
+                                                                <option value="5">Дата менеджер</option>
+                                                                <option value="6">Ауидитор контроля качества</option>
+                                                                <option value="7">Медицинский монитор</option>
+                                                                <option value="8">Специалист по фармаконадзору</option>
+
+                                                            </select>
+                                                        </div>
+                                                        <div class="mb-2">
+                                                            <label class="form-label">Центр</label>
+                                                            <select id="center_id" name="center_id" class="form-select">
+                                                                {{$counter := set 0}}
+                                                                {{range .Centers }}
+                                                                {{$counter := inc}}
+                                                                <option value="{{$counter}}">{{.Name}}</option>
+                                                                {{end}}
+                                                            </select>
+                                                        </div>
+                                                        <div class="d-grid gap-2">
+                                                            <br>
+                                                            <input type="submit" value="Сохранить"
+                                                                class="btn btn-primary">
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger"
+                                                data-bs-dismiss="modal">Закрыть</button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#" class="btn btn-primary">Обновление пользователя</a>
+                            <a href="#" class="btn btn-primary">Удаление пользователя</a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <table class="table table-primary table-bordered table-sm mb-0">
+                <thead>
+                    <tr class="cell-centered">
+                        <th сlass="number-column" scope="col">№ п/п</th>
+                        <th scope="col">Логин</th>
+                        <th scope="col">Имя</th>
+                        <th scope="col">Клинический центр</th>
+                        <th scope="col">Роль</th>
+                        <th scope="col">Изменить</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{if .Name}}
+             
+                    {{$counter := set 0}}
+                    {{range .Users}}
+                    {{$counter := inc}}
+                    <tr class="cell-centered">
+                        <td> {{.Id}} </td>
+                        <td>{{.Email}}</td>
+                        <td>{{.Name}}</td>
+                        {{$c := center .CenterID}}
+                        <td>{{$c}}</td>
+                        {{$r := role .Role}}
+                        <td> {{$r}}</td>
+                        <td>
+                            <a href="/admin/update/{{.Email}}">
+                                <button class="btn btn-sm btn-outline-warning">🖊</button>
+                            </a>
+                        </td>
+                    </tr>
+                    {{end}}
+                    {{else}}
+                    <tr class="cell-centered">
+                        <td colspan="@(showEditing ? 6 : 5)">Протоколы не найдены</td>
+                    </tr>
+
+
+                    {{end}}
+
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+
+</section>

@@ -47,3 +47,28 @@ func (r *PostgresStoreRepository) FindByID(ID string) (*model.User, error) {
 	return u, nil
 
 }
+
+func (r *PostgresStoreRepository) GetUsers() ([]model.User, error) {
+	u := []model.User{}
+	if result := r.store.db.Order("id").Find(&u); result.Error != nil {
+		return nil, result.Error
+	}
+	return u, nil
+}
+
+func (r *PostgresStoreRepository) UpdateUser(ID, role, centerId int, email, name, paswword string) error {
+	u := model.User{
+		Id:       ID,
+		CenterID: centerId,
+		Email:    email,
+		Name:     name,
+		Password: paswword,
+	}
+	if err := u.BeforeCreate(); err != nil {
+		return err
+	}
+	if result := r.store.db.Model(model.User{}).Where("id = ?", ID).Updates(model.User{Name: name, CenterID: centerId, Email: email, Password: paswword, Role: role}); result.Error != nil {
+		return result.Error
+	}
+	return nil
+}

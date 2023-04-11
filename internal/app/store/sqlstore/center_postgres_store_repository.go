@@ -18,3 +18,11 @@ func (r *PostgresStoreRepository) GetCenterName(centerId int) (string, error) {
 	}
 	return c.Name, nil
 }
+
+func (r *PostgresStoreRepository) GetAllCenters() ([]model.Center, error) {
+	c := []model.Center{}
+	if result := r.store.db.Order("center_id").Find(&c); result.Error != nil {
+		return nil, result.Error
+	}
+	return c, nil
+}

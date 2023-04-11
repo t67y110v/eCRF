@@ -1,9 +1,11 @@
 package store
 
 import (
+	postgresModelCenter "github.com/t67y110v/web/internal/app/model/center"
 	mongoModel "github.com/t67y110v/web/internal/app/model/product"
 	postgresModelProtocol "github.com/t67y110v/web/internal/app/model/protocol"
 	posgresModelSubject "github.com/t67y110v/web/internal/app/model/subject"
+
 	postgresModelUser "github.com/t67y110v/web/internal/app/model/user"
 )
 
@@ -18,6 +20,9 @@ type PostgresStoreRepository interface {
 	GetProtocolsByFilter(filter string, centerId int) ([]postgresModelProtocol.Protocol, error)
 	GetSubjects() ([]posgresModelSubject.Subject, error)
 	GetCenterName(centerId int) (string, error)
+	GetAllCenters() ([]postgresModelCenter.Center, error)
+	GetUsers() ([]postgresModelUser.User, error)
+	UpdateUser(ID, role, centerId int, email, name, paswword string) error
 }
 
 type MongoStoreRepository interface {
