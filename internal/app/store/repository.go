@@ -23,6 +23,8 @@ type PostgresStoreRepository interface {
 	GetAllCenters() ([]postgresModelCenter.Center, error)
 	GetUsers() ([]postgresModelUser.User, error)
 	UpdateUser(ID, role, centerId int, email, name, paswword string) error
+	AddNewCenter(name string) error
+	UpdateCenter(centerId int, name string) error
 }
 
 type MongoStoreRepository interface {

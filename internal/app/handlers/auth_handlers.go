@@ -80,7 +80,7 @@ func (h *Handlers) Update() fiber.Handler {
 		if err != nil {
 			return err
 		}
-		userID, err := strconv.Atoi(c.FormValue("center_id"))
+		userID, err := strconv.Atoi(c.FormValue("user_id"))
 		if err != nil {
 			return err
 		}

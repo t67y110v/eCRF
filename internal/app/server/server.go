@@ -93,4 +93,9 @@ func (s *server) configureRouter() {
 	adminPanel.Get("/panel", s.handlers.AdminPage())
 	adminPanel.Get("/update/:email", s.handlers.UpdatePage())
 
+	center := s.router.Group("/center")
+	center.Use(logger.New())
+	center.Post("/new", s.handlers.AddNewCenter())
+	center.Post("/update", s.handlers.UpdateCenter())
+
 }

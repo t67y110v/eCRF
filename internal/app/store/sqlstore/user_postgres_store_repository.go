@@ -67,7 +67,7 @@ func (r *PostgresStoreRepository) UpdateUser(ID, role, centerId int, email, name
 	if err := u.BeforeCreate(); err != nil {
 		return err
 	}
-	if result := r.store.db.Model(model.User{}).Where("id = ?", ID).Updates(model.User{Name: name, CenterID: centerId, Email: email, Password: paswword, Role: role}); result.Error != nil {
+	if result := r.store.db.Model(model.User{}).Where("id = ?", ID).Updates(u); result.Error != nil {
 		return result.Error
 	}
 	return nil

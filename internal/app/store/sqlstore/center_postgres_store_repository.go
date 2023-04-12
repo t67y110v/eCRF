@@ -26,3 +26,23 @@ func (r *PostgresStoreRepository) GetAllCenters() ([]model.Center, error) {
 	}
 	return c, nil
 }
+
+func (r *PostgresStoreRepository) AddNewCenter(name string) error {
+	c := model.Center{
+		Name: name,
+	}
+	if result := r.store.db.Create(&c); result.Error != nil {
+		return result.Error
+	}
+	return nil
+}
+
+func (r *PostgresStoreRepository) UpdateCenter(centerId int, name string) error {
+	c := model.Center{
+		Name: name,
+	}
+	if result := r.store.db.Model(model.Center{}).Where("center_id = ?", centerId).Updates(c); result.Error != nil {
+		return result.Error
+	}
+	return nil
+}
