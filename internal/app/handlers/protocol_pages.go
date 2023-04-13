@@ -10,13 +10,9 @@ import (
 func (h *Handlers) ProtocolPage() fiber.Handler {
 
 	return func(c *fiber.Ctx) error {
-		id, err := checkToken(c.Cookies("JWT"))
+		_, userName, userCentrerID, userRole, err := checkToken(c.Cookies("JWT"))
 		if err != nil {
 			return loginError(c)
-		}
-		u, err := h.pgStore.Repository().FindByID(id)
-		if err != nil {
-			return err
 		}
 
 		protocol_id := c.Params("id")
@@ -34,13 +30,13 @@ func (h *Handlers) ProtocolPage() fiber.Handler {
 		if err != nil {
 			return c.Redirect("/auth") // 502
 		}
-		cName, err := h.pgStore.Repository().GetCenterName(u.CenterID)
+		cName, err := h.pgStore.Repository().GetCenterName(userCentrerID)
 		if err != nil {
 			return err
 		}
 		return c.Render("protocol/protocol_index", fiber.Map{
-			"Name":         u.Name,
-			"Role":         getUserRole(u.Role),
+			"Name":         userName,
+			"Role":         getUserRole(userRole),
 			"CLinicCenter": cName,
 			"Protocol":     p,
 			"Subjects":     s,
@@ -52,13 +48,9 @@ func (h *Handlers) ProtocolPage() fiber.Handler {
 
 func (h *Handlers) ProtocolEdit() fiber.Handler {
 	return func(c *fiber.Ctx) error {
-		id, err := checkToken(c.Cookies("JWT"))
+		_, userName, userCentrerID, userRole, err := checkToken(c.Cookies("JWT"))
 		if err != nil {
 			return loginError(c)
-		}
-		u, err := h.pgStore.Repository().FindByID(id)
-		if err != nil {
-			return err
 		}
 
 		if err != nil {
@@ -74,13 +66,13 @@ func (h *Handlers) ProtocolEdit() fiber.Handler {
 		if err != nil {
 			return c.Redirect("/auth") // 404
 		}
-		cName, err := h.pgStore.Repository().GetCenterName(u.CenterID)
+		cName, err := h.pgStore.Repository().GetCenterName(userCentrerID)
 		if err != nil {
 			return err
 		}
 		return c.Render("protocol/protocol_edit", fiber.Map{
-			"Name":         u.Name,
-			"Role":         getUserRole(u.Role),
+			"Name":         userName,
+			"Role":         getUserRole(userRole),
 			"CLinicCenter": cName,
 			"Protocol":     p,
 		})
@@ -89,25 +81,21 @@ func (h *Handlers) ProtocolEdit() fiber.Handler {
 
 func (h *Handlers) ProtocolNew() fiber.Handler {
 	return func(c *fiber.Ctx) error {
-		id, err := checkToken(c.Cookies("JWT"))
+		_, userName, userCentrerID, userRole, err := checkToken(c.Cookies("JWT"))
 		if err != nil {
 			return loginError(c)
-		}
-		u, err := h.pgStore.Repository().FindByID(id)
-		if err != nil {
-			return err // 404
 		}
 
 		if err != nil {
 			return c.Redirect("/auth")
 		}
-		cName, err := h.pgStore.Repository().GetCenterName(u.CenterID)
+		cName, err := h.pgStore.Repository().GetCenterName(userCentrerID)
 		if err != nil {
 			return err
 		}
 		return c.Render("protocol/protocol_new", fiber.Map{
-			"Name":         u.Name,
-			"Role":         getUserRole(u.Role),
+			"Name":         userName,
+			"Role":         getUserRole(userRole),
 			"CLinicCenter": cName,
 		})
 	}

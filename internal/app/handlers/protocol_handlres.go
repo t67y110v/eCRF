@@ -14,7 +14,7 @@ func (h *Handlers) SaveProtocol() fiber.Handler {
 		status := c.FormValue("status")
 		center_id := c.FormValue("center")
 		protocol_id := c.FormValue("id")
-		id, err := checkToken(cookie)
+		id, _, _, _, err := checkToken(cookie)
 		if err != nil {
 			return loginError(c)
 		}
@@ -51,7 +51,7 @@ func (h *Handlers) AddProtocol() fiber.Handler {
 		name := c.FormValue("name")
 		status := c.FormValue("status")
 		center_id := c.FormValue("center")
-		id, err := checkToken(cookie)
+		id, _, _, _, err := checkToken(cookie)
 		if err != nil {
 			return loginError(c)
 		}

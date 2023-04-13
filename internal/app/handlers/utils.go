@@ -9,7 +9,7 @@ import (
 	"github.com/golang-jwt/jwt/v4"
 )
 
-func createToken(id int) (string, error) {
+func createToken(id, centerId, role int, name string) (string, error) {
 	secret := "11we$*9sd*(@!)"
 
 	minutesCount, _ := strconv.Atoi("15")
@@ -19,15 +19,18 @@ func createToken(id int) (string, error) {
 	claims["exp"] = time.Now().Add(time.Minute * time.Duration(minutesCount)).Unix()
 
 	claims["id"] = id
+	claims["name"] = name
+	claims["centerId"] = centerId
+	claims["role"] = role
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 
 	return token.SignedString([]byte(secret))
 }
 
-func checkToken(cookie string) (string, error) {
+func checkToken(cookie string) (string, string, int, int, error) {
 	if cookie == "" {
-		return "", errors.New("nil token")
+		return "", "", 0, 0, errors.New("nil token")
 	}
 	tokenString := cookie
 
@@ -37,15 +40,18 @@ func checkToken(cookie string) (string, error) {
 		return []byte("11we$*9sd*(@!)"), nil
 	})
 	if err != nil {
-		return "", err
+		return "", "", 0, 0, err
 	}
 	if claims["id"] == nil {
-		return "", errors.New("nil id from token")
+		return "", "", 0, 0, errors.New("nil id from token")
 	}
 
 	id := strconv.Itoa(int(claims["id"].(float64)))
+	role := (int(claims["role"].(float64)))
+	name := claims["name"].(string)
 
-	return id, nil
+	centerId := (int(claims["centerId"].(float64)))
+	return id, name, centerId, role, nil
 
 }
 

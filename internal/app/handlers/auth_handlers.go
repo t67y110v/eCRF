@@ -32,7 +32,8 @@ func (h *Handlers) Register() fiber.Handler {
 
 	return func(c *fiber.Ctx) error {
 		cookie := c.Cookies("JWT")
-		_, err := checkToken(cookie)
+		//id, name, centerId, role, nil
+		_, _, _, _, err := checkToken(cookie)
 		if err != nil {
 			return loginError(c)
 		}
@@ -68,7 +69,7 @@ func (h *Handlers) Register() fiber.Handler {
 func (h *Handlers) Update() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		cookie := c.Cookies("JWT")
-		_, err := checkToken(cookie)
+		_, _, _, _, err := checkToken(cookie)
 		if err != nil {
 			return loginError(c)
 		}
@@ -123,7 +124,7 @@ func (h *Handlers) Login() fiber.Handler {
 			return loginError(c)
 		}
 
-		t, err := createToken(u.Id)
+		t, err := createToken(u.Id, u.CenterID, u.Role, u.Name)
 		if err != nil {
 			return loginError(c) // 502 internal
 		}
@@ -133,11 +134,6 @@ func (h *Handlers) Login() fiber.Handler {
 		}
 		c.Cookie(cookie)
 		return c.Redirect("/main/filter=0")
-		// return c.JSON(fiber.Map{
-		// 	"token": t,
-		// 	"name":  u.Name,
-		// 	"email": u.Email,
-		// })
 	}
 
 }

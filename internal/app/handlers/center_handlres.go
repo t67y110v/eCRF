@@ -10,7 +10,7 @@ func (h *Handlers) AddNewCenter() fiber.Handler {
 
 	return func(c *fiber.Ctx) error {
 		cookie := c.Cookies("JWT")
-		_, err := checkToken(cookie)
+		_, _, _, _, err := checkToken(cookie)
 		if err != nil {
 			return loginError(c)
 		}
@@ -28,7 +28,7 @@ func (h *Handlers) AddNewCenter() fiber.Handler {
 func (h *Handlers) UpdateCenter() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		cookie := c.Cookies("JWT")
-		_, err := checkToken(cookie)
+		_, _, _, _, err := checkToken(cookie)
 		if err != nil {
 			return loginError(c)
 		}

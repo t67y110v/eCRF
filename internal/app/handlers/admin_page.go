@@ -6,19 +6,16 @@ import (
 
 func (h *Handlers) AdminPage() fiber.Handler {
 	return func(c *fiber.Ctx) error {
-		id, err := checkToken(c.Cookies("JWT"))
+		//	//id, name, centerId, role, nil
+		_, userName, userCentrerID, userRole, err := checkToken(c.Cookies("JWT"))
 		if err != nil {
 			return loginError(c)
-		}
-		u, err := h.pgStore.Repository().FindByID(id)
-		if err != nil {
-			return err // 404
 		}
 
 		if err != nil {
 			return c.Redirect("/auth")
 		}
-		cName, err := h.pgStore.Repository().GetCenterName(u.CenterID)
+		cName, err := h.pgStore.Repository().GetCenterName(userCentrerID)
 		if err != nil {
 			return err
 		}
@@ -31,8 +28,8 @@ func (h *Handlers) AdminPage() fiber.Handler {
 			return err
 		}
 		return c.Render("admin/admin_page", fiber.Map{
-			"Name":         u.Name,
-			"Role":         getUserRole(u.Role),
+			"Name":         userName,
+			"Role":         getUserRole(userRole),
 			"CLinicCenter": cName,
 			"Centers":      centers,
 			"Users":        users,
@@ -42,14 +39,11 @@ func (h *Handlers) AdminPage() fiber.Handler {
 
 func (h *Handlers) UpdatePage() fiber.Handler {
 	return func(c *fiber.Ctx) error {
-		id, err := checkToken(c.Cookies("JWT"))
+		_, userName, _, userRole, err := checkToken(c.Cookies("JWT"))
 		if err != nil {
 			return loginError(c)
 		}
-		u, err := h.pgStore.Repository().FindByID(id)
-		if err != nil {
-			return err
-		}
+
 		user, err := h.pgStore.Repository().FindByEmail(c.Params("email"))
 		if err != nil {
 			return err
@@ -61,8 +55,8 @@ func (h *Handlers) UpdatePage() fiber.Handler {
 		}
 
 		return c.Render("admin/edit_user_page", fiber.Map{
-			"Name":    u.Name,
-			"Role":    getUserRole(u.Role),
+			"Name":    userName,
+			"Role":    getUserRole(userRole),
 			"User":    user,
 			"Centers": centers,
 		})
