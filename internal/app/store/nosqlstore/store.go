@@ -21,7 +21,7 @@ func NewMongoDB(client *mongo.Client) *Store {
 	}
 }
 
-func (s *Store) ProductRepository() store.MongoStoreRepository {
+func (s *Store) Repository() store.MongoStoreRepository {
 	if s.mongoStoreRepository != nil {
 		return s.mongoStoreRepository
 	}

@@ -2,7 +2,6 @@ package server
 
 import (
 	"html/template"
-	"net/http"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
@@ -26,7 +25,12 @@ type server struct {
 	handlers *handlers.Handlers
 }
 
-func newServer(pgstore store.PostgresStore, mgstore store.MongoStore, config *config.Config, log logging.Logger) *server {
+func newServer(
+	pgstore store.PostgresStore,
+	mgstore store.MongoStore,
+	config *config.Config,
+	log logging.Logger,
+) *server {
 
 	engine := html.New("./templates", ".html")
 	var st state
@@ -39,7 +43,13 @@ func newServer(pgstore store.PostgresStore, mgstore store.MongoStore, config *co
 		"center": st.Center,
 	})
 	s := &server{
-		router:   fiber.New(fiber.Config{Views: engine, ViewsLayout: "shared/main_layout", ServerHeader: "software engineering course api", AppName: "Api v1.0.1"}),
+		router: fiber.New(
+			fiber.Config{
+				Views:        engine,
+				ViewsLayout:  "shared/main_layout",
+				ServerHeader: "software engineering course api",
+				AppName:      "Api v1.0.1",
+			}),
 		logger:   log,
 		pgStore:  pgstore,
 		mgStore:  mgstore,
@@ -49,9 +59,6 @@ func newServer(pgstore store.PostgresStore, mgstore store.MongoStore, config *co
 	s.configureRouter()
 
 	return s
-}
-
-func (s *server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 }
 
 func (s *server) configureRouter() {
@@ -97,5 +104,8 @@ func (s *server) configureRouter() {
 	center.Use(logger.New())
 	center.Post("/new", s.handlers.AddNewCenter())
 	center.Post("/update", s.handlers.UpdateCenter())
+
+	subject := s.router.Group("/subject")
+	subject.Post("/new", s.handlers.NewSubject())
 
 }

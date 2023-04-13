@@ -5,5 +5,5 @@ type PostgresStore interface {
 }
 
 type MongoStore interface {
-	ProductRepository() MongoStoreRepository
+	Repository() MongoStoreRepository
 }

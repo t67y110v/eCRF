@@ -21,8 +21,10 @@
                         <option value="null">Не выбрано</option>
                         {{range .Subjects}}
                         <option value="@subject.Id">Субьект №{{.Number}}</option>
-                        {{end}}
-                    </select>
+                       {{end}}
+                        </select>
+
+                    
                 </div>
             </div>
             <div class="grey rounded mt-1" id="menu">
@@ -42,6 +44,65 @@
                     <li>Внеплановый визит №2</li>
                 </ul>
             </div>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn  btn-primary" data-bs-toggle="modal" data-bs-target="#updateCenter">
+                Добавить субьект исследования
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="updateCenter" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="updateCenter" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="updateCenter">Обновление центра
+                            </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row justify-content-center mt-3">
+                                <form id="new-form" method="POST" action="/subject/new"
+                                    class="col-12 col-lg-6 col-md-8 col-sm-10 rounded">
+                                    <div class="m-3">
+                                        <div class="m-3">
+                                            <div class="mb-2">
+                                                <label class="form-label">Протокол ID</label>
+                                                <input class="form-control" type="text"
+                                                    placeholder="{{.Protocol.Id}}"
+                                                    value="{{.Protocol.Id}}" name="protocol_id" id="protocol_id"
+                                                    readonly>
+                                            </div>
+                                            <div class="mb-2">
+                                                <label class="form-label">Центр ID</label>
+                                                <input class="form-control" type="text" placeholder="{{.ClinicId}}"
+                                                    value="{{.ClinicId}}" name="center_id" id="center_id" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label class="form-label">Скрининговый номер</label>
+                                            <input id="number" type="text" class="form-control" name="number">
+                                        </div>
+                                        <div class="mb-2">
+                                            <label class="form-label">Инициалы добровольца</label>
+                                            <input id="initials" type="text" class="form-control" name="initials">
+                                        </div>
+
+                                        <div class="d-grid gap-2">
+                                            <br>
+                                            <input type="submit" value="Сохранить" class="btn btn-primary">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Закрыть</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
         <div class="col-8 px-2" id="center">
             <div class="shadow-sm p-3 bg-white rounded h-100">

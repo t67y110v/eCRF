@@ -11,7 +11,6 @@ import (
 	"github.com/t67y110v/web/internal/app/logging"
 	centerModlel "github.com/t67y110v/web/internal/app/model/center"
 	protocolModel "github.com/t67y110v/web/internal/app/model/protocol"
-	subjectModel "github.com/t67y110v/web/internal/app/model/subject"
 	userModel "github.com/t67y110v/web/internal/app/model/user"
 
 	"github.com/t67y110v/web/internal/app/store/nosqlstore"
@@ -62,8 +61,8 @@ func newPostgresDB(c *config.Config) (*gorm.DB, error) {
 
 	db.AutoMigrate(&userModel.User{})
 	db.AutoMigrate(&protocolModel.Protocol{})
-	db.AutoMigrate(&subjectModel.Subject{})
-	db.AutoMigrate(&subjectModel.DemographySubject{})
+	//	db.AutoMigrate(&subjectModel.Subject{})
+	//	db.AutoMigrate(&subjectModel.DemographySubject{})
 	db.AutoMigrate(&centerModlel.Center{})
 	return db, nil
 }
