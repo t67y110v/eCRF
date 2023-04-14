@@ -23,6 +23,7 @@ type MongoStoreRepository interface {
 type SubjectStoreRepository interface {
 	AddSubject(number, initials string, centerId, protocolId int) error
 	GetSubjectsByProtocolId(protocolId int) ([]*modelSubject.Subject, error)
+	GetSubjectByNumber(number string) (*modelSubject.Subject, error)
 }
 
 type CenterStoreRepository interface {

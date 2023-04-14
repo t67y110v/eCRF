@@ -15,8 +15,9 @@ func (h *Handlers) ProtocolPage() fiber.Handler {
 			return loginError(c)
 		}
 
-		protocol_id := c.Params("id")
-		p_id, err := strconv.Atoi(protocol_id)
+		protocolId := c.Params("id")
+		subjectNumber := c.Params("number")
+		p_id, err := strconv.Atoi(protocolId)
 
 		if err != nil {
 			return c.Redirect("/auth")
@@ -30,6 +31,10 @@ func (h *Handlers) ProtocolPage() fiber.Handler {
 		if err != nil {
 			return err // 502
 		}
+		subject, err := h.mgStore.Repository().GetSubjectByNumber(subjectNumber)
+		if err != nil {
+			return err
+		}
 
 		cName, err := h.pgStore.Repository().GetCenterName(userCentrerID)
 		if err != nil {
@@ -42,6 +47,7 @@ func (h *Handlers) ProtocolPage() fiber.Handler {
 			"ClinicId":     userCentrerID,
 			"Protocol":     p,
 			"Subjects":     s, //s,
+			"Subject":      subject,
 		})
 
 	}

@@ -35,12 +35,15 @@ func newServer(
 	engine := html.New("./templates", ".html")
 	var st state
 	st.store = pgstore
+	var c counter
 	engine.AddFuncMap(template.FuncMap{
-		"set":    st.Set,
-		"inc":    st.Inc,
-		"com":    st.Com,
-		"role":   st.Role,
-		"center": st.Center,
+		"setCounter": c.SetCounter,
+		"incCounter": c.IncCounter,
+		"set":        st.Set,
+		"inc":        st.Inc,
+		"com":        st.Com,
+		"role":       st.Role,
+		"center":     st.Center,
 	})
 	s := &server{
 		router: fiber.New(
@@ -66,7 +69,6 @@ func (s *server) configureRouter() {
 		AllowCredentials: true,
 		AllowHeaders:     "Origin, Content-Type, Accept",
 	}))
-
 	s.router.Get("/swagger/*", swagger.HandlerDefault)
 
 	///////// USER GROUP ///////////////
@@ -87,7 +89,7 @@ func (s *server) configureRouter() {
 	pages.Static("/public", "./public")
 	pages.Get("auth", s.handlers.AuthPage())
 	pages.Get("main/filter:filter", s.handlers.MainPage())
-	pages.Get("protocol/:id", s.handlers.ProtocolPage())
+	pages.Get("protocol/:id/:number", s.handlers.ProtocolPage())
 	pages.Get("protocol/edit/:id", s.handlers.ProtocolEdit())
 	pages.Get("protocol/", s.handlers.ProtocolNew())
 

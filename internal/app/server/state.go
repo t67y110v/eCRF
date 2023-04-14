@@ -2,6 +2,19 @@ package server
 
 import "github.com/t67y110v/web/internal/app/store"
 
+type counter struct {
+	n int
+}
+
+func (c *counter) SetCounter(n int) int {
+	c.n = n
+	return n
+}
+func (c *counter) IncCounter() int {
+	c.n++
+	return c.n
+}
+
 type state struct {
 	n     int
 	store store.PostgresStore

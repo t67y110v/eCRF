@@ -73,31 +73,31 @@ func (r *MongoStoreRepository) GetSubjectsByProtocolId(protocolId int) ([]*model
 	return subjects, nil
 }
 
-// func (r *MongoStoreRepository) GetProductByName(productName string) (*model.Product, error) {
-// 	filter := bson.D{
-// 		primitive.E{
-// 			Key:   "product_name",
-// 			Value: productName,
-// 		},
-// 	}
-// 	ctx := context.TODO()
-// 	collection := r.store.client.Database("web").Collection("products")
+func (r *MongoStoreRepository) GetSubjectByNumber(number string) (*model.Subject, error) {
+	filter := bson.D{
+		primitive.E{
+			Key:   "number",
+			Value: number,
+		},
+	}
+	ctx := context.TODO()
+	collection := r.store.client.Database("eCRF").Collection("subjects")
 
-// 	cur := collection.FindOne(ctx, filter)
+	cur := collection.FindOne(ctx, filter)
 
-// 	var p model.Product
+	var p model.Subject
 
-// 	err := cur.Decode(&p)
-// 	if err := cur.Err(); err != nil {
-// 		return &p, err
-// 	}
-// 	if err != nil {
-// 		return nil, err
-// 	}
+	err := cur.Decode(&p)
+	if err := cur.Err(); err != nil {
+		return &p, err
+	}
+	if err != nil {
+		return nil, err
+	}
 
-// 	return &p, nil
+	return &p, nil
 
-// }
+}
 
 // func (r *MongoStoreRepository) DeleteProduct(productName string) error {
 // 	ctx := context.TODO()

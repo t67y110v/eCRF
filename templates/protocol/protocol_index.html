@@ -17,13 +17,19 @@
             <h5 class="text-center">Субъекты</h5>
             <div id="subject-select">
                 <div class="d-flex" id="load">
-                    <select class="form-select px-1" id="subject" onchange="OnSelectSubjectChange()">
-                        <option value="null">Не выбрано</option>
+                    <select class="form-select px-1" id="subject" onchange="gotopage(this)">
+                        <option value="{{.Subject.Number}}">Субьект №{{.Subject.Number}}</option>
+                        {{$p := .Protocol.Id}}
                         {{range .Subjects}}
-                        <option value="@subject.Id">Субьект №{{.Number}}</option>
+                        <option value="/protocol/{{$p}}/{{.Number}}">Субьект №{{.Number}}</option>
                        {{end}}
                         </select>
-
+                        <script type="text/javascript">
+                            function gotopage(selval) {
+                                var value = selval.options[selval.selectedIndex].value;
+                                window.location.href = value;
+                            }
+                        </script>
                     
                 </div>
             </div>

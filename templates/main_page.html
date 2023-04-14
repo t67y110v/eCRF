@@ -55,23 +55,23 @@
                     <tbody>
                         {{if .Name}}
                         {{$c :=.CLinicCenter }}
-                        {{$counter := set 0}}
+                        {{$counter := setCounter 0}}
                         {{range .Protocols}}
-                        {{$counter := inc}}
+                       
                         <tr class="cell-centered">
 
                             <td>
 
 
-                                <a href="/protocol/edit/{{$counter}}">
+                                <a href="/protocol/edit/{{.Id}}/">
                                     <button class="btn btn-sm btn-outline-warning">🖊</button>
                                 </a>
                             </td>
 
                             <div>
-
+                            {{$counter := incCounter}}
                             </div>
-                            <td> {{.Id}} </td>
+                            <td> {{$counter}} </td>
                             <td>{{.Name}}</td>
                             <td>{{$c}}</td>
                             {{$s := set .Status}}
@@ -82,7 +82,7 @@
                     
                     
                             <td>
-                                <a href="/protocol/{{$counter}}">
+                                <a href="/protocol/{{.Id}}/1">
                                     <button class="btn btn-sm  btn-outline-primary">📑</button>
                                 </a>
                             </td>
