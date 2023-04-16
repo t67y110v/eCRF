@@ -1,10 +1,11 @@
-package handlers
+package pages
 
 import (
 	"github.com/gofiber/fiber/v2"
+	"github.com/t67y110v/web/internal/app/utils"
 )
 
-func (h *Handlers) AuthPage() fiber.Handler {
+func (h *Pages) AuthPage() fiber.Handler {
 
 	return func(c *fiber.Ctx) error {
 		c.ClearCookie("JWT")
@@ -25,14 +26,14 @@ func (h *Handlers) AuthPage() fiber.Handler {
 
 }
 
-func (h *Handlers) MainPage() fiber.Handler {
+func (h *Pages) MainPage() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		filter := c.Params("filter")
 		c.ClearCookie("error")
 
-		_, userName, userCentrerID, userRole, err := checkToken(c.Cookies("JWT"))
+		_, userName, userCentrerID, userRole, err := utils.CheckToken(c.Cookies("JWT"))
 		if err != nil {
-			return loginError(c)
+			return utils.LoginError(c)
 		}
 
 		p, err := h.pgStore.Repository().GetProtocolsByFilter(filter, userCentrerID)
@@ -45,7 +46,7 @@ func (h *Handlers) MainPage() fiber.Handler {
 		}
 		return c.Render("main_page", fiber.Map{
 			"Name":         userName,
-			"Role":         getUserRole(userRole),
+			"Role":         utils.GetUserRole(userRole),
 			"CLinicCenter": cName,
 			"Protocols":    p,
 		})

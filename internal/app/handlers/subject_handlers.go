@@ -5,14 +5,14 @@ import (
 	"strconv"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/t67y110v/web/internal/app/utils"
 )
 
 func (h *Handlers) NewSubject() fiber.Handler {
 	return func(c *fiber.Ctx) error {
-		cookie := c.Cookies("JWT")
-		_, _, _, _, err := checkToken(cookie)
+		_, _, _, _, err := utils.CheckToken(c.Cookies("JWT"))
 		if err != nil {
-			return loginError(c)
+			return utils.LoginError(c)
 		}
 
 		centerId, err := strconv.Atoi(c.FormValue("center_id"))

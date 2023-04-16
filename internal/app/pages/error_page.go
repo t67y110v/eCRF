@@ -1,8 +1,8 @@
-package handlers
+package pages
 
 import "github.com/gofiber/fiber/v2"
 
-func (h *Handlers) ErrorPage() fiber.Handler {
+func (h *Pages) ErrorPage() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		err := c.Cookies("Error")
 

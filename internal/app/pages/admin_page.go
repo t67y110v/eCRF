@@ -1,14 +1,15 @@
-package handlers
+package pages
 
 import (
 	"github.com/gofiber/fiber/v2"
+	"github.com/t67y110v/web/internal/app/utils"
 )
 
-func (h *Handlers) AdminPage() fiber.Handler {
+func (h *Pages) AdminPage() fiber.Handler {
 	return func(c *fiber.Ctx) error {
-		_, userName, userCentrerID, userRole, err := checkToken(c.Cookies("JWT"))
+		_, userName, userCentrerID, userRole, err := utils.CheckToken(c.Cookies("JWT"))
 		if err != nil {
-			return loginError(c)
+			return utils.LoginError(c)
 		}
 		cName, err := h.pgStore.Repository().GetCenterName(userCentrerID)
 		if err != nil {
@@ -24,7 +25,7 @@ func (h *Handlers) AdminPage() fiber.Handler {
 		}
 		return c.Render("admin/admin_page", fiber.Map{
 			"Name":         userName,
-			"Role":         getUserRole(userRole),
+			"Role":         utils.GetUserRole(userRole),
 			"CLinicCenter": cName,
 			"Centers":      centers,
 			"Users":        users,
@@ -32,11 +33,11 @@ func (h *Handlers) AdminPage() fiber.Handler {
 	}
 }
 
-func (h *Handlers) UpdatePage() fiber.Handler {
+func (h *Pages) UpdatePage() fiber.Handler {
 	return func(c *fiber.Ctx) error {
-		_, userName, _, userRole, err := checkToken(c.Cookies("JWT"))
+		_, userName, _, userRole, err := utils.CheckToken(c.Cookies("JWT"))
 		if err != nil {
-			return loginError(c)
+			return utils.LoginError(c)
 		}
 
 		user, err := h.pgStore.Repository().FindByEmail(c.Params("email"))
@@ -51,7 +52,7 @@ func (h *Handlers) UpdatePage() fiber.Handler {
 
 		return c.Render("admin/edit_user_page", fiber.Map{
 			"Name":    userName,
-			"Role":    getUserRole(userRole),
+			"Role":    utils.GetUserRole(userRole),
 			"User":    user,
 			"Centers": centers,
 		})

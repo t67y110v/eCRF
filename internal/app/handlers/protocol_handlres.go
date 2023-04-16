@@ -5,6 +5,7 @@ import (
 	"strconv"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/t67y110v/web/internal/app/utils"
 )
 
 func (h *Handlers) SaveProtocol() fiber.Handler {
@@ -14,9 +15,9 @@ func (h *Handlers) SaveProtocol() fiber.Handler {
 		status := c.FormValue("status")
 		center_id := c.FormValue("center")
 		protocol_id := c.FormValue("id")
-		id, _, _, _, err := checkToken(cookie)
+		id, _, _, _, err := utils.CheckToken(cookie)
 		if err != nil {
-			return loginError(c)
+			return utils.LoginError(c)
 		}
 
 		_, err = h.pgStore.Repository().FindByID(id)
@@ -51,9 +52,9 @@ func (h *Handlers) AddProtocol() fiber.Handler {
 		name := c.FormValue("name")
 		status := c.FormValue("status")
 		center_id := c.FormValue("center")
-		id, _, _, _, err := checkToken(cookie)
+		id, _, _, _, err := utils.CheckToken(cookie)
 		if err != nil {
-			return loginError(c)
+			return utils.LoginError(c)
 		}
 		_, err = h.pgStore.Repository().FindByID(id)
 		if err != nil {

@@ -1,18 +1,19 @@
-package handlers
+package pages
 
 import (
 	"fmt"
 	"strconv"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/t67y110v/web/internal/app/utils"
 )
 
-func (h *Handlers) ProtocolPage() fiber.Handler {
+func (h *Pages) ProtocolPage() fiber.Handler {
 
 	return func(c *fiber.Ctx) error {
-		_, userName, userCentrerID, userRole, err := checkToken(c.Cookies("JWT"))
+		_, userName, userCentrerID, userRole, err := utils.CheckToken(c.Cookies("JWT"))
 		if err != nil {
-			return loginError(c)
+			return utils.LoginError(c)
 		}
 
 		protocolId := c.Params("id")
@@ -42,7 +43,7 @@ func (h *Handlers) ProtocolPage() fiber.Handler {
 		}
 		return c.Render("protocol/protocol_index", fiber.Map{
 			"Name":         userName,
-			"Role":         getUserRole(userRole),
+			"Role":         utils.GetUserRole(userRole),
 			"CLinicCenter": cName,
 			"ClinicId":     userCentrerID,
 			"Protocol":     p,
@@ -54,11 +55,11 @@ func (h *Handlers) ProtocolPage() fiber.Handler {
 
 }
 
-func (h *Handlers) ProtocolEdit() fiber.Handler {
+func (h *Pages) ProtocolEdit() fiber.Handler {
 	return func(c *fiber.Ctx) error {
-		_, userName, userCentrerID, userRole, err := checkToken(c.Cookies("JWT"))
+		_, userName, userCentrerID, userRole, err := utils.CheckToken(c.Cookies("JWT"))
 		if err != nil {
-			return loginError(c)
+			return utils.LoginError(c)
 		}
 
 		if err != nil {
@@ -81,18 +82,18 @@ func (h *Handlers) ProtocolEdit() fiber.Handler {
 		}
 		return c.Render("protocol/protocol_edit", fiber.Map{
 			"Name":         userName,
-			"Role":         getUserRole(userRole),
+			"Role":         utils.GetUserRole(userRole),
 			"CLinicCenter": cName,
 			"Protocol":     p,
 		})
 	}
 }
 
-func (h *Handlers) ProtocolNew() fiber.Handler {
+func (h *Pages) ProtocolNew() fiber.Handler {
 	return func(c *fiber.Ctx) error {
-		_, userName, userCentrerID, userRole, err := checkToken(c.Cookies("JWT"))
+		_, userName, userCentrerID, userRole, err := utils.CheckToken(c.Cookies("JWT"))
 		if err != nil {
-			return loginError(c)
+			return utils.LoginError(c)
 		}
 
 		if err != nil {
@@ -104,7 +105,7 @@ func (h *Handlers) ProtocolNew() fiber.Handler {
 		}
 		return c.Render("protocol/protocol_new", fiber.Map{
 			"Name":         userName,
-			"Role":         getUserRole(userRole),
+			"Role":         utils.GetUserRole(userRole),
 			"CLinicCenter": cName,
 		})
 	}

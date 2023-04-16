@@ -9,6 +9,7 @@ import (
 	"github.com/t67y110v/web/internal/app/config"
 	"github.com/t67y110v/web/internal/app/handlers"
 	"github.com/t67y110v/web/internal/app/logging"
+	"github.com/t67y110v/web/internal/app/pages"
 	"github.com/t67y110v/web/internal/app/store"
 
 	"github.com/gofiber/fiber/v2/middleware/logger"
@@ -23,6 +24,7 @@ type server struct {
 	mgStore  store.MongoStore
 	config   *config.Config
 	handlers *handlers.Handlers
+	pages    *pages.Pages
 }
 
 func newServer(
@@ -58,6 +60,7 @@ func newServer(
 		mgStore:  mgstore,
 		config:   config,
 		handlers: handlers.NewHandlers(pgstore, mgstore, log),
+		pages:    pages.NewHandlers(pgstore, mgstore, log),
 	}
 	s.configureRouter()
 
@@ -80,18 +83,18 @@ func (s *server) configureRouter() {
 		AllowHeaders:     "Origin, Content-Type, Accept",
 	}))
 	user.Post("/register", s.handlers.Register())
-	user.Post("/login", s.handlers.Login(), s.handlers.AuthPage())
+	user.Post("/login", s.handlers.Login(), s.pages.AuthPage())
 	user.Post("/check", s.handlers.CheckJWT())
 	user.Post("/update", s.handlers.Update())
 	//////////////////////////////////////
 
 	pages := s.router.Group("/")
 	pages.Static("/public", "./public")
-	pages.Get("auth", s.handlers.AuthPage())
-	pages.Get("main/filter:filter", s.handlers.MainPage())
-	pages.Get("protocol/:id/:number", s.handlers.ProtocolPage())
-	pages.Get("protocol/edit/:id", s.handlers.ProtocolEdit())
-	pages.Get("protocol/", s.handlers.ProtocolNew())
+	pages.Get("auth", s.pages.AuthPage())
+	pages.Get("main/filter:filter", s.pages.MainPage())
+	pages.Get("protocol/:id/:number", s.pages.ProtocolPage())
+	pages.Get("protocol/edit/:id", s.pages.ProtocolEdit())
+	pages.Get("protocol/", s.pages.ProtocolNew())
 
 	protocol := s.router.Group("/protocols")
 	protocol.Use(logger.New())
@@ -99,8 +102,8 @@ func (s *server) configureRouter() {
 	protocol.Post("/add", s.handlers.AddProtocol())
 
 	adminPanel := s.router.Group("/admin")
-	adminPanel.Get("/panel", s.handlers.AdminPage())
-	adminPanel.Get("/update/:email", s.handlers.UpdatePage())
+	adminPanel.Get("/panel", s.pages.AdminPage())
+	adminPanel.Get("/update/:email", s.pages.UpdatePage())
 
 	center := s.router.Group("/center")
 	center.Use(logger.New())
@@ -111,6 +114,6 @@ func (s *server) configureRouter() {
 	subject.Post("/new", s.handlers.NewSubject())
 
 	errors := s.router.Group("/error")
-	errors.Get("/", s.handlers.ErrorPage())
+	errors.Get("/", s.pages.ErrorPage())
 
 }

@@ -11,6 +11,7 @@ import (
 
 	"github.com/t67y110v/web/internal/app/handlers/requests"
 	model "github.com/t67y110v/web/internal/app/model/user"
+	"github.com/t67y110v/web/internal/app/utils"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/golang-jwt/jwt/v4"
@@ -31,11 +32,10 @@ import (
 func (h *Handlers) Register() fiber.Handler {
 
 	return func(c *fiber.Ctx) error {
-		cookie := c.Cookies("JWT")
 		//id, name, centerId, role, nil
-		_, _, _, _, err := checkToken(cookie)
+		_, _, _, _, err := utils.CheckToken(c.Cookies("JWT"))
 		if err != nil {
-			return loginError(c)
+			return utils.LoginError(c)
 		}
 		role, err := strconv.Atoi(c.FormValue("role"))
 		if err != nil {
@@ -68,10 +68,10 @@ func (h *Handlers) Register() fiber.Handler {
 
 func (h *Handlers) Update() fiber.Handler {
 	return func(c *fiber.Ctx) error {
-		cookie := c.Cookies("JWT")
-		_, _, _, _, err := checkToken(cookie)
+
+		_, _, _, _, err := utils.CheckToken(c.Cookies("JWT"))
 		if err != nil {
-			return loginError(c)
+			return utils.LoginError(c)
 		}
 		role, err := strconv.Atoi(c.FormValue("role"))
 		if err != nil {
@@ -113,20 +113,20 @@ func (h *Handlers) Login() fiber.Handler {
 		password := c.FormValue("password")
 		u, err := h.pgStore.Repository().FindByEmail(email)
 		if err != nil {
-			return loginError(c)
+			return utils.LoginError(c)
 		}
 
 		if !u.ComparePassword(password) {
-			return passwordError(c)
+			return utils.PasswordError(c)
 		}
 
 		if u.Id == 0 {
-			return loginError(c)
+			return utils.LoginError(c)
 		}
 
-		t, err := createToken(u.Id, u.CenterID, u.Role, u.Name)
+		t, err := utils.CreateToken(u.Id, u.CenterID, u.Role, u.Name)
 		if err != nil {
-			return loginError(c) // 502 internal
+			return utils.LoginError(c) // 502 internal
 		}
 		cookie := &fiber.Cookie{
 			Name:  "JWT",

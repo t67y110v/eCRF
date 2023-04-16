@@ -1,4 +1,4 @@
-package handlers
+package utils
 
 import (
 	"errors"
@@ -9,7 +9,7 @@ import (
 	"github.com/golang-jwt/jwt/v4"
 )
 
-func createToken(id, centerId, role int, name string) (string, error) {
+func CreateToken(id, centerId, role int, name string) (string, error) {
 	secret := "11we$*9sd*(@!)"
 
 	minutesCount, _ := strconv.Atoi("15")
@@ -28,21 +28,18 @@ func createToken(id, centerId, role int, name string) (string, error) {
 	return token.SignedString([]byte(secret))
 }
 
-func checkToken(cookie string) (string, string, int, int, error) {
-	if cookie == "" {
+func CheckToken(tokenString string) (string, string, int, int, error) {
+	if tokenString == "" {
 		return "", "", 0, 0, errors.New("nil token")
 	}
-	tokenString := cookie
 
 	claims := jwt.MapClaims{}
 
 	_, err := jwt.ParseWithClaims(tokenString, claims, func(token *jwt.Token) (interface{}, error) {
 		return []byte("11we$*9sd*(@!)"), nil
 	})
-	if err != nil {
-		return "", "", 0, 0, err
-	}
-	if claims["id"] == nil {
+
+	if claims["id"] == nil || err != nil {
 		return "", "", 0, 0, errors.New("nil id from token")
 	}
 
@@ -55,7 +52,7 @@ func checkToken(cookie string) (string, string, int, int, error) {
 
 }
 
-func loginError(c *fiber.Ctx) error {
+func LoginError(c *fiber.Ctx) error {
 	c.Status(fiber.StatusNotFound)
 	er := &fiber.Cookie{
 		Name:  "error",
@@ -65,7 +62,7 @@ func loginError(c *fiber.Ctx) error {
 	return c.RedirectBack("/auth")
 }
 
-func passwordError(c *fiber.Ctx) error {
+func PasswordError(c *fiber.Ctx) error {
 	c.Status(fiber.StatusNotFound)
 	er := &fiber.Cookie{
 		Name:  "error",
@@ -75,7 +72,7 @@ func passwordError(c *fiber.Ctx) error {
 	return c.RedirectBack("/auth")
 }
 
-func getUserRole(roleId int) string {
+func GetUserRole(roleId int) string {
 	m := make(map[int]string)
 	m[1] = "Администратор"
 	m[2] = "Исследователь"
