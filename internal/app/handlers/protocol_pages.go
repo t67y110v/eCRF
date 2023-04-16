@@ -62,17 +62,18 @@ func (h *Handlers) ProtocolEdit() fiber.Handler {
 		}
 
 		if err != nil {
-			return c.Redirect("/auth")
+			return c.Redirect("/main/filter=0")
 		}
 
 		protocol_id := c.Params("id")
 		p_id, err := strconv.Atoi(protocol_id)
+		fmt.Println(p_id)
 		if err != nil {
 			return c.Redirect(fmt.Sprintf("/protocol/edit/%s", protocol_id))
 		}
 		p, err := h.pgStore.Repository().GetProtocolById(p_id)
 		if err != nil {
-			return c.Redirect("/auth") // 404
+			return c.Redirect("/main/filter=0") // 404
 		}
 		cName, err := h.pgStore.Repository().GetCenterName(userCentrerID)
 		if err != nil {

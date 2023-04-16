@@ -11,7 +11,8 @@ type PostgresStoreRepository struct {
 }
 
 func (r *PostgresStoreRepository) Create(u *model.User) error {
-	if err := u.BeforeCreate(); err != nil {
+
+	if err := u.BeforeCreate(r.store.db); err != nil {
 		return err
 	}
 	if result := r.store.db.Create(u); result.Error != nil {
@@ -64,7 +65,7 @@ func (r *PostgresStoreRepository) UpdateUser(ID, role, centerId int, email, name
 		Name:     name,
 		Password: paswword,
 	}
-	if err := u.BeforeCreate(); err != nil {
+	if err := u.BeforeCreate(r.store.db); err != nil {
 		return err
 	}
 	if result := r.store.db.Model(model.User{}).Where("id = ?", ID).Updates(u); result.Error != nil {

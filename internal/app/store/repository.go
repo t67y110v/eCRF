@@ -9,8 +9,6 @@ import (
 )
 
 type PostgresStoreRepository interface {
-	//GetSubjects() ([]modelSubject.Subject, error)
-
 	ProtocolStoreRepository
 	UserStoreRepository
 	CenterStoreRepository
@@ -29,7 +27,6 @@ type SubjectStoreRepository interface {
 type CenterStoreRepository interface {
 	GetCenterName(centerId int) (string, error)
 	GetAllCenters() ([]modelCenter.Center, error)
-
 	AddNewCenter(name string) error
 	UpdateCenter(centerId int, name string) error
 }

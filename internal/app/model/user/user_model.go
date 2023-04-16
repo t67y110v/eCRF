@@ -1,6 +1,9 @@
 package model
 
-import "golang.org/x/crypto/bcrypt"
+import (
+	"golang.org/x/crypto/bcrypt"
+	"gorm.io/gorm"
+)
 
 type User struct {
 	Id                int    `json:"user_id" gorm:"primaryKey"`
@@ -12,7 +15,7 @@ type User struct {
 	EncryptedPassword string `json:"-"`
 }
 
-func (u *User) BeforeCreate() error {
+func (u *User) BeforeCreate(tx *gorm.DB) error {
 
 	if len(u.Password) > 0 {
 		enc, err := encryptString(u.Password)

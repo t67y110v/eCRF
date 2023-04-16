@@ -110,4 +110,7 @@ func (s *server) configureRouter() {
 	subject := s.router.Group("/subject")
 	subject.Post("/new", s.handlers.NewSubject())
 
+	errors := s.router.Group("/error")
+	errors.Get("/", s.handlers.ErrorPage())
+
 }
