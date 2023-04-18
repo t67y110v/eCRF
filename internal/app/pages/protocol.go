@@ -1,7 +1,6 @@
 package pages
 
 import (
-	"fmt"
 	"strconv"
 
 	"github.com/gofiber/fiber/v2"
@@ -51,45 +50,4 @@ func (h *Pages) ProtocolPage() fiber.Handler {
 
 	}
 
-}
-
-func (h *Pages) ProtocolEdit() fiber.Handler {
-	return func(c *fiber.Ctx) error {
-		user := c.Locals("user").(*model.User)
-
-		protocol_id := c.Params("id")
-		p_id, err := strconv.Atoi(protocol_id)
-		if err != nil {
-			return c.Redirect(fmt.Sprintf("/protocol/edit/%s", protocol_id))
-		}
-		p, err := h.pgStore.Repository().GetProtocolById(p_id)
-		if err != nil {
-			return c.Redirect("/main/filter=0") // 404
-		}
-		cName, err := h.pgStore.Repository().GetCenterName(user.CenterID)
-		if err != nil {
-			return utils.ErrorPage(c, err)
-		}
-		return c.Render("protocol/protocol_edit", fiber.Map{
-			"Name":         user.Name,
-			"Role":         utils.GetUserRole(user.Role),
-			"CLinicCenter": cName,
-			"Protocol":     p,
-		})
-	}
-}
-
-func (h *Pages) ProtocolNew() fiber.Handler {
-	return func(c *fiber.Ctx) error {
-		user := c.Locals("user").(*model.User)
-		cName, err := h.pgStore.Repository().GetCenterName(user.CenterID)
-		if err != nil {
-			return utils.ErrorPage(c, err)
-		}
-		return c.Render("protocol/protocol_new", fiber.Map{
-			"Name":         user.Name,
-			"Role":         utils.GetUserRole(user.Role),
-			"CLinicCenter": cName,
-		})
-	}
 }

@@ -79,10 +79,6 @@ func (s *server) configureRouter() {
 	////////////////////////////////////
 	user := s.router.Group("/user")
 	user.Use(logger.New())
-	user.Use(cors.New(cors.Config{
-		AllowCredentials: true,
-		AllowHeaders:     "Origin, Content-Type, Accept",
-	}))
 	user.Post("/login", s.handlers.Login(), s.pages.AuthPage())
 	user.Use(middlewares.CheckJWT())
 	user.Post("/register", s.handlers.Register())
@@ -96,8 +92,6 @@ func (s *server) configureRouter() {
 	pages.Use(middlewares.CheckJWT())
 	pages.Get("main/filter:filter", s.pages.MainPage())
 	pages.Get("protocol/:id/:number", s.pages.ProtocolPage())
-	pages.Get("protocol/edit/:id", s.pages.ProtocolEdit())
-	pages.Get("protocol/", s.pages.ProtocolNew())
 
 	protocol := s.router.Group("/protocols")
 	protocol.Use(logger.New())

@@ -11,7 +11,7 @@ func ErrorPage(c *fiber.Ctx, err error) error {
 		Value: err.Error(),
 	}
 	c.Cookie(er)
-	return c.Redirect("/error")
+	return c.Redirect("/error/")
 }
 
 func LoginError(c *fiber.Ctx) error {
