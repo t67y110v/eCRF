@@ -10,7 +10,9 @@ func (h *Pages) AuthPage() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		c.ClearCookie("JWT")
 		er := c.Cookies("error")
+		c.ClearCookie("error")
 		if er == "password" {
+
 			return c.Render("auth_page", fiber.Map{
 				"WrongPassword": "True",
 			})
@@ -19,7 +21,6 @@ func (h *Pages) AuthPage() fiber.Handler {
 				"WrongLogin": "True",
 			})
 		}
-
 		return c.Render("auth_page", fiber.Map{})
 
 	}
@@ -29,7 +30,6 @@ func (h *Pages) AuthPage() fiber.Handler {
 func (h *Pages) MainPage() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		filter := c.Params("filter")
-		c.ClearCookie("error")
 
 		_, userName, userCentrerID, userRole, err := utils.CheckToken(c.Cookies("JWT"))
 		if err != nil {
@@ -38,11 +38,11 @@ func (h *Pages) MainPage() fiber.Handler {
 
 		p, err := h.pgStore.Repository().GetProtocolsByFilter(filter, userCentrerID)
 		if err != nil {
-			return err //404
+			return utils.ErrorPage(c, err)
 		}
 		cName, err := h.pgStore.Repository().GetCenterName(userCentrerID)
 		if err != nil {
-			return err
+			return utils.ErrorPage(c, err)
 		}
 		return c.Render("main_page", fiber.Map{
 			"Name":         userName,

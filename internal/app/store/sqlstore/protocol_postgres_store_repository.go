@@ -1,6 +1,8 @@
 package store
 
 import (
+	"errors"
+
 	model "github.com/t67y110v/web/internal/app/model/protocol"
 )
 
@@ -61,6 +63,9 @@ func (r *PostgresStoreRepository) UpdateProtocolById(ID, status int, name string
 
 func (r *PostgresStoreRepository) AddProtocol(name string, status, centerID int) error {
 
+	if name == "" {
+		return errors.New("empty protocol name")
+	}
 	p := &model.Protocol{
 		Name:     name,
 		Status:   status,

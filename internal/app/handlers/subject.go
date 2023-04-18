@@ -17,20 +17,16 @@ func (h *Handlers) NewSubject() fiber.Handler {
 
 		centerId, err := strconv.Atoi(c.FormValue("center_id"))
 		if err != nil {
-			return err
+			return utils.ErrorPage(c, err)
 		}
 		protocolId, err := strconv.Atoi(c.FormValue("protocol_id"))
 		if err != nil {
-			return err
+			return utils.ErrorPage(c, err)
 		}
 		if err := h.mgStore.Repository().AddSubject(c.FormValue("number"), c.FormValue("initials"), centerId, protocolId); err != nil {
-			return err
+			return utils.ErrorPage(c, err)
 		}
 
-		if err != nil {
-			return err
-		}
-
-		return c.Redirect(fmt.Sprintf("/protocol/%s", c.FormValue("protocol_id")))
+		return c.Redirect(fmt.Sprintf("/protocol/%s/1", c.FormValue("protocol_id")))
 	}
 }

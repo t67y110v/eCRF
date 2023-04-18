@@ -60,7 +60,7 @@ func newServer(
 		mgStore:  mgstore,
 		config:   config,
 		handlers: handlers.NewHandlers(pgstore, mgstore, log),
-		pages:    pages.NewHandlers(pgstore, mgstore, log),
+		pages:    pages.NewPages(pgstore, mgstore, log),
 	}
 	s.configureRouter()
 

@@ -11,7 +11,7 @@ type Pages struct {
 	mgStore store.MongoStore
 }
 
-func NewHandlers(pgstore store.PostgresStore, mgstore store.MongoStore, logger logging.Logger) *Pages {
+func NewPages(pgstore store.PostgresStore, mgstore store.MongoStore, logger logging.Logger) *Pages {
 	return &Pages{
 		pgStore: pgstore,
 		mgStore: mgstore,

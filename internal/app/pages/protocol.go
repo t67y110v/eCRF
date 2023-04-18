@@ -21,25 +21,25 @@ func (h *Pages) ProtocolPage() fiber.Handler {
 		p_id, err := strconv.Atoi(protocolId)
 
 		if err != nil {
-			return c.Redirect("/auth")
+			return utils.ErrorPage(c, err)
 		}
 
 		p, err := h.pgStore.Repository().GetProtocolById(p_id)
 		if err != nil {
-			return c.Redirect("/auth")
+			return utils.ErrorPage(c, err)
 		}
 		s, err := h.mgStore.Repository().GetSubjectsByProtocolId(p_id)
 		if err != nil {
-			return err // 502
+			return utils.ErrorPage(c, err)
 		}
 		subject, err := h.mgStore.Repository().GetSubjectByNumber(subjectNumber)
 		if err != nil {
-			return err
+			return utils.ErrorPage(c, err)
 		}
 
 		cName, err := h.pgStore.Repository().GetCenterName(userCentrerID)
 		if err != nil {
-			return err
+			return utils.ErrorPage(c, err)
 		}
 		return c.Render("protocol/protocol_index", fiber.Map{
 			"Name":         userName,
@@ -47,7 +47,7 @@ func (h *Pages) ProtocolPage() fiber.Handler {
 			"CLinicCenter": cName,
 			"ClinicId":     userCentrerID,
 			"Protocol":     p,
-			"Subjects":     s, //s,
+			"Subjects":     s,
 			"Subject":      subject,
 		})
 
@@ -62,13 +62,8 @@ func (h *Pages) ProtocolEdit() fiber.Handler {
 			return utils.LoginError(c)
 		}
 
-		if err != nil {
-			return c.Redirect("/main/filter=0")
-		}
-
 		protocol_id := c.Params("id")
 		p_id, err := strconv.Atoi(protocol_id)
-		fmt.Println(p_id)
 		if err != nil {
 			return c.Redirect(fmt.Sprintf("/protocol/edit/%s", protocol_id))
 		}
@@ -78,7 +73,7 @@ func (h *Pages) ProtocolEdit() fiber.Handler {
 		}
 		cName, err := h.pgStore.Repository().GetCenterName(userCentrerID)
 		if err != nil {
-			return err
+			return utils.ErrorPage(c, err)
 		}
 		return c.Render("protocol/protocol_edit", fiber.Map{
 			"Name":         userName,
@@ -95,13 +90,9 @@ func (h *Pages) ProtocolNew() fiber.Handler {
 		if err != nil {
 			return utils.LoginError(c)
 		}
-
-		if err != nil {
-			return c.Redirect("/auth")
-		}
 		cName, err := h.pgStore.Repository().GetCenterName(userCentrerID)
 		if err != nil {
-			return err
+			return utils.ErrorPage(c, err)
 		}
 		return c.Render("protocol/protocol_new", fiber.Map{
 			"Name":         userName,

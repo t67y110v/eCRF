@@ -2,6 +2,7 @@ package nosqlstore
 
 import (
 	"context"
+	"errors"
 	"time"
 
 	model "github.com/t67y110v/web/internal/app/model/subject"
@@ -20,6 +21,9 @@ ProtocolId        int                `bson:"protocol_id"`
 Initials          string             `bson:"initials"`
 */
 func (r *MongoStoreRepository) AddSubject(number, initials string, centerId, protocolId int) error {
+	if number == "" || initials == "" {
+		return errors.New("empty fields")
+	}
 	ctx := context.TODO()
 
 	collection := r.store.client.Database("eCRF").Collection("subjects")

@@ -39,11 +39,11 @@ func (h *Handlers) Register() fiber.Handler {
 		}
 		role, err := strconv.Atoi(c.FormValue("role"))
 		if err != nil {
-			return err
+			return utils.ErrorPage(c, err)
 		}
 		centerID, err := strconv.Atoi(c.FormValue("center_id"))
 		if err != nil {
-			return err
+			return utils.ErrorPage(c, err)
 		}
 
 		u := &model.User{
@@ -55,7 +55,7 @@ func (h *Handlers) Register() fiber.Handler {
 		}
 
 		if err := h.pgStore.Repository().Create(u); err != nil {
-			return err
+			return utils.ErrorPage(c, err)
 		}
 
 		u.Sanitize()
@@ -75,19 +75,19 @@ func (h *Handlers) Update() fiber.Handler {
 		}
 		role, err := strconv.Atoi(c.FormValue("role"))
 		if err != nil {
-			return err
+			return utils.ErrorPage(c, err)
 		}
 		centerID, err := strconv.Atoi(c.FormValue("center_id"))
 		if err != nil {
-			return err
+			return utils.ErrorPage(c, err)
 		}
 		userID, err := strconv.Atoi(c.FormValue("user_id"))
 		if err != nil {
-			return err
+			return utils.ErrorPage(c, err)
 		}
 
 		if err := h.pgStore.Repository().UpdateUser(userID, role, centerID, c.FormValue("email"), c.FormValue("name"), c.FormValue("password")); err != nil {
-			return err
+			return utils.ErrorPage(c, err)
 		}
 		return c.Redirect("/admin/panel")
 	}

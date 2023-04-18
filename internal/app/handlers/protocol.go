@@ -22,7 +22,7 @@ func (h *Handlers) SaveProtocol() fiber.Handler {
 
 		_, err = h.pgStore.Repository().FindByID(id)
 		if err != nil {
-			return err
+			return utils.ErrorPage(c, err)
 		}
 
 		p_id, err := strconv.Atoi(protocol_id)
@@ -58,23 +58,23 @@ func (h *Handlers) AddProtocol() fiber.Handler {
 		}
 		_, err = h.pgStore.Repository().FindByID(id)
 		if err != nil {
-			return err
+			return utils.ErrorPage(c, err)
 		}
 
 		if err != nil {
-			return c.Redirect("/main/filter=0")
+			return utils.ErrorPage(c, err)
 		}
 		s, err := strconv.Atoi(status)
 		if err != nil {
-			return c.Redirect("/main/filter=0")
+			return utils.ErrorPage(c, err)
 		}
 		c_id, err := strconv.Atoi(center_id)
 		if err != nil {
-			return c.Redirect("/main/filter=0")
+			return utils.ErrorPage(c, err)
 		}
 		err = h.pgStore.Repository().AddProtocol(name, s, c_id)
 		if err != nil {
-			return c.Redirect("/main/filter=0")
+			return utils.ErrorPage(c, err)
 		}
 
 		return c.Redirect("/main/filter=0")
