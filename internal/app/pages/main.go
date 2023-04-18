@@ -2,6 +2,7 @@ package pages
 
 import (
 	"github.com/gofiber/fiber/v2"
+	model "github.com/t67y110v/web/internal/app/model/user"
 	"github.com/t67y110v/web/internal/app/utils"
 )
 
@@ -28,25 +29,26 @@ func (h *Pages) AuthPage() fiber.Handler {
 }
 
 func (h *Pages) MainPage() fiber.Handler {
+
 	return func(c *fiber.Ctx) error {
+
 		filter := c.Params("filter")
 
-		_, userName, userCentrerID, userRole, err := utils.CheckToken(c.Cookies("JWT"))
+		user := c.Locals("user").(*model.User)
+
+		p, err := h.pgStore.Repository().GetProtocolsByFilter(filter, user.CenterID)
 		if err != nil {
-			return utils.LoginError(c)
+			return utils.ErrorPage(c, err)
 		}
 
-		p, err := h.pgStore.Repository().GetProtocolsByFilter(filter, userCentrerID)
+		cName, err := h.pgStore.Repository().GetCenterName(user.CenterID)
 		if err != nil {
 			return utils.ErrorPage(c, err)
 		}
-		cName, err := h.pgStore.Repository().GetCenterName(userCentrerID)
-		if err != nil {
-			return utils.ErrorPage(c, err)
-		}
+
 		return c.Render("main_page", fiber.Map{
-			"Name":         userName,
-			"Role":         utils.GetUserRole(userRole),
+			"Name":         user.Name,
+			"Role":         utils.GetUserRole(user.Role),
 			"CLinicCenter": cName,
 			"Protocols":    p,
 		})

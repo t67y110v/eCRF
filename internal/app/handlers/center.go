@@ -10,11 +10,6 @@ import (
 func (h *Handlers) AddNewCenter() fiber.Handler {
 
 	return func(c *fiber.Ctx) error {
-		_, _, _, _, err := utils.CheckToken(c.Cookies("JWT"))
-		if err != nil {
-			return utils.LoginError(c)
-		}
-
 		if err := h.pgStore.Repository().AddNewCenter(c.FormValue("name")); err != nil {
 			return utils.ErrorPage(c, err)
 		}
@@ -27,10 +22,6 @@ func (h *Handlers) AddNewCenter() fiber.Handler {
 
 func (h *Handlers) UpdateCenter() fiber.Handler {
 	return func(c *fiber.Ctx) error {
-		_, _, _, _, err := utils.CheckToken(c.Cookies("JWT"))
-		if err != nil {
-			return utils.LoginError(c)
-		}
 
 		centerID, err := strconv.Atoi(c.FormValue("center_id"))
 		if err != nil {

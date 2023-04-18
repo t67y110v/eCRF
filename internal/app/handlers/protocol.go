@@ -10,20 +10,10 @@ import (
 
 func (h *Handlers) SaveProtocol() fiber.Handler {
 	return func(c *fiber.Ctx) error {
-		cookie := c.Cookies("JWT")
 		name := c.FormValue("name")
 		status := c.FormValue("status")
 		center_id := c.FormValue("center")
 		protocol_id := c.FormValue("id")
-		id, _, _, _, err := utils.CheckToken(cookie)
-		if err != nil {
-			return utils.LoginError(c)
-		}
-
-		_, err = h.pgStore.Repository().FindByID(id)
-		if err != nil {
-			return utils.ErrorPage(c, err)
-		}
 
 		p_id, err := strconv.Atoi(protocol_id)
 		if err != nil {
@@ -48,22 +38,10 @@ func (h *Handlers) SaveProtocol() fiber.Handler {
 
 func (h *Handlers) AddProtocol() fiber.Handler {
 	return func(c *fiber.Ctx) error {
-		cookie := c.Cookies("JWT")
 		name := c.FormValue("name")
 		status := c.FormValue("status")
 		center_id := c.FormValue("center")
-		id, _, _, _, err := utils.CheckToken(cookie)
-		if err != nil {
-			return utils.LoginError(c)
-		}
-		_, err = h.pgStore.Repository().FindByID(id)
-		if err != nil {
-			return utils.ErrorPage(c, err)
-		}
 
-		if err != nil {
-			return utils.ErrorPage(c, err)
-		}
 		s, err := strconv.Atoi(status)
 		if err != nil {
 			return utils.ErrorPage(c, err)

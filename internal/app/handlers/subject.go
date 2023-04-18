@@ -10,10 +10,6 @@ import (
 
 func (h *Handlers) NewSubject() fiber.Handler {
 	return func(c *fiber.Ctx) error {
-		_, _, _, _, err := utils.CheckToken(c.Cookies("JWT"))
-		if err != nil {
-			return utils.LoginError(c)
-		}
 
 		centerId, err := strconv.Atoi(c.FormValue("center_id"))
 		if err != nil {

@@ -32,11 +32,6 @@ import (
 func (h *Handlers) Register() fiber.Handler {
 
 	return func(c *fiber.Ctx) error {
-		//id, name, centerId, role, nil
-		_, _, _, _, err := utils.CheckToken(c.Cookies("JWT"))
-		if err != nil {
-			return utils.LoginError(c)
-		}
 		role, err := strconv.Atoi(c.FormValue("role"))
 		if err != nil {
 			return utils.ErrorPage(c, err)
@@ -69,10 +64,6 @@ func (h *Handlers) Register() fiber.Handler {
 func (h *Handlers) Update() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 
-		_, _, _, _, err := utils.CheckToken(c.Cookies("JWT"))
-		if err != nil {
-			return utils.LoginError(c)
-		}
 		role, err := strconv.Atoi(c.FormValue("role"))
 		if err != nil {
 			return utils.ErrorPage(c, err)

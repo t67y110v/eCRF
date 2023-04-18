@@ -9,6 +9,7 @@ import (
 	"github.com/t67y110v/web/internal/app/config"
 	"github.com/t67y110v/web/internal/app/handlers"
 	"github.com/t67y110v/web/internal/app/logging"
+	"github.com/t67y110v/web/internal/app/middlewares"
 	"github.com/t67y110v/web/internal/app/pages"
 	"github.com/t67y110v/web/internal/app/store"
 
@@ -82,8 +83,9 @@ func (s *server) configureRouter() {
 		AllowCredentials: true,
 		AllowHeaders:     "Origin, Content-Type, Accept",
 	}))
-	user.Post("/register", s.handlers.Register())
 	user.Post("/login", s.handlers.Login(), s.pages.AuthPage())
+	user.Use(middlewares.CheckJWT())
+	user.Post("/register", s.handlers.Register())
 	user.Post("/check", s.handlers.CheckJWT())
 	user.Post("/update", s.handlers.Update())
 	//////////////////////////////////////
@@ -91,6 +93,7 @@ func (s *server) configureRouter() {
 	pages := s.router.Group("/")
 	pages.Static("/public", "./public")
 	pages.Get("auth", s.pages.AuthPage())
+	pages.Use(middlewares.CheckJWT())
 	pages.Get("main/filter:filter", s.pages.MainPage())
 	pages.Get("protocol/:id/:number", s.pages.ProtocolPage())
 	pages.Get("protocol/edit/:id", s.pages.ProtocolEdit())
@@ -98,19 +101,23 @@ func (s *server) configureRouter() {
 
 	protocol := s.router.Group("/protocols")
 	protocol.Use(logger.New())
+	protocol.Use(middlewares.CheckJWT())
 	protocol.Post("/save", s.handlers.SaveProtocol())
 	protocol.Post("/add", s.handlers.AddProtocol())
 
 	adminPanel := s.router.Group("/admin")
+	adminPanel.Use(middlewares.CheckJWT())
 	adminPanel.Get("/panel", s.pages.AdminPage())
 	adminPanel.Get("/update/:email", s.pages.UpdatePage())
 
 	center := s.router.Group("/center")
 	center.Use(logger.New())
+	center.Use(middlewares.CheckJWT())
 	center.Post("/new", s.handlers.AddNewCenter())
 	center.Post("/update", s.handlers.UpdateCenter())
 
 	subject := s.router.Group("/subject")
+	subject.Use(middlewares.CheckJWT())
 	subject.Post("/new", s.handlers.NewSubject())
 
 	errors := s.router.Group("/error")
