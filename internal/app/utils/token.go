@@ -10,7 +10,7 @@ import (
 func CreateToken(id, centerId, role int, name string) (string, error) {
 	secret := "11we$*9sd*(@!)"
 
-	minutesCount, _ := strconv.Atoi("15")
+	minutesCount, _ := strconv.Atoi("30")
 
 	claims := jwt.MapClaims{}
 
