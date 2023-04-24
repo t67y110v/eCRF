@@ -14,7 +14,6 @@ func (h *Handlers) SaveProtocol() fiber.Handler {
 		status := c.FormValue("status")
 		center_id := c.FormValue("center")
 		protocol_id := c.FormValue("id")
-
 		p_id, err := strconv.Atoi(protocol_id)
 		if err != nil {
 			return c.Redirect(fmt.Sprintf("/protocol/edit/%s", protocol_id))
@@ -31,6 +30,8 @@ func (h *Handlers) SaveProtocol() fiber.Handler {
 		if err != nil {
 			return c.Redirect(fmt.Sprintf("/protocol/edit/%s", protocol_id))
 		}
+
+		go h.operations.SaveAction("SaveProtocol", "200", c.Locals("name").(string), "Добавление нового протокола")
 
 		return c.Redirect("/main/filter=0")
 	}

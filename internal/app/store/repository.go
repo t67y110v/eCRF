@@ -2,9 +2,9 @@ package store
 
 import (
 	modelCenter "github.com/t67y110v/web/internal/app/model/center"
+	modelOperation "github.com/t67y110v/web/internal/app/model/operation"
 	modelProtocol "github.com/t67y110v/web/internal/app/model/protocol"
 	modelSubject "github.com/t67y110v/web/internal/app/model/subject"
-
 	modelUser "github.com/t67y110v/web/internal/app/model/user"
 )
 
@@ -16,6 +16,12 @@ type PostgresStoreRepository interface {
 
 type MongoStoreRepository interface {
 	SubjectStoreRepository
+	JournalRepository
+}
+
+type JournalRepository interface {
+	SaveAction(modelOperation.Operation) error
+	GetActions() ([]*modelOperation.Operation, error)
 }
 
 type SubjectStoreRepository interface {

@@ -38,6 +38,7 @@ func newServer(
 	engine := html.New("./templates", ".html")
 	var st state
 	st.store = pgstore
+
 	var c counter
 	engine.AddFuncMap(template.FuncMap{
 		"setCounter": c.SetCounter,
@@ -92,6 +93,7 @@ func (s *server) configureRouter() {
 	pages.Use(middlewares.CheckJWT())
 	pages.Get("main/filter:filter", s.pages.MainPage())
 	pages.Get("protocol/:id/:number", s.pages.ProtocolPage())
+	pages.Get("journal", s.pages.JournalPage())
 
 	protocol := s.router.Group("/protocols")
 	protocol.Use(logger.New())

@@ -1,0 +1,52 @@
+<section>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
+                <table class="table table-primary table-bordered table-sm mb-0">
+                    <thead>
+                        <tr class="cell-centered">
+                            <th сlass="number-column" scope="col">№ п/п</th>
+                            <th scope="col">Метод</th>
+                            <th scope="col">Действие</th>
+                            <th scope="col">Инициатор</th>
+                            <th scope="col">Статус</th>
+                            <th scope="col">Дата</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+
+                        {{$counter := setCounter 0}}
+                        {{range .Actions }}
+
+                        <tr class="cell-centered">
+                            {{$counter := incCounter}}
+
+                            <td> {{$counter}} </td>
+                            <td>{{.Method}}</td>
+                            <td>{{.ActionType}}</td>
+                            <td>{{.Initiator}}</td>
+                            <td>{{.Code}}</td>
+                            <td>{{.UpdatedAt}}</td>
+
+
+
+
+
+                        </tr>
+
+
+                        {{end}}
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+</section>

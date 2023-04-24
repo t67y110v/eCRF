@@ -10,9 +10,7 @@ import (
 )
 
 func CheckJWT() fiber.Handler {
-	// Return middleware handler
 	return func(c *fiber.Ctx) error {
-		// Filter request to skip middleware
 
 		claims := jwt.MapClaims{}
 
@@ -36,6 +34,8 @@ func CheckJWT() fiber.Handler {
 		}
 
 		c.Locals("user", u)
+		c.Locals("name", name)
+
 		return c.Next()
 
 	}
