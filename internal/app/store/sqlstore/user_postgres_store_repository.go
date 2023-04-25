@@ -73,3 +73,11 @@ func (r *PostgresStoreRepository) UpdateUser(ID, role, centerId int, email, name
 	}
 	return nil
 }
+
+func (r *PostgresStoreRepository) DeleteUser(Id int) error {
+	if result := r.store.db.Delete(&model.User{}, Id); result.Error != nil {
+		return result.Error
+
+	}
+	return nil
+}

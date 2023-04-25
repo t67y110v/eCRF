@@ -99,6 +99,7 @@ func (s *server) configureRouter() {
 	protocol.Use(middlewares.CheckJWT())
 	protocol.Post("/save", s.handlers.SaveProtocol())
 	protocol.Post("/add", s.handlers.AddProtocol())
+	protocol.Post("/delete", s.handlers.DeleteProtocol())
 
 	adminPanel := s.router.Group("/admin")
 	adminPanel.Use(middlewares.CheckJWT())

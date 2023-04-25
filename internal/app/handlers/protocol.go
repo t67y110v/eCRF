@@ -60,3 +60,20 @@ func (h *Handlers) AddProtocol() fiber.Handler {
 		return c.Redirect("/main/filter=0")
 	}
 }
+
+func (h *Handlers) DeleteProtocol() fiber.Handler {
+	return func(c *fiber.Ctx) error {
+
+		protocolId, err := strconv.Atoi(c.FormValue("id"))
+		if err != nil {
+
+			return utils.ErrorPage(c, err)
+		}
+
+		if err := h.pgStore.Repository().DeleteProtocol(protocolId); err != nil {
+			return utils.ErrorPage(c, err)
+		}
+
+		return c.Redirect("/main/filter=0")
+	}
+}

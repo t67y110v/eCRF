@@ -77,3 +77,10 @@ func (r *PostgresStoreRepository) AddProtocol(name string, status, centerID int)
 
 	return nil
 }
+
+func (r *PostgresStoreRepository) DeleteProtocol(Id int) error {
+	if result := r.store.db.Delete(&model.Protocol{}, Id); result.Error != nil {
+		return result.Error
+	}
+	return nil
+}

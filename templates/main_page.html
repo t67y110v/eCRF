@@ -51,22 +51,23 @@
                                     </div>
                                     <div class="modal-body">
                                         <div class="row justify-content-center mt-3">
-                                            <form id="new-form" method="POST" action="/protocols/add" class="col-12 col-lg-6 col-md-8 col-sm-10 rounded">
-                                                <div class="m-3">                                   
-                                                    <div class="mb-2">                                                         
+                                            <form id="new-form" method="POST" action="/protocols/add"
+                                                class="col-12 col-lg-6 col-md-8 col-sm-10 rounded">
+                                                <div class="m-3">
+                                                    <div class="mb-2">
                                                         <label class="form-label">Название</label>
                                                         <input id="Name" type="text" class="form-control" name="name">
                                                     </div>
                                                     <div class="mb-2">
-                                    
-                                    
+
+
                                                         <label class="form-label">Статус</label>
                                                         <select id="status" name="status" class="form-select">
                                                             <option value="1">Активный</option>
                                                             <option value="2">Неактивный</option>
                                                         </select>
                                                     </div>
-                                    
+
                                                     <div class="mb-2">
                                                         <label class="form-label">Центр</label>
                                                         <select id="center" name="center" class="form-select">
@@ -98,7 +99,7 @@
                     <thead>
                         <tr class="cell-centered">
 
-                            <th scope="col">Изменить</th>
+                            <th scope="col">Действие</th>
 
                             <th сlass="number-column" scope="col">№ п/п</th>
                             <th scope="col">Название</th>
@@ -198,6 +199,52 @@
                                         </div>
                                     </div>
                                 </div>
+                                <button type="button" class="btn btn-sm  btn-outline-danger" data-bs-toggle="modal"
+                                    data-bs-target="#delete{{.Id}}">
+                                    🗑️
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="delete{{.Id}}" data-bs-backdrop="static"
+                                    data-bs-keyboard="false" tabindex="-1" aria-labelledby="delete{{.Id}}"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog modal-xl">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="delete{{.Id}}">Удаление протокола 
+                                                </h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row justify-content-center mt-3">
+                                                    <form id="new-form" method="POST" action="/protocols/delete"
+                                                        class="col-12 col-lg-6 col-md-8 col-sm-10 rounded">
+                                                        <div class="m-3">
+                                                            <div class="mb-2">
+
+                                                                <input class="form-control" type="text"
+                                                                    placeholder="{{.Id}}" value="{{.Id}}" name="id"
+                                                                    id="id" readonly>
+                                                            </div>
+                                                            <div class="d-grid gap-2">
+                                                                <input type="submit" value="Удалить"
+                                                                    class="btn btn-danger">
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-primary"
+                                                    data-bs-dismiss="modal">Отмена</button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
 
                             </td>
 

@@ -103,23 +103,23 @@ func (r *MongoStoreRepository) GetSubjectByNumber(number string) (*model.Subject
 
 }
 
-// func (r *MongoStoreRepository) DeleteProduct(productName string) error {
-// 	ctx := context.TODO()
-// 	filter := bson.D{primitive.E{
-// 		Key:   "product_name",
-// 		Value: productName,
-// 	}}
+func (r *MongoStoreRepository) DeleteSubject(number string) error {
+	ctx := context.TODO()
+	filter := bson.D{primitive.E{
+		Key:   "number",
+		Value: number,
+	}}
 
-// 	collection := r.store.client.Database("web").Collection("products")
+	collection := r.store.client.Database("eCRF").Collection("subjects")
 
-// 	res, err := collection.DeleteOne(ctx, filter)
+	res, err := collection.DeleteOne(ctx, filter)
 
-// 	if err != nil {
-// 		return err
-// 	}
-// 	if res.DeletedCount == 0 {
-// 		return errors.New("no products were deleted")
-// 	}
-// 	return nil
+	if err != nil {
+		return err
+	}
+	if res.DeletedCount == 0 {
+		return errors.New("no products were deleted")
+	}
+	return nil
 
-// }
+}

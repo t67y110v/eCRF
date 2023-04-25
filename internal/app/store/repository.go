@@ -28,6 +28,7 @@ type SubjectStoreRepository interface {
 	AddSubject(number, initials string, centerId, protocolId int) error
 	GetSubjectsByProtocolId(protocolId int) ([]*modelSubject.Subject, error)
 	GetSubjectByNumber(number string) (*modelSubject.Subject, error)
+	DeleteSubject(number string) error
 }
 
 type CenterStoreRepository interface {
@@ -35,6 +36,7 @@ type CenterStoreRepository interface {
 	GetAllCenters() ([]modelCenter.Center, error)
 	AddNewCenter(name string) error
 	UpdateCenter(centerId int, name string) error
+	DeleteCenter(centerId int) error
 }
 
 type UserStoreRepository interface {
@@ -43,6 +45,7 @@ type UserStoreRepository interface {
 	FindByID(string) (*modelUser.User, error)
 	GetUsers() ([]modelUser.User, error)
 	UpdateUser(ID, role, centerId int, email, name, paswword string) error
+	DeleteUser(Id int) error
 }
 
 type ProtocolStoreRepository interface {
@@ -51,4 +54,5 @@ type ProtocolStoreRepository interface {
 	UpdateProtocolById(ID, status int, name string, centerId int) error
 	AddProtocol(name string, status, centerID int) error
 	GetProtocolsByFilter(filter string, centerId int) ([]modelProtocol.Protocol, error)
+	DeleteProtocol(Id int) error
 }

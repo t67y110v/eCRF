@@ -46,3 +46,10 @@ func (r *PostgresStoreRepository) UpdateCenter(centerId int, name string) error 
 	}
 	return nil
 }
+
+func (r *PostgresStoreRepository) DeleteCenter(centerId int) error {
+	if result := r.store.db.Delete(&model.Center{}, centerId); result.Error != nil {
+		return result.Error
+	}
+	return nil
+}
