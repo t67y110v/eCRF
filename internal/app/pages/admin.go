@@ -30,21 +30,3 @@ func (h *Pages) AdminPage() fiber.Handler {
 		})
 	}
 }
-
-func (h *Pages) UpdatePage() fiber.Handler {
-	return func(c *fiber.Ctx) error {
-		user := c.Locals("user").(*model.User)
-
-		centers, err := h.pgStore.Repository().GetAllCenters()
-		if err != nil {
-			return utils.ErrorPage(c, err)
-		}
-
-		return c.Render("admin/edit_user_page", fiber.Map{
-			"Name":    user.Name,
-			"Role":    utils.GetUserRole(user.Role),
-			"User":    user,
-			"Centers": centers,
-		})
-	}
-}

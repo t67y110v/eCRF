@@ -103,7 +103,6 @@ func (s *server) configureRouter() {
 	adminPanel := s.router.Group("/admin")
 	adminPanel.Use(middlewares.CheckJWT())
 	adminPanel.Get("/panel", s.pages.AdminPage())
-	adminPanel.Get("/update/:email", s.pages.UpdatePage())
 
 	center := s.router.Group("/center")
 	center.Use(logger.New())

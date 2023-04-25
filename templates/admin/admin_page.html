@@ -116,6 +116,7 @@
                 </thead>
                 <tbody>
                     {{$counter := set 0}}
+                    {{ $cs := .Centers }}
                     {{range .Users}}
                     {{$counter := inc}}
                     <tr class="cell-centered">
@@ -127,9 +128,93 @@
                         {{$r := role .Role}}
                         <td> {{$r}}</td>
                         <td>
-                            <a href="/admin/update/{{.Email}}">
-                                <button class="btn btn-sm btn-outline-warning">🖊</button>
-                            </a>
+                            <div class="btn-group">
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-sm btn-outline-warning" data-bs-toggle="modal"
+                                    data-bs-target="#update{{.Name}}">
+                                    🖊
+                                </button>
+    
+                                <!-- Modal -->
+                                <div class="modal fade" id="update{{.Name}}" data-bs-backdrop="static"
+                                    data-bs-keyboard="false" tabindex="-1" aria-labelledby="update{{.Name}}"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog modal-xl">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="update{{.Name}}">Изменение пользователя
+                                                </h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row justify-content-center mt-3">
+                                                    <form id="new-form" method="POST" action="/user/update" class="col-12 col-lg-6 col-md-8 col-sm-10 rounded">
+                                                        <div class="m-3">
+                                                            <div class="mb-2">
+                                                                <label class="form-label">ID</label>
+                                                                <input class="form-control" type="text" placeholder="{{.Id}}" value="{{.Id}}"
+                                                                    name="user_id" id="user_id" readonly>
+                                                            </div>
+                                                        </div>
+                                                        <div class="mb-2">
+                                                            <label class="form-label">Логин</label>
+                                                            <input id="email" type="text" class="form-control" name="email" value="{{.Email}}">
+                                                        </div>
+                                                        <div class="mb-2">
+                                                            <label class="form-label">Пароль</label>
+                                                            <input id="password" type="text" class="form-control" name="password" value="{{.Password}}">
+                                                        </div>
+                                                        <div class="mb-2">
+                                                            <label class="form-label">Имя</label>
+                                                            <input id="name" type="text" class="form-control" name="name" value="{{.Name}}">
+                                                        </div>
+                                                        <div class="mb-2">
+                                                            <label class="form-label">Роль</label>
+                                                            <select id="role" name="role" class="form-select">
+                                                                <option value="1">Администратор</option>
+                                                                <option value="2">Исследователь</option>
+                                                                <option value="3">Главный исследователь</option>
+                                                                <option value="4">Монитор</option>
+                                                                <option value="5">Дата менеджер</option>
+                                                                <option value="6">Ауидитор контроля качества</option>
+                                                                <option value="7">Медицинский монитор</option>
+                                                                <option value="8">Специалист по фармаконадзору</option>
+                                            
+                                                            </select>
+                                                        </div>
+                                                        <div class="mb-2">
+                                                            <label class="form-label">Центр</label>
+                                                            <select id="center_id" name="center_id" class="form-select">
+
+                                                           
+                                                                {{range $cen := $cs }}
+                                                             
+                                                                <option value="{{$cen.CenterId}}">{{$cen.Name}}</option>
+                                                                {{end}}
+                                                            </select>
+                                                        </div>
+                                                        <div class="d-grid gap-2">
+                                                            <br>
+                                                            <input type="submit" value="Сохранить" class="btn btn-primary">
+                                                        </div>
+                                                </div>
+                                                </form>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-danger"
+                                                    data-bs-dismiss="modal">Закрыть</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                              
+                            </div>
+
+
+
+
                         </td>
                     </tr>
                     {{end}}
