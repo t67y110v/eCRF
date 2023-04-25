@@ -15,10 +15,8 @@
             <div class="col-4">
                 <h4 class="text-center">Работа с пользователями</h4>
                 <div class="row justify-content-center">
-
                     <div class="shadow p-3 mb-3 bg-white rounded">
                         <div class="btn-group">
-
                             <!-- Button trigger modal -->
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                 data-bs-target="#registrationModal">
@@ -68,7 +66,6 @@
                                                                 <option value="6">Ауидитор контроля качества</option>
                                                                 <option value="7">Медицинский монитор</option>
                                                                 <option value="8">Специалист по фармаконадзору</option>
-
                                                             </select>
                                                         </div>
                                                         <div class="mb-2">
@@ -79,6 +76,7 @@
                                                                 {{$counter := inc}}
                                                                 <option value="{{$counter}}">{{.Name}}</option>
                                                                 {{end}}
+
                                                             </select>
                                                         </div>
                                                         <div class="d-grid gap-2">
@@ -93,7 +91,6 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-danger"
                                                 data-bs-dismiss="modal">Закрыть</button>
-
                                         </div>
                                     </div>
                                 </div>
@@ -102,9 +99,7 @@
                             <a href="#" class="btn btn-primary">Удаление пользователя</a>
                         </div>
                     </div>
-
                 </div>
-
             </div>
         </div>
         <div class="row">
@@ -120,8 +115,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {{if .Name}}
-
                     {{$counter := set 0}}
                     {{range .Users}}
                     {{$counter := inc}}
@@ -140,27 +133,15 @@
                         </td>
                     </tr>
                     {{end}}
-                    {{else}}
-                    <tr class="cell-centered">
-                        <td colspan="@(showEditing ? 6 : 5)">Протоколы не найдены</td>
-                    </tr>
-
-
-                    {{end}}
-
-
-
                 </tbody>
             </table>
         </div>
         <div class="row">
             <div class="col-4">
-
             </div>
             <div class="col-4">
                 <h4 class="text-center">Работа с центрами</h4>
                 <div class="row justify-content-center">
-
                     <div class="shadow p-3 mb-3 bg-white rounded">
                         <div class="btn-group">
                             <!-- Button trigger modal -->
@@ -202,7 +183,6 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-danger"
                                                 data-bs-dismiss="modal">Закрыть</button>
-
                                         </div>
                                     </div>
                                 </div>
@@ -211,7 +191,6 @@
                             <a href="#" class="btn btn-primary">Список Клинических центров</a>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -227,29 +206,25 @@
                         </tr>
                     </thead>
                     <tbody>
-
                         {{range .Centers}}
-
                         <tr class="cell-centered">
                             <td>{{.CenterId}}</td>
-
                             <td>{{.Name}}</td>
                             <td>
-
                                 <!-- Button trigger modal -->
                                 <button type="button" class="btn btn-sm btn-outline-warning" data-bs-toggle="modal"
-                                    data-bs-target="#updateCenter">
+                                    data-bs-target="#update{{.CenterId}}">
                                     🖊
                                 </button>
 
                                 <!-- Modal -->
-                                <div class="modal fade" id="updateCenter" data-bs-backdrop="static"
-                                    data-bs-keyboard="false" tabindex="-1" aria-labelledby="updateCenter"
+                                <div class="modal fade" id="update{{.CenterId}}" data-bs-backdrop="static"
+                                    data-bs-keyboard="false" tabindex="-1" aria-labelledby="update{{.CenterId}}"
                                     aria-hidden="true">
                                     <div class="modal-dialog modal-xl">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="updateCenter">Обновление центра
+                                                <h5 class="modal-title" id="update{{.CenterId}}">Обновление центра
                                                 </h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
@@ -271,7 +246,7 @@
                                                             <div class="mb-2">
                                                                 <label class="form-label">Название</label>
                                                                 <input id="name" type="text" class="form-control"
-                                                                    name="name">
+                                                                    name="name" value="{{.Name}}">
                                                             </div>
                                                             <div class="d-grid gap-2">
                                                                 <br>
@@ -285,7 +260,6 @@
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-danger"
                                                     data-bs-dismiss="modal">Закрыть</button>
-
                                             </div>
                                         </div>
                                     </div>
@@ -293,10 +267,6 @@
                             </td>
                         </tr>
                         {{end}}
-
-
-
-
                     </tbody>
                 </table>
             </div>

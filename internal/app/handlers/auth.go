@@ -1,20 +1,14 @@
 package handlers
 
 import (
-	"bytes"
-
 	"strconv"
-
-	"encoding/json"
 
 	"time"
 
-	"github.com/t67y110v/web/internal/app/handlers/requests"
 	model "github.com/t67y110v/web/internal/app/model/user"
 	"github.com/t67y110v/web/internal/app/utils"
 
 	"github.com/gofiber/fiber/v2"
-	"github.com/golang-jwt/jwt/v4"
 )
 
 // @Summary User Registration
@@ -123,62 +117,9 @@ func (h *Handlers) Login() fiber.Handler {
 			Name:  "JWT",
 			Value: t,
 		}
+
 		c.Cookie(cookie)
 		return c.Redirect("/main/filter=0")
-	}
-
-}
-
-// @Summary Check session
-// @Description Validation user token
-// @Tags         User
-//
-//	@Accept       json
-//
-// @Produce json
-// @Param  data body requests.CheckToken true  "Check token"
-// @Success 200 {object} responses.Login
-// @Failure 400 {object} responses.Error
-// @Failure 500 {object} responses.Error
-// @Router /user/check [post]
-func (h *Handlers) CheckJWT() fiber.Handler {
-
-	return func(c *fiber.Ctx) error {
-
-		req := &requests.CheckToken{}
-
-		reader := bytes.NewReader(c.Body())
-
-		if err := json.NewDecoder(reader).Decode(req); err != nil {
-			h.logger.Warningf("handle checkJWT,  error :%e", err)
-		}
-
-		cookie := req.Cookie
-
-		tokenString := cookie
-
-		claims := jwt.MapClaims{}
-
-		_, err := jwt.ParseWithClaims(tokenString, claims, func(token *jwt.Token) (interface{}, error) {
-			return []byte("secret"), nil
-		})
-
-		if claims["id"] == nil {
-			h.logger.Warningf("handle checkJWT,  error :%e", err)
-			return c.JSON(fiber.Map{
-				"message": "token id is nil",
-			})
-		}
-
-		id := float64(claims["id"].(float64))
-
-		u, err := h.pgStore.Repository().FindByID(strconv.Itoa(int(id)))
-		if err != nil {
-			return err
-		}
-
-		return c.JSON(u)
-
 	}
 
 }

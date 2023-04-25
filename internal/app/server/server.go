@@ -83,7 +83,6 @@ func (s *server) configureRouter() {
 	user.Post("/login", s.handlers.Login(), s.pages.AuthPage())
 	user.Use(middlewares.CheckJWT())
 	user.Post("/register", s.handlers.Register())
-	user.Post("/check", s.handlers.CheckJWT())
 	user.Post("/update", s.handlers.Update())
 	//////////////////////////////////////
 

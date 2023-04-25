@@ -23,11 +23,11 @@ func (h *Handlers) AddNewCenter() fiber.Handler {
 func (h *Handlers) UpdateCenter() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 
-		centerID, err := strconv.Atoi(c.FormValue("center_id"))
+		centerId, err := strconv.Atoi(c.FormValue("center_id"))
 		if err != nil {
 			return utils.ErrorPage(c, err)
 		}
-		if err := h.pgStore.Repository().UpdateCenter(centerID, c.FormValue("name")); err != nil {
+		if err := h.pgStore.Repository().UpdateCenter(centerId, c.FormValue("name")); err != nil {
 			return utils.ErrorPage(c, err)
 		}
 		return c.Redirect("/admin/panel")

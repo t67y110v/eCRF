@@ -12,26 +12,27 @@ func (h *Handlers) SaveProtocol() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		name := c.FormValue("name")
 		status := c.FormValue("status")
-		center_id := c.FormValue("center")
-		protocol_id := c.FormValue("id")
-		p_id, err := strconv.Atoi(protocol_id)
+		centerId := c.FormValue("center")
+		protocolId := c.FormValue("id")
+		p_id, err := strconv.Atoi(protocolId)
 		if err != nil {
-			return c.Redirect(fmt.Sprintf("/protocol/edit/%s", protocol_id))
+			return c.Redirect(fmt.Sprintf("/protocol/edit/%s", protocolId))
 		}
 		s, err := strconv.Atoi(status)
 		if err != nil {
-			return c.Redirect(fmt.Sprintf("/protocol/edit/%s", protocol_id))
+			return c.Redirect(fmt.Sprintf("/protocol/edit/%s", protocolId))
 		}
-		c_id, err := strconv.Atoi(center_id)
+		c_id, err := strconv.Atoi(centerId)
 		if err != nil {
-			return c.Redirect(fmt.Sprintf("/protocol/edit/%s", protocol_id))
-		}
-		err = h.pgStore.Repository().UpdateProtocolById(p_id, s, name, c_id)
-		if err != nil {
-			return c.Redirect(fmt.Sprintf("/protocol/edit/%s", protocol_id))
+			return c.Redirect(fmt.Sprintf("/protocol/edit/%s", protocolId))
 		}
 
-		go h.operations.SaveAction("SaveProtocol", "200", c.Locals("name").(string), "Добавление нового протокола")
+		err = h.pgStore.Repository().UpdateProtocolById(p_id, s, name, c_id)
+		if err != nil {
+			return c.Redirect(fmt.Sprintf("/protocol/edit/%s", protocolId))
+		}
+
+		go h.operations.SaveAction("SaveProtocol", "200", c.Locals("name").(string), "Обновление протокола")
 
 		return c.Redirect("/main/filter=0")
 	}
@@ -41,13 +42,13 @@ func (h *Handlers) AddProtocol() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		name := c.FormValue("name")
 		status := c.FormValue("status")
-		center_id := c.FormValue("center")
+		centerId := c.FormValue("center")
 
 		s, err := strconv.Atoi(status)
 		if err != nil {
 			return utils.ErrorPage(c, err)
 		}
-		c_id, err := strconv.Atoi(center_id)
+		c_id, err := strconv.Atoi(centerId)
 		if err != nil {
 			return utils.ErrorPage(c, err)
 		}
