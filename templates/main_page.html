@@ -119,18 +119,18 @@
 
                                 <!-- Button trigger modal -->
                                 <button type="button" class="btn btn-sm btn-outline-warning" data-bs-toggle="modal"
-                                    data-bs-target="#editProtocol">
+                                    data-bs-target="#edit{{.Id}}">
                                     🖊
                                 </button>
 
                                 <!-- Modal -->
-                                <div class="modal fade" id="editProtocol" data-bs-backdrop="static"
-                                    data-bs-keyboard="false" tabindex="-1" aria-labelledby="editProtocol"
+                                <div class="modal fade" id="edit{{.Id}}" data-bs-backdrop="static"
+                                    data-bs-keyboard="false" tabindex="-1" aria-labelledby="edit{{.Id}}"
                                     aria-hidden="true">
                                     <div class="modal-dialog modal-xl">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="editProtocol">Изменение протокола
+                                                <h5 class="modal-title" id="edit{{.Id}}">Изменение протокола
                                                 </h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
