@@ -211,7 +211,7 @@
                                     <div class="modal-dialog modal-xl">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="delete{{.Id}}">Удаление протокола 
+                                                <h5 class="modal-title" id="delete{{.Id}}">Удаление протокола {{.Name}}
                                                 </h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
@@ -227,6 +227,7 @@
                                                                     placeholder="{{.Id}}" value="{{.Id}}" name="id"
                                                                     id="id" readonly>
                                                             </div>
+                                                            <label>Вы уверены, что хотите удалить протокол?</label>
                                                             <div class="d-grid gap-2">
                                                                 <input type="submit" value="Удалить"
                                                                     class="btn btn-danger">
@@ -283,4 +284,5 @@
             </div>
         </div>
     </div>
+
 </section>

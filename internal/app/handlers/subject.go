@@ -26,3 +26,12 @@ func (h *Handlers) NewSubject() fiber.Handler {
 		return c.Redirect(fmt.Sprintf("/protocol/%s/1", c.FormValue("protocol_id")))
 	}
 }
+
+func (h *Handlers) DeleteSubject() fiber.Handler {
+	return func(c *fiber.Ctx) error {
+		if err := h.mgStore.Repository().DeleteSubject(c.FormValue("number")); err != nil {
+			return utils.ErrorPage(c, err)
+		}
+		return c.Redirect(fmt.Sprintf("/protocol/%s/1", c.FormValue("protocol_id")))
+	}
+}
