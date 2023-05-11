@@ -114,8 +114,14 @@
             <style>
                 .navbar-example3 {
                     position: relative;
-                    height: 600px;
+                    height: 800px;
                     overflow: auto;
+                }
+
+
+                hr {
+                    margin: 20px;
+                    border: 1px, solid #f00;
                 }
             </style>
 
@@ -123,7 +129,9 @@
         <div class="col-8 navbar-example3" id="center">
             <div data-bs-spy="scroll" data-bs-target="#navbar-example3" data-bs-offset="0" tabindex="0">
                 <h4 id="item-1"></h4>
-                <p></p>
+                <p>
+                    <h1 class="text-center" > Скрининг</h1>
+                </p>
                 <h5 id="item-1-1"></h5>
                 <p>
                 <div class="shadow-sm p-3 bg-white rounded h-100">
@@ -429,277 +437,308 @@
 
                 <h4 id="item-1-5"></h4>
                 <p>
-                <div class="shadow-sm p-3 bg-white rounded h-100">
-                    <h5 class="text-center">Критерии включения в иследование</h5>
-                    <hr>
-                    <div class="row">
-                        <div class="col-7">
-                            <br>
-                            <div class="mb-1">
+                    <div class="shadow-sm p-3 bg-white rounded h-100">
+                        <h5 class="text-center">Критерии включения в иследование</h5>
+                        <hr>
+                        <div class="row">
+                            <div class="col-7">
+                                <br>
+                                <div class="mb-1">
+    
+    
+                                    <form id="demography" method="POST" action="/subject/demography/save">
+    
+                                        <div class="mb-1">
+                                            <div class="mb-1">
+                                                <div class="form-chek">
+                                                    <label class="form-check-label"> Наличие письменного информированного согласия субъекта на участие в
+                                                        исследовании &nbsp; </label>
+                                                        <br>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions1" id="inlineRadio1" value="Yes" />
+                                                        <label class="form-check-label" for="inlineRadio1">Да</label>
+                                                    </div>
+    
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions1" id="inlineRadio2" value="No" />
+                                                        <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                    </div>
+    
+    
+    
+                                                </div>
+                                            </div>
+                                            <hr />
+                                            <div class="mb-1">
+                                                <div class="form-radio">
+                                                    <label class="radio-inline">Мужчины и женщины в возрасте от 18 до 55 лет&nbsp;
+                                                    </label>
+                                                    <br>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions2" id="inlineRadio1" value="Yes" />
+                                                        <label class="form-check-label" for="inlineRadio1">Да</label>
+                                                    </div>
+    
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions2" id="inlineRadio2" value="No" />
+                                                        <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr />
+                                            <div class="mb-1">
+                                                <div class="form-radio">
+                                                    <label class="radio-inline">Отрицательный результат исследования на ВИЧ, гепатиты, сифилис &nbsp;</label>
+                                                        <br>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
+                                                        <label class="form-check-label" for="inlineRadio1">Да</label>
+                                                    </div>
+    
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions3" id="inlineRadio2" value="No" />
+                                                        <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr />
+                                            <div class="mb-1">
+                                                <div class="form-radio">
+                                                    <label class="radio-inline">Индекс массы тела (ИМТ) составляет 18.5≤ИМТ≤30 &nbsp;</label>
+                                                    <br>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
+                                                        <label class="form-check-label" for="inlineRadio1">Да</label>
+                                                    </div>
+    
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions3" id="inlineRadio2" value="No" />
+                                                        <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                    </div>
+                                                   
+                                                </div>
+                                            </div>
+                                            <hr />
+                                            <div class="mb-1">
+                                                <div class="form-radio">
+                                                    <label class="radio-inline">Отсутствие острых инфекционных и/или респираторных заболеваний по
+                                                        меньшей мере в течение 14-ти дней до включения в исследование &nbsp;</label>
+                                                        <br>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
+                                                        <label class="form-check-label" for="inlineRadio1">Да</label>
+                                                    </div>
+    
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions3" id="inlineRadio2" value="No" />
+                                                        <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr />
+                                            <div class="mb-1">
+                                                <div class="form-radio">
+                                                    <label class="radio-inline">Согласие на использование эффективных методов контрацепции в ходе
+                                                        всего периода участия в исследовании
+                                                        &nbsp;</label>
+                                                        <br>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
+                                                        <label class="form-check-label" for="inlineRadio1">Да</label>
+                                                    </div>
+    
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions3" id="inlineRadio2" value="No" />
+                                                        <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                    </div>
 
-
-                                <form id="demography" method="POST" action="/subject/demography/save">
-
-                                    <div class="mb-1">
-                                        <div class="mb-1">
-                                            <div class="form-chek">
-                                                <label class="form-check-label"> Отсутствие подписанного информированного
-                                                    согласия &nbsp; </label>
-                                                <label class="form-check-label" for="flexRadioFirstYes">Да</label>
-                                                <input class="form-check-input" type="radio" name="flexRadioYes" id="flexRadioFirstYes" >
-                                                <label class="form-check-label" for="flexRadioFirstNo">Нет</label>
-                                                <input class="form-check-input" type="radio" name="flexRadioNo" id="flexRadioFirstNo">
-                                                
-                                               
+                                                </div>
+                                            </div>
+                                            <hr />
+                                            <div class="mb-1">
+                                                <div class="form-radio">
+                                                    <label class="radio-inline">Отрицательный тест на беременность по результатам исследования мочи на
+                                                        визите скрининга (для женщин детородного возраста) &nbsp;
+                                                    </label>
+                                                    <br>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
+                                                        <label class="form-check-label" for="inlineRadio1">Да</label>
+                                                    </div>
+    
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions3" id="inlineRadio2" value="No" />
+                                                        <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions3" id="inlineRadio3" value="unaccepteble" />
+                                                        <label class="form-check-label" for="inlineRadio3">Неприменимо</label>
+                                                    </div>
+    
+                                                </div>
+                                            </div>
+                                            <hr />
+                                            <div class="mb-1">
+                                                <div class="form-radio">
+                                                    <label class="radio-inline">Отрицательный тест на наличие наркотических и психостимулирующих
+                                                        средств в моче на визите скрининга &nbsp;</label>
+                                                        <br>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
+                                                            <label class="form-check-label" for="inlineRadio1">Да</label>
+                                                        </div>
+        
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions3" id="inlineRadio2" value="No" />
+                                                            <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                        </div>
+                                                </div>
+                                            </div>
+                                            <hr />
+                                            <div class="mb-1">
+                                                <div class="form-radio">
+                                                    <label class="radio-inline">Отрицательный тест на содержание алкоголя на визите скрининга &nbsp;</label>
+                                                    <br>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
+                                                        <label class="form-check-label" for="inlineRadio1">Да</label>
+                                                    </div>
+    
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions3" id="inlineRadio2" value="No" />
+                                                        <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr />
+                                            <div class="mb-1">
+                                                <div class="form-radio">
+                                                    <label class="radio-inline">Отсутствие в анамнезе выраженных поствакцинальных реакций или
+                                                        поствакцинальных осложнений на предыдущее применение
+                                                        иммунобиологических препаратов &nbsp;</label>
+                                                        <br>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
+                                                            <label class="form-check-label" for="inlineRadio1">Да</label>
+                                                        </div>
+        
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions3" id="inlineRadio2" value="No" />
+                                                            <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                        </div>
+                                                </div>
+                                            </div>
+                                            <hr />
+                                            <div class="mb-1">
+                                                <div class="form-radio">
+                                                    <label class="radio-inline">Показатели общего и биохимического анализа крови на скрининге в
+                                                        пределах 1,1 х ВГРИ – 0,9 х НГРИ &nbsp;</label>
+                                                        <br>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
+                                                            <label class="form-check-label" for="inlineRadio1">Да</label>
+                                                        </div>
+        
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions3" id="inlineRadio2" value="No" />
+                                                            <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                        </div>
+                                                </div>
+                                            </div>
+                                            <hr />
+                                            <div class="mb-1">
+                                                <div class="form-radio">
+                                                    <label class="radio-inline">Отсутствие изменений миокарда воспалительного или дистрофического
+                                                        характера по результатам ЭКГ на скрининге &nbsp;</label>
+                                                        <br>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
+                                                            <label class="form-check-label" for="inlineRadio1">Да</label>
+                                                        </div>
+        
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions3" id="inlineRadio2" value="No" />
+                                                            <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                        </div>
+                                                </div>
+                                            </div>
+                                            <hr />
+                                            <div class="mb-1">
+                                                <div class="form-radio">
+                                                    <label class="radio-inline">Отрицательный результат исследования на COVID-2019, определяемый
+                                                        методом ПЦР или экспресс-методом за 3 дня до включения в исследование &nbsp;</label>  
+                                                        <br> 
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
+                                                            <label class="form-check-label" for="inlineRadio1">Да</label>
+                                                        </div>
+        
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions3" id="inlineRadio2" value="No" />
+                                                            <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                        </div>
+                                                </div>
+                                            </div>
+                                            <hr />
+                                            <div class="mb-1">
+                                                <div class="form-radio">
+                                                    <label class="radio-inline">Отсутствие противопоказаний к вакцинации &nbsp;</label>
+                                                        <br>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
+                                                            <label class="form-check-label" for="inlineRadio1">Да</label>
+                                                        </div>
+        
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions3" id="inlineRadio2" value="No" />
+                                                            <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                        </div>
+                                                </div>
+                                            </div>
+                                           
+                                            <div class="d-grid gap-2">
+                                                <input type="submit" value="Сохранить" class="btn btn-primary">
                                             </div>
                                         </div>
-                                        <div class="mb-1">
-                                            <div class="form-radio">
-                                                <label class="radio-inline">Терапия стероидами (за исключением
-                                                    гормональных контрацептивных
-                                                    препаратов) и/или иммуноглобулинами или другими препаратами крови,
-                                                    не
-                                                    завершившаяся за 30 дней до включения в исследование &nbsp;<input
-                                                        type="radio" name="optradio">Да</label>
-                                                <label class="radio-inline"><input type="radio"
-                                                        name="optradio">Нет</label>
-                                            </div>
-                                        </div>
-                                        <div class="mb-1">
-                                            <div class="form-radio">
-                                                <label class="radio-inline">Терапия иммуносупрессивными препаратами,
-                                                    завершившаяся менее чем за
-                                                    3 месяца до включения в исследование &nbsp;<input type="radio"
-                                                        name="optradio">Да</label>
-                                                <label class="radio-inline"><input type="radio"
-                                                        name="optradio">Нет</label>
-                                            </div>
-                                        </div>
-                                        <div class="mb-1">
-                                            <div class="form-radio">
-                                                <label class="radio-inline">Субъекты женского пола в период беременности
-                                                    или кормления грудью &nbsp;<input type="radio"
-                                                        name="optradio">Да</label>
-                                                <label class="radio-inline"><input type="radio"
-                                                        name="optradio">Нет</label>
-                                                <label class="radio-inline"><input type="radio"
-                                                        name="optradio">Неприменимо</label>
-                                            </div>
-                                        </div>
-                                        <div class="mb-1">
-                                            <div class="form-radio">
-                                                <label class="radio-inline">Перенесенный менее чем за один год до
-                                                    включения в исследование острый
-                                                    коронарный синдром или инсульт &nbsp;<input type="radio"
-                                                        name="optradio">Да</label>
-                                                <label class="radio-inline"><input type="radio"
-                                                        name="optradio">Нет</label>
-                                            </div>
-                                        </div>
-                                        <div class="mb-1">
-                                            <div class="form-radio">
-                                                <label class="radio-inline">Туберкулез, хронические системные инфекции
-                                                    &nbsp;<input type="radio" name="optradio">Да</label>
-                                                <label class="radio-inline"><input type="radio"
-                                                        name="optradio">Нет</label>
-                                            </div>
-                                        </div>
-                                        <div class="mb-1">
-                                            <div class="form-radio">
-                                                <label class="radio-inline">Отягощенный аллергологический анамнез
-                                                    (наличие в анамнезе сведений об
-                                                    анафилактическом шоке, отеке Квинке, полиморфной экссудативной
-                                                    экземе,
-                                                    сывороточной болезни), гиперчувствительность или аллергические
-                                                    реакции на
-                                                    введение иммунобиологических препаратов, известные аллергические
-                                                    реакции
-                                                    на компоненты препарата, обострение аллергических заболеваний на
-                                                    день
-                                                    включения в исследование &nbsp;<input type="radio"
-                                                        name="optradio">Да</label>
-                                                <label class="radio-inline"><input type="radio"
-                                                        name="optradio">Нет</label>
-                                            </div>
-                                        </div>
-                                        <div class="mb-1">
-                                            <div class="form-radio">
-                                                <label class="radio-inline">Наличие в анамнезе новообразований (коды МКБ
-                                                    C00-D09) &nbsp;<input type="radio" name="optradio">Да</label>
-                                                <label class="radio-inline"><input type="radio"
-                                                        name="optradio">Нет</label>
-                                            </div>
-                                        </div>
-                                        <div class="mb-1">
-                                            <div class="form-radio">
-                                                <label class="radio-inline">Спленэктомия в анамнезе &nbsp;<input
-                                                        type="radio" name="optradio">Да</label>
-                                                <label class="radio-inline"><input type="radio"
-                                                        name="optradio">Нет</label>
-                                            </div>
-                                        </div>
-                                        <div class="mb-1">
-                                            <div class="form-radio">
-                                                <label class="radio-inline">Нейтропения (снижение абсолютного числа
-                                                    нейтрофилов менее 1000/мм3),
-                                                    агранулоцитоз, значительная кровопотеря, тяжелая анемия (гемоглобин
-                                                    менее
-                                                    80 г/л), иммунодефицит в анамнезе в течение 6 месяцев до включения в
-                                                    исследование &nbsp;<input type="radio" name="optradio">Да</label>
-                                                <label class="radio-inline"><input type="radio"
-                                                        name="optradio">Нет</label>
-                                            </div>
-                                        </div>
-                                        <div class="mb-1">
-                                            <div class="form-radio">
-                                                <label class="radio-inline">Субъекты с активной формой сифилиса,
-                                                    ВИЧ/СПИД, гепатиты B и C &nbsp;<input type="radio"
-                                                        name="optradio">Да</label>
-                                                <label class="radio-inline"><input type="radio"
-                                                        name="optradio">Нет</label>
-                                            </div>
-                                        </div>
-                                        <div class="mb-1">
-                                            <div class="form-radio">
-                                                <label class="radio-inline">Анорексия, белковый дефицит любого
-                                                    происхождения &nbsp;<input type="radio" name="optradio">Да</label>
-                                                <label class="radio-inline"><input type="radio"
-                                                        name="optradio">Нет</label>
-                                            </div>
-                                        </div>
-                                        <div class="mb-1">
-                                            <div class="form-radio">
-                                                <label class="radio-inline">Обширные татуировки на местах введения
-                                                    препарата (область
-                                                    дельтовидной мышцы), не позволяющие оценить местную реакцию на
-                                                    введение ИЛП &nbsp;<input type="radio" name="optradio">Да</label>
-                                                <label class="radio-inline"><input type="radio"
-                                                        name="optradio">Нет</label>
-                                            </div>
-                                        </div>
-                                        <div class="mb-1">
-                                            <div class="form-radio">
-                                                <label class="radio-inline">Прием наркотических и психостимулирующих
-                                                    препаратов в настоящее
-                                                    время или в анамнезе &nbsp;<input type="radio"
-                                                        name="optradio">Да</label>
-                                                <label class="radio-inline"><input type="radio"
-                                                        name="optradio">Нет</label>
-                                            </div>
-                                        </div>
-                                        <div class="mb-1">
-                                            <div class="form-radio">
-                                                <label class="radio-inline">Курение: более 10 сигарет в день
-                                                    &nbsp;<input type="radio" name="optradio">Да</label>
-                                                <label class="radio-inline"><input type="radio"
-                                                        name="optradio">Нет</label>
-                                            </div>
-                                        </div>
-                                        <div class="mb-1">
-                                            <div class="form-radio">
-                                                <label class="radio-inline">Прием алкоголя превышающий уровень низкого
-                                                    риска: не более 20 граммов
-                                                    чистого алкоголя в день, не более 5 дней в неделю, прием алкоголя в
-                                                    течение
-                                                    48 часов до введения исследуемого препарата &nbsp;<input
-                                                        type="radio" name="optradio">Да</label>
-                                                <label class="radio-inline"><input type="radio"
-                                                        name="optradio">Нет</label>
-                                            </div>
-                                        </div>
-                                        <div class="mb-1">
-                                            <div class="form-radio">
-                                                <label class="radio-inline">Плановая госпитализация и/или хирургическое
-                                                    вмешательство в период
-                                                    участия в исследовании, а также за 4 недели до предполагаемой даты
-                                                    вакцинации &nbsp;<input type="radio" name="optradio">Да</label>
-                                                <label class="radio-inline"><input type="radio"
-                                                        name="optradio">Нет</label>
-                                            </div>
-                                        </div>
-                                        <div class="mb-1">
-                                            <div class="form-radio">
-                                                <label class="radio-inline">Донорская сдача крови (450 мл и более крови
-                                                    или плазмы) менее чем за 2
-                                                    месяца до начала исследования &nbsp;<input type="radio"
-                                                        name="optradio">Да</label>
-                                                <label class="radio-inline"><input type="radio"
-                                                        name="optradio">Нет</label>
-                                            </div>
-                                        </div>
-                                        <div class="mb-1">
-                                            <div class="form-radio">
-                                                <label class="radio-inline">Участие субъекта в любом другом
-                                                    интервенционном клиническом
-                                                    исследовании за последние 90 дней &nbsp;<input type="radio"
-                                                        name="optradio">Да</label>
-                                                <label class="radio-inline"><input type="radio"
-                                                        name="optradio">Нет</label>
-                                            </div>
-                                        </div>
-                                        <div class="mb-1">
-                                            <div class="form-radio">
-                                                <label class="radio-inline">Любая вакцинация за последние 30 дней
-                                                    &nbsp;<input type="radio" name="optradio">Да</label>
-                                                <label class="radio-inline"><input type="radio"
-                                                        name="optradio">Нет</label>
-                                            </div>
-                                        </div>
-                                        <div class="mb-1">
-                                            <div class="form-radio">
-                                                <label class="radio-inline">Неспособность читать на русском языке;
-                                                    невозможность или нежелание
-                                                    понять суть исследования. Любые другие состояния, которые
-                                                    ограничивают
-                                                    правомерность получения информированного согласия или могут повлиять
-                                                    на
-                                                    способность добровольца принять участие в исследовании повлиять на
-                                                    способность добровольца принять участие в исследовании &nbsp;<input
-                                                        type="radio" name="optradio">Да</label>
-                                                <label class="radio-inline"><input type="radio"
-                                                        name="optradio">Нет</label>
-                                            </div>
-                                        </div>
-                                        <div class="mb-1">
-                                            <div class="form-radio">
-                                                <label class="radio-inline">Персонал исследовательских центров и другие
-                                                    сотрудники,
-                                                    непосредственно участвующие в проведении исследования и члены их
-                                                    семей
-                                                    (главный исследователь и члены исследовательской команды)
-                                                    &nbsp;<input type="radio" name="optradio">Да</label>
-                                                <label class="radio-inline"><input type="radio"
-                                                        name="optradio">Нет</label>
-                                            </div>
-                                        </div>
-                                        <div class="mb-1">
-                                            <div class="form-radio">
-                                                <label class="radio-inline">Любое иное состояние субъекта исследования,
-                                                    которое, по мнению-врача-
-                                                    исследователя, может препятствовать завершению исследования в
-                                                    соответствии с протоколом &nbsp;<input type="radio"
-                                                        name="optradio">Да</label>
-                                                <label class="radio-inline"><input type="radio"
-                                                        name="optradio">Нет</label>
-                                            </div>
-                                        </div>
-
-
-
-
-                                        <div class="d-grid gap-2">
-                                            <input type="submit" value="Сохранить" class="btn btn-primary">
-                                        </div>
-                                    </div>
-                                </form>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 </p>
 
-                <h4 id="item-1-5"></h4>
+                <h4 id="item-1-6"></h4>
                 <p>
+                
                 <div class="shadow-sm p-3 bg-white rounded h-100">
                     <h5 class="text-center">Критерии невключения в иследование</h5>
                     <hr>
@@ -713,38 +752,493 @@
 
                                     <div class="mb-1">
                                         <div class="mb-1">
-                                            <div class="form-check">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                                        id="flexRadioDefault1">
-                                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                                        id="flexRadioDefault1">
-                                                    <label class="form-check-label" for="flexRadioDefault1">
-                                                        ,kf,kf
-                                                    </label>
+                                            <div class="form-chek">
+                                                <label class="form-check-label"> Отсутствие подписанного
+                                                    информированного
+                                                    согласия &nbsp; </label>
+                                                    <br>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio"
+                                                        name="inlineRadioOptions1" id="inlineRadio1" value="Yes" />
+                                                    <label class="form-check-label" for="inlineRadio1">Да</label>
+                                                </div>
+
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio"
+                                                        name="inlineRadioOptions1" id="inlineRadio2" value="No" />
+                                                    <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                </div>
+
+
+
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="mb-1">
+                                            <div class="form-radio">
+                                                <label class="radio-inline">Терапия стероидами (за исключением
+                                                    гормональных контрацептивных
+                                                    препаратов) и/или иммуноглобулинами или другими препаратами крови,
+                                                    не
+                                                    завершившаяся за 30 дней до включения в исследование &nbsp;
+                                                </label>
+                                                <br>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio"
+                                                        name="inlineRadioOptions2" id="inlineRadio1" value="Yes" />
+                                                    <label class="form-check-label" for="inlineRadio1">Да</label>
+                                                </div>
+
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio"
+                                                        name="inlineRadioOptions2" id="inlineRadio2" value="No" />
+                                                    <label class="form-check-label" for="inlineRadio2">Нет</label>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="mb-2">
-                                            <label class="form-label">Если НЕТ, то укажите причину</label>
-                                            <input class="form-control" type="input">
+                                        <hr />
+                                        <div class="mb-1">
+                                            <div class="form-radio">
+                                                <label class="radio-inline">Терапия иммуносупрессивными препаратами,
+                                                    завершившаяся менее чем за
+                                                    3 месяца до включения в исследование &nbsp;</label>
+                                                    <br>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio"
+                                                        name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
+                                                    <label class="form-check-label" for="inlineRadio1">Да</label>
+                                                </div>
+
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio"
+                                                        name="inlineRadioOptions3" id="inlineRadio2" value="No" />
+                                                    <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="mb-2">
-                                            <label class="form-label">Дата проведения измерений</label>
-                                            <input class="form-control" type="date">
+                                        <hr />
+                                        <div class="mb-1">
+                                            <div class="form-radio">
+                                                <label class="radio-inline">Субъекты женского пола в период беременности
+                                                    или кормления грудью &nbsp;</label>
+                                                <br>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio"
+                                                        name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
+                                                    <label class="form-check-label" for="inlineRadio1">Да</label>
+                                                </div>
+
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio"
+                                                        name="inlineRadioOptions3" id="inlineRadio2" value="No" />
+                                                    <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio"
+                                                        name="inlineRadioOptions3" id="inlineRadio3" value="unaccepteble" />
+                                                    <label class="form-check-label" for="inlineRadio3">Неприменимо</label>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="mb-2">
-                                            <label class="form-label">Масса тела</label>
-                                            <input class="form-control" type="input">
+                                        <hr />
+                                        <div class="mb-1">
+                                            <div class="form-radio">
+                                                <label class="radio-inline">Перенесенный менее чем за один год до
+                                                    включения в исследование острый
+                                                    коронарный синдром или инсульт &nbsp;</label>
+                                                    <br>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio"
+                                                        name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
+                                                    <label class="form-check-label" for="inlineRadio1">Да</label>
+                                                </div>
+
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio"
+                                                        name="inlineRadioOptions3" id="inlineRadio2" value="No" />
+                                                    <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="mb-2">
-                                            <label class="form-label">Рост</label>
-                                            <input class="form-control" type="input">
+                                        <hr />
+                                        <div class="mb-1">
+                                            <div class="form-radio">
+                                                <label class="radio-inline">Туберкулез, хронические системные инфекции
+                                                    &nbsp;</label>
+                                                    <br>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio"
+                                                        name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
+                                                    <label class="form-check-label" for="inlineRadio1">Да</label>
+                                                </div>
+
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio"
+                                                        name="inlineRadioOptions3" id="inlineRadio2" value="No" />
+                                                    <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="mb-2">
-                                            <label class="form-label">Индекс массы тела(рассчетное значение)</label>
-                                            <input class="form-control" type="input">
+                                        <hr />
+                                        <div class="mb-1">
+                                            <div class="form-radio">
+                                                <label class="radio-inline">Отягощенный аллергологический анамнез
+                                                    (наличие в анамнезе сведений об
+                                                    анафилактическом шоке, отеке Квинке, полиморфной экссудативной
+                                                    экземе,
+                                                    сывороточной болезни), гиперчувствительность или аллергические
+                                                    реакции на
+                                                    введение иммунобиологических препаратов, известные аллергические
+                                                    реакции
+                                                    на компоненты препарата, обострение аллергических заболеваний на
+                                                    день
+                                                    включения в исследование &nbsp;
+                                                </label>
+                                                <br>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio"
+                                                        name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
+                                                    <label class="form-check-label" for="inlineRadio1">Да</label>
+                                                </div>
+
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio"
+                                                        name="inlineRadioOptions3" id="inlineRadio2" value="No" />
+                                                    <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                </div>
+
+                                            </div>
                                         </div>
+                                        <hr />
+                                        <div class="mb-1">
+                                            <div class="form-radio">
+                                                <label class="radio-inline">Наличие в анамнезе новообразований (коды МКБ
+                                                    C00-D09) &nbsp;</label>
+                                                    <br>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
+                                                        <label class="form-check-label" for="inlineRadio1">Да</label>
+                                                    </div>
+    
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions3" id="inlineRadio2" value="No" />
+                                                        <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="mb-1">
+                                            <div class="form-radio">
+                                                <label class="radio-inline">Спленэктомия в анамнезе &nbsp;</label>
+                                                <br>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio"
+                                                        name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
+                                                    <label class="form-check-label" for="inlineRadio1">Да</label>
+                                                </div>
+
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio"
+                                                        name="inlineRadioOptions3" id="inlineRadio2" value="No" />
+                                                    <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="mb-1">
+                                            <div class="form-radio">
+                                                <label class="radio-inline">Нейтропения (снижение абсолютного числа
+                                                    нейтрофилов менее 1000/мм3),
+                                                    агранулоцитоз, значительная кровопотеря, тяжелая анемия (гемоглобин
+                                                    менее
+                                                    80 г/л), иммунодефицит в анамнезе в течение 6 месяцев до включения в
+                                                    исследование &nbsp;</label>
+                                                    <br>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
+                                                        <label class="form-check-label" for="inlineRadio1">Да</label>
+                                                    </div>
+    
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions3" id="inlineRadio2" value="No" />
+                                                        <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="mb-1">
+                                            <div class="form-radio">
+                                                <label class="radio-inline">Субъекты с активной формой сифилиса,
+                                                    ВИЧ/СПИД, гепатиты B и C &nbsp;</label>
+                                                    <br>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
+                                                        <label class="form-check-label" for="inlineRadio1">Да</label>
+                                                    </div>
+    
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions3" id="inlineRadio2" value="No" />
+                                                        <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="mb-1">
+                                            <div class="form-radio">
+                                                <label class="radio-inline">Анорексия, белковый дефицит любого
+                                                    происхождения &nbsp;</label>
+                                                    <br>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
+                                                        <label class="form-check-label" for="inlineRadio1">Да</label>
+                                                    </div>
+    
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions3" id="inlineRadio2" value="No" />
+                                                        <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="mb-1">
+                                            <div class="form-radio">
+                                                <label class="radio-inline">Обширные татуировки на местах введения
+                                                    препарата (область
+                                                    дельтовидной мышцы), не позволяющие оценить местную реакцию на
+                                                    введение ИЛП &nbsp;</label>  
+                                                    <br> 
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
+                                                        <label class="form-check-label" for="inlineRadio1">Да</label>
+                                                    </div>
+    
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions3" id="inlineRadio2" value="No" />
+                                                        <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="mb-1">
+                                            <div class="form-radio">
+                                                <label class="radio-inline">Прием наркотических и психостимулирующих
+                                                    препаратов в настоящее
+                                                    время или в анамнезе &nbsp;</label>
+                                                    <br>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
+                                                        <label class="form-check-label" for="inlineRadio1">Да</label>
+                                                    </div>
+    
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions3" id="inlineRadio2" value="No" />
+                                                        <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="mb-1">
+                                            <div class="form-radio">
+                                                <label class="radio-inline">Курение: более 10 сигарет в день
+                                                    &nbsp;</label>
+                                                    <br>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
+                                                        <label class="form-check-label" for="inlineRadio1">Да</label>
+                                                    </div>
+    
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions3" id="inlineRadio2" value="No" />
+                                                        <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="mb-1">
+                                            <div class="form-radio">
+                                                <label class="radio-inline">Прием алкоголя превышающий уровень низкого
+                                                    риска: не более 20 граммов
+                                                    чистого алкоголя в день, не более 5 дней в неделю, прием алкоголя в
+                                                    течение
+                                                    48 часов до введения исследуемого препарата &nbsp;</label>
+                                                    <br>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
+                                                        <label class="form-check-label" for="inlineRadio1">Да</label>
+                                                    </div>
+    
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions3" id="inlineRadio2" value="No" />
+                                                        <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="mb-1">
+                                            <div class="form-radio">
+                                                <label class="radio-inline">Плановая госпитализация и/или хирургическое
+                                                    вмешательство в период
+                                                    участия в исследовании, а также за 4 недели до предполагаемой даты
+                                                    вакцинации &nbsp;</label>
+                                                    <br>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
+                                                        <label class="form-check-label" for="inlineRadio1">Да</label>
+                                                    </div>
+    
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions3" id="inlineRadio2" value="No" />
+                                                        <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="mb-1">
+                                            <div class="form-radio">
+                                                <label class="radio-inline">Донорская сдача крови (450 мл и более крови
+                                                    или плазмы) менее чем за 2
+                                                    месяца до начала исследования &nbsp;</label>
+                                                    <br>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
+                                                        <label class="form-check-label" for="inlineRadio1">Да</label>
+                                                    </div>
+    
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions3" id="inlineRadio2" value="No" />
+                                                        <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="mb-1">
+                                            <div class="form-radio">
+                                                <label class="radio-inline">Участие субъекта в любом другом
+                                                    интервенционном клиническом
+                                                    исследовании за последние 90 дней &nbsp;</label>
+                                                    <br>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
+                                                        <label class="form-check-label" for="inlineRadio1">Да</label>
+                                                    </div>
+    
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions3" id="inlineRadio2" value="No" />
+                                                        <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="mb-1">
+                                            <div class="form-radio">
+                                                <label class="radio-inline">Любая вакцинация за последние 30 дней
+                                                    &nbsp;</label>
+                                                    <br>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
+                                                        <label class="form-check-label" for="inlineRadio1">Да</label>
+                                                    </div>
+    
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions3" id="inlineRadio2" value="No" />
+                                                        <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="mb-1">
+                                            <div class="form-radio">
+                                                <label class="radio-inline">Неспособность читать на русском языке;
+                                                    невозможность или нежелание
+                                                    понять суть исследования. Любые другие состояния, которые
+                                                    ограничивают
+                                                    правомерность получения информированного согласия или могут повлиять
+                                                    на
+                                                    способность добровольца принять участие в исследовании повлиять на
+                                                    способность добровольца принять участие в исследовании &nbsp;</label>
+                                                    <br>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
+                                                        <label class="form-check-label" for="inlineRadio1">Да</label>
+                                                    </div>
+    
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions3" id="inlineRadio2" value="No" />
+                                                        <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="mb-1">
+                                            <div class="form-radio">
+                                                <label class="radio-inline">Персонал исследовательских центров и другие
+                                                    сотрудники,
+                                                    непосредственно участвующие в проведении исследования и члены их
+                                                    семей
+                                                    (главный исследователь и члены исследовательской команды)
+                                                    &nbsp;</label>
+                                                    <br>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
+                                                        <label class="form-check-label" for="inlineRadio1">Да</label>
+                                                    </div>
+    
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions3" id="inlineRadio2" value="No" />
+                                                        <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="mb-1">
+                                            <div class="form-radio">
+                                                <label class="radio-inline">Любое иное состояние субъекта исследования,
+                                                    которое, по мнению-врача-
+                                                    исследователя, может препятствовать завершению исследования в
+                                                    соответствии с протоколом &nbsp;</label>
+                                                    <br>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
+                                                        <label class="form-check-label" for="inlineRadio1">Да</label>
+                                                    </div>
+    
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions3" id="inlineRadio2" value="No" />
+                                                        <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                    </div>
+                                            </div>
+                                        </div>
+
 
 
 
@@ -758,12 +1252,6 @@
                     </div>
                 </div>
                 </p>
-
-                <h4 id="item-2">Item 2</h4>
-                <p>...</p>
-                <h4 id="item-3">Item 3</h4>
-                <p>...</p>
-
             </div>
         </div>
 
