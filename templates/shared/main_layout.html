@@ -42,7 +42,11 @@
           <ul class="list-group w-100">
             <li class="list-group-item"><b>ФИО:&nbsp</b> {{.Name}}</li>
             <li class="list-group-item"><b>Клинический центр:&nbsp</b>{{.CLinicCenter}}<br></li>
+            {{if eq  .Role  "Администратор"}}
+            <a href="/admin/panel"> <li class="list-group-item"><b>Роль:&nbsp</b>{{.Role}} </li> </a>
+            {{else}}
             <li class="list-group-item"><b>Роль:&nbsp</b>{{.Role}} </li>
+            {{end}}
           </ul>
         </div>
       </div>
