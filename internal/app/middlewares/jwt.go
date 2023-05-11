@@ -1,12 +1,9 @@
 package middlewares
 
 import (
-	"errors"
-
 	"github.com/gofiber/fiber/v2"
 	"github.com/golang-jwt/jwt/v4"
 	model "github.com/t67y110v/web/internal/app/model/user"
-	"github.com/t67y110v/web/internal/app/utils"
 )
 
 func CheckJWT() fiber.Handler {
@@ -18,7 +15,7 @@ func CheckJWT() fiber.Handler {
 			return []byte("11we$*9sd*(@!)"), nil
 		})
 		if claims["id"] == nil || err != nil {
-			return utils.ErrorPage(c, errors.New("nil token"))
+			return c.Redirect("/auth")
 		}
 
 		id := int(claims["id"].(float64))
