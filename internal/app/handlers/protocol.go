@@ -32,7 +32,7 @@ func (h *Handlers) SaveProtocol() fiber.Handler {
 			return c.Redirect(fmt.Sprintf("/protocol/edit/%s", protocolId))
 		}
 
-		go h.operations.SaveAction("SaveProtocol", "200", c.Locals("name").(string), "Обновление протокола")
+		go h.operations.SaveAction(c.Context(), "SaveProtocol", "200", c.Locals("name").(string), "Обновление протокола")
 
 		return c.Redirect("/main/filter=0")
 	}
@@ -56,7 +56,7 @@ func (h *Handlers) AddProtocol() fiber.Handler {
 		if err != nil {
 			return utils.ErrorPage(c, err)
 		}
-
+		go h.operations.SaveAction(c.Context(), "AddProtocol", "200", c.Locals("name").(string), "Добавление протокола")
 		return c.Redirect("/main/filter=0")
 	}
 }
@@ -73,6 +73,8 @@ func (h *Handlers) DeleteProtocol() fiber.Handler {
 		if err := h.pgStore.Repository().DeleteProtocol(protocolId); err != nil {
 			return utils.ErrorPage(c, err)
 		}
+
+		go h.operations.SaveAction(c.Context(), "DeleteProtocol", "200", c.Locals("name").(string), "Удаление протокла")
 
 		return c.Redirect("/main/filter=0")
 	}

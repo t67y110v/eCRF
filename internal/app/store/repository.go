@@ -1,6 +1,8 @@
 package store
 
 import (
+	"context"
+
 	modelCenter "github.com/t67y110v/web/internal/app/model/center"
 	modelOperation "github.com/t67y110v/web/internal/app/model/operation"
 	modelProtocol "github.com/t67y110v/web/internal/app/model/protocol"
@@ -20,7 +22,8 @@ type MongoStoreRepository interface {
 }
 
 type JournalRepository interface {
-	SaveAction(modelOperation.Operation) error
+	SaveAction(context.Context, modelOperation.Operation) error
+	SaveProtocolAction(context.Context, modelOperation.Operation) error
 	GetActions() ([]*modelOperation.Operation, error)
 }
 
