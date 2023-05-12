@@ -89,17 +89,17 @@ func (r *MongoStoreRepository) GetSubjectByNumber(number string) (*model.Subject
 
 	cur := collection.FindOne(ctx, filter)
 
-	var p model.Subject
+	var s model.Subject
 
-	err := cur.Decode(&p)
+	err := cur.Decode(&s)
 	if err := cur.Err(); err != nil {
-		return &p, err
+		return &s, err
 	}
 	if err != nil {
 		return nil, err
 	}
 
-	return &p, nil
+	return &s, nil
 
 }
 

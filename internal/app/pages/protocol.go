@@ -18,26 +18,40 @@ func (h *Pages) ProtocolPage() fiber.Handler {
 		p_id, err := strconv.Atoi(protocolId)
 
 		if err != nil {
+			h.logger.Warningln(err)
 			return utils.ErrorPage(c, err)
 		}
-
+		cName, err := h.pgStore.Repository().GetCenterName(user.CenterID)
+		if err != nil {
+			h.logger.Warningln(err)
+			return utils.ErrorPage(c, err)
+		}
 		p, err := h.pgStore.Repository().GetProtocolById(p_id)
 		if err != nil {
+			h.logger.Warningln(err)
 			return utils.ErrorPage(c, err)
 		}
 		s, err := h.mgStore.Repository().GetSubjectsByProtocolId(p_id)
 		if err != nil {
+			h.logger.Warningln(err)
 			return utils.ErrorPage(c, err)
 		}
 		subject, err := h.mgStore.Repository().GetSubjectByNumber(subjectNumber)
 		if err != nil {
+			h.logger.Warningln(err)
+			if len(s) == 0 {
+				return c.Render("protocol/protocol_index", fiber.Map{
+					"Name":         user.Name,
+					"Role":         utils.GetUserRole(user.Role),
+					"CLinicCenter": cName,
+					"ClinicId":     user.CenterID,
+					"Protocol":     p,
+					"Subjects":     s,
+				})
+			}
 			return utils.ErrorPage(c, err)
 		}
 
-		cName, err := h.pgStore.Repository().GetCenterName(user.CenterID)
-		if err != nil {
-			return utils.ErrorPage(c, err)
-		}
 		return c.Render("protocol/protocol_index", fiber.Map{
 			"Name":         user.Name,
 			"Role":         utils.GetUserRole(user.Role),

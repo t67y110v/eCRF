@@ -114,6 +114,7 @@ func (s *server) configureRouter() {
 	subject := s.router.Group("/subject")
 	subject.Use(middlewares.CheckJWT())
 	subject.Post("/new", s.handlers.NewSubject())
+	subject.Post("/demography", s.handlers.DemographySubject())
 
 	errors := s.router.Group("/error")
 	errors.Get("/", s.pages.ErrorPage())

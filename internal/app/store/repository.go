@@ -8,6 +8,7 @@ import (
 	modelProtocol "github.com/t67y110v/web/internal/app/model/protocol"
 	modelSubject "github.com/t67y110v/web/internal/app/model/subject"
 	modelUser "github.com/t67y110v/web/internal/app/model/user"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 type PostgresStoreRepository interface {
@@ -32,6 +33,7 @@ type SubjectStoreRepository interface {
 	GetSubjectsByProtocolId(protocolId int) ([]*modelSubject.Subject, error)
 	GetSubjectByNumber(number string) (*modelSubject.Subject, error)
 	DeleteSubject(number string) error
+	Demography(ctx context.Context, id primitive.ObjectID, sex, race int, date string) error
 }
 
 type CenterStoreRepository interface {

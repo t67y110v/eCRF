@@ -47,8 +47,6 @@ type Subject struct {
 		IndexWeigthOfBody              int    `bson:"index_weight_of_body"`
 	}
 	DemographySubject struct {
-		Id        int    `bson:"demography_id"`
-		SubjectId int    `bson:"subject_id"`
 		Sex       int    `bson:"sex"`
 		Race      int    `bson:"race"`
 		BirthDate string `bson:"date"`
