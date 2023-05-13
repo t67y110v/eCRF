@@ -10,17 +10,11 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-type MongoStoreRepository struct {
+type MongoSubjectRepository struct {
 	store *Store
 }
 
-/*
-Number            string             `bson:"number"`
-CenterID          int                `bson:"center_id" `
-ProtocolId        int                `bson:"protocol_id"`
-Initials          string             `bson:"initials"`
-*/
-func (r *MongoStoreRepository) AddSubject(number, initials string, centerId, protocolId int) error {
+func (r *MongoSubjectRepository) AddSubject(number, initials string, centerId, protocolId int) error {
 	if number == "" || initials == "" {
 		return errors.New("empty fields")
 	}
@@ -45,7 +39,7 @@ func (r *MongoStoreRepository) AddSubject(number, initials string, centerId, pro
 
 }
 
-func (r *MongoStoreRepository) GetSubjectsByProtocolId(protocolId int) ([]*model.Subject, error) {
+func (r *MongoSubjectRepository) GetSubjectsByProtocolId(protocolId int) ([]*model.Subject, error) {
 	filter := bson.D{
 		primitive.E{
 			Key:   "protocol_id",
@@ -77,7 +71,7 @@ func (r *MongoStoreRepository) GetSubjectsByProtocolId(protocolId int) ([]*model
 	return subjects, nil
 }
 
-func (r *MongoStoreRepository) GetSubjectByNumber(number string) (*model.Subject, error) {
+func (r *MongoSubjectRepository) GetSubjectByNumber(number string) (*model.Subject, error) {
 	filter := bson.D{
 		primitive.E{
 			Key:   "number",
@@ -103,7 +97,7 @@ func (r *MongoStoreRepository) GetSubjectByNumber(number string) (*model.Subject
 
 }
 
-func (r *MongoStoreRepository) DeleteSubject(number string) error {
+func (r *MongoSubjectRepository) DeleteSubject(number string) error {
 	ctx := context.TODO()
 	filter := bson.D{primitive.E{
 		Key:   "number",

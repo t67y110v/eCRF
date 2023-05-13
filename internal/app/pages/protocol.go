@@ -31,12 +31,12 @@ func (h *Pages) ProtocolPage() fiber.Handler {
 			h.logger.Warningln(err)
 			return utils.ErrorPage(c, err)
 		}
-		s, err := h.mgStore.Repository().GetSubjectsByProtocolId(p_id)
+		s, err := h.mgStore.Subject().GetSubjectsByProtocolId(p_id)
 		if err != nil {
 			h.logger.Warningln(err)
 			return utils.ErrorPage(c, err)
 		}
-		subject, err := h.mgStore.Repository().GetSubjectByNumber(subjectNumber)
+		subject, err := h.mgStore.Subject().GetSubjectByNumber(subjectNumber)
 		if err != nil {
 			h.logger.Warningln(err)
 			if len(s) == 0 {

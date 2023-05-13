@@ -5,5 +5,7 @@ type PostgresStore interface {
 }
 
 type MongoStore interface {
-	Repository() MongoStoreRepository
+	Subject() MongoSubjectRepository
+	Screening() MongoScreeningRepository
+	Journal() MongoJournalRepository
 }

@@ -8,7 +8,7 @@ import (
 func (p *Pages) JournalPage() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 
-		actions, err := p.mgStore.Repository().GetActions()
+		actions, err := p.mgStore.Journal().GetActions()
 		if err != nil {
 			return utils.ErrorPage(c, err)
 		}

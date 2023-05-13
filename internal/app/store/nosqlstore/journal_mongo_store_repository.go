@@ -9,11 +9,15 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-func (r *MongoStoreRepository) SaveProtocolAction(ctx context.Context, operation model.Operation) error {
+type MongoJournalRepository struct {
+	store *Store
+}
+
+func (r *MongoJournalRepository) SaveProtocolAction(ctx context.Context, operation model.Operation) error {
 	return nil
 }
 
-func (r *MongoStoreRepository) SaveAction(ctx context.Context, operation model.Operation) error {
+func (r *MongoJournalRepository) SaveAction(ctx context.Context, operation model.Operation) error {
 
 	collection := r.store.client.Database("eCRF").Collection("operations")
 
@@ -25,7 +29,7 @@ func (r *MongoStoreRepository) SaveAction(ctx context.Context, operation model.O
 
 }
 
-func (r *MongoStoreRepository) GetActions() ([]*model.Operation, error) {
+func (r *MongoJournalRepository) GetActions() ([]*model.Operation, error) {
 
 	filter := bson.D{{}}
 	ctx := context.TODO()

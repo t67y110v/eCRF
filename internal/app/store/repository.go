@@ -17,23 +17,25 @@ type PostgresStoreRepository interface {
 	CenterStoreRepository
 }
 
-type MongoStoreRepository interface {
-	SubjectStoreRepository
-	JournalRepository
+type MongoSubjectRepository interface {
+	AddSubject(number, initials string, centerId, protocolId int) error
+	GetSubjectsByProtocolId(protocolId int) ([]*modelSubject.Subject, error)
+	GetSubjectByNumber(number string) (*modelSubject.Subject, error)
+	DeleteSubject(number string) error
 }
 
-type JournalRepository interface {
+type MongoJournalRepository interface {
 	SaveAction(context.Context, modelOperation.Operation) error
 	SaveProtocolAction(context.Context, modelOperation.Operation) error
 	GetActions() ([]*modelOperation.Operation, error)
 }
 
-type SubjectStoreRepository interface {
-	AddSubject(number, initials string, centerId, protocolId int) error
-	GetSubjectsByProtocolId(protocolId int) ([]*modelSubject.Subject, error)
-	GetSubjectByNumber(number string) (*modelSubject.Subject, error)
-	DeleteSubject(number string) error
+type MongoScreeningRepository interface {
+	InformaionConsent(ctx context.Context, id primitive.ObjectID, dateOfSign int, timeOfSign string, isSigned, receivedAnInsurancePolicy, receivedAnInformaionConsent bool) error
 	Demography(ctx context.Context, id primitive.ObjectID, sex, race int, date string) error
+	Anthropometry(ctx context.Context, id primitive.ObjectID, anthropometricDataBeenMeasured bool, reasonIfNot, dateOfStartMeasured string, weightOfBody, hightOfBody, indexWeigthOfBody int) error
+	InclusionCriteria(ctx context.Context, id primitive.ObjectID, presenceOfAnInformationPanel, aged18To55Years, negativeHIVTestResult, bodyMassIndex, absenceOfAcuteInfectiousDiseases, consentToUseEffectiveMethodsOfContraception, negativePregnancyTest, negativeAlcoholTest, noHistoryOfSeverePostVaccinationReactions, indicatorsBloodTestsAtScreeningWithin, noMyocardialChanges, negativeTestResultForCOVID, noContraindicationsToVaccination bool) error
+	ExclusionСriteria(ctx context.Context, id primitive.ObjectID, lackOfSignedInformedConsent, steroidTherapy, therapyWithImmunosuppressiveDrugs, femaleSubjectsDuringPregnancy, strokeInLessThanOneYear, chronicSystemicInfections, aggravatedAllergicHistory, presenceOfAHistoryOfNeoplasms, historyOfSplenectomy, neutropenia, subjectsWithActiveSyphilis, anorexia, extensiveTattoos, takingNarcoticAndPsychostimulantDrugs, smokingMoretThanTenCigarettesADay, alcoholIntake, plannedHospitalization, donorBloodDonation, subjectParticipationInAnyOtherStudy, anyVaccinationInTheLastMonth, inabilityToReadInRussian, researchCenterStaff, anyOtherStateOfTheSubjectOfTheStudy bool) error
 }
 
 type CenterStoreRepository interface {

@@ -19,5 +19,5 @@ func (o *Operations) SaveAction(ctx context.Context, method, code, initiator, ac
 		UpdatedAt:  time.Now(),
 	}
 
-	o.mgStore.Repository().SaveAction(ctx, op)
+	o.mgStore.Journal().SaveAction(ctx, op)
 }

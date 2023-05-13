@@ -9,8 +9,10 @@ import (
 )
 
 type Store struct {
-	client               *mongo.Client
-	mongoStoreRepository *MongoStoreRepository
+	client                   *mongo.Client
+	mongoStoreRepository     *MongoSubjectRepository
+	mongoScreeningRepository *MongoScreeningRepository
+	mongoJournalRepository   *MongoJournalRepository
 }
 
 func NewMongoDB(client *mongo.Client) *Store {
@@ -21,12 +23,33 @@ func NewMongoDB(client *mongo.Client) *Store {
 	}
 }
 
-func (s *Store) Repository() store.MongoStoreRepository {
+func (s *Store) Subject() store.MongoSubjectRepository {
 	if s.mongoStoreRepository != nil {
 		return s.mongoStoreRepository
 	}
-	s.mongoStoreRepository = &MongoStoreRepository{
+	s.mongoStoreRepository = &MongoSubjectRepository{
 		store: s,
 	}
 	return s.mongoStoreRepository
+}
+
+func (s *Store) Screening() store.MongoScreeningRepository {
+	if s.mongoScreeningRepository != nil {
+		return s.mongoScreeningRepository
+	}
+	s.mongoScreeningRepository = &MongoScreeningRepository{
+		store: s,
+	}
+	return s.mongoScreeningRepository
+}
+
+func (s *Store) Journal() store.MongoJournalRepository {
+	if s.mongoJournalRepository != nil {
+		return s.mongoJournalRepository
+	}
+
+	s.mongoJournalRepository = &MongoJournalRepository{
+		store: s,
+	}
+	return s.mongoJournalRepository
 }
