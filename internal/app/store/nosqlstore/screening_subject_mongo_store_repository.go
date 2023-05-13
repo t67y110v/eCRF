@@ -12,8 +12,6 @@ type MongoScreeningRepository struct {
 	store *Store
 }
 
-
-
 func (r *MongoScreeningRepository) InformaionConsent(
 	ctx context.Context,
 	id primitive.ObjectID,
@@ -27,11 +25,11 @@ func (r *MongoScreeningRepository) InformaionConsent(
 	filter := bson.M{"_id": id}
 	update := bson.M{
 		"$set": bson.M{
-			"informaionconsent.signed":                         isSigned,
-			"informaionconsent.date_of_sign":                   dateOfSign,
-			"informaionconsent.time_of_sign":                   timeOfSign,
-			"informaionconsent.received_an_insurance_policy":   receivedAnInsurancePolicy,
-			"informaionconsent.received_an_informaion_consent": receivedAnInformaionConsent,
+			"screening.informaionconsent.signed":                         isSigned,
+			"screening.informaionconsent.date_of_sign":                   dateOfSign,
+			"screening.informaionconsent.time_of_sign":                   timeOfSign,
+			"screening.informaionconsent.received_an_insurance_policy":   receivedAnInsurancePolicy,
+			"screening.informaionconsent.received_an_informaion_consent": receivedAnInformaionConsent,
 		},
 	}
 
@@ -47,10 +45,10 @@ func (r *MongoScreeningRepository) Demography(ctx context.Context, id primitive.
 	filter := bson.M{"_id": id}
 	update := bson.M{
 		"$set": bson.M{
-			"demographysubject.sex":  sex,
-			"demographysubject.race": race,
-			"demographysubject.date": date,
-			"updated_at":             time.Now(),
+			"screening.demography.sex":  sex,
+			"screening.demography.race": race,
+			"screening.demography.date": date,
+			"updated_at":                time.Now(),
 		},
 	}
 

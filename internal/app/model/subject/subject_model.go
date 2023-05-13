@@ -31,7 +31,7 @@ type Subject struct {
 			HightOfBody                    int    `bson:"hight_of_body"`
 			IndexWeigthOfBody              int    `bson:"index_weight_of_body"`
 		}
-		DemographySubject struct {
+		Demography struct {
 			Sex       int    `bson:"sex"`
 			Race      int    `bson:"race"`
 			BirthDate string `bson:"date"`
