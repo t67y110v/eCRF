@@ -15,6 +15,13 @@
     <div class="row">
         <div class="col-2  shadow-sm p-3 bg-white rounded">
             <h5 class="text-center">Субъекты</h5>
+            <!-- Button trigger modal -->
+            <div class="d-grid gap-2">
+                <button type="button" class="btn btn-sm  btn-primary" data-bs-toggle="modal"
+                    data-bs-target="#updateCenter">
+                    Добавить субьект исследования
+                </button>
+            </div>
             <div id="subject-select">
                 <div class="d-flex" id="load">
                     <select class="form-select px-1" id="subject" onchange="gotopage(this)">
@@ -33,10 +40,8 @@
 
                 </div>
             </div>
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-sm  btn-primary" data-bs-toggle="modal" data-bs-target="#updateCenter">
-                Добавить субьект исследования
-            </button>
+            
+
 
             <!-- Modal -->
             <div class="modal fade" id="updateCenter" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -152,7 +157,8 @@
                     <h5 class="text-center">Информ. согласие</h5>
                     <hr>
                     <div class="row">
-                        <div class="col-7">
+                        <div class="col-1"></div>
+                        <div class="col-10">
                             <br>
                             <div class="mb-1">
 
@@ -160,39 +166,82 @@
                                 <form id="demography" method="POST" action="/subject/demography/save">
 
                                     <div class="mb-1">
-                                        <div class="mb-1">
-                                            <label class="form-label">Информированное согласие подписано?</label>
-                                            <select id="sex" name="center" class="form-select">
-                                                <option value="1">Да</option>
-                                                <option value="2">Нет</option>
+                                        <div class="mb-1"> <label class="form-label">Информированное согласие
+                                                подписано?</label>
+                                            <div class="input-group mb-3">
 
-                                            </select>
+                                                <select id="sex" name="center" class="form-select">
+                                                    <option value="1">Да</option>
+                                                    <option value="2">Нет</option>
+
+                                                </select>
+                                                <span title="Автоматическая валидация" class="input-group-text"
+                                                    id="basic-addon1">🟢</span>
+                                                <span title="Валидация монитором" class="input-group-text"
+                                                    id="basic-addon1">🟢</span>
+                                                <span title="Валидация дата-менеджером" class="input-group-text"
+                                                    id="basic-addon1">🔴</span>
+                                            </div>
+
                                         </div>
                                         <div class="mb-2">
                                             <label class="form-label">Дата подписания</label>
-                                            <input class="form-control" type="date">
+                                            <div class="input-group mb-3">
+
+                                                <input class="form-control" type="date">
+                                                <span title="Автоматическая валидация" class="input-group-text"
+                                                    id="basic-addon1">🟢</span>
+                                                <span title="Валидация монитором" class="input-group-text"
+                                                    id="basic-addon1">🟢</span>
+                                                <span title="Валидация дата-менеджером" class="input-group-text"
+                                                    id="basic-addon1">🔴</span>
+                                            </div>
                                         </div>
                                         <div class="mb-2">
                                             <label class="form-label">Время подписания</label>
-                                            <input class="form-control" type="time">
+                                            <div class="input-group mb-3">
+                                                <input class="form-control" type="time">
+                                                <span title="Автоматическая валидация" class="input-group-text"
+                                                    id="basic-addon1">🟢</span>
+                                                <span title="Валидация монитором" class="input-group-text"
+                                                    id="basic-addon1">🟢</span>
+                                                <span title="Валидация дата-менеджером" class="input-group-text"
+                                                    id="basic-addon1">🔴</span>
+                                            </div>
                                         </div>
                                         <div class="mb-1">
                                             <label class="form-label">Доброволец получил на руки оригинал страхового
                                                 Полиса участника исследования ?</label>
-                                            <select id="sex" name="center" class="form-select">
-                                                <option value="1">Да</option>
-                                                <option value="2">Нет</option>
+                                            <div class="input-group mb-3">
+                                                <select id="sex" name="center" class="form-select">
+                                                    <option value="1">Да</option>
+                                                    <option value="2">Нет</option>
 
-                                            </select>
+                                                </select>
+                                                <span title="Автоматическая валидация" class="input-group-text"
+                                                    id="basic-addon1">🟢</span>
+                                                <span title="Валидация монитором" class="input-group-text"
+                                                    id="basic-addon1">🟢</span>
+                                                <span title="Валидация дата-менеджером" class="input-group-text"
+                                                    id="basic-addon1">🔴</span>
+                                            </div>
                                         </div>
                                         <div class="mb-1">
                                             <label class="form-label">Доброволец получил на руки один экземпляр
                                                 информированного согласия</label>
-                                            <select id="sex" name="center" class="form-select">
-                                                <option value="1">Да</option>
-                                                <option value="2">Нет</option>
+                                            <div class="input-group mb-3">
+                                                <select id="sex" name="center" class="form-select">
+                                                    <option value="1">Да</option>
+                                                    <option value="2">Нет</option>
 
-                                            </select>
+                                                </select>
+                                                <span title="Автоматическая валидация" class="input-group-text"
+                                                    id="basic-addon1">🟢</span>
+                                                <span title="Валидация монитором" class="input-group-text"
+                                                    id="basic-addon1">🟢</span>
+                                                <span title="Валидация дата-менеджером" class="input-group-text"
+                                                    id="basic-addon1">🔴</span>
+                                            </div>
                                         </div>
 
 
@@ -213,7 +262,8 @@
                     <h5 class="text-center">Демография</h5>
                     <hr>
                     <div class="row">
-                        <div class="col-7">
+                        <div class="col-1"></div>
+                        <div class="col-10">
                             <br>
                             <div class="mb-1">
 
@@ -223,57 +273,86 @@
                                         <input class="form-control" type="hidden" placeholder="{{.Subject.Number}}"
                                             value="{{.Subject.Number}}" name="subject_number" id="id" readonly>
                                     </div>
+                                    <div class="mb-2">
+                                        <input class="form-control" type="hidden" placeholder="{{.Subject.ProtocolId}}"
+                                            value="{{.Subject.ProtocolId}}" name="protocol_id" id="id" readonly>
+                                    </div>
                                     <div class="mb-1">
                                         <div class="mb-1">
                                             <label class="form-label">Пол</label>
-                                            <select id="sex" name="sex" class="form-select">
-                                                {{if eq .Subject.Screening.Demography.Sex 1}}
-                                                <option selected value="1">Мужчина</option>
-                                                <option value="2">Женщина</option>
-                                                {{else if eq .Subject.Screening.Demography.Sex 2 }}
-                                                <option value="1">Мужчина</option>
-                                                <option selected value="2">Женщина</option>
-                                                
-                                                {{else}}
-                                                <option selected value="0">Не выбрано</option>
-                                                <option value="1">Мужчина</option>
-                                                <option value="2">Женщина</option>
-                                                {{end}}
-                                            </select>
+                                            <div class="input-group mb-3">
+                                                <select id="sex" name="sex" class="form-select">
+                                                    {{if eq .Subject.Screening.Demography.Sex 1}}
+                                                    <option selected value="1">Мужчина</option>
+                                                    <option value="2">Женщина</option>
+                                                    {{else if eq .Subject.Screening.Demography.Sex 2 }}
+                                                    <option value="1">Мужчина</option>
+                                                    <option selected value="2">Женщина</option>
+
+                                                    {{else}}
+                                                    <option selected value="0">Не выбрано</option>
+                                                    <option value="1">Мужчина</option>
+                                                    <option value="2">Женщина</option>
+                                                    {{end}}
+                                                </select>
+                                                <span title="Автоматическая валидация" class="input-group-text"
+                                                    id="basic-addon1">🟢</span>
+                                                <span title="Валидация монитором" class="input-group-text"
+                                                    id="basic-addon1">🟢</span>
+                                                <span title="Валидация дата-менеджером" class="input-group-text"
+                                                    id="basic-addon1">🔴</span>
+                                            </div>
                                         </div>
                                         <div class="mb-2">
 
 
                                             <label class="form-label">Раса</label>
-                                            <select id="race" name="race" class="form-select">
-                                                {{if eq .Subject.Screening.Demography.Race 1}}
-                                                <option selected value="1">Европеоидная</option>
-                                                {{else if eq .Subject.Screening.Demography.Race 2}}
-                                                <option  selected value="2">Негроидная</option>
-                                                {{else if eq .Subject.Screening.Demography.Race 3}}
-                                                <option selected value="3">Монголоидная</option>
-                                                {{else if eq .Subject.Screening.Demography.Race 4}}
-                                                <option selected value="4">Американоидная</option>
-                                                {{else if eq .Subject.Screening.Demography.Race 5}}
-                                                <option selected  value="5">Австралоидная</option>
-                                                {{else }}
-                                                <option selected value="0">Не выбрано</option>
-                                                {{end}}
-                                                <option value="1">Европеоидная</option>
-                                                <option value="2">Негроидная</option>
-                                                <option value="3">Монголоидная</option>
-                                                <option value="4">Американоидная</option>
-                                                <option value="5">Австралоидная</option>
+                                            <div class="input-group mb-3">
+                                                <select id="race" name="race" class="form-select">
+                                                    {{if eq .Subject.Screening.Demography.Race 1}}
+                                                    <option selected value="1">Европеоидная</option>
+                                                    {{else if eq .Subject.Screening.Demography.Race 2}}
+                                                    <option selected value="2">Негроидная</option>
+                                                    {{else if eq .Subject.Screening.Demography.Race 3}}
+                                                    <option selected value="3">Монголоидная</option>
+                                                    {{else if eq .Subject.Screening.Demography.Race 4}}
+                                                    <option selected value="4">Американоидная</option>
+                                                    {{else if eq .Subject.Screening.Demography.Race 5}}
+                                                    <option selected value="5">Австралоидная</option>
+                                                    {{else }}
+                                                    <option selected value="0">Не выбрано</option>
+                                                    {{end}}
+                                                    <option value="1">Европеоидная</option>
+                                                    <option value="2">Негроидная</option>
+                                                    <option value="3">Монголоидная</option>
+                                                    <option value="4">Американоидная</option>
+                                                    <option value="5">Австралоидная</option>
 
-                                            </select>
+                                                </select>
+                                                <span title="Автоматическая валидация" class="input-group-text"
+                                                    id="basic-addon1">🟢</span>
+                                                <span title="Валидация монитором" class="input-group-text"
+                                                    id="basic-addon1">🟢</span>
+                                                <span title="Валидация дата-менеджером" class="input-group-text"
+                                                    id="basic-addon1">🔴</span>
+                                            </div>
                                         </div>
                                         <div class="mb-2">
                                             <label class="form-label">Дата рождения</label>
-                                            {{if .Subject.Screening.Demography.BirthDate }}
-                                            <input value="{{.Subject.Screening.Demography.BirthDate}}" name="birth_date" class="form-control" type="data">
-                                            {{else}}
-                                            <input  name="birth_date" class="form-control" type="date">
-                                            {{end}}
+                                            <div class="input-group mb-3">
+                                                {{if .Subject.Screening.Demography.BirthDate }}
+                                                <input value="{{.Subject.Screening.Demography.BirthDate}}"
+                                                    name="birth_date" class="form-control" type="data">
+                                                {{else}}
+                                                <input name="birth_date" class="form-control" type="date">
+                                                {{end}}
+                                                <span title="Автоматическая валидация" class="input-group-text"
+                                                    id="basic-addon1">🟢</span>
+                                                <span title="Валидация монитором" class="input-group-text"
+                                                    id="basic-addon1">🟢</span>
+                                                <span title="Валидация дата-менеджером" class="input-group-text"
+                                                    id="basic-addon1">🔴</span>
+                                            </div>
                                         </div>
 
                                         <div class="d-grid gap-2">
@@ -283,125 +362,7 @@
                                 </form>
                             </div>
                         </div>
-                        <div class="col-5 grey rounded">
-                            <table>
-                                <thead>
-                                    <tr class="cell-centered">
-                                        <th>Первичная валидация</th>
-                                        <th>Верификация монитором</th>
-                                        <th>Верификация Дата Менеджером</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="cell-centered">
-                                        <td>
-                                            <h2>✅</h2>
-                                        </td>
-                                        <td>
-                                            <h2>✅</h2>
-                                        </td>
-                                        <td>
-                                            <h2>⛔</h2>
-                                        </td>
-                                    </tr>
-                                    <tr class="cell-centered">
 
-                                        <td>
-                                            <h2></h2>
-                                        </td>
-                                        <td>
-                                            <h2></h2>
-                                        </td>
-                                        <td>
-                                            <h2></h2>
-                                        </td>
-                                    </tr>
-                                    <tr class="cell-centered">
-
-                                        <td>
-                                            <h2></h2>
-                                        </td>
-                                        <td>
-                                            <h2></h2>
-                                        </td>
-                                        <td>
-                                            <h2></h2>
-                                        </td>
-                                    </tr>
-                                    <tr class="cell-centered">
-
-                                        <td>
-                                            <h2></h2>
-                                        </td>
-                                        <td>
-                                            <h2></h2>
-                                        </td>
-                                        <td>
-                                            <h2></h2>
-                                        </td>
-                                    </tr>
-                                    <tr class="cell-centered">
-
-                                        <td>
-                                            <h2>✅</h2>
-                                        </td>
-                                        <td>
-                                            <h2>✅</h2>
-                                        </td>
-                                        <td>
-                                            <h2>⛔</h2>
-                                        </td>
-                                    </tr>
-                                    <tr class="cell-centered">
-
-                                        <td>
-                                            <h2></h2>
-                                        </td>
-                                        <td>
-                                            <h2></h2>
-                                        </td>
-                                        <td>
-                                            <h2></h2>
-                                        </td>
-                                    </tr>
-                                    <tr class="cell-centered">
-
-                                        <td>
-                                            <h2></h2>
-                                        </td>
-                                        <td>
-                                            <h2></h2>
-                                        </td>
-                                        <td>
-                                            <h2></h2>
-                                        </td>
-                                    </tr>
-                                    <tr class="cell-centered">
-
-                                        <td>
-                                            <h2></h2>
-                                        </td>
-                                        <td>
-                                            <h2></h2>
-                                        </td>
-                                        <td>
-                                            <h2></h2>
-                                        </td>
-                                    </tr>
-                                    <tr class="cell-centered">
-                                        <td>
-                                            <h2>✅</h2>
-                                        </td>
-                                        <td>
-                                            <h2>✅</h2>
-                                        </td>
-                                        <td>
-                                            <h2>⛔</h2>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
                     </div>
 
 
@@ -414,7 +375,8 @@
                     <h5 class="text-center">Антропометрия</h5>
                     <hr>
                     <div class="row">
-                        <div class="col-7">
+                        <div class="col-1"></div>
+                        <div class="col-10">
                             <br>
                             <div class="mb-1">
 
@@ -425,31 +387,80 @@
                                         <div class="mb-1">
                                             <label class="form-label">Измерение антропометрических данных
                                                 проведено?</label>
-                                            <select id="sex" name="center" class="form-select">
-                                                <option value="1">Да</option>
-                                                <option value="2">Нет</option>
+                                            <div class="input-group mb-3">
+                                                <select id="sex" name="center" class="form-select">
+                                                    <option value="1">Да</option>
+                                                    <option value="2">Нет</option>
 
-                                            </select>
+                                                </select>
+                                                <span title="Автоматическая валидация" class="input-group-text"
+                                                    id="basic-addon1">🟢</span>
+                                                <span title="Валидация монитором" class="input-group-text"
+                                                    id="basic-addon1">🟢</span>
+                                                <span title="Валидация дата-менеджером" class="input-group-text"
+                                                    id="basic-addon1">🔴</span>
+                                            </div>
                                         </div>
                                         <div class="mb-2">
                                             <label class="form-label">Если НЕТ, то укажите причину</label>
-                                            <input class="form-control" type="input">
+                                            <div class="input-group mb-3">
+                                                <input class="form-control" type="input">
+                                                <span title="Автоматическая валидация" class="input-group-text"
+                                                    id="basic-addon1">🟢</span>
+                                                <span title="Валидация монитором" class="input-group-text"
+                                                    id="basic-addon1">🟢</span>
+                                                <span title="Валидация дата-менеджером" class="input-group-text"
+                                                    id="basic-addon1">🔴</span>
+                                            </div>
                                         </div>
                                         <div class="mb-2">
                                             <label class="form-label">Дата проведения измерений</label>
-                                            <input class="form-control" type="date">
+                                            <div class="input-group mb-3">
+                                                <input class="form-control" type="date">
+                                                <span title="Автоматическая валидация" class="input-group-text"
+                                                    id="basic-addon1">🟢</span>
+                                                <span title="Валидация монитором" class="input-group-text"
+                                                    id="basic-addon1">🟢</span>
+                                                <span title="Валидация дата-менеджером" class="input-group-text"
+                                                    id="basic-addon1">🔴</span>
+                                            </div>
                                         </div>
                                         <div class="mb-2">
                                             <label class="form-label">Масса тела</label>
-                                            <input class="form-control" type="input">
+                                            <div class="input-group mb-3">
+                                                <input class="form-control" type="input">
+                                                <span title="Автоматическая валидация" class="input-group-text"
+                                                    id="basic-addon1">🟢</span>
+                                                <span title="Валидация монитором" class="input-group-text"
+                                                    id="basic-addon1">🟢</span>
+                                                <span title="Валидация дата-менеджером" class="input-group-text"
+                                                    id="basic-addon1">🔴</span>
+                                            </div>
                                         </div>
                                         <div class="mb-2">
                                             <label class="form-label">Рост</label>
-                                            <input class="form-control" type="input">
+                                            <div class="input-group mb-3">
+                                                <input class="form-control" type="input">
+                                                <span title="Автоматическая валидация" class="input-group-text"
+                                                    id="basic-addon1">🟢</span>
+                                                <span title="Валидация монитором" class="input-group-text"
+                                                    id="basic-addon1">🟢</span>
+                                                <span title="Валидация дата-менеджером" class="input-group-text"
+                                                    id="basic-addon1">🔴</span>
+                                            </div>
                                         </div>
                                         <div class="mb-2">
                                             <label class="form-label">Индекс массы тела(рассчетное значение)</label>
-                                            <input class="form-control" type="input">
+                                            <div class="input-group mb-3">
+
+                                                <input class="form-control" type="input">
+                                                <span title="Автоматическая валидация" class="input-group-text"
+                                                    id="basic-addon1">🟢</span>
+                                                <span title="Валидация монитором" class="input-group-text"
+                                                    id="basic-addon1">🟢</span>
+                                                <span title="Валидация дата-менеджером" class="input-group-text"
+                                                    id="basic-addon1">🔴</span>
+                                            </div>
                                         </div>
 
 
@@ -471,7 +482,8 @@
                     <h5 class="text-center">Критерии включения в иследование</h5>
                     <hr>
                     <div class="row">
-                        <div class="col-7">
+                        <div class="col-1"></div>
+                        <div class="col-10">
                             <br>
                             <div class="mb-1">
 
@@ -481,22 +493,41 @@
                                     <div class="mb-1">
                                         <div class="mb-1">
                                             <div class="form-chek">
-                                                <label class="form-check-label"> Наличие письменного информированного
+
+                                                <label class="form-check-label"> Наличие письменного
+                                                    информированного
                                                     согласия субъекта на участие в
                                                     исследовании &nbsp; </label>
+
+
                                                 <br>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions1" id="inlineRadio1" value="Yes" />
-                                                    <label class="form-check-label" for="inlineRadio1">Да</label>
-                                                </div>
+                                                <div class="input-group">
+                                                    <div class="input-group-text">
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions1" id="inlineRadio1"
+                                                                value="Yes" />
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio1">Да</label>
+                                                        </div>
 
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions1" id="inlineRadio2" value="No" />
-                                                    <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions1" id="inlineRadio2"
+                                                                value="No" />
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio2">Нет</label>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" class="form-control" disabled
+                                                        aria-label="Text input with radio button">
+                                                    <span title="Автоматическая валидация" class="input-group-text"
+                                                        id="basic-addon1">🟢</span>
+                                                    <span title="Валидация монитором" class="input-group-text"
+                                                        id="basic-addon1">🟢</span>
+                                                    <span title="Валидация дата-менеджером" class="input-group-text"
+                                                        id="basic-addon1">🔴</span>
                                                 </div>
-
 
 
                                             </div>
@@ -508,16 +539,32 @@
                                                     лет&nbsp;
                                                 </label>
                                                 <br>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions2" id="inlineRadio1" value="Yes" />
-                                                    <label class="form-check-label" for="inlineRadio1">Да</label>
-                                                </div>
+                                                <div class="input-group">
+                                                    <div class="input-group-text">
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions1" id="inlineRadio1"
+                                                                value="Yes" />
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio1">Да</label>
+                                                        </div>
 
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions2" id="inlineRadio2" value="No" />
-                                                    <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions1" id="inlineRadio2"
+                                                                value="No" />
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio2">Нет</label>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" class="form-control" disabled
+                                                        aria-label="Text input with radio button">
+                                                    <span title="Автоматическая валидация" class="input-group-text"
+                                                        id="basic-addon1">🟢</span>
+                                                    <span title="Валидация монитором" class="input-group-text"
+                                                        id="basic-addon1">🟢</span>
+                                                    <span title="Валидация дата-менеджером" class="input-group-text"
+                                                        id="basic-addon1">🔴</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -527,16 +574,32 @@
                                                 <label class="radio-inline">Отрицательный результат исследования на ВИЧ,
                                                     гепатиты, сифилис &nbsp;</label>
                                                 <br>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
-                                                    <label class="form-check-label" for="inlineRadio1">Да</label>
-                                                </div>
+                                                <div class="input-group">
+                                                    <div class="input-group-text">
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions1" id="inlineRadio1"
+                                                                value="Yes" />
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio1">Да</label>
+                                                        </div>
 
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio2" value="No" />
-                                                    <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions1" id="inlineRadio2"
+                                                                value="No" />
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio2">Нет</label>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" class="form-control" disabled
+                                                        aria-label="Text input with radio button">
+                                                    <span title="Автоматическая валидация" class="input-group-text"
+                                                        id="basic-addon1">🟢</span>
+                                                    <span title="Валидация монитором" class="input-group-text"
+                                                        id="basic-addon1">🟢</span>
+                                                    <span title="Валидация дата-менеджером" class="input-group-text"
+                                                        id="basic-addon1">🔴</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -546,16 +609,32 @@
                                                 <label class="radio-inline">Индекс массы тела (ИМТ) составляет
                                                     18.5≤ИМТ≤30 &nbsp;</label>
                                                 <br>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
-                                                    <label class="form-check-label" for="inlineRadio1">Да</label>
-                                                </div>
+                                                <div class="input-group">
+                                                    <div class="input-group-text">
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions1" id="inlineRadio1"
+                                                                value="Yes" />
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio1">Да</label>
+                                                        </div>
 
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio2" value="No" />
-                                                    <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions1" id="inlineRadio2"
+                                                                value="No" />
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio2">Нет</label>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" class="form-control" disabled
+                                                        aria-label="Text input with radio button">
+                                                    <span title="Автоматическая валидация" class="input-group-text"
+                                                        id="basic-addon1">🟢</span>
+                                                    <span title="Валидация монитором" class="input-group-text"
+                                                        id="basic-addon1">🟢</span>
+                                                    <span title="Валидация дата-менеджером" class="input-group-text"
+                                                        id="basic-addon1">🔴</span>
                                                 </div>
 
                                             </div>
@@ -568,16 +647,32 @@
                                                     меньшей мере в течение 14-ти дней до включения в исследование
                                                     &nbsp;</label>
                                                 <br>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
-                                                    <label class="form-check-label" for="inlineRadio1">Да</label>
-                                                </div>
+                                                <div class="input-group">
+                                                    <div class="input-group-text">
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions1" id="inlineRadio1"
+                                                                value="Yes" />
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio1">Да</label>
+                                                        </div>
 
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio2" value="No" />
-                                                    <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions1" id="inlineRadio2"
+                                                                value="No" />
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio2">Нет</label>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" class="form-control" disabled
+                                                        aria-label="Text input with radio button">
+                                                    <span title="Автоматическая валидация" class="input-group-text"
+                                                        id="basic-addon1">🟢</span>
+                                                    <span title="Валидация монитором" class="input-group-text"
+                                                        id="basic-addon1">🟢</span>
+                                                    <span title="Валидация дата-менеджером" class="input-group-text"
+                                                        id="basic-addon1">🔴</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -589,16 +684,32 @@
                                                     всего периода участия в исследовании
                                                     &nbsp;</label>
                                                 <br>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
-                                                    <label class="form-check-label" for="inlineRadio1">Да</label>
-                                                </div>
+                                                <div class="input-group">
+                                                    <div class="input-group-text">
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions1" id="inlineRadio1"
+                                                                value="Yes" />
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio1">Да</label>
+                                                        </div>
 
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio2" value="No" />
-                                                    <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions1" id="inlineRadio2"
+                                                                value="No" />
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio2">Нет</label>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" class="form-control" disabled
+                                                        aria-label="Text input with radio button">
+                                                    <span title="Автоматическая валидация" class="input-group-text"
+                                                        id="basic-addon1">🟢</span>
+                                                    <span title="Валидация монитором" class="input-group-text"
+                                                        id="basic-addon1">🟢</span>
+                                                    <span title="Валидация дата-менеджером" class="input-group-text"
+                                                        id="basic-addon1">🔴</span>
                                                 </div>
 
                                             </div>
@@ -611,24 +722,41 @@
                                                     визите скрининга (для женщин детородного возраста) &nbsp;
                                                 </label>
                                                 <br>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
-                                                    <label class="form-check-label" for="inlineRadio1">Да</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-text">
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions1" id="inlineRadio1"
+                                                                value="Yes" />
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio1">Да</label>
+                                                        </div>
+
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions1" id="inlineRadio2"
+                                                                value="No" />
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio2">Нет</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions3" id="inlineRadio3"
+                                                                value="unaccepteble" />
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio3">Неприменимо</label>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" class="form-control" disabled
+                                                        aria-label="Text input with radio button">
+                                                    <span title="Автоматическая валидация" class="input-group-text"
+                                                        id="basic-addon1">🟢</span>
+                                                    <span title="Валидация монитором" class="input-group-text"
+                                                        id="basic-addon1">🟢</span>
+                                                    <span title="Валидация дата-менеджером" class="input-group-text"
+                                                        id="basic-addon1">🔴</span>
                                                 </div>
 
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio2" value="No" />
-                                                    <label class="form-check-label" for="inlineRadio2">Нет</label>
-                                                </div>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio3"
-                                                        value="unaccepteble" />
-                                                    <label class="form-check-label"
-                                                        for="inlineRadio3">Неприменимо</label>
-                                                </div>
 
                                             </div>
                                         </div>
@@ -639,16 +767,32 @@
                                                     и психостимулирующих
                                                     средств в моче на визите скрининга &nbsp;</label>
                                                 <br>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
-                                                    <label class="form-check-label" for="inlineRadio1">Да</label>
-                                                </div>
+                                                <div class="input-group">
+                                                    <div class="input-group-text">
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions1" id="inlineRadio1"
+                                                                value="Yes" />
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio1">Да</label>
+                                                        </div>
 
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio2" value="No" />
-                                                    <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions1" id="inlineRadio2"
+                                                                value="No" />
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio2">Нет</label>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" class="form-control" disabled
+                                                        aria-label="Text input with radio button">
+                                                    <span title="Автоматическая валидация" class="input-group-text"
+                                                        id="basic-addon1">🟢</span>
+                                                    <span title="Валидация монитором" class="input-group-text"
+                                                        id="basic-addon1">🟢</span>
+                                                    <span title="Валидация дата-менеджером" class="input-group-text"
+                                                        id="basic-addon1">🔴</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -658,16 +802,32 @@
                                                 <label class="radio-inline">Отрицательный тест на содержание алкоголя на
                                                     визите скрининга &nbsp;</label>
                                                 <br>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
-                                                    <label class="form-check-label" for="inlineRadio1">Да</label>
-                                                </div>
+                                                <div class="input-group">
+                                                    <div class="input-group-text">
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions1" id="inlineRadio1"
+                                                                value="Yes" />
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio1">Да</label>
+                                                        </div>
 
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio2" value="No" />
-                                                    <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions1" id="inlineRadio2"
+                                                                value="No" />
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio2">Нет</label>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" class="form-control" disabled
+                                                        aria-label="Text input with radio button">
+                                                    <span title="Автоматическая валидация" class="input-group-text"
+                                                        id="basic-addon1">🟢</span>
+                                                    <span title="Валидация монитором" class="input-group-text"
+                                                        id="basic-addon1">🟢</span>
+                                                    <span title="Валидация дата-менеджером" class="input-group-text"
+                                                        id="basic-addon1">🔴</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -679,16 +839,32 @@
                                                     поствакцинальных осложнений на предыдущее применение
                                                     иммунобиологических препаратов &nbsp;</label>
                                                 <br>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
-                                                    <label class="form-check-label" for="inlineRadio1">Да</label>
-                                                </div>
+                                                <div class="input-group">
+                                                    <div class="input-group-text">
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions1" id="inlineRadio1"
+                                                                value="Yes" />
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio1">Да</label>
+                                                        </div>
 
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio2" value="No" />
-                                                    <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions1" id="inlineRadio2"
+                                                                value="No" />
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio2">Нет</label>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" class="form-control" disabled
+                                                        aria-label="Text input with radio button">
+                                                    <span title="Автоматическая валидация" class="input-group-text"
+                                                        id="basic-addon1">🟢</span>
+                                                    <span title="Валидация монитором" class="input-group-text"
+                                                        id="basic-addon1">🟢</span>
+                                                    <span title="Валидация дата-менеджером" class="input-group-text"
+                                                        id="basic-addon1">🔴</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -699,16 +875,32 @@
                                                     крови на скрининге в
                                                     пределах 1,1 х ВГРИ – 0,9 х НГРИ &nbsp;</label>
                                                 <br>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
-                                                    <label class="form-check-label" for="inlineRadio1">Да</label>
-                                                </div>
+                                                <div class="input-group">
+                                                    <div class="input-group-text">
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions1" id="inlineRadio1"
+                                                                value="Yes" />
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio1">Да</label>
+                                                        </div>
 
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio2" value="No" />
-                                                    <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions1" id="inlineRadio2"
+                                                                value="No" />
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio2">Нет</label>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" class="form-control" disabled
+                                                        aria-label="Text input with radio button">
+                                                    <span title="Автоматическая валидация" class="input-group-text"
+                                                        id="basic-addon1">🟢</span>
+                                                    <span title="Валидация монитором" class="input-group-text"
+                                                        id="basic-addon1">🟢</span>
+                                                    <span title="Валидация дата-менеджером" class="input-group-text"
+                                                        id="basic-addon1">🔴</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -719,16 +911,32 @@
                                                     воспалительного или дистрофического
                                                     характера по результатам ЭКГ на скрининге &nbsp;</label>
                                                 <br>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
-                                                    <label class="form-check-label" for="inlineRadio1">Да</label>
-                                                </div>
+                                                <div class="input-group">
+                                                    <div class="input-group-text">
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions1" id="inlineRadio1"
+                                                                value="Yes" />
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio1">Да</label>
+                                                        </div>
 
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio2" value="No" />
-                                                    <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions1" id="inlineRadio2"
+                                                                value="No" />
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio2">Нет</label>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" class="form-control" disabled
+                                                        aria-label="Text input with radio button">
+                                                    <span title="Автоматическая валидация" class="input-group-text"
+                                                        id="basic-addon1">🟢</span>
+                                                    <span title="Валидация монитором" class="input-group-text"
+                                                        id="basic-addon1">🟢</span>
+                                                    <span title="Валидация дата-менеджером" class="input-group-text"
+                                                        id="basic-addon1">🔴</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -740,16 +948,32 @@
                                                     методом ПЦР или экспресс-методом за 3 дня до включения в
                                                     исследование &nbsp;</label>
                                                 <br>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
-                                                    <label class="form-check-label" for="inlineRadio1">Да</label>
-                                                </div>
+                                                <div class="input-group">
+                                                    <div class="input-group-text">
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions1" id="inlineRadio1"
+                                                                value="Yes" />
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio1">Да</label>
+                                                        </div>
 
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio2" value="No" />
-                                                    <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions1" id="inlineRadio2"
+                                                                value="No" />
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio2">Нет</label>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" class="form-control" disabled
+                                                        aria-label="Text input with radio button">
+                                                    <span title="Автоматическая валидация" class="input-group-text"
+                                                        id="basic-addon1">🟢</span>
+                                                    <span title="Валидация монитором" class="input-group-text"
+                                                        id="basic-addon1">🟢</span>
+                                                    <span title="Валидация дата-менеджером" class="input-group-text"
+                                                        id="basic-addon1">🔴</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -759,16 +983,32 @@
                                                 <label class="radio-inline">Отсутствие противопоказаний к вакцинации
                                                     &nbsp;</label>
                                                 <br>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
-                                                    <label class="form-check-label" for="inlineRadio1">Да</label>
-                                                </div>
+                                                <div class="input-group">
+                                                    <div class="input-group-text">
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions1" id="inlineRadio1"
+                                                                value="Yes" />
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio1">Да</label>
+                                                        </div>
 
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio2" value="No" />
-                                                    <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions1" id="inlineRadio2"
+                                                                value="No" />
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio2">Нет</label>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" class="form-control" disabled
+                                                        aria-label="Text input with radio button">
+                                                    <span title="Автоматическая валидация" class="input-group-text"
+                                                        id="basic-addon1">🟢</span>
+                                                    <span title="Валидация монитором" class="input-group-text"
+                                                        id="basic-addon1">🟢</span>
+                                                    <span title="Валидация дата-менеджером" class="input-group-text"
+                                                        id="basic-addon1">🔴</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -791,7 +1031,8 @@
                     <h5 class="text-center">Критерии невключения в иследование</h5>
                     <hr>
                     <div class="row">
-                        <div class="col-7">
+                        <div class="col-1"></div>
+                        <div class="col-10">
                             <br>
                             <div class="mb-1">
 
@@ -805,18 +1046,33 @@
                                                     информированного
                                                     согласия &nbsp; </label>
                                                 <br>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions1" id="inlineRadio1" value="Yes" />
-                                                    <label class="form-check-label" for="inlineRadio1">Да</label>
-                                                </div>
+                                                <div class="input-group">
+                                                    <div class="input-group-text">
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions1" id="inlineRadio1"
+                                                                value="Yes" />
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio1">Да</label>
+                                                        </div>
 
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions1" id="inlineRadio2" value="No" />
-                                                    <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions1" id="inlineRadio2"
+                                                                value="No" />
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio2">Нет</label>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" class="form-control" disabled
+                                                        aria-label="Text input with radio button">
+                                                    <span title="Автоматическая валидация" class="input-group-text"
+                                                        id="basic-addon1">🟢</span>
+                                                    <span title="Валидация монитором" class="input-group-text"
+                                                        id="basic-addon1">🟢</span>
+                                                    <span title="Валидация дата-менеджером" class="input-group-text"
+                                                        id="basic-addon1">🔴</span>
                                                 </div>
-
 
 
                                             </div>
@@ -831,16 +1087,32 @@
                                                     завершившаяся за 30 дней до включения в исследование &nbsp;
                                                 </label>
                                                 <br>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions2" id="inlineRadio1" value="Yes" />
-                                                    <label class="form-check-label" for="inlineRadio1">Да</label>
-                                                </div>
+                                                <div class="input-group">
+                                                    <div class="input-group-text">
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions1" id="inlineRadio1"
+                                                                value="Yes" />
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio1">Да</label>
+                                                        </div>
 
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions2" id="inlineRadio2" value="No" />
-                                                    <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions1" id="inlineRadio2"
+                                                                value="No" />
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio2">Нет</label>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" class="form-control" disabled
+                                                        aria-label="Text input with radio button">
+                                                    <span title="Автоматическая валидация" class="input-group-text"
+                                                        id="basic-addon1">🟢</span>
+                                                    <span title="Валидация монитором" class="input-group-text"
+                                                        id="basic-addon1">🟢</span>
+                                                    <span title="Валидация дата-менеджером" class="input-group-text"
+                                                        id="basic-addon1">🔴</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -851,16 +1123,32 @@
                                                     завершившаяся менее чем за
                                                     3 месяца до включения в исследование &nbsp;</label>
                                                 <br>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
-                                                    <label class="form-check-label" for="inlineRadio1">Да</label>
-                                                </div>
+                                                <div class="input-group">
+                                                    <div class="input-group-text">
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions1" id="inlineRadio1"
+                                                                value="Yes" />
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio1">Да</label>
+                                                        </div>
 
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio2" value="No" />
-                                                    <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions1" id="inlineRadio2"
+                                                                value="No" />
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio2">Нет</label>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" class="form-control" disabled
+                                                        aria-label="Text input with radio button">
+                                                    <span title="Автоматическая валидация" class="input-group-text"
+                                                        id="basic-addon1">🟢</span>
+                                                    <span title="Валидация монитором" class="input-group-text"
+                                                        id="basic-addon1">🟢</span>
+                                                    <span title="Валидация дата-менеджером" class="input-group-text"
+                                                        id="basic-addon1">🔴</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -870,24 +1158,41 @@
                                                 <label class="radio-inline">Субъекты женского пола в период беременности
                                                     или кормления грудью &nbsp;</label>
                                                 <br>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
-                                                    <label class="form-check-label" for="inlineRadio1">Да</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-text">
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions1" id="inlineRadio1"
+                                                                value="Yes" />
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio1">Да</label>
+                                                        </div>
+
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions1" id="inlineRadio2"
+                                                                value="No" />
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio2">Нет</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions3" id="inlineRadio3"
+                                                                value="unaccepteble" />
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio3">Неприменимо</label>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" class="form-control" disabled
+                                                        aria-label="Text input with radio button">
+                                                    <span title="Автоматическая валидация" class="input-group-text"
+                                                        id="basic-addon1">🟢</span>
+                                                    <span title="Валидация монитором" class="input-group-text"
+                                                        id="basic-addon1">🟢</span>
+                                                    <span title="Валидация дата-менеджером" class="input-group-text"
+                                                        id="basic-addon1">🔴</span>
                                                 </div>
 
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio2" value="No" />
-                                                    <label class="form-check-label" for="inlineRadio2">Нет</label>
-                                                </div>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio3"
-                                                        value="unaccepteble" />
-                                                    <label class="form-check-label"
-                                                        for="inlineRadio3">Неприменимо</label>
-                                                </div>
                                             </div>
                                         </div>
                                         <hr />
@@ -897,16 +1202,32 @@
                                                     включения в исследование острый
                                                     коронарный синдром или инсульт &nbsp;</label>
                                                 <br>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
-                                                    <label class="form-check-label" for="inlineRadio1">Да</label>
-                                                </div>
+                                                <div class="input-group">
+                                                    <div class="input-group-text">
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions1" id="inlineRadio1"
+                                                                value="Yes" />
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio1">Да</label>
+                                                        </div>
 
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio2" value="No" />
-                                                    <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions1" id="inlineRadio2"
+                                                                value="No" />
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio2">Нет</label>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" class="form-control" disabled
+                                                        aria-label="Text input with radio button">
+                                                    <span title="Автоматическая валидация" class="input-group-text"
+                                                        id="basic-addon1">🟢</span>
+                                                    <span title="Валидация монитором" class="input-group-text"
+                                                        id="basic-addon1">🟢</span>
+                                                    <span title="Валидация дата-менеджером" class="input-group-text"
+                                                        id="basic-addon1">🔴</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -916,16 +1237,32 @@
                                                 <label class="radio-inline">Туберкулез, хронические системные инфекции
                                                     &nbsp;</label>
                                                 <br>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
-                                                    <label class="form-check-label" for="inlineRadio1">Да</label>
-                                                </div>
+                                                <div class="input-group">
+                                                    <div class="input-group-text">
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions1" id="inlineRadio1"
+                                                                value="Yes" />
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio1">Да</label>
+                                                        </div>
 
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio2" value="No" />
-                                                    <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions1" id="inlineRadio2"
+                                                                value="No" />
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio2">Нет</label>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" class="form-control" disabled
+                                                        aria-label="Text input with radio button">
+                                                    <span title="Автоматическая валидация" class="input-group-text"
+                                                        id="basic-addon1">🟢</span>
+                                                    <span title="Валидация монитором" class="input-group-text"
+                                                        id="basic-addon1">🟢</span>
+                                                    <span title="Валидация дата-менеджером" class="input-group-text"
+                                                        id="basic-addon1">🔴</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -945,16 +1282,32 @@
                                                     включения в исследование &nbsp;
                                                 </label>
                                                 <br>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
-                                                    <label class="form-check-label" for="inlineRadio1">Да</label>
-                                                </div>
+                                                <div class="input-group">
+                                                    <div class="input-group-text">
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions1" id="inlineRadio1"
+                                                                value="Yes" />
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio1">Да</label>
+                                                        </div>
 
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio2" value="No" />
-                                                    <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions1" id="inlineRadio2"
+                                                                value="No" />
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio2">Нет</label>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" class="form-control" disabled
+                                                        aria-label="Text input with radio button">
+                                                    <span title="Автоматическая валидация" class="input-group-text"
+                                                        id="basic-addon1">🟢</span>
+                                                    <span title="Валидация монитором" class="input-group-text"
+                                                        id="basic-addon1">🟢</span>
+                                                    <span title="Валидация дата-менеджером" class="input-group-text"
+                                                        id="basic-addon1">🔴</span>
                                                 </div>
 
                                             </div>
@@ -965,16 +1318,32 @@
                                                 <label class="radio-inline">Наличие в анамнезе новообразований (коды МКБ
                                                     C00-D09) &nbsp;</label>
                                                 <br>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
-                                                    <label class="form-check-label" for="inlineRadio1">Да</label>
-                                                </div>
+                                                <div class="input-group">
+                                                    <div class="input-group-text">
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions1" id="inlineRadio1"
+                                                                value="Yes" />
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio1">Да</label>
+                                                        </div>
 
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio2" value="No" />
-                                                    <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions1" id="inlineRadio2"
+                                                                value="No" />
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio2">Нет</label>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" class="form-control" disabled
+                                                        aria-label="Text input with radio button">
+                                                    <span title="Автоматическая валидация" class="input-group-text"
+                                                        id="basic-addon1">🟢</span>
+                                                    <span title="Валидация монитором" class="input-group-text"
+                                                        id="basic-addon1">🟢</span>
+                                                    <span title="Валидация дата-менеджером" class="input-group-text"
+                                                        id="basic-addon1">🔴</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -983,16 +1352,32 @@
                                             <div class="form-radio">
                                                 <label class="radio-inline">Спленэктомия в анамнезе &nbsp;</label>
                                                 <br>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
-                                                    <label class="form-check-label" for="inlineRadio1">Да</label>
-                                                </div>
+                                                <div class="input-group">
+                                                    <div class="input-group-text">
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions1" id="inlineRadio1"
+                                                                value="Yes" />
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio1">Да</label>
+                                                        </div>
 
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio2" value="No" />
-                                                    <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions1" id="inlineRadio2"
+                                                                value="No" />
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio2">Нет</label>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" class="form-control" disabled
+                                                        aria-label="Text input with radio button">
+                                                    <span title="Автоматическая валидация" class="input-group-text"
+                                                        id="basic-addon1">🟢</span>
+                                                    <span title="Валидация монитором" class="input-group-text"
+                                                        id="basic-addon1">🟢</span>
+                                                    <span title="Валидация дата-менеджером" class="input-group-text"
+                                                        id="basic-addon1">🔴</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -1006,312 +1391,484 @@
                                                     80 г/л), иммунодефицит в анамнезе в течение 6 месяцев до включения в
                                                     исследование &nbsp;</label>
                                                 <br>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
-                                                    <label class="form-check-label" for="inlineRadio1">Да</label>
-                                                </div>
+                                                < <div class="input-group">
+                                                    <div class="input-group-text">
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions1" id="inlineRadio1"
+                                                                value="Yes" />
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio1">Да</label>
+                                                        </div>
 
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio2" value="No" />
-                                                    <label class="form-check-label" for="inlineRadio2">Нет</label>
-                                                </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions1" id="inlineRadio2"
+                                                                value="No" />
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio2">Нет</label>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" class="form-control" disabled
+                                                        aria-label="Text input with radio button">
+                                                    <span title="Автоматическая валидация" class="input-group-text"
+                                                        id="basic-addon1">🟢</span>
+                                                    <span title="Валидация монитором" class="input-group-text"
+                                                        id="basic-addon1">🟢</span>
+                                                    <span title="Валидация дата-менеджером" class="input-group-text"
+                                                        id="basic-addon1">🔴</span>
                                             </div>
-                                        </div>
-                                        <hr />
-                                        <div class="mb-1">
-                                            <div class="form-radio">
-                                                <label class="radio-inline">Субъекты с активной формой сифилиса,
-                                                    ВИЧ/СПИД, гепатиты B и C &nbsp;</label>
-                                                <br>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
-                                                    <label class="form-check-label" for="inlineRadio1">Да</label>
-                                                </div>
-
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio2" value="No" />
-                                                    <label class="form-check-label" for="inlineRadio2">Нет</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr />
-                                        <div class="mb-1">
-                                            <div class="form-radio">
-                                                <label class="radio-inline">Анорексия, белковый дефицит любого
-                                                    происхождения &nbsp;</label>
-                                                <br>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
-                                                    <label class="form-check-label" for="inlineRadio1">Да</label>
-                                                </div>
-
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio2" value="No" />
-                                                    <label class="form-check-label" for="inlineRadio2">Нет</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr />
-                                        <div class="mb-1">
-                                            <div class="form-radio">
-                                                <label class="radio-inline">Обширные татуировки на местах введения
-                                                    препарата (область
-                                                    дельтовидной мышцы), не позволяющие оценить местную реакцию на
-                                                    введение ИЛП &nbsp;</label>
-                                                <br>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
-                                                    <label class="form-check-label" for="inlineRadio1">Да</label>
-                                                </div>
-
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio2" value="No" />
-                                                    <label class="form-check-label" for="inlineRadio2">Нет</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr />
-                                        <div class="mb-1">
-                                            <div class="form-radio">
-                                                <label class="radio-inline">Прием наркотических и психостимулирующих
-                                                    препаратов в настоящее
-                                                    время или в анамнезе &nbsp;</label>
-                                                <br>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
-                                                    <label class="form-check-label" for="inlineRadio1">Да</label>
-                                                </div>
-
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio2" value="No" />
-                                                    <label class="form-check-label" for="inlineRadio2">Нет</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr />
-                                        <div class="mb-1">
-                                            <div class="form-radio">
-                                                <label class="radio-inline">Курение: более 10 сигарет в день
-                                                    &nbsp;</label>
-                                                <br>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
-                                                    <label class="form-check-label" for="inlineRadio1">Да</label>
-                                                </div>
-
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio2" value="No" />
-                                                    <label class="form-check-label" for="inlineRadio2">Нет</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr />
-                                        <div class="mb-1">
-                                            <div class="form-radio">
-                                                <label class="radio-inline">Прием алкоголя превышающий уровень низкого
-                                                    риска: не более 20 граммов
-                                                    чистого алкоголя в день, не более 5 дней в неделю, прием алкоголя в
-                                                    течение
-                                                    48 часов до введения исследуемого препарата &nbsp;</label>
-                                                <br>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
-                                                    <label class="form-check-label" for="inlineRadio1">Да</label>
-                                                </div>
-
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio2" value="No" />
-                                                    <label class="form-check-label" for="inlineRadio2">Нет</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr />
-                                        <div class="mb-1">
-                                            <div class="form-radio">
-                                                <label class="radio-inline">Плановая госпитализация и/или хирургическое
-                                                    вмешательство в период
-                                                    участия в исследовании, а также за 4 недели до предполагаемой даты
-                                                    вакцинации &nbsp;</label>
-                                                <br>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
-                                                    <label class="form-check-label" for="inlineRadio1">Да</label>
-                                                </div>
-
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio2" value="No" />
-                                                    <label class="form-check-label" for="inlineRadio2">Нет</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr />
-                                        <div class="mb-1">
-                                            <div class="form-radio">
-                                                <label class="radio-inline">Донорская сдача крови (450 мл и более крови
-                                                    или плазмы) менее чем за 2
-                                                    месяца до начала исследования &nbsp;</label>
-                                                <br>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
-                                                    <label class="form-check-label" for="inlineRadio1">Да</label>
-                                                </div>
-
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio2" value="No" />
-                                                    <label class="form-check-label" for="inlineRadio2">Нет</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr />
-                                        <div class="mb-1">
-                                            <div class="form-radio">
-                                                <label class="radio-inline">Участие субъекта в любом другом
-                                                    интервенционном клиническом
-                                                    исследовании за последние 90 дней &nbsp;</label>
-                                                <br>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
-                                                    <label class="form-check-label" for="inlineRadio1">Да</label>
-                                                </div>
-
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio2" value="No" />
-                                                    <label class="form-check-label" for="inlineRadio2">Нет</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr />
-                                        <div class="mb-1">
-                                            <div class="form-radio">
-                                                <label class="radio-inline">Любая вакцинация за последние 30 дней
-                                                    &nbsp;</label>
-                                                <br>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
-                                                    <label class="form-check-label" for="inlineRadio1">Да</label>
-                                                </div>
-
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio2" value="No" />
-                                                    <label class="form-check-label" for="inlineRadio2">Нет</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr />
-                                        <div class="mb-1">
-                                            <div class="form-radio">
-                                                <label class="radio-inline">Неспособность читать на русском языке;
-                                                    невозможность или нежелание
-                                                    понять суть исследования. Любые другие состояния, которые
-                                                    ограничивают
-                                                    правомерность получения информированного согласия или могут повлиять
-                                                    на
-                                                    способность добровольца принять участие в исследовании повлиять на
-                                                    способность добровольца принять участие в исследовании
-                                                    &nbsp;</label>
-                                                <br>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
-                                                    <label class="form-check-label" for="inlineRadio1">Да</label>
-                                                </div>
-
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio2" value="No" />
-                                                    <label class="form-check-label" for="inlineRadio2">Нет</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr />
-                                        <div class="mb-1">
-                                            <div class="form-radio">
-                                                <label class="radio-inline">Персонал исследовательских центров и другие
-                                                    сотрудники,
-                                                    непосредственно участвующие в проведении исследования и члены их
-                                                    семей
-                                                    (главный исследователь и члены исследовательской команды)
-                                                    &nbsp;</label>
-                                                <br>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
-                                                    <label class="form-check-label" for="inlineRadio1">Да</label>
-                                                </div>
-
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio2" value="No" />
-                                                    <label class="form-check-label" for="inlineRadio2">Нет</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr />
-                                        <div class="mb-1">
-                                            <div class="form-radio">
-                                                <label class="radio-inline">Любое иное состояние субъекта исследования,
-                                                    которое, по мнению-врача-
-                                                    исследователя, может препятствовать завершению исследования в
-                                                    соответствии с протоколом &nbsp;</label>
-                                                <br>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio1" value="Yes" />
-                                                    <label class="form-check-label" for="inlineRadio1">Да</label>
-                                                </div>
-
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="inlineRadioOptions3" id="inlineRadio2" value="No" />
-                                                    <label class="form-check-label" for="inlineRadio2">Нет</label>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-
-
-                                        <div class="d-grid gap-2">
-                                            <input type="submit" value="Сохранить" class="btn btn-primary">
                                         </div>
                                     </div>
-                                </form>
+                                    <hr />
+                                    <div class="mb-1">
+                                        <div class="form-radio">
+                                            <label class="radio-inline">Субъекты с активной формой сифилиса,
+                                                ВИЧ/СПИД, гепатиты B и C &nbsp;</label>
+                                            <br>
+                                            <div class="input-group">
+                                                <div class="input-group-text">
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions1" id="inlineRadio1" value="Yes" />
+                                                        <label class="form-check-label" for="inlineRadio1">Да</label>
+                                                    </div>
+
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions1" id="inlineRadio2" value="No" />
+                                                        <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                    </div>
+                                                </div>
+                                                <input type="text" class="form-control" disabled
+                                                    aria-label="Text input with radio button">
+                                                <span title="Автоматическая валидация" class="input-group-text"
+                                                    id="basic-addon1">🟢</span>
+                                                <span title="Валидация монитором" class="input-group-text"
+                                                    id="basic-addon1">🟢</span>
+                                                <span title="Валидация дата-менеджером" class="input-group-text"
+                                                    id="basic-addon1">🔴</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr />
+                                    <div class="mb-1">
+                                        <div class="form-radio">
+                                            <label class="radio-inline">Анорексия, белковый дефицит любого
+                                                происхождения &nbsp;</label>
+                                            <br>
+                                            <div class="input-group">
+                                                <div class="input-group-text">
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions1" id="inlineRadio1" value="Yes" />
+                                                        <label class="form-check-label" for="inlineRadio1">Да</label>
+                                                    </div>
+
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions1" id="inlineRadio2" value="No" />
+                                                        <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                    </div>
+                                                </div>
+                                                <input type="text" class="form-control" disabled
+                                                    aria-label="Text input with radio button">
+                                                <span title="Автоматическая валидация" class="input-group-text"
+                                                    id="basic-addon1">🟢</span>
+                                                <span title="Валидация монитором" class="input-group-text"
+                                                    id="basic-addon1">🟢</span>
+                                                <span title="Валидация дата-менеджером" class="input-group-text"
+                                                    id="basic-addon1">🔴</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr />
+                                    <div class="mb-1">
+                                        <div class="form-radio">
+                                            <label class="radio-inline">Обширные татуировки на местах введения
+                                                препарата (область
+                                                дельтовидной мышцы), не позволяющие оценить местную реакцию на
+                                                введение ИЛП &nbsp;</label>
+                                            <br>
+                                            <div class="input-group">
+                                                <div class="input-group-text">
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions1" id="inlineRadio1" value="Yes" />
+                                                        <label class="form-check-label" for="inlineRadio1">Да</label>
+                                                    </div>
+
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions1" id="inlineRadio2" value="No" />
+                                                        <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                    </div>
+                                                </div>
+                                                <input type="text" class="form-control" disabled
+                                                    aria-label="Text input with radio button">
+                                                <span title="Автоматическая валидация" class="input-group-text"
+                                                    id="basic-addon1">🟢</span>
+                                                <span title="Валидация монитором" class="input-group-text"
+                                                    id="basic-addon1">🟢</span>
+                                                <span title="Валидация дата-менеджером" class="input-group-text"
+                                                    id="basic-addon1">🔴</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr />
+                                    <div class="mb-1">
+                                        <div class="form-radio">
+                                            <label class="radio-inline">Прием наркотических и психостимулирующих
+                                                препаратов в настоящее
+                                                время или в анамнезе &nbsp;</label>
+                                            <br>
+                                            <div class="input-group">
+                                                <div class="input-group-text">
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions1" id="inlineRadio1" value="Yes" />
+                                                        <label class="form-check-label" for="inlineRadio1">Да</label>
+                                                    </div>
+
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions1" id="inlineRadio2" value="No" />
+                                                        <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                    </div>
+                                                </div>
+                                                <input type="text" class="form-control" disabled
+                                                    aria-label="Text input with radio button">
+                                                <span title="Автоматическая валидация" class="input-group-text"
+                                                    id="basic-addon1">🟢</span>
+                                                <span title="Валидация монитором" class="input-group-text"
+                                                    id="basic-addon1">🟢</span>
+                                                <span title="Валидация дата-менеджером" class="input-group-text"
+                                                    id="basic-addon1">🔴</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr />
+                                    <div class="mb-1">
+                                        <div class="form-radio">
+                                            <label class="radio-inline">Курение: более 10 сигарет в день
+                                                &nbsp;</label>
+                                            <br>
+                                            <div class="input-group">
+                                                <div class="input-group-text">
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions1" id="inlineRadio1" value="Yes" />
+                                                        <label class="form-check-label" for="inlineRadio1">Да</label>
+                                                    </div>
+
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions1" id="inlineRadio2" value="No" />
+                                                        <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                    </div>
+                                                </div>
+                                                <input type="text" class="form-control" disabled
+                                                    aria-label="Text input with radio button">
+                                                <span title="Автоматическая валидация" class="input-group-text"
+                                                    id="basic-addon1">🟢</span>
+                                                <span title="Валидация монитором" class="input-group-text"
+                                                    id="basic-addon1">🟢</span>
+                                                <span title="Валидация дата-менеджером" class="input-group-text"
+                                                    id="basic-addon1">🔴</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr />
+                                    <div class="mb-1">
+                                        <div class="form-radio">
+                                            <label class="radio-inline">Прием алкоголя превышающий уровень низкого
+                                                риска: не более 20 граммов
+                                                чистого алкоголя в день, не более 5 дней в неделю, прием алкоголя в
+                                                течение
+                                                48 часов до введения исследуемого препарата &nbsp;</label>
+                                            <br>
+                                            < <div class="input-group">
+                                                <div class="input-group-text">
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions1" id="inlineRadio1" value="Yes" />
+                                                        <label class="form-check-label" for="inlineRadio1">Да</label>
+                                                    </div>
+
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions1" id="inlineRadio2" value="No" />
+                                                        <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                                    </div>
+                                                </div>
+                                                <input type="text" class="form-control" disabled
+                                                    aria-label="Text input with radio button">
+                                                <span title="Автоматическая валидация" class="input-group-text"
+                                                    id="basic-addon1">🟢</span>
+                                                <span title="Валидация монитором" class="input-group-text"
+                                                    id="basic-addon1">🟢</span>
+                                                <span title="Валидация дата-менеджером" class="input-group-text"
+                                                    id="basic-addon1">🔴</span>
+                                        </div>
+                                    </div>
+                            </div>
+                            <hr />
+                            <div class="mb-1">
+                                <div class="form-radio">
+                                    <label class="radio-inline">Плановая госпитализация и/или хирургическое
+                                        вмешательство в период
+                                        участия в исследовании, а также за 4 недели до предполагаемой даты
+                                        вакцинации &nbsp;</label>
+                                    <br>
+                                    <div class="input-group">
+                                        <div class="input-group-text">
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="inlineRadioOptions1"
+                                                    id="inlineRadio1" value="Yes" />
+                                                <label class="form-check-label" for="inlineRadio1">Да</label>
+                                            </div>
+
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="inlineRadioOptions1"
+                                                    id="inlineRadio2" value="No" />
+                                                <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control" disabled
+                                            aria-label="Text input with radio button">
+                                        <span title="Автоматическая валидация" class="input-group-text"
+                                            id="basic-addon1">🟢</span>
+                                        <span title="Валидация монитором" class="input-group-text"
+                                            id="basic-addon1">🟢</span>
+                                        <span title="Валидация дата-менеджером" class="input-group-text"
+                                            id="basic-addon1">🔴</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="mb-1">
+                                <div class="form-radio">
+                                    <label class="radio-inline">Донорская сдача крови (450 мл и более крови
+                                        или плазмы) менее чем за 2
+                                        месяца до начала исследования &nbsp;</label>
+                                    <br>
+                                    <div class="input-group">
+                                        <div class="input-group-text">
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="inlineRadioOptions1"
+                                                    id="inlineRadio1" value="Yes" />
+                                                <label class="form-check-label" for="inlineRadio1">Да</label>
+                                            </div>
+
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="inlineRadioOptions1"
+                                                    id="inlineRadio2" value="No" />
+                                                <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control" disabled
+                                            aria-label="Text input with radio button">
+                                        <span title="Автоматическая валидация" class="input-group-text"
+                                            id="basic-addon1">🟢</span>
+                                        <span title="Валидация монитором" class="input-group-text"
+                                            id="basic-addon1">🟢</span>
+                                        <span title="Валидация дата-менеджером" class="input-group-text"
+                                            id="basic-addon1">🔴</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="mb-1">
+                                <div class="form-radio">
+                                    <label class="radio-inline">Участие субъекта в любом другом
+                                        интервенционном клиническом
+                                        исследовании за последние 90 дней &nbsp;</label>
+                                    <br>
+                                    <div class="input-group">
+                                        <div class="input-group-text">
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="inlineRadioOptions1"
+                                                    id="inlineRadio1" value="Yes" />
+                                                <label class="form-check-label" for="inlineRadio1">Да</label>
+                                            </div>
+
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="inlineRadioOptions1"
+                                                    id="inlineRadio2" value="No" />
+                                                <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control" disabled
+                                            aria-label="Text input with radio button">
+                                        <span title="Автоматическая валидация" class="input-group-text"
+                                            id="basic-addon1">🟢</span>
+                                        <span title="Валидация монитором" class="input-group-text"
+                                            id="basic-addon1">🟢</span>
+                                        <span title="Валидация дата-менеджером" class="input-group-text"
+                                            id="basic-addon1">🔴</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="mb-1">
+                                <div class="form-radio">
+                                    <label class="radio-inline">Любая вакцинация за последние 30 дней
+                                        &nbsp;</label>
+                                    <br>
+                                    <div class="input-group">
+                                        <div class="input-group-text">
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="inlineRadioOptions1"
+                                                    id="inlineRadio1" value="Yes" />
+                                                <label class="form-check-label" for="inlineRadio1">Да</label>
+                                            </div>
+
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="inlineRadioOptions1"
+                                                    id="inlineRadio2" value="No" />
+                                                <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control" disabled
+                                            aria-label="Text input with radio button">
+                                        <span title="Автоматическая валидация" class="input-group-text"
+                                            id="basic-addon1">🟢</span>
+                                        <span title="Валидация монитором" class="input-group-text"
+                                            id="basic-addon1">🟢</span>
+                                        <span title="Валидация дата-менеджером" class="input-group-text"
+                                            id="basic-addon1">🔴</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="mb-1">
+                                <div class="form-radio">
+                                    <label class="radio-inline">Неспособность читать на русском языке;
+                                        невозможность или нежелание
+                                        понять суть исследования. Любые другие состояния, которые
+                                        ограничивают
+                                        правомерность получения информированного согласия или могут повлиять
+                                        на
+                                        способность добровольца принять участие в исследовании повлиять на
+                                        способность добровольца принять участие в исследовании
+                                        &nbsp;</label>
+                                    <br>
+                                    <div class="input-group">
+                                        <div class="input-group-text">
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="inlineRadioOptions1"
+                                                    id="inlineRadio1" value="Yes" />
+                                                <label class="form-check-label" for="inlineRadio1">Да</label>
+                                            </div>
+
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="inlineRadioOptions1"
+                                                    id="inlineRadio2" value="No" />
+                                                <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control" disabled
+                                            aria-label="Text input with radio button">
+                                        <span title="Автоматическая валидация" class="input-group-text"
+                                            id="basic-addon1">🟢</span>
+                                        <span title="Валидация монитором" class="input-group-text"
+                                            id="basic-addon1">🟢</span>
+                                        <span title="Валидация дата-менеджером" class="input-group-text"
+                                            id="basic-addon1">🔴</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="mb-1">
+                                <div class="form-radio">
+                                    <label class="radio-inline">Персонал исследовательских центров и другие
+                                        сотрудники,
+                                        непосредственно участвующие в проведении исследования и члены их
+                                        семей
+                                        (главный исследователь и члены исследовательской команды)
+                                        &nbsp;</label>
+                                    <br>
+                                    <div class="input-group">
+                                        <div class="input-group-text">
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="inlineRadioOptions1"
+                                                    id="inlineRadio1" value="Yes" />
+                                                <label class="form-check-label" for="inlineRadio1">Да</label>
+                                            </div>
+
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="inlineRadioOptions1"
+                                                    id="inlineRadio2" value="No" />
+                                                <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control" disabled
+                                            aria-label="Text input with radio button">
+                                        <span title="Автоматическая валидация" class="input-group-text"
+                                            id="basic-addon1">🟢</span>
+                                        <span title="Валидация монитором" class="input-group-text"
+                                            id="basic-addon1">🟢</span>
+                                        <span title="Валидация дата-менеджером" class="input-group-text"
+                                            id="basic-addon1">🔴</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="mb-1">
+                                <div class="form-radio">
+                                    <label class="radio-inline">Любое иное состояние субъекта исследования,
+                                        которое, по мнению-врача-
+                                        исследователя, может препятствовать завершению исследования в
+                                        соответствии с протоколом &nbsp;</label>
+                                    <br>
+                                    <div class="input-group">
+                                        <div class="input-group-text">
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="inlineRadioOptions1"
+                                                    id="inlineRadio1" value="Yes" />
+                                                <label class="form-check-label" for="inlineRadio1">Да</label>
+                                            </div>
+
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="inlineRadioOptions1"
+                                                    id="inlineRadio2" value="No" />
+                                                <label class="form-check-label" for="inlineRadio2">Нет</label>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control" disabled
+                                            aria-label="Text input with radio button">
+                                        <span title="Автоматическая валидация" class="input-group-text"
+                                            id="basic-addon1">🟢</span>
+                                        <span title="Валидация монитором" class="input-group-text"
+                                            id="basic-addon1">🟢</span>
+                                        <span title="Валидация дата-менеджером" class="input-group-text"
+                                            id="basic-addon1">🔴</span>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="d-grid gap-2">
+                                <input type="submit" value="Сохранить" class="btn btn-primary">
                             </div>
                         </div>
+                        </form>
                     </div>
                 </div>
-                </p>
             </div>
         </div>
+        </p>
+    </div>
+    </div>
 
 
 
 
-        <div class="col-2 shadow-sm p-3 bg-white rounded" id="right">
-            <h5 class="text-center">Обсуждения</h5>
-        </div>
+    <div class="col-2 shadow-sm p-3 bg-white rounded" id="right">
+        <h5 class="text-center">Обсуждения</h5>
+    </div>
     </div>
 </section>
 

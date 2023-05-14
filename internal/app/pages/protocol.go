@@ -36,7 +36,7 @@ func (h *Pages) ProtocolPage() fiber.Handler {
 			h.logger.Warningln(err)
 			return utils.ErrorPage(c, err)
 		}
-		subject, err := h.mgStore.Subject().GetSubjectByNumber(subjectNumber)
+		subject, err := h.mgStore.Subject().GetSubjectByNumber(subjectNumber, p_id)
 		if err != nil {
 			h.logger.Warningln(err)
 			if len(s) == 0 {

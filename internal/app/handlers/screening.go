@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"fmt"
 	"strconv"
 
 	"github.com/gofiber/fiber/v2"
@@ -10,9 +11,8 @@ import (
 func (h *Handlers) InformaionConsentSubject() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		subjectNumber := c.FormValue("subject_number")
-		// TODO: add hidden input with current protocol number to correct redirect
 
-		subject, err := h.mgStore.Subject().GetSubjectByNumber(subjectNumber)
+		subject, err := h.mgStore.Subject().GetSubjectByNumber(subjectNumber, 1)
 		if err != nil {
 
 			h.logger.Warningln(err)
@@ -30,9 +30,13 @@ func (h *Handlers) InformaionConsentSubject() fiber.Handler {
 func (h *Handlers) DemographySubject() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		subjectNumber := c.FormValue("subject_number")
+		protocolId, err := strconv.Atoi(c.FormValue("protocol_id"))
+		if err != nil {
+			return utils.ErrorPage(c, err)
+		}
 		// TODO: add hidden input with current protocol number to correct redirect
 
-		subject, err := h.mgStore.Subject().GetSubjectByNumber(subjectNumber)
+		subject, err := h.mgStore.Subject().GetSubjectByNumber(subjectNumber, protocolId)
 		if err != nil {
 
 			h.logger.Warningln(err)
@@ -54,7 +58,7 @@ func (h *Handlers) DemographySubject() fiber.Handler {
 			h.logger.Warningln(err)
 			return utils.ErrorPage(c, err)
 		}
-		return c.Redirect("/protocol/1/1")
+		return c.Redirect(fmt.Sprintf("/protocol/%d/%s", protocolId, subjectNumber))
 	}
 }
 
@@ -63,7 +67,7 @@ func (h *Handlers) AnthropometrySubject() fiber.Handler {
 		subjectNumber := c.FormValue("subject_number")
 		// TODO: add hidden input with current protocol number to correct redirect
 
-		subject, err := h.mgStore.Subject().GetSubjectByNumber(subjectNumber)
+		subject, err := h.mgStore.Subject().GetSubjectByNumber(subjectNumber, 1)
 		if err != nil {
 
 			h.logger.Warningln(err)
@@ -84,7 +88,7 @@ func (h *Handlers) InclusionCriteriaSubject() fiber.Handler {
 		subjectNumber := c.FormValue("subject_number")
 		// TODO: add hidden input with current protocol number to correct redirect
 
-		subject, err := h.mgStore.Subject().GetSubjectByNumber(subjectNumber)
+		subject, err := h.mgStore.Subject().GetSubjectByNumber(subjectNumber, 1)
 		if err != nil {
 
 			h.logger.Warningln(err)
@@ -105,7 +109,7 @@ func (h *Handlers) ExclusionСriteriaSubject() fiber.Handler {
 		subjectNumber := c.FormValue("subject_number")
 		// TODO: add hidden input with current protocol number to correct redirect
 
-		subject, err := h.mgStore.Subject().GetSubjectByNumber(subjectNumber)
+		subject, err := h.mgStore.Subject().GetSubjectByNumber(subjectNumber, 1)
 		if err != nil {
 
 			h.logger.Warningln(err)

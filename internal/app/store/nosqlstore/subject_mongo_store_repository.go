@@ -71,11 +71,15 @@ func (r *MongoSubjectRepository) GetSubjectsByProtocolId(protocolId int) ([]*mod
 	return subjects, nil
 }
 
-func (r *MongoSubjectRepository) GetSubjectByNumber(number string) (*model.Subject, error) {
+func (r *MongoSubjectRepository) GetSubjectByNumber(number string, protocolID int) (*model.Subject, error) {
 	filter := bson.D{
 		primitive.E{
 			Key:   "number",
 			Value: number,
+		},
+		primitive.E{
+			Key:   "protocol_id",
+			Value: protocolID,
 		},
 	}
 	ctx := context.TODO()
