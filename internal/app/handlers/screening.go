@@ -136,23 +136,25 @@ func (h *Handlers) InclusionCriteriaSubject() fiber.Handler {
 
 		subject, err := h.mgStore.Subject().GetSubjectByNumber(subjectNumber, protocolId)
 		if err != nil {
+			h.logger.Warningln(err)
+			return utils.ErrorPage(c, err)
+		}
+		inclusion1, _ := strconv.Atoi(c.FormValue("inclusion1"))
+		inclusion2, _ := strconv.Atoi(c.FormValue("inclusion2"))
+		inclusion3, _ := strconv.Atoi(c.FormValue("inclusion3"))
+		inclusion4, _ := strconv.Atoi(c.FormValue("inclusion4"))
+		inclusion5, _ := strconv.Atoi(c.FormValue("inclusion5"))
+		inclusion6, _ := strconv.Atoi(c.FormValue("inclusion6"))
+		inclusion7, _ := strconv.Atoi(c.FormValue("inclusion7"))
+		inclusion8, _ := strconv.Atoi(c.FormValue("inclusion8"))
+		inclusion9, _ := strconv.Atoi(c.FormValue("inclusion9"))
+		inclusion10, _ := strconv.Atoi(c.FormValue("inclusion10"))
+		inclusion11, _ := strconv.Atoi(c.FormValue("inclusion11"))
+		inclusion12, _ := strconv.Atoi(c.FormValue("inclusion12"))
+		inclusion13, _ := strconv.Atoi(c.FormValue("inclusion13"))
+		inclusion14, _ := strconv.Atoi(c.FormValue("inclusion14"))
 
-			h.logger.Warningln(err)
-			return utils.ErrorPage(c, err)
-		}
-		sexSubject, err := strconv.Atoi(c.FormValue(""))
-		if err != nil {
-			h.logger.Warningln(err)
-			return utils.ErrorPage(c, err)
-		}
-		raceSubject, err := strconv.Atoi(c.FormValue("race"))
-		if err != nil {
-			h.logger.Warningln(err)
-			return utils.ErrorPage(c, err)
-		}
-		birthDateSubject := c.FormValue("birth_date")
-
-		if err := h.mgStore.Screening().Demography(c.Context(), subject.ID, sexSubject, raceSubject, birthDateSubject); err != nil {
+		if err := h.mgStore.Screening().InclusionCriteria(c.Context(), subject.ID, inclusion1, inclusion2, inclusion3, inclusion4, inclusion5, inclusion6, inclusion7, inclusion8, inclusion9, inclusion10, inclusion11, inclusion12, inclusion13, inclusion14); err != nil {
 			h.logger.Warningln(err)
 			return utils.ErrorPage(c, err)
 		}

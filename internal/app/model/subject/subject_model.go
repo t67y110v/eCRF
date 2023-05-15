@@ -44,6 +44,7 @@ type Subject struct {
 			AbsenceOfAcuteInfectiousDiseases            int `bson:"absence_of_acute_infectious_diseases"`
 			ConsentToUseEffectiveMethodsOfContraception int `bson:"consent_to_use_effective_methods_of_contraception"`
 			NegativePregnancyTest                       int `bson:"negative_pregnancy_test"`
+			NegativeDrugTest                            int `bson:"negative_drug_test"`
 			NegativeAlcoholTest                         int `bson:"negative_alcohol_test"`
 			NoHistoryOfSeverePostVaccinationReactions   int `bson:"no_history_of_severe_post_vaccination_reactions"`
 			IndicatorsBloodTestsAtScreeningWithin       int `bson:"indicators_blood_tests_at_screening_within"`

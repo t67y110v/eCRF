@@ -100,14 +100,16 @@ func (r *MongoScreeningRepository) InclusionCriteria(
 	absenceOfAcuteInfectiousDiseases,
 	consentToUseEffectiveMethodsOfContraception,
 	negativePregnancyTest,
+	negativeDrugTest,
 	negativeAlcoholTest,
 	noHistoryOfSeverePostVaccinationReactions,
 	indicatorsBloodTestsAtScreeningWithin,
 	noMyocardialChanges,
 	negativeTestResultForCOVID,
-	noContraindicationsToVaccination bool,
+	noContraindicationsToVaccination int,
 
 ) error {
+
 	collection := r.store.client.Database("eCRF").Collection("subjects")
 	filter := bson.M{"_id": id}
 	update := bson.M{
@@ -119,6 +121,7 @@ func (r *MongoScreeningRepository) InclusionCriteria(
 			"screening.inclusioncriteria.absence_of_acute_infectious_diseases":              absenceOfAcuteInfectiousDiseases,
 			"screening.inclusioncriteria.consent_to_use_effective_methods_of_contraception": consentToUseEffectiveMethodsOfContraception,
 			"screening.inclusioncriteria.negative_pregnancy_test":                           negativePregnancyTest,
+			"screening.inclusioncriteria.negative_drug_test":                                negativeDrugTest,
 			"screening.inclusioncriteria.negative_alcohol_test":                             negativeAlcoholTest,
 			"screening.inclusioncriteria.no_history_of_severe_post_vaccination_reactions":   noHistoryOfSeverePostVaccinationReactions,
 			"screening.inclusioncriteria.indicators_blood_tests_at_screening_within":        indicatorsBloodTestsAtScreeningWithin,
