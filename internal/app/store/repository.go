@@ -31,9 +31,9 @@ type MongoJournalRepository interface {
 }
 
 type MongoScreeningRepository interface {
-	InformaionConsent(ctx context.Context, id primitive.ObjectID, dateOfSign int, timeOfSign string, isSigned, receivedAnInsurancePolicy, receivedAnInformaionConsent bool) error
+	InformaionConsent(ctx context.Context, id primitive.ObjectID, dateOfSign, timeOfSign string, isSigned, receivedAnInsurancePolicy, receivedAnInformaionConsent int) error
 	Demography(ctx context.Context, id primitive.ObjectID, sex, race int, date string) error
-	Anthropometry(ctx context.Context, id primitive.ObjectID, anthropometricDataBeenMeasured bool, reasonIfNot, dateOfStartMeasured string, weightOfBody, hightOfBody, indexWeigthOfBody int) error
+	Anthropometry(ctx context.Context, id primitive.ObjectID, anthropometricDataBeenMeasured int, reasonIfNot, dateOfStartMeasured string, weightOfBody, hightOfBody, indexWeigthOfBody int) error
 	InclusionCriteria(ctx context.Context, id primitive.ObjectID, presenceOfAnInformationPanel, aged18To55Years, negativeHIVTestResult, bodyMassIndex, absenceOfAcuteInfectiousDiseases, consentToUseEffectiveMethodsOfContraception, negativePregnancyTest, negativeAlcoholTest, noHistoryOfSeverePostVaccinationReactions, indicatorsBloodTestsAtScreeningWithin, noMyocardialChanges, negativeTestResultForCOVID, noContraindicationsToVaccination bool) error
 	ExclusionСriteria(ctx context.Context, id primitive.ObjectID, lackOfSignedInformedConsent, steroidTherapy, therapyWithImmunosuppressiveDrugs, femaleSubjectsDuringPregnancy, strokeInLessThanOneYear, chronicSystemicInfections, aggravatedAllergicHistory, presenceOfAHistoryOfNeoplasms, historyOfSplenectomy, neutropenia, subjectsWithActiveSyphilis, anorexia, extensiveTattoos, takingNarcoticAndPsychostimulantDrugs, smokingMoretThanTenCigarettesADay, alcoholIntake, plannedHospitalization, donorBloodDonation, subjectParticipationInAnyOtherStudy, anyVaccinationInTheLastMonth, inabilityToReadInRussian, researchCenterStaff, anyOtherStateOfTheSubjectOfTheStudy bool) error
 }

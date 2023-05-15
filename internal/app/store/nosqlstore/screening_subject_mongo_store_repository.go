@@ -15,11 +15,11 @@ type MongoScreeningRepository struct {
 func (r *MongoScreeningRepository) InformaionConsent(
 	ctx context.Context,
 	id primitive.ObjectID,
-	dateOfSign int,
+	dateOfSign,
 	timeOfSign string,
 	isSigned,
 	receivedAnInsurancePolicy,
-	receivedAnInformaionConsent bool,
+	receivedAnInformaionConsent int,
 ) error {
 	collection := r.store.client.Database("eCRF").Collection("subjects")
 	filter := bson.M{"_id": id}
@@ -63,11 +63,11 @@ func (r *MongoScreeningRepository) Demography(ctx context.Context, id primitive.
 func (r *MongoScreeningRepository) Anthropometry(
 	ctx context.Context,
 	id primitive.ObjectID,
-	anthropometricDataBeenMeasured bool,
+	anthropometricDataBeenMeasured int,
 	reasonIfNot,
 	dateOfStartMeasured string,
 	weightOfBody,
-	hightOfBody,
+	heightOfBody,
 	indexWeigthOfBody int,
 ) error {
 	collection := r.store.client.Database("eCRF").Collection("subjects")
@@ -78,7 +78,7 @@ func (r *MongoScreeningRepository) Anthropometry(
 			"screening.anthropometry.reason_if_not":                     reasonIfNot,
 			"screening.anthropometry.date_of_start_measured":            dateOfStartMeasured,
 			"screening.anthropometry.weight_of_body":                    weightOfBody,
-			"screening.anthropometry.hight_of_body":                     hightOfBody,
+			"screening.anthropometry.height_of_body":                    heightOfBody,
 			"screening.anthropometry.index_weight_of_body":              indexWeigthOfBody,
 		},
 	}

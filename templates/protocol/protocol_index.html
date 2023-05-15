@@ -40,7 +40,7 @@
 
                 </div>
             </div>
-            
+
 
 
             <!-- Modal -->
@@ -163,17 +163,34 @@
                             <div class="mb-1">
 
 
-                                <form id="demography" method="POST" action="/subject/demography/save">
+                                <form id="demography" method="POST" action="/subject/screening/informaionconsent">
 
                                     <div class="mb-1">
+                                        <div class="mb-2">
+                                            <input class="form-control" type="hidden" placeholder="{{.Subject.Number}}"
+                                                value="{{.Subject.Number}}" name="subject_number" id="id" readonly>
+                                        </div>
+                                        <div class="mb-2">
+                                            <input class="form-control" type="hidden"
+                                                placeholder="{{.Subject.ProtocolId}}" value="{{.Subject.ProtocolId}}"
+                                                name="protocol_id" id="id" readonly>
+                                        </div>
                                         <div class="mb-1"> <label class="form-label">Информированное согласие
                                                 подписано?</label>
                                             <div class="input-group mb-3">
 
-                                                <select id="sex" name="center" class="form-select">
+                                                <select id="signed" name="signed" class="form-select">
+                                                    {{if eq .Subject.Screening.InformaionConsent.Signed 1 }}
+                                                    <option selected value="1">Да</option>
+                                                    <option value="2">Нет</option>
+                                                    {{else if eq .Subject.Screening.InformaionConsent.Signed 2}}
+                                                    <option value="1">Да</option>
+                                                    <option selected value="2">Нет</option>
+                                                    {{else }}
+                                                    <option value="0">Не выбрано</option>
                                                     <option value="1">Да</option>
                                                     <option value="2">Нет</option>
-
+                                                    {{end}}
                                                 </select>
                                                 <span title="Автоматическая валидация" class="input-group-text"
                                                     id="basic-addon1">🟢</span>
@@ -187,8 +204,13 @@
                                         <div class="mb-2">
                                             <label class="form-label">Дата подписания</label>
                                             <div class="input-group mb-3">
+                                                {{if .Subject.Screening.InformaionConsent.DateOfSign }}
+                                                <input value="{{.Subject.Screening.InformaionConsent.DateOfSign}}"
+                                                    name="date_of_sign" class="form-control" type="data">
+                                                {{else}}
+                                                <input name="date_of_sign" class="form-control" type="date">
+                                                {{end}}
 
-                                                <input class="form-control" type="date">
                                                 <span title="Автоматическая валидация" class="input-group-text"
                                                     id="basic-addon1">🟢</span>
                                                 <span title="Валидация монитором" class="input-group-text"
@@ -200,7 +222,12 @@
                                         <div class="mb-2">
                                             <label class="form-label">Время подписания</label>
                                             <div class="input-group mb-3">
-                                                <input class="form-control" type="time">
+                                                {{if .Subject.Screening.InformaionConsent.TimeOfSign }}
+                                                <input value="{{.Subject.Screening.InformaionConsent.TimeOfSign}}"
+                                                    name="time_of_sign" class="form-control" type="time">
+                                                {{else}}
+                                                <input name="time_of_sign" class="form-control" type="time">
+                                                {{end}}
                                                 <span title="Автоматическая валидация" class="input-group-text"
                                                     id="basic-addon1">🟢</span>
                                                 <span title="Валидация монитором" class="input-group-text"
@@ -213,9 +240,21 @@
                                             <label class="form-label">Доброволец получил на руки оригинал страхового
                                                 Полиса участника исследования ?</label>
                                             <div class="input-group mb-3">
-                                                <select id="sex" name="center" class="form-select">
+                                                <select id="sex" name="original" class="form-select">
+                                                    {{if eq
+                                                    .Subject.Screening.InformaionConsent.ReceivedAnInsurancePolicy 1 }}
+                                                    <option selected value="1">Да</option>
+                                                    <option value="2">Нет</option>
+                                                    {{else if eq
+                                                    .Subject.Screening.InformaionConsent.ReceivedAnInsurancePolicy 2}}
+                                                    <option value="1">Да</option>
+                                                    <option selected value="2">Нет</option>
+                                                    {{else }}
+                                                    <option value="0">Не выбрано</option>
                                                     <option value="1">Да</option>
                                                     <option value="2">Нет</option>
+                                                    {{end}}
+
 
                                                 </select>
                                                 <span title="Автоматическая валидация" class="input-group-text"
@@ -230,9 +269,21 @@
                                             <label class="form-label">Доброволец получил на руки один экземпляр
                                                 информированного согласия</label>
                                             <div class="input-group mb-3">
-                                                <select id="sex" name="center" class="form-select">
+                                                <select id="sex" name="consent" class="form-select">
+                                                    {{if eq
+                                                    .Subject.Screening.InformaionConsent.ReceivedAnInformaionConsent 1
+                                                    }}
+                                                    <option selected value="1">Да</option>
+                                                    <option value="2">Нет</option>
+                                                    {{else if eq
+                                                    .Subject.Screening.InformaionConsent.ReceivedAnInformaionConsent 2}}
+                                                    <option value="1">Да</option>
+                                                    <option selected value="2">Нет</option>
+                                                    {{else }}
+                                                    <option value="0">Не выбрано</option>
                                                     <option value="1">Да</option>
                                                     <option value="2">Нет</option>
+                                                    {{end}}
 
                                                 </select>
                                                 <span title="Автоматическая валидация" class="input-group-text"
@@ -370,7 +421,9 @@
                 </p>
 
                 <h4 id="item-1-4"></h4>
+
                 <p>
+
                 <div class="shadow-sm p-3 bg-white rounded h-100">
                     <h5 class="text-center">Антропометрия</h5>
                     <hr>
@@ -381,16 +434,39 @@
                             <div class="mb-1">
 
 
-                                <form id="demography" method="POST" action="/subject/demography/save">
+                                <form id="demography" method="POST" action="/subject/screening/anthropometry">
 
                                     <div class="mb-1">
                                         <div class="mb-1">
                                             <label class="form-label">Измерение антропометрических данных
                                                 проведено?</label>
                                             <div class="input-group mb-3">
-                                                <select id="sex" name="center" class="form-select">
+                                                <div class="mb-2">
+                                                    <input class="form-control" type="hidden"
+                                                        placeholder="{{.Subject.Number}}" value="{{.Subject.Number}}"
+                                                        name="subject_number" id="id" readonly>
+                                                </div>
+                                                <div class="mb-2">
+                                                    <input class="form-control" type="hidden"
+                                                        placeholder="{{.Subject.ProtocolId}}"
+                                                        value="{{.Subject.ProtocolId}}" name="protocol_id" id="id"
+                                                        readonly>
+                                                </div>
+                                                <select id="sex" name="data_been_measured" class="form-select">
+                                                    {{if eq
+                                                    .Subject.Screening.Anthropometry.AnthropometricDataBeenMeasured 1 }}
+                                                    <option selected value="1">Да</option>
+                                                    <option value="2">Нет</option>
+                                                    {{else if eq
+                                                    .Subject.Screening.Anthropometry.AnthropometricDataBeenMeasured 2}}
+                                                    <option value="1">Да</option>
+                                                    <option selected value="2">Нет</option>
+                                                    {{else }}
+                                                    <option value="0">Не выбрано</option>
                                                     <option value="1">Да</option>
                                                     <option value="2">Нет</option>
+                                                    {{end}}
+
 
                                                 </select>
                                                 <span title="Автоматическая валидация" class="input-group-text"
@@ -404,7 +480,12 @@
                                         <div class="mb-2">
                                             <label class="form-label">Если НЕТ, то укажите причину</label>
                                             <div class="input-group mb-3">
-                                                <input class="form-control" type="input">
+                                                {{if .Subject.Screening.Anthropometry.ReasonIfNot }}
+                                                <input value="{{.Subject.Screening.Anthropometry.ReasonIfNot}}"
+                                                    name="if_not" class="form-control" type="input">
+                                                {{else}}
+                                                <input name="if_not" class="form-control" type="input">
+                                                {{end}}
                                                 <span title="Автоматическая валидация" class="input-group-text"
                                                     id="basic-addon1">🟢</span>
                                                 <span title="Валидация монитором" class="input-group-text"
@@ -416,7 +497,13 @@
                                         <div class="mb-2">
                                             <label class="form-label">Дата проведения измерений</label>
                                             <div class="input-group mb-3">
-                                                <input class="form-control" type="date">
+                                                {{if .Subject.Screening.Anthropometry.DateOfStartMeasured }}
+                                                <input value="{{.Subject.Screening.Anthropometry.DateOfStartMeasured}}"
+                                                    name="date_of_start" class="form-control" type="date">
+                                                {{else}}
+                                                <input name="date_of_start" class="form-control" type="date">
+                                                {{end}}
+
                                                 <span title="Автоматическая валидация" class="input-group-text"
                                                     id="basic-addon1">🟢</span>
                                                 <span title="Валидация монитором" class="input-group-text"
@@ -428,7 +515,12 @@
                                         <div class="mb-2">
                                             <label class="form-label">Масса тела</label>
                                             <div class="input-group mb-3">
-                                                <input class="form-control" type="input">
+                                                {{if .Subject.Screening.Anthropometry.WeightOfBody }}
+                                                <input value="{{.Subject.Screening.Anthropometry.WeightOfBody}}"
+                                                    name="weight" class="form-control" type="input">
+                                                {{else}}
+                                                <input name="weight" class="form-control" type="input">
+                                                {{end}}
                                                 <span title="Автоматическая валидация" class="input-group-text"
                                                     id="basic-addon1">🟢</span>
                                                 <span title="Валидация монитором" class="input-group-text"
@@ -440,7 +532,12 @@
                                         <div class="mb-2">
                                             <label class="form-label">Рост</label>
                                             <div class="input-group mb-3">
-                                                <input class="form-control" type="input">
+                                                {{if .Subject.Screening.Anthropometry.HeightOfBody }}
+                                                <input value="{{.Subject.Screening.Anthropometry.HeightOfBody}}"
+                                                    name="height" class="form-control" type="input">
+                                                {{else}}
+                                                <input name="height" class="form-control" type="input">
+                                                {{end}}
                                                 <span title="Автоматическая валидация" class="input-group-text"
                                                     id="basic-addon1">🟢</span>
                                                 <span title="Валидация монитором" class="input-group-text"
@@ -452,8 +549,13 @@
                                         <div class="mb-2">
                                             <label class="form-label">Индекс массы тела(рассчетное значение)</label>
                                             <div class="input-group mb-3">
+                                                {{if .Subject.Screening.Anthropometry.IndexWeigthOfBody }}
+                                                <input value="{{.Subject.Screening.Anthropometry.IndexWeigthOfBody }}"
+                                                    name="index" class="form-control" type="input">
+                                                {{else}}
 
-                                                <input class="form-control" type="input">
+                                                <input name="index" class="form-control" type="input">
+                                                {{end}}
                                                 <span title="Автоматическая валидация" class="input-group-text"
                                                     id="basic-addon1">🟢</span>
                                                 <span title="Валидация монитором" class="input-group-text"
@@ -505,18 +607,18 @@
                                                     <div class="input-group-text">
                                                         <div class="form-check form-check-inline">
                                                             <input class="form-check-input" type="radio"
-                                                                name="inlineRadioOptions1" id="inlineRadio1"
-                                                                value="Yes" />
+                                                                name="inclusion1" id="inclusion1Radio1"
+                                                                value="1" />
                                                             <label class="form-check-label"
-                                                                for="inlineRadio1">Да</label>
+                                                                for="inclusion1Radio1">Да</label>
                                                         </div>
 
                                                         <div class="form-check form-check-inline">
                                                             <input class="form-check-input" type="radio"
-                                                                name="inlineRadioOptions1" id="inlineRadio2"
-                                                                value="No" />
+                                                                name="inclusion1" id="inclusion1Radio2"
+                                                                value="2" />
                                                             <label class="form-check-label"
-                                                                for="inlineRadio2">Нет</label>
+                                                                for="inclusion1Radio2">Нет</label>
                                                         </div>
                                                     </div>
                                                     <input type="text" class="form-control" disabled
@@ -543,18 +645,18 @@
                                                     <div class="input-group-text">
                                                         <div class="form-check form-check-inline">
                                                             <input class="form-check-input" type="radio"
-                                                                name="inlineRadioOptions1" id="inlineRadio1"
-                                                                value="Yes" />
+                                                                name="inclusion2" id="inclusion2Radio1"
+                                                                value="1" />
                                                             <label class="form-check-label"
-                                                                for="inlineRadio1">Да</label>
+                                                                for="inclusion2Radio2">Да</label>
                                                         </div>
 
                                                         <div class="form-check form-check-inline">
                                                             <input class="form-check-input" type="radio"
-                                                                name="inlineRadioOptions1" id="inlineRadio2"
-                                                                value="No" />
+                                                                name="inclusion2" id="inclusion2Radio2"
+                                                                value="2" />
                                                             <label class="form-check-label"
-                                                                for="inlineRadio2">Нет</label>
+                                                                for="inclusion2Radio2">Нет</label>
                                                         </div>
                                                     </div>
                                                     <input type="text" class="form-control" disabled
@@ -578,18 +680,18 @@
                                                     <div class="input-group-text">
                                                         <div class="form-check form-check-inline">
                                                             <input class="form-check-input" type="radio"
-                                                                name="inlineRadioOptions1" id="inlineRadio1"
-                                                                value="Yes" />
+                                                                name="inclusion3" id="inclusion3Radio1"
+                                                                value="1" />
                                                             <label class="form-check-label"
-                                                                for="inlineRadio1">Да</label>
+                                                                for="inclusion3Radio1">Да</label>
                                                         </div>
 
                                                         <div class="form-check form-check-inline">
                                                             <input class="form-check-input" type="radio"
-                                                                name="inlineRadioOptions1" id="inlineRadio2"
-                                                                value="No" />
+                                                                name="inclusion3" id="inclusion3Radio2"
+                                                                value="2" />
                                                             <label class="form-check-label"
-                                                                for="inlineRadio2">Нет</label>
+                                                                for="inclusion3Radio2">Нет</label>
                                                         </div>
                                                     </div>
                                                     <input type="text" class="form-control" disabled
@@ -613,18 +715,18 @@
                                                     <div class="input-group-text">
                                                         <div class="form-check form-check-inline">
                                                             <input class="form-check-input" type="radio"
-                                                                name="inlineRadioOptions1" id="inlineRadio1"
-                                                                value="Yes" />
+                                                                name="inclusion4" id="inclusion4Radio1"
+                                                                value="1" />
                                                             <label class="form-check-label"
-                                                                for="inlineRadio1">Да</label>
+                                                                for="inclusion4Radio1">Да</label>
                                                         </div>
 
                                                         <div class="form-check form-check-inline">
                                                             <input class="form-check-input" type="radio"
-                                                                name="inlineRadioOptions1" id="inlineRadio2"
-                                                                value="No" />
+                                                                name="inclusion4" id="inclusion4Radio2"
+                                                                value="2" />
                                                             <label class="form-check-label"
-                                                                for="inlineRadio2">Нет</label>
+                                                                for="inclusion4Radio2">Нет</label>
                                                         </div>
                                                     </div>
                                                     <input type="text" class="form-control" disabled
@@ -651,18 +753,18 @@
                                                     <div class="input-group-text">
                                                         <div class="form-check form-check-inline">
                                                             <input class="form-check-input" type="radio"
-                                                                name="inlineRadioOptions1" id="inlineRadio1"
-                                                                value="Yes" />
+                                                                name="inclusion5" id="inclusion5Radio1"
+                                                                value="1" />
                                                             <label class="form-check-label"
-                                                                for="inlineRadio1">Да</label>
+                                                                for="inclusion5Radio1">Да</label>
                                                         </div>
 
                                                         <div class="form-check form-check-inline">
                                                             <input class="form-check-input" type="radio"
-                                                                name="inlineRadioOptions1" id="inlineRadio2"
-                                                                value="No" />
+                                                                name="inclusion5" id="inclusion5Radio2"
+                                                                value="2" />
                                                             <label class="form-check-label"
-                                                                for="inlineRadio2">Нет</label>
+                                                                for="inclusion5Radio2">Нет</label>
                                                         </div>
                                                     </div>
                                                     <input type="text" class="form-control" disabled
@@ -688,18 +790,18 @@
                                                     <div class="input-group-text">
                                                         <div class="form-check form-check-inline">
                                                             <input class="form-check-input" type="radio"
-                                                                name="inlineRadioOptions1" id="inlineRadio1"
-                                                                value="Yes" />
+                                                                name="inclusion6" id="inclusion6Radio1"
+                                                                value="1" />
                                                             <label class="form-check-label"
-                                                                for="inlineRadio1">Да</label>
+                                                                for="inclusion6Radio1">Да</label>
                                                         </div>
 
                                                         <div class="form-check form-check-inline">
                                                             <input class="form-check-input" type="radio"
-                                                                name="inlineRadioOptions1" id="inlineRadio2"
-                                                                value="No" />
+                                                                name="inclusion6" id="inclusion6Radio2"
+                                                                value="2" />
                                                             <label class="form-check-label"
-                                                                for="inlineRadio2">Нет</label>
+                                                                for="inclusion6Radio2">Нет</label>
                                                         </div>
                                                     </div>
                                                     <input type="text" class="form-control" disabled
@@ -726,25 +828,25 @@
                                                     <div class="input-group-text">
                                                         <div class="form-check form-check-inline">
                                                             <input class="form-check-input" type="radio"
-                                                                name="inlineRadioOptions1" id="inlineRadio1"
-                                                                value="Yes" />
+                                                                name="inclusion7" id="inclusion7Radio1"
+                                                                value="1" />
                                                             <label class="form-check-label"
-                                                                for="inlineRadio1">Да</label>
+                                                                for="inclusion7Radio1">Да</label>
                                                         </div>
 
                                                         <div class="form-check form-check-inline">
                                                             <input class="form-check-input" type="radio"
-                                                                name="inlineRadioOptions1" id="inlineRadio2"
-                                                                value="No" />
+                                                                name="inclusion7" id="inclusion7Radio2"
+                                                                value="2" />
                                                             <label class="form-check-label"
-                                                                for="inlineRadio2">Нет</label>
+                                                                for="inclusion7Radio2">Нет</label>
                                                         </div>
                                                         <div class="form-check form-check-inline">
                                                             <input class="form-check-input" type="radio"
-                                                                name="inlineRadioOptions3" id="inlineRadio3"
-                                                                value="unaccepteble" />
+                                                                name="inclusion7" id="inclusion7Radio3"
+                                                                value="3" />
                                                             <label class="form-check-label"
-                                                                for="inlineRadio3">Неприменимо</label>
+                                                                for="inclusion7Radio3">Неприменимо</label>
                                                         </div>
                                                     </div>
                                                     <input type="text" class="form-control" disabled
@@ -771,18 +873,18 @@
                                                     <div class="input-group-text">
                                                         <div class="form-check form-check-inline">
                                                             <input class="form-check-input" type="radio"
-                                                                name="inlineRadioOptions1" id="inlineRadio1"
-                                                                value="Yes" />
+                                                                name="inclusion8" id="inclusion8Radio1"
+                                                                value="1" />
                                                             <label class="form-check-label"
-                                                                for="inlineRadio1">Да</label>
+                                                                for="inclusion8Radio1">Да</label>
                                                         </div>
 
                                                         <div class="form-check form-check-inline">
                                                             <input class="form-check-input" type="radio"
-                                                                name="inlineRadioOptions1" id="inlineRadio2"
-                                                                value="No" />
+                                                                name="inclusion8" id="inclusion8Radio2"
+                                                                value="2" />
                                                             <label class="form-check-label"
-                                                                for="inlineRadio2">Нет</label>
+                                                                for="inclusion8Radio2">Нет</label>
                                                         </div>
                                                     </div>
                                                     <input type="text" class="form-control" disabled
@@ -806,18 +908,18 @@
                                                     <div class="input-group-text">
                                                         <div class="form-check form-check-inline">
                                                             <input class="form-check-input" type="radio"
-                                                                name="inlineRadioOptions1" id="inlineRadio1"
-                                                                value="Yes" />
+                                                                name="inclusion9" id="inclusion9Radio1"
+                                                                value="1" />
                                                             <label class="form-check-label"
-                                                                for="inlineRadio1">Да</label>
+                                                                for="inclusion9Radio1">Да</label>
                                                         </div>
 
                                                         <div class="form-check form-check-inline">
                                                             <input class="form-check-input" type="radio"
-                                                                name="inlineRadioOptions1" id="inlineRadio2"
-                                                                value="No" />
+                                                                name="inclusion9" id="inclusion9Radio2"
+                                                                value="2" />
                                                             <label class="form-check-label"
-                                                                for="inlineRadio2">Нет</label>
+                                                                for="inclusion9Radio2">Нет</label>
                                                         </div>
                                                     </div>
                                                     <input type="text" class="form-control" disabled
@@ -843,18 +945,18 @@
                                                     <div class="input-group-text">
                                                         <div class="form-check form-check-inline">
                                                             <input class="form-check-input" type="radio"
-                                                                name="inlineRadioOptions1" id="inlineRadio1"
-                                                                value="Yes" />
+                                                                name="inclusion10" id="inclusion10Radio1"
+                                                                value="1" />
                                                             <label class="form-check-label"
-                                                                for="inlineRadio1">Да</label>
+                                                                for="inclusion10Radio1">Да</label>
                                                         </div>
 
                                                         <div class="form-check form-check-inline">
                                                             <input class="form-check-input" type="radio"
-                                                                name="inlineRadioOptions1" id="inlineRadio2"
-                                                                value="No" />
+                                                                name="inclusion10" id="inclusion10Radio2"
+                                                                value="2" />
                                                             <label class="form-check-label"
-                                                                for="inlineRadio2">Нет</label>
+                                                                for="inclusion10Radio2">Нет</label>
                                                         </div>
                                                     </div>
                                                     <input type="text" class="form-control" disabled
@@ -879,18 +981,18 @@
                                                     <div class="input-group-text">
                                                         <div class="form-check form-check-inline">
                                                             <input class="form-check-input" type="radio"
-                                                                name="inlineRadioOptions1" id="inlineRadio1"
-                                                                value="Yes" />
+                                                                name="inclusion11" id="inclusion11Radio1"
+                                                                value="1" />
                                                             <label class="form-check-label"
-                                                                for="inlineRadio1">Да</label>
+                                                                for="inclusion11Radio1">Да</label>
                                                         </div>
 
                                                         <div class="form-check form-check-inline">
                                                             <input class="form-check-input" type="radio"
-                                                                name="inlineRadioOptions1" id="inlineRadio2"
-                                                                value="No" />
+                                                                name="inclusion11" id="inclusion11Radio2"
+                                                                value="2" />
                                                             <label class="form-check-label"
-                                                                for="inlineRadio2">Нет</label>
+                                                                for="inclusion11Radio2">Нет</label>
                                                         </div>
                                                     </div>
                                                     <input type="text" class="form-control" disabled
@@ -915,18 +1017,18 @@
                                                     <div class="input-group-text">
                                                         <div class="form-check form-check-inline">
                                                             <input class="form-check-input" type="radio"
-                                                                name="inlineRadioOptions1" id="inlineRadio1"
-                                                                value="Yes" />
+                                                                name="inclusion12" id="inclusion12Radio1"
+                                                                value="1" />
                                                             <label class="form-check-label"
-                                                                for="inlineRadio1">Да</label>
+                                                                for="inclusion12Radio1">Да</label>
                                                         </div>
 
                                                         <div class="form-check form-check-inline">
                                                             <input class="form-check-input" type="radio"
-                                                                name="inlineRadioOptions1" id="inlineRadio2"
-                                                                value="No" />
+                                                                name="inclusion12" id="inclusion12Radio2"
+                                                                value="2" />
                                                             <label class="form-check-label"
-                                                                for="inlineRadio2">Нет</label>
+                                                                for="inclusion12Radio2">Нет</label>
                                                         </div>
                                                     </div>
                                                     <input type="text" class="form-control" disabled
@@ -952,18 +1054,18 @@
                                                     <div class="input-group-text">
                                                         <div class="form-check form-check-inline">
                                                             <input class="form-check-input" type="radio"
-                                                                name="inlineRadioOptions1" id="inlineRadio1"
-                                                                value="Yes" />
+                                                                name="inclusion13" id="inclusion13Radio1"
+                                                                value="1" />
                                                             <label class="form-check-label"
-                                                                for="inlineRadio1">Да</label>
+                                                                for="inclusion13Radio1">Да</label>
                                                         </div>
 
                                                         <div class="form-check form-check-inline">
                                                             <input class="form-check-input" type="radio"
-                                                                name="inlineRadioOptions1" id="inlineRadio2"
-                                                                value="No" />
+                                                                name="inclusion13" id="inclusion13Radio2"
+                                                                value="2" />
                                                             <label class="form-check-label"
-                                                                for="inlineRadio2">Нет</label>
+                                                                for="inclusion13Radio2">Нет</label>
                                                         </div>
                                                     </div>
                                                     <input type="text" class="form-control" disabled
@@ -987,18 +1089,18 @@
                                                     <div class="input-group-text">
                                                         <div class="form-check form-check-inline">
                                                             <input class="form-check-input" type="radio"
-                                                                name="inlineRadioOptions1" id="inlineRadio1"
-                                                                value="Yes" />
+                                                                name="inclusion14" id="inclusion14Radio1"
+                                                                value="1" />
                                                             <label class="form-check-label"
-                                                                for="inlineRadio1">Да</label>
+                                                                for="inclusion14Radio1">Да</label>
                                                         </div>
 
                                                         <div class="form-check form-check-inline">
                                                             <input class="form-check-input" type="radio"
-                                                                name="inlineRadioOptions1" id="inlineRadio2"
-                                                                value="No" />
+                                                                name="inclusion14" id="inclusion14Radio2"
+                                                                value="2" />
                                                             <label class="form-check-label"
-                                                                for="inlineRadio2">Нет</label>
+                                                                for="inclusion14Radio2">Нет</label>
                                                         </div>
                                                     </div>
                                                     <input type="text" class="form-control" disabled
