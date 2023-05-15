@@ -163,7 +163,7 @@ func (r *MongoScreeningRepository) ExclusionСriteria(
 	anyVaccinationInTheLastMonth,
 	inabilityToReadInRussian,
 	researchCenterStaff,
-	anyOtherStateOfTheSubjectOfTheStudy bool,
+	anyOtherStateOfTheSubjectOfTheStudy int,
 
 ) error {
 	collection := r.store.client.Database("eCRF").Collection("subjects")

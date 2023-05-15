@@ -154,7 +154,17 @@ func (h *Handlers) InclusionCriteriaSubject() fiber.Handler {
 		inclusion13, _ := strconv.Atoi(c.FormValue("inclusion13"))
 		inclusion14, _ := strconv.Atoi(c.FormValue("inclusion14"))
 
-		if err := h.mgStore.Screening().InclusionCriteria(c.Context(), subject.ID, inclusion1, inclusion2, inclusion3, inclusion4, inclusion5, inclusion6, inclusion7, inclusion8, inclusion9, inclusion10, inclusion11, inclusion12, inclusion13, inclusion14); err != nil {
+		if err := h.mgStore.Screening().InclusionCriteria(
+			c.Context(),
+			subject.ID,
+			inclusion1, inclusion2,
+			inclusion3, inclusion4,
+			inclusion5, inclusion6,
+			inclusion7, inclusion8,
+			inclusion9, inclusion10,
+			inclusion11, inclusion12,
+			inclusion13, inclusion14,
+		); err != nil {
 			h.logger.Warningln(err)
 			return utils.ErrorPage(c, err)
 		}
@@ -165,20 +175,63 @@ func (h *Handlers) InclusionCriteriaSubject() fiber.Handler {
 func (h *Handlers) ExclusionСriteriaSubject() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		subjectNumber := c.FormValue("subject_number")
+		protocolId, err := strconv.Atoi(c.FormValue("protocol_id"))
+		if err != nil {
+			return utils.ErrorPage(c, err)
+		}
 		// TODO: add hidden input with current protocol number to correct redirect
 
-		subject, err := h.mgStore.Subject().GetSubjectByNumber(subjectNumber, 1)
+		subject, err := h.mgStore.Subject().GetSubjectByNumber(subjectNumber, protocolId)
 		if err != nil {
-
-			h.logger.Warningln(err)
-			return utils.ErrorPage(c, err)
-		}
-		if err := h.mgStore.Screening().ExclusionСriteria(c.Context(), subject.ID, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false); err != nil {
 			h.logger.Warningln(err)
 			return utils.ErrorPage(c, err)
 		}
 
-		return c.Redirect("/protocol/1/1")
+		exclusion1, _ := strconv.Atoi(c.FormValue("exclusion1"))
+		exclusion2, _ := strconv.Atoi(c.FormValue("exclusion2"))
+		exclusion3, _ := strconv.Atoi(c.FormValue("exclusion3"))
+		exclusion4, _ := strconv.Atoi(c.FormValue("exclusion4"))
+		exclusion5, _ := strconv.Atoi(c.FormValue("exclusion5"))
+		exclusion6, _ := strconv.Atoi(c.FormValue("exclusion6"))
+		exclusion7, _ := strconv.Atoi(c.FormValue("exclusion7"))
+		exclusion8, _ := strconv.Atoi(c.FormValue("exclusion8"))
+		exclusion9, _ := strconv.Atoi(c.FormValue("exclusion9"))
+		exclusion10, _ := strconv.Atoi(c.FormValue("exclusion10"))
+		exclusion11, _ := strconv.Atoi(c.FormValue("exclusion11"))
+		exclusion12, _ := strconv.Atoi(c.FormValue("exclusion12"))
+		exclusion13, _ := strconv.Atoi(c.FormValue("exclusion13"))
+		exclusion14, _ := strconv.Atoi(c.FormValue("exclusion14"))
+		exclusion15, _ := strconv.Atoi(c.FormValue("exclusion15"))
+		exclusion16, _ := strconv.Atoi(c.FormValue("exclusion16"))
+		exclusion17, _ := strconv.Atoi(c.FormValue("exclusion17"))
+		exclusion18, _ := strconv.Atoi(c.FormValue("exclusion18"))
+		exclusion19, _ := strconv.Atoi(c.FormValue("exclusion19"))
+		exclusion20, _ := strconv.Atoi(c.FormValue("exclusion20"))
+		exclusion21, _ := strconv.Atoi(c.FormValue("exclusion21"))
+		exclusion22, _ := strconv.Atoi(c.FormValue("exclusion22"))
+		exclusion23, _ := strconv.Atoi(c.FormValue("exclusion23"))
+
+		if err := h.mgStore.Screening().ExclusionСriteria(
+			c.Context(),
+			subject.ID,
+			exclusion1, exclusion2,
+			exclusion3, exclusion4,
+			exclusion5, exclusion6,
+			exclusion7, exclusion8,
+			exclusion9, exclusion10,
+			exclusion11, exclusion12,
+			exclusion13, exclusion14,
+			exclusion15, exclusion16,
+			exclusion17, exclusion18,
+			exclusion19, exclusion20,
+			exclusion21, exclusion22,
+			exclusion23,
+		); err != nil {
+			h.logger.Warningln(err)
+			return utils.ErrorPage(c, err)
+		}
+
+		return c.Redirect(fmt.Sprintf("/protocol/%d/%s", protocolId, subjectNumber))
 
 	}
 }
