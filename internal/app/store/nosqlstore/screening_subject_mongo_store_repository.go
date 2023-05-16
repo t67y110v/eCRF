@@ -25,11 +25,16 @@ func (r *MongoScreeningRepository) InformaionConsent(
 	filter := bson.M{"_id": id}
 	update := bson.M{
 		"$set": bson.M{
-			"screening.informaionconsent.signed":                         isSigned,
-			"screening.informaionconsent.date_of_sign":                   dateOfSign,
-			"screening.informaionconsent.time_of_sign":                   timeOfSign,
-			"screening.informaionconsent.received_an_insurance_policy":   receivedAnInsurancePolicy,
-			"screening.informaionconsent.received_an_informaion_consent": receivedAnInformaionConsent,
+			"screening.informaionconsent.signedcondition.signed":                                              isSigned,
+			"screening.informaionconsent.signedcondition.color":                                               1,
+			"screening.informaionconsent.dateofsigncondition.date_of_sign":                                    dateOfSign,
+			"screening.informaionconsent.dateofsigncondition.color":                                           1,
+			"screening.informaionconsent.timeofsigncondition.time_of_sign":                                    timeOfSign,
+			"screening.informaionconsent.timeofsigncondition.color":                                           1,
+			"screening.informaionconsent.receivedaninsurancepolicycondition.received_an_insurance_policy":     receivedAnInsurancePolicy,
+			"screening.informaionconsent.receivedaninsurancepolicycondition.color":                            1,
+			"screening.informaionconsent.receivedaninformaionconsentcondition.received_an_informaion_consent": receivedAnInformaionConsent,
+			"screening.informaionconsent.receivedaninformaionconsentcondition.color":                          1,
 		},
 	}
 

@@ -16,11 +16,36 @@ type Subject struct {
 	Initials   string             `bson:"initials"`
 	Screening  struct {
 		InformaionConsent struct {
-			Signed                      int    `bson:"signed"`
-			DateOfSign                  string `bson:"date_of_sign"`
-			TimeOfSign                  string `bson:"time_of_sign"`
-			ReceivedAnInsurancePolicy   int    `bson:"received_an_insurance_policy"`
-			ReceivedAnInformaionConsent int    `bson:"received_an_informaion_consent"`
+			SignedCondition struct {
+				Signed  int    `bson:"signed"`
+				Color   int    `bson:"color"`
+				Reason  string `bson:"resason"`
+				Comment string `bson:"comment"`
+			}
+			DateOfSignCondition struct {
+				DateOfSign string `bson:"date_of_sign"`
+				Color      int    `bson:"color"`
+				Reason     string `bson:"resason"`
+				Comment    string `bson:"comment"`
+			}
+			TimeOfSignCondition struct {
+				TimeOfSign string `bson:"time_of_sign"`
+				Color      int    `bson:"color"`
+				Reason     string `bson:"resason"`
+				Comment    string `bson:"comment"`
+			}
+			ReceivedAnInsurancePolicyCondition struct {
+				ReceivedAnInsurancePolicy int    `bson:"received_an_insurance_policy"`
+				Color                     int    `bson:"color"`
+				Reason                    string `bson:"resason"`
+				Comment                   string `bson:"comment"`
+			}
+			ReceivedAnInformaionConsentCondition struct {
+				ReceivedAnInformaionConsent int    `bson:"received_an_informaion_consent"`
+				Color                       int    `bson:"color"`
+				Reason                      string `bson:"resason"`
+				Comment                     string `bson:"comment"`
+			}
 		}
 
 		Anthropometry struct {

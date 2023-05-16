@@ -1,4 +1,5 @@
 <section>
+    <script src="/public/js/script.js"></script>
     <div class="container-fluid mb-3">
         <div class="row justify-content-center">
             <div class="col-8 p-0">
@@ -156,6 +157,10 @@
                 <div class="shadow-sm p-3 bg-white rounded h-100">
                     <h5 class="text-center">Информ. согласие</h5>
                     <hr>
+
+
+
+
                     <div class="row">
                         <div class="col-1"></div>
                         <div class="col-10">
@@ -175,15 +180,21 @@
                                                 placeholder="{{.Subject.ProtocolId}}" value="{{.Subject.ProtocolId}}"
                                                 name="protocol_id" id="id" readonly>
                                         </div>
+
+
                                         <div class="mb-1"> <label class="form-label">Информированное согласие
                                                 подписано?</label>
-                                            <div class="input-group mb-3">
+                                            <div class="input-group mb-3" id="condition1"
+                                                color-value="{{.Subject.Screening.InformaionConsent.SignedCondition.Color}}">
 
                                                 <select id="signed" name="signed" class="form-select">
-                                                    {{if eq .Subject.Screening.InformaionConsent.Signed 1 }}
+                                                    {{if eq
+                                                    .Subject.Screening.InformaionConsent.SignedCondition.Signed
+                                                    1 }}
                                                     <option selected value="1">Да</option>
                                                     <option value="2">Нет</option>
-                                                    {{else if eq .Subject.Screening.InformaionConsent.Signed 2}}
+                                                    {{else if eq
+                                                    .Subject.Screening.InformaionConsent.SignedCondition.Signed 2}}
                                                     <option value="1">Да</option>
                                                     <option selected value="2">Нет</option>
                                                     {{else }}
@@ -192,61 +203,56 @@
                                                     <option value="2">Нет</option>
                                                     {{end}}
                                                 </select>
-                                                <span title="Автоматическая валидация" class="input-group-text"
-                                                    id="basic-addon1">🟢</span>
-                                                <span title="Валидация монитором" class="input-group-text"
-                                                    id="basic-addon1">🟢</span>
-                                                <span title="Валидация дата-менеджером" class="input-group-text"
-                                                    id="basic-addon1">🔴</span>
                                             </div>
 
                                         </div>
                                         <div class="mb-2">
                                             <label class="form-label">Дата подписания</label>
-                                            <div class="input-group mb-3">
-                                                {{if .Subject.Screening.InformaionConsent.DateOfSign }}
-                                                <input value="{{.Subject.Screening.InformaionConsent.DateOfSign}}"
+                                            <div class="input-group mb-3" id="condition2"
+                                                color-value="{{.Subject.Screening.InformaionConsent.DateOfSignCondition.Color}}">
+                                                {{if
+                                                .Subject.Screening.InformaionConsent.DateOfSignCondition.DateOfSign
+                                                }}
+                                                <input
+                                                    value="{{.Subject.Screening.InformaionConsent.DateOfSignCondition.DateOfSign}}"
                                                     name="date_of_sign" class="form-control" type="data">
                                                 {{else}}
                                                 <input name="date_of_sign" class="form-control" type="date">
                                                 {{end}}
 
-                                                <span title="Автоматическая валидация" class="input-group-text"
-                                                    id="basic-addon1">🟢</span>
-                                                <span title="Валидация монитором" class="input-group-text"
-                                                    id="basic-addon1">🟢</span>
-                                                <span title="Валидация дата-менеджером" class="input-group-text"
-                                                    id="basic-addon1">🔴</span>
+
                                             </div>
                                         </div>
+                                        </body>
                                         <div class="mb-2">
                                             <label class="form-label">Время подписания</label>
-                                            <div class="input-group mb-3">
-                                                {{if .Subject.Screening.InformaionConsent.TimeOfSign }}
-                                                <input value="{{.Subject.Screening.InformaionConsent.TimeOfSign}}"
+                                            <div class="input-group mb-3" id="condition3"
+                                            color-value="{{.Subject.Screening.InformaionConsent.TimeOfSignCondition.Color}}" >
+                                                {{if
+                                                .Subject.Screening.InformaionConsent.TimeOfSignCondition.TimeOfSign
+                                                }}
+                                                <input
+                                                    value="{{.Subject.Screening.InformaionConsent.TimeOfSignCondition.TimeOfSign}}"
                                                     name="time_of_sign" class="form-control" type="time">
                                                 {{else}}
                                                 <input name="time_of_sign" class="form-control" type="time">
                                                 {{end}}
-                                                <span title="Автоматическая валидация" class="input-group-text"
-                                                    id="basic-addon1">🟢</span>
-                                                <span title="Валидация монитором" class="input-group-text"
-                                                    id="basic-addon1">🟢</span>
-                                                <span title="Валидация дата-менеджером" class="input-group-text"
-                                                    id="basic-addon1">🔴</span>
                                             </div>
                                         </div>
                                         <div class="mb-1">
                                             <label class="form-label">Доброволец получил на руки оригинал страхового
                                                 Полиса участника исследования ?</label>
-                                            <div class="input-group mb-3">
+                                            <div class="input-group mb-3" id="condition4"
+                                            color-value="{{.Subject.Screening.InformaionConsent.ReceivedAnInsurancePolicyCondition.Color}}">
                                                 <select id="sex" name="original" class="form-select">
                                                     {{if eq
-                                                    .Subject.Screening.InformaionConsent.ReceivedAnInsurancePolicy 1 }}
+                                                    .Subject.Screening.InformaionConsent.ReceivedAnInsurancePolicyCondition.ReceivedAnInsurancePolicy
+                                                    1 }}
                                                     <option selected value="1">Да</option>
                                                     <option value="2">Нет</option>
                                                     {{else if eq
-                                                    .Subject.Screening.InformaionConsent.ReceivedAnInsurancePolicy 2}}
+                                                    .Subject.Screening.InformaionConsent.ReceivedAnInsurancePolicyCondition.ReceivedAnInsurancePolicy
+                                                    2}}
                                                     <option value="1">Да</option>
                                                     <option selected value="2">Нет</option>
                                                     {{else }}
@@ -257,26 +263,24 @@
 
 
                                                 </select>
-                                                <span title="Автоматическая валидация" class="input-group-text"
-                                                    id="basic-addon1">🟢</span>
-                                                <span title="Валидация монитором" class="input-group-text"
-                                                    id="basic-addon1">🟢</span>
-                                                <span title="Валидация дата-менеджером" class="input-group-text"
-                                                    id="basic-addon1">🔴</span>
+                            
                                             </div>
                                         </div>
                                         <div class="mb-1">
                                             <label class="form-label">Доброволец получил на руки один экземпляр
                                                 информированного согласия</label>
-                                            <div class="input-group mb-3">
+                                            <div class="input-group mb-3" id="condition5"
+                                            color-value="{{.Subject.Screening.InformaionConsent.ReceivedAnInformaionConsentCondition.Color}}">
                                                 <select id="sex" name="consent" class="form-select">
                                                     {{if eq
-                                                    .Subject.Screening.InformaionConsent.ReceivedAnInformaionConsent 1
+                                                    .Subject.Screening.InformaionConsent.ReceivedAnInformaionConsentCondition.ReceivedAnInformaionConsent
+                                                    1
                                                     }}
                                                     <option selected value="1">Да</option>
                                                     <option value="2">Нет</option>
                                                     {{else if eq
-                                                    .Subject.Screening.InformaionConsent.ReceivedAnInformaionConsent 2}}
+                                                    .Subject.Screening.InformaionConsent.ReceivedAnInformaionConsentCondition.ReceivedAnInformaionConsent
+                                                    2}}
                                                     <option value="1">Да</option>
                                                     <option selected value="2">Нет</option>
                                                     {{else }}
@@ -286,12 +290,6 @@
                                                     {{end}}
 
                                                 </select>
-                                                <span title="Автоматическая валидация" class="input-group-text"
-                                                    id="basic-addon1">🟢</span>
-                                                <span title="Валидация монитором" class="input-group-text"
-                                                    id="basic-addon1">🟢</span>
-                                                <span title="Валидация дата-менеджером" class="input-group-text"
-                                                    id="basic-addon1">🔴</span>
                                             </div>
                                         </div>
 
@@ -304,6 +302,7 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
                 </p>
 
@@ -1720,14 +1719,15 @@
 
                                                         <div class="form-check form-check-inline">
                                                             {{if eq
-                                                                .Subject.Screening.ExclusionСriteria.AggravatedAllergicHistory
-                                                                2}}
+                                                            .Subject.Screening.ExclusionСriteria.AggravatedAllergicHistory
+                                                            2}}
                                                             <input class="form-check-input" type="radio"
-                                                                name="exclusion7" id="exclusion7Radio2" value="2" checked />
-                                                                {{else}}
-                                                                <input class="form-check-input" type="radio"
+                                                                name="exclusion7" id="exclusion7Radio2" value="2"
+                                                                checked />
+                                                            {{else}}
+                                                            <input class="form-check-input" type="radio"
                                                                 name="exclusion7" id="exclusion7Radio2" value="2" />
-                                                                {{end}}
+                                                            {{end}}
                                                             <label class="form-check-label"
                                                                 for="exclusion7Radio2">Нет</label>
                                                         </div>
@@ -1754,28 +1754,30 @@
                                                     <div class="input-group-text">
                                                         <div class="form-check form-check-inline">
                                                             {{if eq
-                                                                .Subject.Screening.ExclusionСriteria.PresenceOfAHistoryOfNeoplasms
-                                                                1}}
+                                                            .Subject.Screening.ExclusionСriteria.PresenceOfAHistoryOfNeoplasms
+                                                            1}}
                                                             <input class="form-check-input" type="radio"
-                                                                name="exclusion8" id="exclusion8Radio1" value="1" checked/>
-                                                                {{else}}
-                                                                <input class="form-check-input" type="radio"
+                                                                name="exclusion8" id="exclusion8Radio1" value="1"
+                                                                checked />
+                                                            {{else}}
+                                                            <input class="form-check-input" type="radio"
                                                                 name="exclusion8" id="exclusion8Radio1" value="1" />
-                                                                {{end}}
+                                                            {{end}}
                                                             <label class="form-check-label"
                                                                 for="exclusion8Radio1">Да</label>
                                                         </div>
 
                                                         <div class="form-check form-check-inline">
                                                             {{if eq
-                                                                .Subject.Screening.ExclusionСriteria.PresenceOfAHistoryOfNeoplasms
-                                                                2}}
+                                                            .Subject.Screening.ExclusionСriteria.PresenceOfAHistoryOfNeoplasms
+                                                            2}}
                                                             <input class="form-check-input" type="radio"
-                                                                name="exclusion8" id="exclusion8Radio2" value="2" checked />
-                                                                {{else}}
-                                                                <input class="form-check-input" type="radio"
+                                                                name="exclusion8" id="exclusion8Radio2" value="2"
+                                                                checked />
+                                                            {{else}}
+                                                            <input class="form-check-input" type="radio"
                                                                 name="exclusion8" id="exclusion8Radio2" value="2" />
-                                                                {{end}}
+                                                            {{end}}
                                                             <label class="form-check-label"
                                                                 for="exclusion8Radio2">Нет</label>
                                                         </div>
@@ -1800,28 +1802,30 @@
                                                     <div class="input-group-text">
                                                         <div class="form-check form-check-inline">
                                                             {{if eq
-                                                                .Subject.Screening.ExclusionСriteria.HistoryOfSplenectomy
-                                                                1}}
+                                                            .Subject.Screening.ExclusionСriteria.HistoryOfSplenectomy
+                                                            1}}
                                                             <input class="form-check-input" type="radio"
-                                                                name="exclusion9" id="exclusion9Radio1" value="1" checked />
-                                                                {{else}}
-                                                                <input class="form-check-input" type="radio"
+                                                                name="exclusion9" id="exclusion9Radio1" value="1"
+                                                                checked />
+                                                            {{else}}
+                                                            <input class="form-check-input" type="radio"
                                                                 name="exclusion9" id="exclusion9Radio1" value="1" />
-                                                                {{end}}
-                                                                <label class="form-check-label"
+                                                            {{end}}
+                                                            <label class="form-check-label"
                                                                 for="exclusion9Radio1">Да</label>
                                                         </div>
 
                                                         <div class="form-check form-check-inline">
                                                             {{if eq
-                                                                .Subject.Screening.ExclusionСriteria.HistoryOfSplenectomy
-                                                                2}}
+                                                            .Subject.Screening.ExclusionСriteria.HistoryOfSplenectomy
+                                                            2}}
                                                             <input class="form-check-input" type="radio"
-                                                                name="exclusion9" id="exclusion9Radio2" value="2" checked />
-                                                                {{else}}
-                                                                <input class="form-check-input" type="radio"
+                                                                name="exclusion9" id="exclusion9Radio2" value="2"
+                                                                checked />
+                                                            {{else}}
+                                                            <input class="form-check-input" type="radio"
                                                                 name="exclusion9" id="exclusion9Radio2" value="2" />
-                                                                {{end}}
+                                                            {{end}}
                                                             <label class="form-check-label"
                                                                 for="exclusion9Radio2">Нет</label>
                                                         </div>
@@ -1851,28 +1855,30 @@
                                                     <div class="input-group-text">
                                                         <div class="form-check form-check-inline">
                                                             {{if eq
-                                                                .Subject.Screening.ExclusionСriteria.Neutropenia
-                                                                1}}
+                                                            .Subject.Screening.ExclusionСriteria.Neutropenia
+                                                            1}}
                                                             <input class="form-check-input" type="radio"
-                                                                name="exclusion10" id="exclusion10Radio1" value="1"  checked/>
-                                                                {{else}}
-                                                                <input class="form-check-input" type="radio"
+                                                                name="exclusion10" id="exclusion10Radio1" value="1"
+                                                                checked />
+                                                            {{else}}
+                                                            <input class="form-check-input" type="radio"
                                                                 name="exclusion10" id="exclusion10Radio1" value="1" />
-                                                                {{end}}
+                                                            {{end}}
                                                             <label class="form-check-label"
                                                                 for="exclusion10Radio1">Да</label>
                                                         </div>
 
                                                         <div class="form-check form-check-inline">
                                                             {{if eq
-                                                                .Subject.Screening.ExclusionСriteria.Neutropenia
-                                                                2}}
+                                                            .Subject.Screening.ExclusionСriteria.Neutropenia
+                                                            2}}
                                                             <input class="form-check-input" type="radio"
-                                                                name="exclusion10" id="exclusion10Radio2"  checked value="2" />
-                                                                {{else}}
-                                                                <input class="form-check-input" type="radio"
+                                                                name="exclusion10" id="exclusion10Radio2" checked
+                                                                value="2" />
+                                                            {{else}}
+                                                            <input class="form-check-input" type="radio"
                                                                 name="exclusion10" id="exclusion10Radio2" value="2" />
-                                                                {{end}}
+                                                            {{end}}
                                                             <label class="form-check-label"
                                                                 for="exclusion10Radio2">Нет</label>
                                                         </div>
@@ -1898,28 +1904,28 @@
                                                 <div class="input-group-text">
                                                     <div class="form-check form-check-inline">
                                                         {{if eq
-                                                            .Subject.Screening.ExclusionСriteria.SubjectsWithActiveSyphilis
-                                                            1}}
+                                                        .Subject.Screening.ExclusionСriteria.SubjectsWithActiveSyphilis
+                                                        1}}
                                                         <input class="form-check-input" type="radio" name="exclusion11"
                                                             id="exclusion11Radio1" value="1" checked />
-                                                            {{else}}
-                                                            <input class="form-check-input" type="radio" name="exclusion11"
+                                                        {{else}}
+                                                        <input class="form-check-input" type="radio" name="exclusion11"
                                                             id="exclusion11Radio1" value="1" />
-                                                            {{end}}
+                                                        {{end}}
                                                         <label class="form-check-label"
                                                             for="exclusion11Radio1">Да</label>
                                                     </div>
 
                                                     <div class="form-check form-check-inline">
                                                         {{if eq
-                                                            .Subject.Screening.ExclusionСriteria.SubjectsWithActiveSyphilis
-                                                            2}}
+                                                        .Subject.Screening.ExclusionСriteria.SubjectsWithActiveSyphilis
+                                                        2}}
                                                         <input class="form-check-input" type="radio" name="exclusion11"
                                                             id="exclusion11Radio2" value="2" checked />
-                                                            {{else}}
-                                                            <input class="form-check-input" type="radio" name="exclusion11"
+                                                        {{else}}
+                                                        <input class="form-check-input" type="radio" name="exclusion11"
                                                             id="exclusion11Radio2" value="2" />
-                                                            {{end}}
+                                                        {{end}}
                                                         <label class="form-check-label"
                                                             for="exclusion11Radio2">Нет</label>
                                                     </div>
@@ -1945,28 +1951,28 @@
                                                 <div class="input-group-text">
                                                     <div class="form-check form-check-inline">
                                                         {{if eq
-                                                            .Subject.Screening.ExclusionСriteria.Anorexia
-                                                            1}}
+                                                        .Subject.Screening.ExclusionСriteria.Anorexia
+                                                        1}}
                                                         <input class="form-check-input" type="radio" name="exclusion12"
-                                                            id="exclusion12Radio1" value="1" checked/>
-                                                            {{else}}
-                                                            <input class="form-check-input" type="radio" name="exclusion12"
+                                                            id="exclusion12Radio1" value="1" checked />
+                                                        {{else}}
+                                                        <input class="form-check-input" type="radio" name="exclusion12"
                                                             id="exclusion12Radio1" value="1" />
-                                                            {{end}}
+                                                        {{end}}
                                                         <label class="form-check-label"
                                                             for="exclusion12Radio1">Да</label>
                                                     </div>
 
                                                     <div class="form-check form-check-inline">
                                                         {{if eq
-                                                            .Subject.Screening.ExclusionСriteria.Anorexia
-                                                            2}}
+                                                        .Subject.Screening.ExclusionСriteria.Anorexia
+                                                        2}}
                                                         <input class="form-check-input" type="radio" name="exclusion12"
-                                                            id="exclusion12Radio2" value="2" checked/>
-                                                            {{else}}
-                                                            <input class="form-check-input" type="radio" name="exclusion12"
+                                                            id="exclusion12Radio2" value="2" checked />
+                                                        {{else}}
+                                                        <input class="form-check-input" type="radio" name="exclusion12"
                                                             id="exclusion12Radio2" value="2" />
-                                                            {{end}}
+                                                        {{end}}
                                                         <label class="form-check-label"
                                                             for="exclusion12Radio2">Нет</label>
                                                     </div>
@@ -1994,28 +2000,28 @@
                                                 <div class="input-group-text">
                                                     <div class="form-check form-check-inline">
                                                         {{if eq
-                                                            .Subject.Screening.ExclusionСriteria.ExtensiveTattoos
-                                                            1}}
+                                                        .Subject.Screening.ExclusionСriteria.ExtensiveTattoos
+                                                        1}}
                                                         <input class="form-check-input" type="radio" name="exclusion13"
                                                             id="exclusion13Radio1" value="1" checked />
-                                                            {{else}}
-                                                            <input class="form-check-input" type="radio" name="exclusion13"
+                                                        {{else}}
+                                                        <input class="form-check-input" type="radio" name="exclusion13"
                                                             id="exclusion13Radio1" value="1" />
-                                                            {{end}}
+                                                        {{end}}
                                                         <label class="form-check-label"
                                                             for="exclusion13Radio1">Да</label>
                                                     </div>
 
                                                     <div class="form-check form-check-inline">
                                                         {{if eq
-                                                            .Subject.Screening.ExclusionСriteria.ExtensiveTattoos
-                                                            2}}
+                                                        .Subject.Screening.ExclusionСriteria.ExtensiveTattoos
+                                                        2}}
                                                         <input class="form-check-input" type="radio" name="exclusion13"
-                                                            id="exclusion13Radio2" value="2" checked/>
-                                                            {{else}}
-                                                               <input class="form-check-input" type="radio" name="exclusion13"
+                                                            id="exclusion13Radio2" value="2" checked />
+                                                        {{else}}
+                                                        <input class="form-check-input" type="radio" name="exclusion13"
                                                             id="exclusion13Radio2" value="2" />
-                                                            {{end}}
+                                                        {{end}}
                                                         <label class="form-check-label"
                                                             for="exclusion13Radio2">Нет</label>
                                                     </div>
@@ -2042,14 +2048,14 @@
                                                 <div class="input-group-text">
                                                     <div class="form-check form-check-inline">
                                                         {{if eq
-                                                            .Subject.Screening.ExclusionСriteria.TakingNarcoticAndPsychostimulantDrugs
-                                                            1}}
+                                                        .Subject.Screening.ExclusionСriteria.TakingNarcoticAndPsychostimulantDrugs
+                                                        1}}
                                                         <input class="form-check-input" type="radio" name="exclusion14"
                                                             id="exclusion14Radio1" value="1" checked />
-                                                            {{else}}
-                                                            <input class="form-check-input" type="radio" name="exclusion14"
+                                                        {{else}}
+                                                        <input class="form-check-input" type="radio" name="exclusion14"
                                                             id="exclusion14Radio1" value="1" />
-                                                            {{end}}
+                                                        {{end}}
 
                                                         <label class="form-check-label"
                                                             for="exclusion14Radio1">Да</label>
@@ -2057,14 +2063,14 @@
 
                                                     <div class="form-check form-check-inline">
                                                         {{if eq
-                                                            .Subject.Screening.ExclusionСriteria.TakingNarcoticAndPsychostimulantDrugs
-                                                            2}}
+                                                        .Subject.Screening.ExclusionСriteria.TakingNarcoticAndPsychostimulantDrugs
+                                                        2}}
                                                         <input class="form-check-input" type="radio" name="exclusion14"
                                                             id="exclusion14Radio2" value="2" checked />
-                                                            {{else}}
-                                                            <input class="form-check-input" type="radio" name="exclusion14"
+                                                        {{else}}
+                                                        <input class="form-check-input" type="radio" name="exclusion14"
                                                             id="exclusion14Radio2" value="2" />
-                                                            {{end}}
+                                                        {{end}}
                                                         <label class="form-check-label"
                                                             for="exclusion14Radio2">Нет</label>
                                                     </div>
@@ -2090,29 +2096,29 @@
                                                 <div class="input-group-text">
                                                     <div class="form-check form-check-inline">
                                                         {{if eq
-                                                            .Subject.Screening.ExclusionСriteria.SmokingMoretThanTenCigarettesADay
-                                                            1}}
+                                                        .Subject.Screening.ExclusionСriteria.SmokingMoretThanTenCigarettesADay
+                                                        1}}
                                                         <input class="form-check-input" type="radio" name="exclusion15"
-                                                            id="exclusion15Radio1" value="1"checked />
-                                                            {{else}}
-                                                            <input class="form-check-input" type="radio" name="exclusion15"
+                                                            id="exclusion15Radio1" value="1" checked />
+                                                        {{else}}
+                                                        <input class="form-check-input" type="radio" name="exclusion15"
                                                             id="exclusion15Radio1" value="1" />
-                                                            {{end}}
+                                                        {{end}}
                                                         <label class="form-check-label"
                                                             for="exclusion15Radio1">Да</label>
                                                     </div>
 
                                                     <div class="form-check form-check-inline">
                                                         {{if eq
-                                                            .Subject.Screening.ExclusionСriteria.SmokingMoretThanTenCigarettesADay
-                                                            2}}
+                                                        .Subject.Screening.ExclusionСriteria.SmokingMoretThanTenCigarettesADay
+                                                        2}}
                                                         <input class="form-check-input" type="radio" name="exclusion15"
-                                                            id="exclusion15Radio2" value="2" checked/>
-                                                            {{else}}
-                                                            <input class="form-check-input" type="radio" name="exclusion15"
+                                                            id="exclusion15Radio2" value="2" checked />
+                                                        {{else}}
+                                                        <input class="form-check-input" type="radio" name="exclusion15"
                                                             id="exclusion15Radio2" value="2" />
-                                                            {{end}}
-                                                            <label class="form-check-label"
+                                                        {{end}}
+                                                        <label class="form-check-label"
                                                             for="exclusion15Radio2">Нет</label>
                                                     </div>
                                                 </div>
@@ -2140,28 +2146,28 @@
                                                 <div class="input-group-text">
                                                     <div class="form-check form-check-inline">
                                                         {{if eq
-                                                            .Subject.Screening.ExclusionСriteria.AlcoholIntake
-                                                            1}}
+                                                        .Subject.Screening.ExclusionСriteria.AlcoholIntake
+                                                        1}}
                                                         <input class="form-check-input" type="radio" name="exclusion16"
                                                             id="exclusion16Radio1" value="1" checked />
-                                                            {{else}}
-                                                            <input class="form-check-input" type="radio" name="exclusion16"
+                                                        {{else}}
+                                                        <input class="form-check-input" type="radio" name="exclusion16"
                                                             id="exclusion16Radio1" value="1" />
-                                                            {{end}}
+                                                        {{end}}
                                                         <label class="form-check-label"
                                                             for="exclusion16Radio1">Да</label>
                                                     </div>
 
                                                     <div class="form-check form-check-inline">
                                                         {{if eq
-                                                            .Subject.Screening.ExclusionСriteria.AlcoholIntake
-                                                            2}}
+                                                        .Subject.Screening.ExclusionСriteria.AlcoholIntake
+                                                        2}}
                                                         <input class="form-check-input" type="radio" name="exclusion16"
-                                                            id="exclusion16Radio2" value="2" checked/>
-                                                            {{else}}
-                                                            <input class="form-check-input" type="radio" name="exclusion16"
+                                                            id="exclusion16Radio2" value="2" checked />
+                                                        {{else}}
+                                                        <input class="form-check-input" type="radio" name="exclusion16"
                                                             id="exclusion16Radio2" value="2" />
-                                                            {{end}}
+                                                        {{end}}
                                                         <label class="form-check-label"
                                                             for="exclusion16Radio2">Нет</label>
                                                     </div>
@@ -2189,27 +2195,27 @@
                                         <div class="input-group-text">
                                             <div class="form-check form-check-inline">
                                                 {{if eq
-                                                    .Subject.Screening.ExclusionСriteria.PlannedHospitalization
-                                                    1}}
+                                                .Subject.Screening.ExclusionСriteria.PlannedHospitalization
+                                                1}}
                                                 <input class="form-check-input" type="radio" name="exclusion17"
                                                     id="inlineRadio1" value="1" checked />
-                                                    {{else}}
-                                                    <input class="form-check-input" type="radio" name="exclusion17"
+                                                {{else}}
+                                                <input class="form-check-input" type="radio" name="exclusion17"
                                                     id="inlineRadio1" value="1" />
-                                                    {{end}}
+                                                {{end}}
                                                 <label class="form-check-label" for="exclusion17Radio1">Да</label>
                                             </div>
 
                                             <div class="form-check form-check-inline">
                                                 {{if eq
-                                                    .Subject.Screening.ExclusionСriteria.PlannedHospitalization
-                                                    2}}
+                                                .Subject.Screening.ExclusionСriteria.PlannedHospitalization
+                                                2}}
                                                 <input class="form-check-input" type="radio" name="exclusion17"
-                                                    id="inlineRadio2" value="2" checked/>
-                                                    {{else}}
-                                                    <input class="form-check-input" type="radio" name="exclusion17"
+                                                    id="inlineRadio2" value="2" checked />
+                                                {{else}}
+                                                <input class="form-check-input" type="radio" name="exclusion17"
                                                     id="inlineRadio2" value="2" />
-                                                    {{end}}
+                                                {{end}}
                                                 <label class="form-check-label" for="exclusion17Radio2">Нет</label>
                                             </div>
                                         </div>
@@ -2235,27 +2241,27 @@
                                         <div class="input-group-text">
                                             <div class="form-check form-check-inline">
                                                 {{if eq
-                                                    .Subject.Screening.ExclusionСriteria.DonorBloodDonation
-                                                    1}}
+                                                .Subject.Screening.ExclusionСriteria.DonorBloodDonation
+                                                1}}
                                                 <input class="form-check-input" type="radio" name="exclusion18"
-                                                    id="exclusion18Radio1" value="1"checked />
-                                                    {{else}}
-                                                    <input class="form-check-input" type="radio" name="exclusion18"
+                                                    id="exclusion18Radio1" value="1" checked />
+                                                {{else}}
+                                                <input class="form-check-input" type="radio" name="exclusion18"
                                                     id="exclusion18Radio1" value="1" />
-                                                    {{end}}
+                                                {{end}}
                                                 <label class="form-check-label" for="exclusion18Radio1">Да</label>
                                             </div>
 
                                             <div class="form-check form-check-inline">
                                                 {{if eq
-                                                    .Subject.Screening.ExclusionСriteria.DonorBloodDonation
-                                                    2}}
+                                                .Subject.Screening.ExclusionСriteria.DonorBloodDonation
+                                                2}}
                                                 <input class="form-check-input" type="radio" name="exclusion18"
-                                                    id="exclusion18Radio2" value="2"  checked/>
-                                                    {{else}}
-                                                    <input class="form-check-input" type="radio" name="exclusion18"
+                                                    id="exclusion18Radio2" value="2" checked />
+                                                {{else}}
+                                                <input class="form-check-input" type="radio" name="exclusion18"
                                                     id="exclusion18Radio2" value="2" />
-                                                    {{end}}
+                                                {{end}}
                                                 <label class="form-check-label" for="exclusion18Radio2">Нет</label>
                                             </div>
                                         </div>
@@ -2281,27 +2287,27 @@
                                         <div class="input-group-text">
                                             <div class="form-check form-check-inline">
                                                 {{if eq
-                                                    .Subject.Screening.ExclusionСriteria.SubjectParticipationInAnyOtherStudy
-                                                    1}}
+                                                .Subject.Screening.ExclusionСriteria.SubjectParticipationInAnyOtherStudy
+                                                1}}
                                                 <input class="form-check-input" type="radio" name="exclusion19"
-                                                    id="exclusion19Radio1" value="1"checked />
-                                                    {{else}}
-                                                    <input class="form-check-input" type="radio" name="exclusion19"
+                                                    id="exclusion19Radio1" value="1" checked />
+                                                {{else}}
+                                                <input class="form-check-input" type="radio" name="exclusion19"
                                                     id="exclusion19Radio1" value="1" />
-                                                    {{end}}
+                                                {{end}}
                                                 <label class="form-check-label" for="exclusion19Radio1">Да</label>
                                             </div>
 
                                             <div class="form-check form-check-inline">
                                                 {{if eq
-                                                    .Subject.Screening.ExclusionСriteria.SubjectParticipationInAnyOtherStudy
-                                                    2}}
+                                                .Subject.Screening.ExclusionСriteria.SubjectParticipationInAnyOtherStudy
+                                                2}}
                                                 <input class="form-check-input" type="radio" name="exclusion19"
                                                     id="exclusion19Radio2" value="2" checked />
-                                                    {{else}}
-                                                    <input class="form-check-input" type="radio" name="exclusion19"
+                                                {{else}}
+                                                <input class="form-check-input" type="radio" name="exclusion19"
                                                     id="exclusion19Radio2" value="2" />
-                                                    {{end}}
+                                                {{end}}
                                                 <label class="form-check-label" for="exclusion19Radio2">Нет</label>
                                             </div>
                                         </div>
@@ -2326,27 +2332,27 @@
                                         <div class="input-group-text">
                                             <div class="form-check form-check-inline">
                                                 {{if eq
-                                                    .Subject.Screening.ExclusionСriteria.AnyVaccinationInTheLastMonth
-                                                    1}}
+                                                .Subject.Screening.ExclusionСriteria.AnyVaccinationInTheLastMonth
+                                                1}}
                                                 <input class="form-check-input" type="radio" name="exclusion20"
                                                     id="exclusion20Radio1" value="1" checked />
-                                                    {{else}}
-                                                    <input class="form-check-input" type="radio" name="exclusion20"
+                                                {{else}}
+                                                <input class="form-check-input" type="radio" name="exclusion20"
                                                     id="exclusion20Radio1" value="1" />
-                                                    {{end}}
+                                                {{end}}
                                                 <label class="form-check-label" for="exclusion20Radio1">Да</label>
                                             </div>
 
                                             <div class="form-check form-check-inline">
                                                 {{if eq
-                                                    .Subject.Screening.ExclusionСriteria.AnyVaccinationInTheLastMonth
-                                                    2}}
+                                                .Subject.Screening.ExclusionСriteria.AnyVaccinationInTheLastMonth
+                                                2}}
                                                 <input class="form-check-input" type="radio" name="exclusion20"
-                                                    id="exclusion20Radio2" value="2" checked/>
-                                                    {{else}}
-                                                    <input class="form-check-input" type="radio" name="exclusion20"
+                                                    id="exclusion20Radio2" value="2" checked />
+                                                {{else}}
+                                                <input class="form-check-input" type="radio" name="exclusion20"
                                                     id="exclusion20Radio2" value="2" />
-                                                    {{end}}
+                                                {{end}}
                                                 <label class="form-check-label" for="exclusion20Radio2">Нет</label>
                                             </div>
                                         </div>
@@ -2378,27 +2384,27 @@
                                         <div class="input-group-text">
                                             <div class="form-check form-check-inline">
                                                 {{if eq
-                                                    .Subject.Screening.ExclusionСriteria.InabilityToReadInRussian
-                                                    1}}
+                                                .Subject.Screening.ExclusionСriteria.InabilityToReadInRussian
+                                                1}}
                                                 <input class="form-check-input" type="radio" name="exclusion21"
-                                                    id="exclusion21Radio1" value="1" checked/>
-                                                    {{else}}
-                                                    <input class="form-check-input" type="radio" name="exclusion21"
+                                                    id="exclusion21Radio1" value="1" checked />
+                                                {{else}}
+                                                <input class="form-check-input" type="radio" name="exclusion21"
                                                     id="exclusion21Radio1" value="1" />
-                                                    {{end}}
+                                                {{end}}
                                                 <label class="form-check-label" for="exclusion21Radio1">Да</label>
                                             </div>
 
                                             <div class="form-check form-check-inline">
                                                 {{if eq
-                                                    .Subject.Screening.ExclusionСriteria.InabilityToReadInRussian
-                                                    2}}
+                                                .Subject.Screening.ExclusionСriteria.InabilityToReadInRussian
+                                                2}}
                                                 <input class="form-check-input" type="radio" name="exclusion21"
                                                     id="exclusion21Radio2" value="2" checked />
-                                                    {{else}}
-                                                    <input class="form-check-input" type="radio" name="exclusion21"
+                                                {{else}}
+                                                <input class="form-check-input" type="radio" name="exclusion21"
                                                     id="exclusion21Radio2" value="2" />
-                                                    {{end}}
+                                                {{end}}
                                                 <label class="form-check-label" for="exclusion21Radio2">Нет</label>
                                             </div>
                                         </div>
@@ -2427,27 +2433,27 @@
                                         <div class="input-group-text">
                                             <div class="form-check form-check-inline">
                                                 {{if eq
-                                                    .Subject.Screening.ExclusionСriteria.ResearchCenterStaff
-                                                    1}}
+                                                .Subject.Screening.ExclusionСriteria.ResearchCenterStaff
+                                                1}}
                                                 <input class="form-check-input" type="radio" name="exclusion22"
-                                                    id="exclusion22Radio1" value="1"checked />
-                                                    {{else}}
-                                                    <input class="form-check-input" type="radio" name="exclusion22"
+                                                    id="exclusion22Radio1" value="1" checked />
+                                                {{else}}
+                                                <input class="form-check-input" type="radio" name="exclusion22"
                                                     id="exclusion22Radio1" value="1" />
-                                                    {{end}}
+                                                {{end}}
                                                 <label class="form-check-label" for="exclusion22Radio1">Да</label>
                                             </div>
 
                                             <div class="form-check form-check-inline">
                                                 {{if eq
-                                                    .Subject.Screening.ExclusionСriteria.ResearchCenterStaff
-                                                    2}}
+                                                .Subject.Screening.ExclusionСriteria.ResearchCenterStaff
+                                                2}}
                                                 <input class="form-check-input" type="radio" name="exclusion22"
-                                                    id="exclusion22Radio2" value="2" checked/>
-                                                    {{else}}
-                                                    <input class="form-check-input" type="radio" name="exclusion22"
+                                                    id="exclusion22Radio2" value="2" checked />
+                                                {{else}}
+                                                <input class="form-check-input" type="radio" name="exclusion22"
                                                     id="exclusion22Radio2" value="2" />
-                                                    {{end}}
+                                                {{end}}
                                                 <label class="form-check-label" for="exclusion22Radio2">Нет</label>
                                             </div>
                                         </div>
@@ -2473,29 +2479,29 @@
                                     <div class="input-group">
                                         <div class="input-group-text">
                                             <div class="form-check form-check-inline">
-                                                 {{if eq
+                                                {{if eq
                                                 .Subject.Screening.ExclusionСriteria.AnyOtherStateOfTheSubjectOfTheStudy
                                                 1}}
-                                                
+
                                                 <input class="form-check-input" type="radio" name="exclusion23"
                                                     id="exclusion23Radio1" value="1" checked />
-                                                    {{else}}
-                                                    <input class="form-check-input" type="radio" name="exclusion23"
+                                                {{else}}
+                                                <input class="form-check-input" type="radio" name="exclusion23"
                                                     id="exclusion23Radio1" value="1" />
-                                                    {{end}}
+                                                {{end}}
                                                 <label class="form-check-label" for="exclusion23Radio1">Да</label>
                                             </div>
 
                                             <div class="form-check form-check-inline">
                                                 {{if eq
-                                                    .Subject.Screening.ExclusionСriteria.AnyOtherStateOfTheSubjectOfTheStudy
-                                                    2}}
+                                                .Subject.Screening.ExclusionСriteria.AnyOtherStateOfTheSubjectOfTheStudy
+                                                2}}
                                                 <input class="form-check-input" type="radio" name="exclusion23"
                                                     id="exclusion23Radio2" value="2" checked />
-                                                    {{else}}
-                                                    <input class="form-check-input" type="radio" name="exclusion23"
+                                                {{else}}
+                                                <input class="form-check-input" type="radio" name="exclusion23"
                                                     id="exclusion23Radio2" value="2" />
-                                                    {{end}}
+                                                {{end}}
                                                 <label class="form-check-label" for="exclusion23Radio2">Нет</label>
                                             </div>
                                         </div>
@@ -2534,6 +2540,90 @@
         <h5 class="text-center">Обсуждения</h5>
     </div>
     </div>
+    <script>
+        (function () {
+            for (let i = 1; i <= 5; i++) {
+                let t = document.getElementById("condition" + i)
+                let color = t.getAttribute("color-value")
+                switch (color) {
+                    case "1":
+                        t.insertAdjacentHTML('beforeend', `
+                        <span title="Автоматическая валидация" class="input-group-text"
+                          id="basic-addon1">🟢</span>
+                    
+                         <span title="Автоматическая валидация" class="input-group-text"
+                             id="basic-addon1">⚪</span>
+                         <span title="Валидация монитором" class="input-group-text"
+                               id="basic-addon1">⚪</span>
+                       `)
+                        continue;
+                    case "2":
+                        t.insertAdjacentHTML('beforeend', `
+                         <span title="Автоматическая валидация" class="input-group-text"
+                           id="basic-addon1">🟢</span>
+                    
+                      <span title="Автоматическая валидация" class="input-group-text"
+                          id="basic-addon1">🟢</span>
+                      <span title="Валидация монитором" class="input-group-text"
+                              id="basic-addon1">⚪</span>
+                    `)
+                        continue;
+                    case "3":
+                        t.insertAdjacentHTML('beforeend', `
+                      <span title="Автоматическая валидация" class="input-group-text"
+                         id="basic-addon1">🟢</span>
+                    
+                      <span title="Автоматическая валидация" class="input-group-text"
+                          id="basic-addon1">🔴</span>
+                      <span title="Валидация монитором" class="input-group-text"
+                              id="basic-addon1">⚪</span>
+                    `)
+                        continue;
+                    case "4":
+                        t.insertAdjacentHTML('beforeend', `
+                      <span title="Автоматическая валидация" class="input-group-text"
+                         id="basic-addon1">🟢</span>
+                    
+                      <span title="Автоматическая валидация" class="input-group-text"
+                          id="basic-addon1">🟢</span>
+                      <span title="Валидация монитором" class="input-group-text"
+                              id="basic-addon1">🔴</span>
+                    `)
+                        continue;
+                    case "5":
+                        t.insertAdjacentHTML('beforeend', `
+                      <span title="Автоматическая валидация" class="input-group-text"
+                         id="basic-addon1">🟢</span>
+                    
+                      <span title="Автоматическая валидация" class="input-group-text"
+                          id="basic-addon1">🟢</span>
+                      <span title="Валидация монитором" class="input-group-text"
+                              id="basic-addon1">🟢</span>
+                    `)
+                        continue;
+
+
+
+
+                    default:
+                        t.insertAdjacentHTML('beforeend', `
+                       <span title="Автоматическая валидация" class="input-group-text"
+                              id="basic-addon1">⚪</span>
+                    
+                      <span title="Автоматическая валидация" class="input-group-text"
+                              id="basic-addon1">⚪</span>
+                         <span title="Валидация монитором" class="input-group-text"
+                          id="basic-addon1">⚪</span>
+                    `)
+                        continue;
+                }
+
+            }
+
+        })();
+
+
+    </script>
 </section>
 
 <div class="modal fade" id="Modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="false">
