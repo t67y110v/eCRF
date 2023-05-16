@@ -207,3 +207,19 @@ func (r *MongoScreeningRepository) ExclusionСriteria(
 	}
 	return nil
 }
+
+func (r *MongoScreeningRepository) UpdateColor(ctx context.Context, id primitive.ObjectID, fieldToUpdate string, field int) error {
+	collection := r.store.client.Database("eCRF").Collection("subjects")
+	filter := bson.M{"_id": id}
+	update := bson.M{
+		"$set": bson.M{
+			fieldToUpdate: field,
+		},
+	}
+
+	_, err := collection.UpdateOne(ctx, filter, update)
+	if err != nil {
+		return err
+	}
+	return nil
+}

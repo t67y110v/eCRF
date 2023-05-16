@@ -1,10 +1,13 @@
 package handlers
 
 import (
+	"bytes"
+	"encoding/json"
 	"fmt"
 	"strconv"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/t67y110v/web/internal/app/handlers/requests"
 	"github.com/t67y110v/web/internal/app/utils"
 )
 
@@ -232,6 +235,38 @@ func (h *Handlers) ExclusionСriteriaSubject() fiber.Handler {
 		}
 
 		return c.Redirect(fmt.Sprintf("/protocol/%d/%s", protocolId, subjectNumber))
+
+	}
+}
+
+func (h *Handlers) UpdateColor() fiber.Handler {
+	return func(c *fiber.Ctx) error {
+
+		req := &requests.Request{}
+		reader := bytes.NewReader(c.Body())
+
+		if err := json.NewDecoder(reader).Decode(req); err != nil {
+			h.logger.Warningf("handle filter by category, status :%d, error :%e", fiber.StatusBadRequest, err)
+		}
+		subjectNumber := req.SNum
+		protocolId, err := strconv.Atoi(req.PID)
+		if err != nil {
+			return utils.ErrorPage(c, err)
+		}
+		subject, err := h.mgStore.Subject().GetSubjectByNumber(subjectNumber, protocolId)
+		if err != nil {
+			h.logger.Warningln(err)
+			return utils.ErrorPage(c, err)
+		}
+		field := req.FName
+		value := req.V
+
+		fieldName := utils.GetFieldName(field)
+		//fmt.Println("s - ", subject.ID, "p - ", protocolId, "field - ", field, "fieldNAme - ", fieldName, "v - ", value)
+		if err := h.mgStore.Screening().UpdateColor(c.Context(), subject.ID, fieldName, value); err != nil {
+			return utils.ErrorPage(c, err)
+		}
+		return nil
 
 	}
 }

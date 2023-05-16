@@ -1,4 +1,5 @@
 <section>
+
     <script src="/public/js/script.js"></script>
     <div class="container-fluid mb-3">
         <div class="row justify-content-center">
@@ -185,7 +186,8 @@
                                         <div class="mb-1"> <label class="form-label">Информированное согласие
                                                 подписано?</label>
                                             <div class="input-group mb-3" id="condition1"
-                                                color-value="{{.Subject.Screening.InformaionConsent.SignedCondition.Color}}">
+                                                color-value="{{.Subject.Screening.InformaionConsent.SignedCondition.Color}}"
+                                                field-name="signed">
 
                                                 <select id="signed" name="signed" class="form-select">
                                                     {{if eq
@@ -208,7 +210,7 @@
                                         </div>
                                         <div class="mb-2">
                                             <label class="form-label">Дата подписания</label>
-                                            <div class="input-group mb-3" id="condition2"
+                                            <div class="input-group mb-3" id="condition2" field-name="date_of_sign"
                                                 color-value="{{.Subject.Screening.InformaionConsent.DateOfSignCondition.Color}}">
                                                 {{if
                                                 .Subject.Screening.InformaionConsent.DateOfSignCondition.DateOfSign
@@ -226,8 +228,8 @@
                                         </body>
                                         <div class="mb-2">
                                             <label class="form-label">Время подписания</label>
-                                            <div class="input-group mb-3" id="condition3"
-                                            color-value="{{.Subject.Screening.InformaionConsent.TimeOfSignCondition.Color}}" >
+                                            <div class="input-group mb-3" id="condition3" field-name="time_of_sign"
+                                                color-value="{{.Subject.Screening.InformaionConsent.TimeOfSignCondition.Color}}">
                                                 {{if
                                                 .Subject.Screening.InformaionConsent.TimeOfSignCondition.TimeOfSign
                                                 }}
@@ -242,8 +244,8 @@
                                         <div class="mb-1">
                                             <label class="form-label">Доброволец получил на руки оригинал страхового
                                                 Полиса участника исследования ?</label>
-                                            <div class="input-group mb-3" id="condition4"
-                                            color-value="{{.Subject.Screening.InformaionConsent.ReceivedAnInsurancePolicyCondition.Color}}">
+                                            <div class="input-group mb-3" id="condition4"  field-name="original"
+                                                color-value="{{.Subject.Screening.InformaionConsent.ReceivedAnInsurancePolicyCondition.Color}}">
                                                 <select id="sex" name="original" class="form-select">
                                                     {{if eq
                                                     .Subject.Screening.InformaionConsent.ReceivedAnInsurancePolicyCondition.ReceivedAnInsurancePolicy
@@ -263,14 +265,14 @@
 
 
                                                 </select>
-                            
+
                                             </div>
                                         </div>
                                         <div class="mb-1">
                                             <label class="form-label">Доброволец получил на руки один экземпляр
                                                 информированного согласия</label>
-                                            <div class="input-group mb-3" id="condition5"
-                                            color-value="{{.Subject.Screening.InformaionConsent.ReceivedAnInformaionConsentCondition.Color}}">
+                                            <div class="input-group mb-3" id="condition5" field-name="consent"
+                                                color-value="{{.Subject.Screening.InformaionConsent.ReceivedAnInformaionConsentCondition.Color}}">
                                                 <select id="sex" name="consent" class="form-select">
                                                     {{if eq
                                                     .Subject.Screening.InformaionConsent.ReceivedAnInformaionConsentCondition.ReceivedAnInformaionConsent
@@ -2521,7 +2523,7 @@
 
 
                             <div class="d-grid gap-2">
-                                <input type="submit" value="Сохранить" class="btn btn-primary">
+                                 <input type="submit" value="Сохранить"  class="btn btn-primary">
                             </div>
                         </div>
                         </form>
@@ -2533,26 +2535,70 @@
     </div>
     </div>
 
-
-
-
     <div class="col-2 shadow-sm p-3 bg-white rounded" id="right">
         <h5 class="text-center">Обсуждения</h5>
     </div>
     </div>
     <script>
+        function updateSecondColor( field , id , color) {
+            let subjectNum = '{{.Subject.Number}}'
+            let protocolId = '{{.Subject.ProtocolId}}'
+            fetch('/subject/screening/updatecolor', {
+                
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ "field_name": field.name, "value": color ,"subject_number" : subjectNum, "protocol_id" :protocolId  })
+            })
+                    $("#condition" + id).load(location.href + " #condition" + id + ">*", "");
+            //$("#condition"+id).load(window.location.href + " #condition"+id );
+
+        }
+
+
         (function () {
             for (let i = 1; i <= 5; i++) {
                 let t = document.getElementById("condition" + i)
+
+                let field= t.getAttribute("field-name")
+               
                 let color = t.getAttribute("color-value")
                 switch (color) {
                     case "1":
                         t.insertAdjacentHTML('beforeend', `
+                      
                         <span title="Автоматическая валидация" class="input-group-text"
                           id="basic-addon1">🟢</span>
-                    
+                          
                          <span title="Автоматическая валидация" class="input-group-text"
-                             id="basic-addon1">⚪</span>
+                             id="basic-addon1">
+                             
+                             <div class="dropdown">
+                                <button  class="btn btn-outline-secondary dropdown-toggle btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    ⚪
+                                     </button>
+                                <ul class="dropdown-menu">
+                                    
+                                   
+                                         <li ><div class="d-grid gap-2">
+
+                                        <button type="button" onclick="updateSecondColor(${field} ,${i},${2})"  class="btn  btn-outline-success">Принять</button>
+
+                                    </div></li>
+
+                                         <li > <div class="d-grid gap-2">
+
+                                        <button type="button" class="btn btn-outline-danger">Отклонить</button>
+
+                                    </div></li>
+                        
+                                 </ul>
+                            </div>
+                        
+                        
+                        </span>
                          <span title="Валидация монитором" class="input-group-text"
                                id="basic-addon1">⚪</span>
                        `)
@@ -2564,8 +2610,33 @@
                     
                       <span title="Автоматическая валидация" class="input-group-text"
                           id="basic-addon1">🟢</span>
-                      <span title="Валидация монитором" class="input-group-text"
-                              id="basic-addon1">⚪</span>
+                          <span title="Автоматическая валидация" class="input-group-text"
+                             id="basic-addon1">
+                             
+                             <div class="dropdown">
+                                <button  class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    ⚪
+                                     </button>
+                                <ul class="dropdown-menu">
+                                    
+                                   
+                                         <li ><div class="d-grid gap-2">
+
+                                        <button type="button" onclick="updateSecondColor(${field} ,${i},${5})"  class="btn btn-outline-success">Принять</button>
+
+                                    </div></li>
+
+                                         <li > <div class="d-grid gap-2">
+
+                                        <button type="button" class="btn btn-outline-danger">Отклонить</button>
+
+                                    </div></li>
+                        
+                                 </ul>
+                            </div>
+                        
+                        
+                        </span>
                     `)
                         continue;
                     case "3":
@@ -2622,7 +2693,9 @@
 
         })();
 
+ 
 
+        
     </script>
 </section>
 
@@ -2638,5 +2711,6 @@
         </div>
     </div>
 </div>
-<script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>

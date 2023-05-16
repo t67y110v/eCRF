@@ -120,6 +120,7 @@ func (s *server) configureRouter() {
 	screening.Post("/anthropometry", s.handlers.AnthropometrySubject())
 	screening.Post("/inclusioncriteria", s.handlers.InclusionCriteriaSubject())
 	screening.Post("/exclusioncriteria", s.handlers.ExclusionСriteriaSubject())
+	screening.Post("/updatecolor", s.handlers.UpdateColor())
 
 	errors := s.router.Group("/error")
 	errors.Get("/", s.pages.ErrorPage())
