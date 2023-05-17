@@ -242,14 +242,14 @@ func (h *Handlers) ExclusionСriteriaSubject() fiber.Handler {
 func (h *Handlers) UpdateColor() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 
-		req := &requests.Request{}
+		req := &requests.UpdateColorRequest{}
 		reader := bytes.NewReader(c.Body())
 
 		if err := json.NewDecoder(reader).Decode(req); err != nil {
 			h.logger.Warningf("handle filter by category, status :%d, error :%e", fiber.StatusBadRequest, err)
 		}
-		subjectNumber := req.SNum
-		protocolId, err := strconv.Atoi(req.PID)
+		subjectNumber := req.SubjectNumber
+		protocolId, err := strconv.Atoi(req.ProtocolID)
 		if err != nil {
 			return utils.ErrorPage(c, err)
 		}
@@ -258,14 +258,48 @@ func (h *Handlers) UpdateColor() fiber.Handler {
 			h.logger.Warningln(err)
 			return utils.ErrorPage(c, err)
 		}
-		field := req.FName
-		value := req.V
+		field := req.FieldName
+		value := req.Value
 
 		fieldName := utils.GetFieldName(field)
 		//fmt.Println("s - ", subject.ID, "p - ", protocolId, "field - ", field, "fieldNAme - ", fieldName, "v - ", value)
 		if err := h.mgStore.Screening().UpdateColor(c.Context(), subject.ID, fieldName, value); err != nil {
 			return utils.ErrorPage(c, err)
 		}
+		return nil
+
+	}
+}
+
+func (h *Handlers) UpdateColorWithComment() fiber.Handler {
+	return func(c *fiber.Ctx) error {
+		req := &requests.UpdateColorWithCommentRequest{}
+		reader := bytes.NewReader(c.Body())
+		if err := json.NewDecoder(reader).Decode(req); err != nil {
+			h.logger.Warningf("handle filter by category, status :%d, error :%e", fiber.StatusBadRequest, err)
+		}
+		subjectNumber := req.SubjectNumber
+		protocolId, err := strconv.Atoi(req.ProtocolID)
+		if err != nil {
+			return utils.ErrorPage(c, err)
+		}
+		subject, err := h.mgStore.Subject().GetSubjectByNumber(subjectNumber, protocolId)
+		if err != nil {
+			h.logger.Warningln(err)
+			return utils.ErrorPage(c, err)
+		}
+		field := req.FieldName
+
+		value := req.Value
+		fieldName := utils.GetFieldName(field)
+
+		reason := req.Reason
+		comment := req.Comment
+
+		if err := h.mgStore.Screening().UpdateColorWithComment(c.Context(), subject.ID, fieldName, reason, comment, value); err != nil {
+			return utils.ErrorPage(c, err)
+		}
+
 		return nil
 
 	}

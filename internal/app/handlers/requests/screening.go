@@ -1,8 +1,17 @@
 package requests
 
-type Request struct {
-	SNum  string `json:"subject_number"`
-	PID   string `json:"protocol_id"`
-	FName string `json:"field_name"`
-	V     int    `json:"value"`
+type UpdateColorRequest struct {
+	SubjectNumber string `json:"subject_number"`
+	ProtocolID    string `json:"protocol_id"`
+	FieldName     string `json:"field_name"`
+	Value         int    `json:"value"`
+}
+
+type UpdateColorWithCommentRequest struct {
+	SubjectNumber string `json:"subject_number"`
+	ProtocolID    string `json:"protocol_id"`
+	FieldName     string `json:"field_name"`
+	Value         int    `json:"value"`
+	Comment       string `json:"comment"`
+	Reason        string `json:"reason"`
 }

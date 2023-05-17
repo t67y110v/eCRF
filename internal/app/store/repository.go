@@ -37,6 +37,7 @@ type MongoScreeningRepository interface {
 	InclusionCriteria(ctx context.Context, id primitive.ObjectID, presenceOfAnInformationPanel, aged18To55Years, negativeHIVTestResult, bodyMassIndex, absenceOfAcuteInfectiousDiseases, consentToUseEffectiveMethodsOfContraception, negativePregnancyTest, negativeDrugTest, negativeAlcoholTest, noHistoryOfSeverePostVaccinationReactions, indicatorsBloodTestsAtScreeningWithin, noMyocardialChanges, negativeTestResultForCOVID, noContraindicationsToVaccination int) error
 	ExclusionСriteria(ctx context.Context, id primitive.ObjectID, lackOfSignedInformedConsent, steroidTherapy, therapyWithImmunosuppressiveDrugs, femaleSubjectsDuringPregnancy, strokeInLessThanOneYear, chronicSystemicInfections, aggravatedAllergicHistory, presenceOfAHistoryOfNeoplasms, historyOfSplenectomy, neutropenia, subjectsWithActiveSyphilis, anorexia, extensiveTattoos, takingNarcoticAndPsychostimulantDrugs, smokingMoretThanTenCigarettesADay, alcoholIntake, plannedHospitalization, donorBloodDonation, subjectParticipationInAnyOtherStudy, anyVaccinationInTheLastMonth, inabilityToReadInRussian, researchCenterStaff, anyOtherStateOfTheSubjectOfTheStudy int) error
 	UpdateColor(ctx context.Context, id primitive.ObjectID, fieldToUpdate string, field int) error
+	UpdateColorWithComment(ctx context.Context, id primitive.ObjectID, fieldToUpdate, reason, comment string, color int) error
 }
 
 type CenterStoreRepository interface {

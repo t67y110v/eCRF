@@ -121,6 +121,7 @@ func (s *server) configureRouter() {
 	screening.Post("/inclusioncriteria", s.handlers.InclusionCriteriaSubject())
 	screening.Post("/exclusioncriteria", s.handlers.ExclusionСriteriaSubject())
 	screening.Post("/updatecolor", s.handlers.UpdateColor())
+	screening.Post("/updatecolorwithcomment", s.handlers.UpdateColorWithComment())
 
 	errors := s.router.Group("/error")
 	errors.Get("/", s.pages.ErrorPage())

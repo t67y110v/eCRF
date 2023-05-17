@@ -19,31 +19,31 @@ type Subject struct {
 			SignedCondition struct {
 				Signed  int    `bson:"signed"`
 				Color   int    `bson:"color"`
-				Reason  string `bson:"resason"`
+				Reason  string `bson:"reason"`
 				Comment string `bson:"comment"`
 			}
 			DateOfSignCondition struct {
 				DateOfSign string `bson:"date_of_sign"`
 				Color      int    `bson:"color"`
-				Reason     string `bson:"resason"`
+				Reason     string `bson:"reason"`
 				Comment    string `bson:"comment"`
 			}
 			TimeOfSignCondition struct {
 				TimeOfSign string `bson:"time_of_sign"`
 				Color      int    `bson:"color"`
-				Reason     string `bson:"resason"`
+				Reason     string `bson:"reason"`
 				Comment    string `bson:"comment"`
 			}
 			ReceivedAnInsurancePolicyCondition struct {
 				ReceivedAnInsurancePolicy int    `bson:"received_an_insurance_policy"`
 				Color                     int    `bson:"color"`
-				Reason                    string `bson:"resason"`
+				Reason                    string `bson:"reason"`
 				Comment                   string `bson:"comment"`
 			}
 			ReceivedAnInformaionConsentCondition struct {
 				ReceivedAnInformaionConsent int    `bson:"received_an_informaion_consent"`
 				Color                       int    `bson:"color"`
-				Reason                      string `bson:"resason"`
+				Reason                      string `bson:"reason"`
 				Comment                     string `bson:"comment"`
 			}
 		}
@@ -104,4 +104,10 @@ type Subject struct {
 			AnyOtherStateOfTheSubjectOfTheStudy   int `bson:"any_other_state_of_the_subject_of_the_study"`
 		}
 	}
+}
+
+type InformationConsentErrors struct {
+	Field    string `bson:"field"`
+	Reasons  string `bson:"reasons"`
+	Comments string `bson:"comments"`
 }

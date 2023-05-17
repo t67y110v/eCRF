@@ -53,13 +53,14 @@ func (h *Pages) ProtocolPage() fiber.Handler {
 		}
 
 		return c.Render("protocol/protocol_index", fiber.Map{
-			"Name":         user.Name,
-			"Role":         utils.GetUserRole(user.Role),
-			"CLinicCenter": cName,
-			"ClinicId":     user.CenterID,
-			"Protocol":     p,
-			"Subjects":     s,
-			"Subject":      subject,
+			"Name":          user.Name,
+			"Role":          utils.GetUserRole(user.Role),
+			"CLinicCenter":  cName,
+			"ClinicId":      user.CenterID,
+			"Protocol":      p,
+			"Subjects":      s,
+			"Subject":       subject,
+			"ConsentErrors": utils.GetInformationConsentErrors(subject),
 		})
 
 	}

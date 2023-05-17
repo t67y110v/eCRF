@@ -2,6 +2,7 @@ package nosqlstore
 
 import (
 	"context"
+	"fmt"
 	"time"
 
 	"go.mongodb.org/mongo-driver/bson"
@@ -213,7 +214,7 @@ func (r *MongoScreeningRepository) UpdateColor(ctx context.Context, id primitive
 	filter := bson.M{"_id": id}
 	update := bson.M{
 		"$set": bson.M{
-			fieldToUpdate: field,
+			fmt.Sprintf("%scolor", fieldToUpdate): field,
 		},
 	}
 
@@ -222,4 +223,22 @@ func (r *MongoScreeningRepository) UpdateColor(ctx context.Context, id primitive
 		return err
 	}
 	return nil
+}
+
+func (r *MongoScreeningRepository) UpdateColorWithComment(ctx context.Context, id primitive.ObjectID, fieldToUpdate, reason, comment string, color int) error {
+	collection := r.store.client.Database("eCRF").Collection("subjects")
+	filter := bson.M{"_id": id}
+	update := bson.M{
+		"$set": bson.M{
+			fmt.Sprintf("%scolor", fieldToUpdate):   color,
+			fmt.Sprintf("%sreason", fieldToUpdate):  reason,
+			fmt.Sprintf("%scomment", fieldToUpdate): comment,
+		},
+	}
+	_, err := collection.UpdateOne(ctx, filter, update)
+	if err != nil {
+		return err
+	}
+	return nil
+
 }
