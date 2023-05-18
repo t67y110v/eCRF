@@ -138,6 +138,8 @@
             </style>
 
         </div>
+
+        {{if .Subject}}
         <div class="col-8 navbar-example3" id="center">
             <div data-bs-spy="scroll" data-bs-target="#navbar-example3" data-bs-offset="0" tabindex="0">
                 <h4 id="item-1"></h4>
@@ -328,12 +330,14 @@
                                     <div class="mb-1">
                                         <div class="mb-1">
                                             <label class="form-label">Пол</label>
-                                            <div class="input-group mb-3">
+                                            <div class="input-group mb-3"  id="condition6"
+                                            color-value="{{.Subject.Screening.Demography.SexCondition.Color}}"
+                                            field-name="sex">
                                                 <select id="sex" name="sex" class="form-select">
-                                                    {{if eq .Subject.Screening.Demography.Sex 1}}
+                                                    {{if eq .Subject.Screening.Demography.SexCondition.Sex 1}}
                                                     <option selected value="1">Мужчина</option>
                                                     <option value="2">Женщина</option>
-                                                    {{else if eq .Subject.Screening.Demography.Sex 2 }}
+                                                    {{else if eq .Subject.Screening.Demography.SexCondition.Sex 2 }}
                                                     <option value="1">Мужчина</option>
                                                     <option selected value="2">Женщина</option>
 
@@ -343,29 +347,25 @@
                                                     <option value="2">Женщина</option>
                                                     {{end}}
                                                 </select>
-                                                <span title="Автоматическая валидация" class="input-group-text"
-                                                    id="basic-addon1">🟢</span>
-                                                <span title="Валидация монитором" class="input-group-text"
-                                                    id="basic-addon1">🟢</span>
-                                                <span title="Валидация дата-менеджером" class="input-group-text"
-                                                    id="basic-addon1">🔴</span>
+                                               
                                             </div>
                                         </div>
                                         <div class="mb-2">
 
 
                                             <label class="form-label">Раса</label>
-                                            <div class="input-group mb-3">
+                                            <div class="input-group mb-3" id="condition7" field-name="race"
+                                            color-value="{{.Subject.Screening.Demography.RaceCondition.Color}}">
                                                 <select id="race" name="race" class="form-select">
-                                                    {{if eq .Subject.Screening.Demography.Race 1}}
+                                                    {{if eq .Subject.Screening.Demography.RaceCondition.Race 1}}
                                                     <option selected value="1">Европеоидная</option>
-                                                    {{else if eq .Subject.Screening.Demography.Race 2}}
+                                                    {{else if eq .Subject.Screening.Demography.RaceCondition.Race 2}}
                                                     <option selected value="2">Негроидная</option>
-                                                    {{else if eq .Subject.Screening.Demography.Race 3}}
+                                                    {{else if eq .Subject.Screening.Demography.RaceCondition.Race 3}}
                                                     <option selected value="3">Монголоидная</option>
-                                                    {{else if eq .Subject.Screening.Demography.Race 4}}
+                                                    {{else if eq .Subject.Screening.Demography.RaceCondition.Race 4}}
                                                     <option selected value="4">Американоидная</option>
-                                                    {{else if eq .Subject.Screening.Demography.Race 5}}
+                                                    {{else if eq .Subject.Screening.Demography.RaceCondition.Race 5}}
                                                     <option selected value="5">Австралоидная</option>
                                                     {{else }}
                                                     <option selected value="0">Не выбрано</option>
@@ -377,29 +377,19 @@
                                                     <option value="5">Австралоидная</option>
 
                                                 </select>
-                                                <span title="Автоматическая валидация" class="input-group-text"
-                                                    id="basic-addon1">🟢</span>
-                                                <span title="Валидация монитором" class="input-group-text"
-                                                    id="basic-addon1">🟢</span>
-                                                <span title="Валидация дата-менеджером" class="input-group-text"
-                                                    id="basic-addon1">🔴</span>
+                        
                                             </div>
                                         </div>
                                         <div class="mb-2">
                                             <label class="form-label">Дата рождения</label>
-                                            <div class="input-group mb-3">
-                                                {{if .Subject.Screening.Demography.BirthDate }}
-                                                <input value="{{.Subject.Screening.Demography.BirthDate}}"
+                                            <div class="input-group mb-3" id="condition8" field-name="birth_date"
+                                            color-value="{{.Subject.Screening.Demography.BirthDateCondition.Color}}">
+                                                {{if .Subject.Screening.Demography.BirthDateCondition.BirthDate }}
+                                                <input value="{{.Subject.Screening.Demography.BirthDateCondition.BirthDate}}"
                                                     name="birth_date" class="form-control" type="data">
                                                 {{else}}
                                                 <input name="birth_date" class="form-control" type="date">
                                                 {{end}}
-                                                <span title="Автоматическая валидация" class="input-group-text"
-                                                    id="basic-addon1">🟢</span>
-                                                <span title="Валидация монитором" class="input-group-text"
-                                                    id="basic-addon1">🟢</span>
-                                                <span title="Валидация дата-менеджером" class="input-group-text"
-                                                    id="basic-addon1">🔴</span>
                                             </div>
                                         </div>
 
@@ -437,7 +427,8 @@
                                         <div class="mb-1">
                                             <label class="form-label">Измерение антропометрических данных
                                                 проведено?</label>
-                                            <div class="input-group mb-3">
+                                            <div class="input-group mb-3"id="condition9" field-name="data_been_measured"
+                                            color-value="{{.Subject.Screening.Anthropometry.AnthropometricDataBeenMeasuredCondition.Color}}" >
                                                 <div class="mb-2">
                                                     <input class="form-control" type="hidden"
                                                         placeholder="{{.Subject.Number}}" value="{{.Subject.Number}}"
@@ -451,11 +442,11 @@
                                                 </div>
                                                 <select id="sex" name="data_been_measured" class="form-select">
                                                     {{if eq
-                                                    .Subject.Screening.Anthropometry.AnthropometricDataBeenMeasured 1 }}
+                                                    .Subject.Screening.Anthropometry.AnthropometricDataBeenMeasuredCondition.AnthropometricDataBeenMeasured 1 }}
                                                     <option selected value="1">Да</option>
                                                     <option value="2">Нет</option>
                                                     {{else if eq
-                                                    .Subject.Screening.Anthropometry.AnthropometricDataBeenMeasured 2}}
+                                                    .Subject.Screening.Anthropometry.AnthropometricDataBeenMeasuredCondition.AnthropometricDataBeenMeasured 2}}
                                                     <option value="1">Да</option>
                                                     <option selected value="2">Нет</option>
                                                     {{else }}
@@ -466,99 +457,74 @@
 
 
                                                 </select>
-                                                <span title="Автоматическая валидация" class="input-group-text"
-                                                    id="basic-addon1">🟢</span>
-                                                <span title="Валидация монитором" class="input-group-text"
-                                                    id="basic-addon1">🟢</span>
-                                                <span title="Валидация дата-менеджером" class="input-group-text"
-                                                    id="basic-addon1">🔴</span>
+                                              
                                             </div>
                                         </div>
                                         <div class="mb-2">
                                             <label class="form-label">Если НЕТ, то укажите причину</label>
-                                            <div class="input-group mb-3">
-                                                {{if .Subject.Screening.Anthropometry.ReasonIfNot }}
-                                                <input value="{{.Subject.Screening.Anthropometry.ReasonIfNot}}"
+                                            <div class="input-group mb-3" id="condition10" field-name="if_not"
+                                            color-value="{{.Subject.Screening.Anthropometry.ReasonIfNotCondition.Color}}" >
+                                                {{if .Subject.Screening.Anthropometry.ReasonIfNotCondition.ReasonIfNot }}
+                                                <input value="{{.Subject.Screening.Anthropometry.ReasonIfNotCondition.ReasonIfNot}}"
                                                     name="if_not" class="form-control" type="input">
                                                 {{else}}
                                                 <input name="if_not" class="form-control" type="input">
                                                 {{end}}
-                                                <span title="Автоматическая валидация" class="input-group-text"
-                                                    id="basic-addon1">🟢</span>
-                                                <span title="Валидация монитором" class="input-group-text"
-                                                    id="basic-addon1">🟢</span>
-                                                <span title="Валидация дата-менеджером" class="input-group-text"
-                                                    id="basic-addon1">🔴</span>
+                                            
                                             </div>
                                         </div>
                                         <div class="mb-2">
                                             <label class="form-label">Дата проведения измерений</label>
-                                            <div class="input-group mb-3">
-                                                {{if .Subject.Screening.Anthropometry.DateOfStartMeasured }}
-                                                <input value="{{.Subject.Screening.Anthropometry.DateOfStartMeasured}}"
+                                            <div class="input-group mb-3" id="condition11" field-name="date_of_start"
+                                            color-value="{{.Subject.Screening.Anthropometry.DateOfStartMeasuredCondition.Color}}" >
+                                                {{if .Subject.Screening.Anthropometry.DateOfStartMeasuredCondition.DateOfStartMeasured }}
+                                                <input value="{{.Subject.Screening.Anthropometry.DateOfStartMeasuredCondition.DateOfStartMeasured}}"
                                                     name="date_of_start" class="form-control" type="date">
                                                 {{else}}
                                                 <input name="date_of_start" class="form-control" type="date">
                                                 {{end}}
 
-                                                <span title="Автоматическая валидация" class="input-group-text"
-                                                    id="basic-addon1">🟢</span>
-                                                <span title="Валидация монитором" class="input-group-text"
-                                                    id="basic-addon1">🟢</span>
-                                                <span title="Валидация дата-менеджером" class="input-group-text"
-                                                    id="basic-addon1">🔴</span>
+                                               
                                             </div>
                                         </div>
                                         <div class="mb-2">
                                             <label class="form-label">Масса тела</label>
-                                            <div class="input-group mb-3">
-                                                {{if .Subject.Screening.Anthropometry.WeightOfBody }}
-                                                <input value="{{.Subject.Screening.Anthropometry.WeightOfBody}}"
+                                            <div class="input-group mb-3"  id="condition12" field-name="weight"
+                                            color-value="{{.Subject.Screening.Anthropometry.WeightOfBodyCondition.Color}}" >
+                                                {{if .Subject.Screening.Anthropometry.WeightOfBodyCondition.WeightOfBody }}
+                                                <input value="{{.Subject.Screening.Anthropometry.WeightOfBodyCondition.WeightOfBody}}"
                                                     name="weight" class="form-control" type="input">
                                                 {{else}}
                                                 <input name="weight" class="form-control" type="input">
                                                 {{end}}
-                                                <span title="Автоматическая валидация" class="input-group-text"
-                                                    id="basic-addon1">🟢</span>
-                                                <span title="Валидация монитором" class="input-group-text"
-                                                    id="basic-addon1">🟢</span>
-                                                <span title="Валидация дата-менеджером" class="input-group-text"
-                                                    id="basic-addon1">🔴</span>
+                                               
                                             </div>
                                         </div>
                                         <div class="mb-2">
                                             <label class="form-label">Рост</label>
-                                            <div class="input-group mb-3">
-                                                {{if .Subject.Screening.Anthropometry.HeightOfBody }}
-                                                <input value="{{.Subject.Screening.Anthropometry.HeightOfBody}}"
+                                            <div class="input-group mb-3"  id="condition13" field-name="height"
+                                            color-value="{{.Subject.Screening.Anthropometry.HeightOfBodyCondition.Color}}" >
+                                                {{if .Subject.Screening.Anthropometry.HeightOfBodyCondition.HeightOfBody }}
+                                                <input value="{{.Subject.Screening.Anthropometry.HeightOfBodyCondition.HeightOfBody}}"
                                                     name="height" class="form-control" type="input">
                                                 {{else}}
                                                 <input name="height" class="form-control" type="input">
                                                 {{end}}
-                                                <span title="Автоматическая валидация" class="input-group-text"
-                                                    id="basic-addon1">🟢</span>
-                                                <span title="Валидация монитором" class="input-group-text"
-                                                    id="basic-addon1">🟢</span>
-                                                <span title="Валидация дата-менеджером" class="input-group-text"
-                                                    id="basic-addon1">🔴</span>
+                                               
                                             </div>
                                         </div>
                                         <div class="mb-2">
                                             <label class="form-label">Индекс массы тела(рассчетное значение)</label>
-                                            <div class="input-group mb-3">
-                                                {{if .Subject.Screening.Anthropometry.IndexWeigthOfBody }}
-                                                <input value="{{.Subject.Screening.Anthropometry.IndexWeigthOfBody }}"
+                                            <div class="input-group mb-3"  id="condition14" field-name="index"
+                                            color-value="{{.Subject.Screening.Anthropometry.IndexWeigthOfBodyCondition.Color}}"  >
+                                                {{if .Subject.Screening.Anthropometry.IndexWeigthOfBodyCondition.IndexWeigthOfBody }}
+                                                <input value="{{.Subject.Screening.Anthropometry.IndexWeigthOfBodyCondition.IndexWeigthOfBody }}"
                                                     name="index" class="form-control" type="input">
                                                 {{else}}
 
                                                 <input name="index" class="form-control" type="input">
                                                 {{end}}
-                                                <span title="Автоматическая валидация" class="input-group-text"
-                                                    id="basic-addon1">🟢</span>
-                                                <span title="Валидация монитором" class="input-group-text"
-                                                    id="basic-addon1">🟢</span>
-                                                <span title="Валидация дата-менеджером" class="input-group-text"
-                                                    id="basic-addon1">🔴</span>
+                                               
                                             </div>
                                         </div>
 
@@ -613,7 +579,7 @@
                                                     <div class="input-group-text">
                                                         <div class="form-check form-check-inline">
                                                             {{if eq
-                                                            .Subject.Screening.InclusionCriteria.PresenceOfAnInformationPanel
+                                                            .Subject.Screening.InclusionCriteria.PresenceOfAnInformationPanelCondition.PresenceOfAnInformationPanel
                                                             1}}
                                                             <input class="form-check-input" type="radio"
                                                                 name="inclusion1" id="inclusion1Radio1" value="1"
@@ -628,7 +594,7 @@
 
                                                         <div class="form-check form-check-inline">
                                                             {{if eq
-                                                            .Subject.Screening.InclusionCriteria.PresenceOfAnInformationPanel
+                                                            .Subject.Screening.InclusionCriteria.PresenceOfAnInformationPanelCondition.PresenceOfAnInformationPanel
                                                             2}}
                                                             <input class="form-check-input" type="radio"
                                                                 name="inclusion1" id="inclusion1Radio2" value="2"
@@ -665,7 +631,7 @@
                                                     <div class="input-group-text">
                                                         <div class="form-check form-check-inline">
                                                             {{if eq
-                                                            .Subject.Screening.InclusionCriteria.Aged18To55Years
+                                                            .Subject.Screening.InclusionCriteria.Aged18To55YearsCondition.Aged18To55Years
                                                             1}}
                                                             <input class="form-check-input" type="radio"
                                                                 name="inclusion2" id="inclusion2Radio1" value="1"
@@ -681,7 +647,7 @@
 
                                                         <div class="form-check form-check-inline">
                                                             {{if eq
-                                                            .Subject.Screening.InclusionCriteria.Aged18To55Years
+                                                            .Subject.Screening.InclusionCriteria.Aged18To55YearsCondition.Aged18To55Years
                                                             2}}
                                                             <input class="form-check-input" type="radio"
                                                                 name="inclusion2" id="inclusion2Radio2" value="2"
@@ -715,7 +681,7 @@
                                                     <div class="input-group-text">
                                                         <div class="form-check form-check-inline">
                                                             {{if eq
-                                                            .Subject.Screening.InclusionCriteria.NegativeHIVTestResult
+                                                            .Subject.Screening.InclusionCriteria.NegativeHIVTestResultCondition.NegativeHIVTestResult
                                                             1}}
                                                             <input class="form-check-input" type="radio"
                                                                 name="inclusion3" id="inclusion3Radio1" value="1"
@@ -731,7 +697,7 @@
 
                                                         <div class="form-check form-check-inline">
                                                             {{if eq
-                                                            .Subject.Screening.InclusionCriteria.NegativeHIVTestResult
+                                                            .Subject.Screening.InclusionCriteria.NegativeHIVTestResultCondition.NegativeHIVTestResult
                                                             2}}
                                                             <input class="form-check-input" type="radio"
                                                                 name="inclusion3" id="inclusion3Radio2" value="2" />
@@ -764,7 +730,7 @@
                                                     <div class="input-group-text">
                                                         <div class="form-check form-check-inline">
                                                             {{if eq
-                                                            .Subject.Screening.InclusionCriteria.BodyMassIndex
+                                                            .Subject.Screening.InclusionCriteria.BodyMassIndexCondition.BodyMassIndex
                                                             1}}
                                                             <input class="form-check-input" type="radio"
                                                                 name="inclusion4" id="inclusion4Radio1" value="1"
@@ -779,7 +745,7 @@
 
                                                         <div class="form-check form-check-inline">
                                                             {{if eq
-                                                            .Subject.Screening.InclusionCriteria.BodyMassIndex
+                                                            .Subject.Screening.InclusionCriteria.BodyMassIndexCondition.BodyMassIndex
                                                             2}}
                                                             <input class="form-check-input" type="radio"
                                                                 name="inclusion4" id="inclusion4Radio2" value="2"
@@ -816,7 +782,7 @@
                                                     <div class="input-group-text">
                                                         <div class="form-check form-check-inline">
                                                             {{if eq
-                                                            .Subject.Screening.InclusionCriteria.AbsenceOfAcuteInfectiousDiseases
+                                                            .Subject.Screening.InclusionCriteria.AbsenceOfAcuteInfectiousDiseasesCondition.AbsenceOfAcuteInfectiousDiseases
                                                             1}}
                                                             <input class="form-check-input" type="radio"
                                                                 name="inclusion5" id="inclusion5Radio1" value="1"
@@ -831,7 +797,7 @@
 
                                                         <div class="form-check form-check-inline">
                                                             {{if eq
-                                                            .Subject.Screening.InclusionCriteria.AbsenceOfAcuteInfectiousDiseases
+                                                            .Subject.Screening.InclusionCriteria.AbsenceOfAcuteInfectiousDiseasesCondition.AbsenceOfAcuteInfectiousDiseases
                                                             2}}
                                                             <input class="form-check-input" type="radio"
                                                                 name="inclusion5" id="inclusion5Radio2" value="2"
@@ -867,7 +833,7 @@
                                                     <div class="input-group-text">
                                                         <div class="form-check form-check-inline">
                                                             {{if eq
-                                                            .Subject.Screening.InclusionCriteria.ConsentToUseEffectiveMethodsOfContraception
+                                                            .Subject.Screening.InclusionCriteria.ConsentToUseEffectiveMethodsOfContraceptionCondition.ConsentToUseEffectiveMethodsOfContraception
                                                             1}}
                                                             <input class="form-check-input" type="radio"
                                                                 name="inclusion6" id="inclusion6Radio1" value="1"
@@ -883,7 +849,7 @@
 
                                                         <div class="form-check form-check-inline">
                                                             {{if eq
-                                                            .Subject.Screening.InclusionCriteria.ConsentToUseEffectiveMethodsOfContraception
+                                                            .Subject.Screening.InclusionCriteria.ConsentToUseEffectiveMethodsOfContraceptionCondition.ConsentToUseEffectiveMethodsOfContraception
                                                             2}}
                                                             <input class="form-check-input" type="radio"
                                                                 name="inclusion6" id="inclusion6Radio2" value="2"
@@ -920,7 +886,7 @@
                                                     <div class="input-group-text">
                                                         <div class="form-check form-check-inline">
                                                             {{if eq
-                                                            .Subject.Screening.InclusionCriteria.NegativePregnancyTest
+                                                            .Subject.Screening.InclusionCriteria.NegativePregnancyTestCondition.NegativePregnancyTest
                                                             1}}
                                                             <input class="form-check-input" type="radio"
                                                                 name="inclusion7" id="inclusion7Radio1" value="1"
@@ -935,7 +901,7 @@
 
                                                         <div class="form-check form-check-inline">
                                                             {{if eq
-                                                            .Subject.Screening.InclusionCriteria.NegativePregnancyTest
+                                                            .Subject.Screening.InclusionCriteria.NegativePregnancyTestCondition.NegativePregnancyTest
                                                             2}}
                                                             <input class="form-check-input" type="radio"
                                                                 name="inclusion7" id="inclusion7Radio2" value="2"
@@ -949,7 +915,7 @@
                                                         </div>
                                                         <div class="form-check form-check-inline">
                                                             {{if eq
-                                                            .Subject.Screening.InclusionCriteria.NegativePregnancyTest
+                                                            .Subject.Screening.InclusionCriteria.NegativePregnancyTestCondition.NegativePregnancyTest
                                                             3}}
                                                             <input class="form-check-input" type="radio"
                                                                 name="inclusion7" id="inclusion7Radio3" value="3"
@@ -986,7 +952,7 @@
                                                     <div class="input-group-text">
                                                         <div class="form-check form-check-inline">
                                                             {{if eq
-                                                            .Subject.Screening.InclusionCriteria.NegativeDrugTest
+                                                            .Subject.Screening.InclusionCriteria.NegativeDrugTestCondition.NegativeDrugTest
                                                             1}}
                                                             <input class="form-check-input" type="radio"
                                                                 name="inclusion8" id="inclusion8Radio1" value="1"
@@ -1001,7 +967,7 @@
 
                                                         <div class="form-check form-check-inline">
                                                             {{if eq
-                                                            .Subject.Screening.InclusionCriteria.NegativeDrugTest
+                                                            .Subject.Screening.InclusionCriteria.NegativeDrugTestCondition.NegativeDrugTest
                                                             2}}
                                                             <input class="form-check-input" type="radio"
                                                                 name="inclusion8" id="inclusion8Radio2" value="2"
@@ -1035,7 +1001,7 @@
                                                     <div class="input-group-text">
                                                         <div class="form-check form-check-inline">
                                                             {{if eq
-                                                            .Subject.Screening.InclusionCriteria.NegativeAlcoholTest
+                                                            .Subject.Screening.InclusionCriteria.NegativeAlcoholTestCondition.NegativeAlcoholTest
                                                             1}}
                                                             <input class="form-check-input" type="radio"
                                                                 name="inclusion9" id="inclusion9Radio1" value="1"
@@ -1051,7 +1017,7 @@
 
                                                         <div class="form-check form-check-inline">
                                                             {{if eq
-                                                            .Subject.Screening.InclusionCriteria.NegativeAlcoholTest
+                                                            .Subject.Screening.InclusionCriteria.NegativeAlcoholTestCondition.NegativeAlcoholTest
                                                             2}}
                                                             <input class="form-check-input" type="radio"
                                                                 name="inclusion9" id="inclusion9Radio2" value="2"
@@ -1087,7 +1053,7 @@
                                                     <div class="input-group-text">
                                                         <div class="form-check form-check-inline">
                                                             {{if eq
-                                                            .Subject.Screening.InclusionCriteria.NoHistoryOfSeverePostVaccinationReactions
+                                                            .Subject.Screening.InclusionCriteria.NoHistoryOfSeverePostVaccinationReactionsCondition.NoHistoryOfSeverePostVaccinationReactions
                                                             1}}
                                                             <input class="form-check-input" type="radio"
                                                                 name="inclusion10" id="inclusion10Radio1" value="1"
@@ -1102,7 +1068,7 @@
 
                                                         <div class="form-check form-check-inline">
                                                             {{if eq
-                                                            .Subject.Screening.InclusionCriteria.NoHistoryOfSeverePostVaccinationReactions
+                                                            .Subject.Screening.InclusionCriteria.NoHistoryOfSeverePostVaccinationReactionsCondition.NoHistoryOfSeverePostVaccinationReactions
                                                             2}}
                                                             <input class="form-check-input" type="radio"
                                                                 name="inclusion10" id="inclusion10Radio2" value="2"
@@ -1137,7 +1103,7 @@
                                                     <div class="input-group-text">
                                                         <div class="form-check form-check-inline">
                                                             {{if eq
-                                                            .Subject.Screening.InclusionCriteria.IndicatorsBloodTestsAtScreeningWithin
+                                                            .Subject.Screening.InclusionCriteria.IndicatorsBloodTestsAtScreeningWithinCondition.IndicatorsBloodTestsAtScreeningWithin
                                                             1}}
                                                             <input class="form-check-input" type="radio"
                                                                 name="inclusion11" id="inclusion11Radio1" value="1"
@@ -1153,7 +1119,7 @@
 
                                                         <div class="form-check form-check-inline">
                                                             {{if eq
-                                                            .Subject.Screening.InclusionCriteria.IndicatorsBloodTestsAtScreeningWithin
+                                                            .Subject.Screening.InclusionCriteria.IndicatorsBloodTestsAtScreeningWithinCondition.IndicatorsBloodTestsAtScreeningWithin
                                                             2}}
                                                             <input class="form-check-input" type="radio"
                                                                 name="inclusion11" id="inclusion11Radio2" value="2"
@@ -1189,7 +1155,7 @@
                                                     <div class="input-group-text">
                                                         <div class="form-check form-check-inline">
                                                             {{if eq
-                                                            .Subject.Screening.InclusionCriteria.NoMyocardialChanges
+                                                            .Subject.Screening.InclusionCriteria.NoMyocardialChangesCondition.NoMyocardialChanges
                                                             1}}
                                                             <input class="form-check-input" type="radio"
                                                                 name="inclusion12" id="inclusion12Radio1" value="1"
@@ -1204,7 +1170,7 @@
 
                                                         <div class="form-check form-check-inline">
                                                             {{if eq
-                                                            .Subject.Screening.InclusionCriteria.NoMyocardialChanges
+                                                            .Subject.Screening.InclusionCriteria.NoMyocardialChangesCondition.NoMyocardialChanges
                                                             2}}
                                                             <input class="form-check-input" type="radio"
                                                                 name="inclusion12" id="inclusion12Radio2" value="2"
@@ -1240,7 +1206,7 @@
                                                     <div class="input-group-text">
                                                         <div class="form-check form-check-inline">
                                                             {{if eq
-                                                            .Subject.Screening.InclusionCriteria.NegativeTestResultForCOVID
+                                                            .Subject.Screening.InclusionCriteria.NegativeTestResultForCOVIDCondition.NegativeTestResultForCOVID
                                                             1}}
                                                             <input class="form-check-input" type="radio"
                                                                 name="inclusion13" id="inclusion13Radio1" value="1"
@@ -1255,7 +1221,7 @@
 
                                                         <div class="form-check form-check-inline">
                                                             {{if eq
-                                                            .Subject.Screening.InclusionCriteria.NegativeTestResultForCOVID
+                                                            .Subject.Screening.InclusionCriteria.NegativeTestResultForCOVIDCondition.NegativeTestResultForCOVID
                                                             2}}
                                                             <input class="form-check-input" type="radio"
                                                                 name="inclusion13" id="inclusion13Radio2" value="2"
@@ -1289,7 +1255,7 @@
                                                     <div class="input-group-text">
                                                         <div class="form-check form-check-inline">
                                                             {{if eq
-                                                            .Subject.Screening.InclusionCriteria.NoContraindicationsToVaccination
+                                                            .Subject.Screening.InclusionCriteria.NoContraindicationsToVaccinationCondition.NoContraindicationsToVaccination
                                                             1}}
                                                             <input class="form-check-input" type="radio"
                                                                 name="inclusion14" id="inclusion14Radio1" value="1"
@@ -1304,7 +1270,7 @@
 
                                                         <div class="form-check form-check-inline">
                                                             {{if eq
-                                                            .Subject.Screening.InclusionCriteria.NoContraindicationsToVaccination
+                                                            .Subject.Screening.InclusionCriteria.NoContraindicationsToVaccinationCondition.NoContraindicationsToVaccination
                                                             2}}
                                                             <input class="form-check-input" type="radio"
                                                                 name="inclusion14" id="inclusion14Radio2" value="2"
@@ -1377,7 +1343,7 @@
                                                     <div class="input-group-text">
                                                         <div class="form-check form-check-inline">
                                                             {{if eq
-                                                            .Subject.Screening.ExclusionСriteria.LackOfSignedInformedConsent
+                                                            .Subject.Screening.ExclusionСriteria.LackOfSignedInformedConsentCondition.LackOfSignedInformedConsent
                                                             1}}
                                                             <input class="form-check-input" type="radio"
                                                                 name="exclusion1" id="exclusion1Radio1" value="1"
@@ -1392,7 +1358,7 @@
 
                                                         <div class="form-check form-check-inline">
                                                             {{if eq
-                                                            .Subject.Screening.ExclusionСriteria.LackOfSignedInformedConsent
+                                                            .Subject.Screening.ExclusionСriteria.LackOfSignedInformedConsentCondition.LackOfSignedInformedConsent
                                                             2}}
                                                             <input class="form-check-input" type="radio"
                                                                 name="exclusion1" id="exclusion1Radio2" value="2"
@@ -1431,7 +1397,7 @@
                                                 <div class="input-group">
                                                     <div class="input-group-text">
                                                         <div class="form-check form-check-inline">
-                                                            {{if eq .Subject.Screening.ExclusionСriteria.SteroidTherapy
+                                                            {{if eq .Subject.Screening.ExclusionСriteria.SteroidTherapyCondition.SteroidTherapy
                                                             1}}
                                                             <input class="form-check-input" type="radio"
                                                                 name="exclusion2" id="exclusion2Radio1" value="1"
@@ -1445,7 +1411,7 @@
                                                         </div>
 
                                                         <div class="form-check form-check-inline">
-                                                            {{if eq .Subject.Screening.ExclusionСriteria.SteroidTherapy
+                                                            {{if eq .Subject.Screening.ExclusionСriteria.SteroidTherapyCondition.SteroidTherapy
                                                             2}}
                                                             <input class="form-check-input" type="radio"
                                                                 name="exclusion2" id="exclusion2Radio2" value="2"
@@ -1480,7 +1446,7 @@
                                                     <div class="input-group-text">
                                                         <div class="form-check form-check-inline">
                                                             {{if eq
-                                                            .Subject.Screening.ExclusionСriteria.TherapyWithImmunosuppressiveDrugs
+                                                            .Subject.Screening.ExclusionСriteria.TherapyWithImmunosuppressiveDrugsCondition.TherapyWithImmunosuppressiveDrugs
                                                             1}}
                                                             <input class="form-check-input" type="radio"
                                                                 name="exclusion3" id="exclusion3Radio1" value="1"
@@ -1495,7 +1461,7 @@
 
                                                         <div class="form-check form-check-inline">
                                                             {{if eq
-                                                            .Subject.Screening.ExclusionСriteria.TherapyWithImmunosuppressiveDrugs
+                                                            .Subject.Screening.ExclusionСriteria.TherapyWithImmunosuppressiveDrugsCondition.TherapyWithImmunosuppressiveDrugs
                                                             2}}
                                                             <input class="form-check-input" type="radio"
                                                                 name="exclusion3" id="exclusion3Radio2" value="2"
@@ -1529,7 +1495,7 @@
                                                     <div class="input-group-text">
                                                         <div class="form-check form-check-inline">
                                                             {{if eq
-                                                            .Subject.Screening.ExclusionСriteria.FemaleSubjectsDuringPregnancy
+                                                            .Subject.Screening.ExclusionСriteria.FemaleSubjectsDuringPregnancyCondition.FemaleSubjectsDuringPregnancy
                                                             1}}
                                                             <input class="form-check-input" type="radio"
                                                                 name="exclusion4" id="exclusion4Radio1" value="1"
@@ -1544,7 +1510,7 @@
 
                                                         <div class="form-check form-check-inline">
                                                             {{if eq
-                                                            .Subject.Screening.ExclusionСriteria.FemaleSubjectsDuringPregnancy
+                                                            .Subject.Screening.ExclusionСriteria.FemaleSubjectsDuringPregnancyCondition.FemaleSubjectsDuringPregnancy
                                                             2}}
                                                             <input class="form-check-input" type="radio"
                                                                 name="exclusion4" id="exclusion4Radio2" value="2"
@@ -1558,7 +1524,7 @@
                                                         </div>
                                                         <div class="form-check form-check-inline">
                                                             {{if eq
-                                                            .Subject.Screening.ExclusionСriteria.FemaleSubjectsDuringPregnancy
+                                                            .Subject.Screening.ExclusionСriteria.FemaleSubjectsDuringPregnancyCondition.FemaleSubjectsDuringPregnancy
                                                             3}}
                                                             <input class="form-check-input" type="radio"
                                                                 name="exclusion4" id="exclusion4Radio3" value="3"
@@ -1594,7 +1560,7 @@
                                                     <div class="input-group-text">
                                                         <div class="form-check form-check-inline">
                                                             {{if eq
-                                                            .Subject.Screening.ExclusionСriteria.StrokeInLessThanOneYear
+                                                            .Subject.Screening.ExclusionСriteria.StrokeInLessThanOneYearCondition.StrokeInLessThanOneYear
                                                             1}}
                                                             <input class="form-check-input" type="radio"
                                                                 name="exclusion5" id="exclusion5Radio1" value="1"
@@ -1609,7 +1575,7 @@
 
                                                         <div class="form-check form-check-inline">
                                                             {{if eq
-                                                            .Subject.Screening.ExclusionСriteria.StrokeInLessThanOneYear
+                                                            .Subject.Screening.ExclusionСriteria.StrokeInLessThanOneYearCondition.StrokeInLessThanOneYear
                                                             2}}
                                                             <input class="form-check-input" type="radio"
                                                                 name="exclusion5" id="exclusion5Radio2" value="2"
@@ -1643,7 +1609,7 @@
                                                     <div class="input-group-text">
                                                         <div class="form-check form-check-inline">
                                                             {{if eq
-                                                            .Subject.Screening.ExclusionСriteria.ChronicSystemicInfections
+                                                            .Subject.Screening.ExclusionСriteria.ChronicSystemicInfectionsCondition.ChronicSystemicInfections
                                                             1}}
                                                             <input class="form-check-input" type="radio"
                                                                 name="exclusion6" id="exclusion6Radio1" value="1"
@@ -1658,7 +1624,7 @@
 
                                                         <div class="form-check form-check-inline">
                                                             {{if eq
-                                                            .Subject.Screening.ExclusionСriteria.ChronicSystemicInfections
+                                                            .Subject.Screening.ExclusionСriteria.ChronicSystemicInfectionsCondition.ChronicSystemicInfections
                                                             2}}
                                                             <input class="form-check-input" type="radio"
                                                                 name="exclusion6" id="exclusion6Radio2" value="2"
@@ -1702,7 +1668,7 @@
                                                     <div class="input-group-text">
                                                         <div class="form-check form-check-inline">
                                                             {{if eq
-                                                            .Subject.Screening.ExclusionСriteria.AggravatedAllergicHistory
+                                                            .Subject.Screening.ExclusionСriteria.AggravatedAllergicHistoryCondition.AggravatedAllergicHistory
                                                             1}}
                                                             <input class="form-check-input" type="radio"
                                                                 name="exclusion7" id="exclusion7Radio1" value="1"
@@ -1717,7 +1683,7 @@
 
                                                         <div class="form-check form-check-inline">
                                                             {{if eq
-                                                            .Subject.Screening.ExclusionСriteria.AggravatedAllergicHistory
+                                                            .Subject.Screening.ExclusionСriteria.AggravatedAllergicHistoryCondition.AggravatedAllergicHistory
                                                             2}}
                                                             <input class="form-check-input" type="radio"
                                                                 name="exclusion7" id="exclusion7Radio2" value="2"
@@ -1752,7 +1718,7 @@
                                                     <div class="input-group-text">
                                                         <div class="form-check form-check-inline">
                                                             {{if eq
-                                                            .Subject.Screening.ExclusionСriteria.PresenceOfAHistoryOfNeoplasms
+                                                            .Subject.Screening.ExclusionСriteria.PresenceOfAHistoryOfNeoplasmsCondition.PresenceOfAHistoryOfNeoplasms
                                                             1}}
                                                             <input class="form-check-input" type="radio"
                                                                 name="exclusion8" id="exclusion8Radio1" value="1"
@@ -1767,7 +1733,7 @@
 
                                                         <div class="form-check form-check-inline">
                                                             {{if eq
-                                                            .Subject.Screening.ExclusionСriteria.PresenceOfAHistoryOfNeoplasms
+                                                            .Subject.Screening.ExclusionСriteria.PresenceOfAHistoryOfNeoplasmsCondition.PresenceOfAHistoryOfNeoplasms
                                                             2}}
                                                             <input class="form-check-input" type="radio"
                                                                 name="exclusion8" id="exclusion8Radio2" value="2"
@@ -1800,7 +1766,7 @@
                                                     <div class="input-group-text">
                                                         <div class="form-check form-check-inline">
                                                             {{if eq
-                                                            .Subject.Screening.ExclusionСriteria.HistoryOfSplenectomy
+                                                            .Subject.Screening.ExclusionСriteria.HistoryOfSplenectomyCondition.HistoryOfSplenectomy
                                                             1}}
                                                             <input class="form-check-input" type="radio"
                                                                 name="exclusion9" id="exclusion9Radio1" value="1"
@@ -1815,7 +1781,7 @@
 
                                                         <div class="form-check form-check-inline">
                                                             {{if eq
-                                                            .Subject.Screening.ExclusionСriteria.HistoryOfSplenectomy
+                                                            .Subject.Screening.ExclusionСriteria.HistoryOfSplenectomyCondition.HistoryOfSplenectomy
                                                             2}}
                                                             <input class="form-check-input" type="radio"
                                                                 name="exclusion9" id="exclusion9Radio2" value="2"
@@ -1853,7 +1819,7 @@
                                                     <div class="input-group-text">
                                                         <div class="form-check form-check-inline">
                                                             {{if eq
-                                                            .Subject.Screening.ExclusionСriteria.Neutropenia
+                                                            .Subject.Screening.ExclusionСriteria.NeutropeniaCondition.Neutropenia
                                                             1}}
                                                             <input class="form-check-input" type="radio"
                                                                 name="exclusion10" id="exclusion10Radio1" value="1"
@@ -1868,7 +1834,7 @@
 
                                                         <div class="form-check form-check-inline">
                                                             {{if eq
-                                                            .Subject.Screening.ExclusionСriteria.Neutropenia
+                                                            .Subject.Screening.ExclusionСriteria.NeutropeniaCondition.Neutropenia
                                                             2}}
                                                             <input class="form-check-input" type="radio"
                                                                 name="exclusion10" id="exclusion10Radio2" checked
@@ -1902,7 +1868,7 @@
                                                 <div class="input-group-text">
                                                     <div class="form-check form-check-inline">
                                                         {{if eq
-                                                        .Subject.Screening.ExclusionСriteria.SubjectsWithActiveSyphilis
+                                                        .Subject.Screening.ExclusionСriteria.SubjectsWithActiveSyphilisCondition.SubjectsWithActiveSyphilis
                                                         1}}
                                                         <input class="form-check-input" type="radio" name="exclusion11"
                                                             id="exclusion11Radio1" value="1" checked />
@@ -1916,7 +1882,7 @@
 
                                                     <div class="form-check form-check-inline">
                                                         {{if eq
-                                                        .Subject.Screening.ExclusionСriteria.SubjectsWithActiveSyphilis
+                                                        .Subject.Screening.ExclusionСriteria.SubjectsWithActiveSyphilisCondition.SubjectsWithActiveSyphilis
                                                         2}}
                                                         <input class="form-check-input" type="radio" name="exclusion11"
                                                             id="exclusion11Radio2" value="2" checked />
@@ -1949,7 +1915,7 @@
                                                 <div class="input-group-text">
                                                     <div class="form-check form-check-inline">
                                                         {{if eq
-                                                        .Subject.Screening.ExclusionСriteria.Anorexia
+                                                        .Subject.Screening.ExclusionСriteria.AnorexiaCondition.Anorexia
                                                         1}}
                                                         <input class="form-check-input" type="radio" name="exclusion12"
                                                             id="exclusion12Radio1" value="1" checked />
@@ -1963,7 +1929,7 @@
 
                                                     <div class="form-check form-check-inline">
                                                         {{if eq
-                                                        .Subject.Screening.ExclusionСriteria.Anorexia
+                                                        .Subject.Screening.ExclusionСriteria.AnorexiaCondition.Anorexia
                                                         2}}
                                                         <input class="form-check-input" type="radio" name="exclusion12"
                                                             id="exclusion12Radio2" value="2" checked />
@@ -1998,7 +1964,7 @@
                                                 <div class="input-group-text">
                                                     <div class="form-check form-check-inline">
                                                         {{if eq
-                                                        .Subject.Screening.ExclusionСriteria.ExtensiveTattoos
+                                                        .Subject.Screening.ExclusionСriteria.ExtensiveTattoosCondition.ExtensiveTattoos
                                                         1}}
                                                         <input class="form-check-input" type="radio" name="exclusion13"
                                                             id="exclusion13Radio1" value="1" checked />
@@ -2012,7 +1978,7 @@
 
                                                     <div class="form-check form-check-inline">
                                                         {{if eq
-                                                        .Subject.Screening.ExclusionСriteria.ExtensiveTattoos
+                                                        .Subject.Screening.ExclusionСriteria.ExtensiveTattoosCondition.ExtensiveTattoos
                                                         2}}
                                                         <input class="form-check-input" type="radio" name="exclusion13"
                                                             id="exclusion13Radio2" value="2" checked />
@@ -2046,7 +2012,7 @@
                                                 <div class="input-group-text">
                                                     <div class="form-check form-check-inline">
                                                         {{if eq
-                                                        .Subject.Screening.ExclusionСriteria.TakingNarcoticAndPsychostimulantDrugs
+                                                        .Subject.Screening.ExclusionСriteria.TakingNarcoticAndPsychostimulantDrugsCondition.TakingNarcoticAndPsychostimulantDrugs
                                                         1}}
                                                         <input class="form-check-input" type="radio" name="exclusion14"
                                                             id="exclusion14Radio1" value="1" checked />
@@ -2061,7 +2027,7 @@
 
                                                     <div class="form-check form-check-inline">
                                                         {{if eq
-                                                        .Subject.Screening.ExclusionСriteria.TakingNarcoticAndPsychostimulantDrugs
+                                                        .Subject.Screening.ExclusionСriteria.TakingNarcoticAndPsychostimulantDrugsCondition.TakingNarcoticAndPsychostimulantDrugs
                                                         2}}
                                                         <input class="form-check-input" type="radio" name="exclusion14"
                                                             id="exclusion14Radio2" value="2" checked />
@@ -2094,7 +2060,7 @@
                                                 <div class="input-group-text">
                                                     <div class="form-check form-check-inline">
                                                         {{if eq
-                                                        .Subject.Screening.ExclusionСriteria.SmokingMoretThanTenCigarettesADay
+                                                        .Subject.Screening.ExclusionСriteria.SmokingMoretThanTenCigarettesADayCondition.SmokingMoretThanTenCigarettesADay
                                                         1}}
                                                         <input class="form-check-input" type="radio" name="exclusion15"
                                                             id="exclusion15Radio1" value="1" checked />
@@ -2108,7 +2074,7 @@
 
                                                     <div class="form-check form-check-inline">
                                                         {{if eq
-                                                        .Subject.Screening.ExclusionСriteria.SmokingMoretThanTenCigarettesADay
+                                                        .Subject.Screening.ExclusionСriteria.SmokingMoretThanTenCigarettesADayCondition.SmokingMoretThanTenCigarettesADay
                                                         2}}
                                                         <input class="form-check-input" type="radio" name="exclusion15"
                                                             id="exclusion15Radio2" value="2" checked />
@@ -2144,7 +2110,7 @@
                                                 <div class="input-group-text">
                                                     <div class="form-check form-check-inline">
                                                         {{if eq
-                                                        .Subject.Screening.ExclusionСriteria.AlcoholIntake
+                                                        .Subject.Screening.ExclusionСriteria.AlcoholIntakeCondition.AlcoholIntake
                                                         1}}
                                                         <input class="form-check-input" type="radio" name="exclusion16"
                                                             id="exclusion16Radio1" value="1" checked />
@@ -2158,7 +2124,7 @@
 
                                                     <div class="form-check form-check-inline">
                                                         {{if eq
-                                                        .Subject.Screening.ExclusionСriteria.AlcoholIntake
+                                                        .Subject.Screening.ExclusionСriteria.AlcoholIntakeCondition.AlcoholIntake
                                                         2}}
                                                         <input class="form-check-input" type="radio" name="exclusion16"
                                                             id="exclusion16Radio2" value="2" checked />
@@ -2193,7 +2159,7 @@
                                         <div class="input-group-text">
                                             <div class="form-check form-check-inline">
                                                 {{if eq
-                                                .Subject.Screening.ExclusionСriteria.PlannedHospitalization
+                                                .Subject.Screening.ExclusionСriteria.PlannedHospitalizationConditiont.PlannedHospitalization
                                                 1}}
                                                 <input class="form-check-input" type="radio" name="exclusion17"
                                                     id="inlineRadio1" value="1" checked />
@@ -2206,7 +2172,7 @@
 
                                             <div class="form-check form-check-inline">
                                                 {{if eq
-                                                .Subject.Screening.ExclusionСriteria.PlannedHospitalization
+                                                .Subject.Screening.ExclusionСriteria.PlannedHospitalizationConditiont.PlannedHospitalization
                                                 2}}
                                                 <input class="form-check-input" type="radio" name="exclusion17"
                                                     id="inlineRadio2" value="2" checked />
@@ -2239,7 +2205,7 @@
                                         <div class="input-group-text">
                                             <div class="form-check form-check-inline">
                                                 {{if eq
-                                                .Subject.Screening.ExclusionСriteria.DonorBloodDonation
+                                                .Subject.Screening.ExclusionСriteria.DonorBloodDonationCondition.DonorBloodDonation
                                                 1}}
                                                 <input class="form-check-input" type="radio" name="exclusion18"
                                                     id="exclusion18Radio1" value="1" checked />
@@ -2252,7 +2218,7 @@
 
                                             <div class="form-check form-check-inline">
                                                 {{if eq
-                                                .Subject.Screening.ExclusionСriteria.DonorBloodDonation
+                                                .Subject.Screening.ExclusionСriteria.DonorBloodDonationCondition.DonorBloodDonation
                                                 2}}
                                                 <input class="form-check-input" type="radio" name="exclusion18"
                                                     id="exclusion18Radio2" value="2" checked />
@@ -2285,7 +2251,7 @@
                                         <div class="input-group-text">
                                             <div class="form-check form-check-inline">
                                                 {{if eq
-                                                .Subject.Screening.ExclusionСriteria.SubjectParticipationInAnyOtherStudy
+                                                .Subject.Screening.ExclusionСriteria.SubjectParticipationInAnyOtherStudyCondition.SubjectParticipationInAnyOtherStudy
                                                 1}}
                                                 <input class="form-check-input" type="radio" name="exclusion19"
                                                     id="exclusion19Radio1" value="1" checked />
@@ -2298,7 +2264,7 @@
 
                                             <div class="form-check form-check-inline">
                                                 {{if eq
-                                                .Subject.Screening.ExclusionСriteria.SubjectParticipationInAnyOtherStudy
+                                                .Subject.Screening.ExclusionСriteria.SubjectParticipationInAnyOtherStudyCondition.SubjectParticipationInAnyOtherStudy
                                                 2}}
                                                 <input class="form-check-input" type="radio" name="exclusion19"
                                                     id="exclusion19Radio2" value="2" checked />
@@ -2330,7 +2296,7 @@
                                         <div class="input-group-text">
                                             <div class="form-check form-check-inline">
                                                 {{if eq
-                                                .Subject.Screening.ExclusionСriteria.AnyVaccinationInTheLastMonth
+                                                .Subject.Screening.ExclusionСriteria.AnyVaccinationInTheLastMonthCondition.AnyVaccinationInTheLastMonth
                                                 1}}
                                                 <input class="form-check-input" type="radio" name="exclusion20"
                                                     id="exclusion20Radio1" value="1" checked />
@@ -2343,7 +2309,7 @@
 
                                             <div class="form-check form-check-inline">
                                                 {{if eq
-                                                .Subject.Screening.ExclusionСriteria.AnyVaccinationInTheLastMonth
+                                                .Subject.Screening.ExclusionСriteria.AnyVaccinationInTheLastMonthCondition.AnyVaccinationInTheLastMonth
                                                 2}}
                                                 <input class="form-check-input" type="radio" name="exclusion20"
                                                     id="exclusion20Radio2" value="2" checked />
@@ -2382,7 +2348,7 @@
                                         <div class="input-group-text">
                                             <div class="form-check form-check-inline">
                                                 {{if eq
-                                                .Subject.Screening.ExclusionСriteria.InabilityToReadInRussian
+                                                .Subject.Screening.ExclusionСriteria.InabilityToReadInRussianCondition.InabilityToReadInRussian
                                                 1}}
                                                 <input class="form-check-input" type="radio" name="exclusion21"
                                                     id="exclusion21Radio1" value="1" checked />
@@ -2395,7 +2361,7 @@
 
                                             <div class="form-check form-check-inline">
                                                 {{if eq
-                                                .Subject.Screening.ExclusionСriteria.InabilityToReadInRussian
+                                                .Subject.Screening.ExclusionСriteria.InabilityToReadInRussianCondition.InabilityToReadInRussian
                                                 2}}
                                                 <input class="form-check-input" type="radio" name="exclusion21"
                                                     id="exclusion21Radio2" value="2" checked />
@@ -2431,7 +2397,7 @@
                                         <div class="input-group-text">
                                             <div class="form-check form-check-inline">
                                                 {{if eq
-                                                .Subject.Screening.ExclusionСriteria.ResearchCenterStaff
+                                                .Subject.Screening.ExclusionСriteria.ResearchCenterStaffCondition.ResearchCenterStaff
                                                 1}}
                                                 <input class="form-check-input" type="radio" name="exclusion22"
                                                     id="exclusion22Radio1" value="1" checked />
@@ -2444,7 +2410,7 @@
 
                                             <div class="form-check form-check-inline">
                                                 {{if eq
-                                                .Subject.Screening.ExclusionСriteria.ResearchCenterStaff
+                                                .Subject.Screening.ExclusionСriteria.ResearchCenterStaffCondition.ResearchCenterStaff
                                                 2}}
                                                 <input class="form-check-input" type="radio" name="exclusion22"
                                                     id="exclusion22Radio2" value="2" checked />
@@ -2478,7 +2444,7 @@
                                         <div class="input-group-text">
                                             <div class="form-check form-check-inline">
                                                 {{if eq
-                                                .Subject.Screening.ExclusionСriteria.AnyOtherStateOfTheSubjectOfTheStudy
+                                                .Subject.Screening.ExclusionСriteria.AnyOtherStateOfTheSubjectOfTheStudyCondition.AnyOtherStateOfTheSubjectOfTheStudy
                                                 1}}
 
                                                 <input class="form-check-input" type="radio" name="exclusion23"
@@ -2492,7 +2458,7 @@
 
                                             <div class="form-check form-check-inline">
                                                 {{if eq
-                                                .Subject.Screening.ExclusionСriteria.AnyOtherStateOfTheSubjectOfTheStudy
+                                                .Subject.Screening.ExclusionСriteria.AnyOtherStateOfTheSubjectOfTheStudyCondition.AnyOtherStateOfTheSubjectOfTheStudy
                                                 2}}
                                                 <input class="form-check-input" type="radio" name="exclusion23"
                                                     id="exclusion23Radio2" value="2" checked />
@@ -2527,6 +2493,27 @@
                 </div>
             </div>
         </div>
+{{else }}
+<div class="col - 8 ">
+<div class="bg-white rounded shadow-sm">
+    <br>
+    <h4 class="text-center" >
+        Для  того чтобы начать работать с протоколом создайте первый субъект
+    </h4>
+    <br>
+    <br>
+    <div class="d-grid gap-2">
+        <button type="button" class="btn btn-sm  btn-primary" data-bs-toggle="modal"
+            data-bs-target="#updateCenter">
+            Добавить субьект исследования
+        </button>
+    </div>
+</div>
+</div>
+
+{{end}}
+
+
         </p>
     </div>
     </div>
@@ -2556,6 +2543,26 @@
 
 
                 {{end}}
+
+                {{range .DemographyErrors}}
+
+                <div class="message-container">
+                    <h6>&nbsp;&nbsp;•&nbsp; {{.Field}}    </h6>
+                    <h8>&nbsp;&nbsp;•&nbsp;  {{.Reasons}} </h8>
+                    <h8>&nbsp;&nbsp;•&nbsp; {{.Comments}} </h8>
+                </div>
+                <br>
+                {{end}}
+
+                {{range .AnthropometryErrors}}
+                <div class="message-container">
+                    <h6>&nbsp;&nbsp;•&nbsp; {{.Field}}    </h6>
+                    <h8>&nbsp;&nbsp;•&nbsp;  {{.Reasons}} </h8>
+                    <h8>&nbsp;&nbsp;•&nbsp; {{.Comments}} </h8>
+                </div>
+                <br>
+                {{end}}
+
             </div>
         </div>
 
@@ -2566,7 +2573,7 @@
         function updateColorWithComment(field, id, color) {
             let subjectNum = '{{.Subject.Number}}'
             let protocolId = '{{.Subject.ProtocolId}}'
-
+            console.log(field.name, id , color)
             fetch('/subject/screening/updatecolorwithcomment', {
 
                 method: 'POST',
@@ -2609,12 +2616,14 @@
 
 
         (function () {
-            for (let i = 1; i <= 5; i++) {
+            for (let i = 1; i <=  14; i++) {
                 let t = document.getElementById("condition" + i)
 
                 let field = t.getAttribute("field-name")
 
                 let color = t.getAttribute("color-value")
+
+               
                 switch (color) {
                     case "1":
                         t.insertAdjacentHTML('beforeend', `

@@ -47,7 +47,7 @@ func (h *Handlers) InformaionConsentSubject() fiber.Handler {
 			return utils.ErrorPage(c, err)
 		}
 
-		return c.Redirect(fmt.Sprintf("/protocol/%d/%s", protocolId, subjectNumber))
+		return c.Redirect(fmt.Sprintf("/protocol/%d/%s#item-1-2", protocolId, subjectNumber))
 	}
 }
 
@@ -82,7 +82,7 @@ func (h *Handlers) DemographySubject() fiber.Handler {
 			h.logger.Warningln(err)
 			return utils.ErrorPage(c, err)
 		}
-		return c.Redirect(fmt.Sprintf("/protocol/%d/%s", protocolId, subjectNumber))
+		return c.Redirect(fmt.Sprintf("/protocol/%d/%s#item-1-3", protocolId, subjectNumber))
 	}
 }
 
@@ -124,7 +124,7 @@ func (h *Handlers) AnthropometrySubject() fiber.Handler {
 			return utils.ErrorPage(c, err)
 		}
 
-		return c.Redirect(fmt.Sprintf("/protocol/%d/%s", protocolId, subjectNumber))
+		return c.Redirect(fmt.Sprintf("/protocol/%d/%s#item-1-4", protocolId, subjectNumber))
 	}
 }
 
@@ -171,7 +171,7 @@ func (h *Handlers) InclusionCriteriaSubject() fiber.Handler {
 			h.logger.Warningln(err)
 			return utils.ErrorPage(c, err)
 		}
-		return c.Redirect(fmt.Sprintf("/protocol/%d/%s", protocolId, subjectNumber))
+		return c.Redirect(fmt.Sprintf("/protocol/%d/%s#item-1-5", protocolId, subjectNumber))
 	}
 }
 
@@ -234,7 +234,7 @@ func (h *Handlers) ExclusionСriteriaSubject() fiber.Handler {
 			return utils.ErrorPage(c, err)
 		}
 
-		return c.Redirect(fmt.Sprintf("/protocol/%d/%s", protocolId, subjectNumber))
+		return c.Redirect(fmt.Sprintf("/protocol/%d/%s#item-1-6", protocolId, subjectNumber))
 
 	}
 }
@@ -262,7 +262,6 @@ func (h *Handlers) UpdateColor() fiber.Handler {
 		value := req.Value
 
 		fieldName := utils.GetFieldName(field)
-		//fmt.Println("s - ", subject.ID, "p - ", protocolId, "field - ", field, "fieldNAme - ", fieldName, "v - ", value)
 		if err := h.mgStore.Screening().UpdateColor(c.Context(), subject.ID, fieldName, value); err != nil {
 			return utils.ErrorPage(c, err)
 		}
@@ -295,7 +294,7 @@ func (h *Handlers) UpdateColorWithComment() fiber.Handler {
 
 		reason := req.Reason
 		comment := req.Comment
-
+		fmt.Println("s - ", subject.ID, "p - ", protocolId, "field - ", field, "fieldNAme - ", fieldName, "v - ", value, "r - ", reason, "c - ", comment)
 		if err := h.mgStore.Screening().UpdateColorWithComment(c.Context(), subject.ID, fieldName, reason, comment, value); err != nil {
 			return utils.ErrorPage(c, err)
 		}

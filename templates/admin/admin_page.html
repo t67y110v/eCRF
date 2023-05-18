@@ -157,8 +157,8 @@
                                                     <form id="new-form" method="POST" action="/user/update" class="col-12 col-lg-6 col-md-8 col-sm-10 rounded">
                                                         <div class="m-3">
                                                             <div class="mb-2">
-                                                                <label class="form-label">ID</label>
-                                                                <input class="form-control" type="text" placeholder="{{.Id}}" value="{{.Id}}"
+                                                
+                                                                <input class="form-control" type="hidden" placeholder="{{.Id}}" value="{{.Id}}"
                                                                     name="user_id" id="user_id" readonly>
                                                             </div>
                                                         </div>
@@ -326,8 +326,7 @@
                                                         <div class="m-3">
                                                             <div class="m-3">
                                                                 <div class="mb-2">
-                                                                    <label class="form-label">ID</label>
-                                                                    <input class="form-control" type="text"
+                                                                    <input class="form-control" type="hidden"
                                                                         placeholder="{{.CenterId}}"
                                                                         value="{{.CenterId}}" name="center_id"
                                                                         id="center_id" readonly>
