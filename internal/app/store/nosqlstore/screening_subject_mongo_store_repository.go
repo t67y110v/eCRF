@@ -257,7 +257,7 @@ func (r *MongoScreeningRepository) ExclusionСriteria(
 
 func (r *MongoScreeningRepository) UpdateColor(ctx context.Context, id primitive.ObjectID, fieldToUpdate string, field int) error {
 	collection := r.store.client.Database("eCRF").Collection("subjects")
-	fmt.Println(fieldToUpdate)
+
 	filter := bson.M{"_id": id}
 	update := bson.M{
 		"$set": bson.M{

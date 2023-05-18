@@ -294,7 +294,7 @@ func (h *Handlers) UpdateColorWithComment() fiber.Handler {
 
 		reason := req.Reason
 		comment := req.Comment
-		fmt.Println("s - ", subject.ID, "p - ", protocolId, "field - ", field, "fieldNAme - ", fieldName, "v - ", value, "r - ", reason, "c - ", comment)
+		//	fmt.Println("s - ", subject.ID, "p - ", protocolId, "field - ", field, "fieldNAme - ", fieldName, "v - ", value, "r - ", reason, "c - ", comment)
 		if err := h.mgStore.Screening().UpdateColorWithComment(c.Context(), subject.ID, fieldName, reason, comment, value); err != nil {
 			return utils.ErrorPage(c, err)
 		}

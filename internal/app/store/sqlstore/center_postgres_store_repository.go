@@ -1,8 +1,6 @@
 package store
 
 import (
-	"fmt"
-
 	model "github.com/t67y110v/web/internal/app/model/center"
 )
 
@@ -13,7 +11,7 @@ func (r *PostgresStoreRepository) GetCenterName(centerId int) (string, error) {
 
 	// }
 	if result := r.store.db.Where("center_id = ?", centerId).First(&c); result.Error != nil {
-		fmt.Println(result.Error)
+
 		return "", result.Error
 	}
 	return c.Name, nil
