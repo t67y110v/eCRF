@@ -330,9 +330,9 @@
                                     <div class="mb-1">
                                         <div class="mb-1">
                                             <label class="form-label">Пол</label>
-                                            <div class="input-group mb-3"  id="condition6"
-                                            color-value="{{.Subject.Screening.Demography.SexCondition.Color}}"
-                                            field-name="sex">
+                                            <div class="input-group mb-3" id="condition6"
+                                                color-value="{{.Subject.Screening.Demography.SexCondition.Color}}"
+                                                field-name="sex">
                                                 <select id="sex" name="sex" class="form-select">
                                                     {{if eq .Subject.Screening.Demography.SexCondition.Sex 1}}
                                                     <option selected value="1">Мужчина</option>
@@ -347,7 +347,7 @@
                                                     <option value="2">Женщина</option>
                                                     {{end}}
                                                 </select>
-                                               
+
                                             </div>
                                         </div>
                                         <div class="mb-2">
@@ -355,7 +355,7 @@
 
                                             <label class="form-label">Раса</label>
                                             <div class="input-group mb-3" id="condition7" field-name="race"
-                                            color-value="{{.Subject.Screening.Demography.RaceCondition.Color}}">
+                                                color-value="{{.Subject.Screening.Demography.RaceCondition.Color}}">
                                                 <select id="race" name="race" class="form-select">
                                                     {{if eq .Subject.Screening.Demography.RaceCondition.Race 1}}
                                                     <option selected value="1">Европеоидная</option>
@@ -377,15 +377,16 @@
                                                     <option value="5">Австралоидная</option>
 
                                                 </select>
-                        
+
                                             </div>
                                         </div>
                                         <div class="mb-2">
                                             <label class="form-label">Дата рождения</label>
                                             <div class="input-group mb-3" id="condition8" field-name="birth_date"
-                                            color-value="{{.Subject.Screening.Demography.BirthDateCondition.Color}}">
+                                                color-value="{{.Subject.Screening.Demography.BirthDateCondition.Color}}">
                                                 {{if .Subject.Screening.Demography.BirthDateCondition.BirthDate }}
-                                                <input value="{{.Subject.Screening.Demography.BirthDateCondition.BirthDate}}"
+                                                <input
+                                                    value="{{.Subject.Screening.Demography.BirthDateCondition.BirthDate}}"
                                                     name="birth_date" class="form-control" type="data">
                                                 {{else}}
                                                 <input name="birth_date" class="form-control" type="date">
@@ -427,8 +428,9 @@
                                         <div class="mb-1">
                                             <label class="form-label">Измерение антропометрических данных
                                                 проведено?</label>
-                                            <div class="input-group mb-3"id="condition9" field-name="data_been_measured"
-                                            color-value="{{.Subject.Screening.Anthropometry.AnthropometricDataBeenMeasuredCondition.Color}}" >
+                                            <div class="input-group mb-3" id="condition9"
+                                                field-name="data_been_measured"
+                                                color-value="{{.Subject.Screening.Anthropometry.AnthropometricDataBeenMeasuredCondition.Color}}">
                                                 <div class="mb-2">
                                                     <input class="form-control" type="hidden"
                                                         placeholder="{{.Subject.Number}}" value="{{.Subject.Number}}"
@@ -442,11 +444,13 @@
                                                 </div>
                                                 <select id="sex" name="data_been_measured" class="form-select">
                                                     {{if eq
-                                                    .Subject.Screening.Anthropometry.AnthropometricDataBeenMeasuredCondition.AnthropometricDataBeenMeasured 1 }}
+                                                    .Subject.Screening.Anthropometry.AnthropometricDataBeenMeasuredCondition.AnthropometricDataBeenMeasured
+                                                    1 }}
                                                     <option selected value="1">Да</option>
                                                     <option value="2">Нет</option>
                                                     {{else if eq
-                                                    .Subject.Screening.Anthropometry.AnthropometricDataBeenMeasuredCondition.AnthropometricDataBeenMeasured 2}}
+                                                    .Subject.Screening.Anthropometry.AnthropometricDataBeenMeasuredCondition.AnthropometricDataBeenMeasured
+                                                    2}}
                                                     <option value="1">Да</option>
                                                     <option selected value="2">Нет</option>
                                                     {{else }}
@@ -457,74 +461,86 @@
 
 
                                                 </select>
-                                              
+
                                             </div>
                                         </div>
                                         <div class="mb-2">
                                             <label class="form-label">Если НЕТ, то укажите причину</label>
                                             <div class="input-group mb-3" id="condition10" field-name="if_not"
-                                            color-value="{{.Subject.Screening.Anthropometry.ReasonIfNotCondition.Color}}" >
-                                                {{if .Subject.Screening.Anthropometry.ReasonIfNotCondition.ReasonIfNot }}
-                                                <input value="{{.Subject.Screening.Anthropometry.ReasonIfNotCondition.ReasonIfNot}}"
+                                                color-value="{{.Subject.Screening.Anthropometry.ReasonIfNotCondition.Color}}">
+                                                {{if .Subject.Screening.Anthropometry.ReasonIfNotCondition.ReasonIfNot
+                                                }}
+                                                <input
+                                                    value="{{.Subject.Screening.Anthropometry.ReasonIfNotCondition.ReasonIfNot}}"
                                                     name="if_not" class="form-control" type="input">
                                                 {{else}}
                                                 <input name="if_not" class="form-control" type="input">
                                                 {{end}}
-                                            
+
                                             </div>
                                         </div>
                                         <div class="mb-2">
                                             <label class="form-label">Дата проведения измерений</label>
                                             <div class="input-group mb-3" id="condition11" field-name="date_of_start"
-                                            color-value="{{.Subject.Screening.Anthropometry.DateOfStartMeasuredCondition.Color}}" >
-                                                {{if .Subject.Screening.Anthropometry.DateOfStartMeasuredCondition.DateOfStartMeasured }}
-                                                <input value="{{.Subject.Screening.Anthropometry.DateOfStartMeasuredCondition.DateOfStartMeasured}}"
+                                                color-value="{{.Subject.Screening.Anthropometry.DateOfStartMeasuredCondition.Color}}">
+                                                {{if
+                                                .Subject.Screening.Anthropometry.DateOfStartMeasuredCondition.DateOfStartMeasured
+                                                }}
+                                                <input
+                                                    value="{{.Subject.Screening.Anthropometry.DateOfStartMeasuredCondition.DateOfStartMeasured}}"
                                                     name="date_of_start" class="form-control" type="date">
                                                 {{else}}
                                                 <input name="date_of_start" class="form-control" type="date">
                                                 {{end}}
 
-                                               
+
                                             </div>
                                         </div>
                                         <div class="mb-2">
                                             <label class="form-label">Масса тела</label>
-                                            <div class="input-group mb-3"  id="condition12" field-name="weight"
-                                            color-value="{{.Subject.Screening.Anthropometry.WeightOfBodyCondition.Color}}" >
-                                                {{if .Subject.Screening.Anthropometry.WeightOfBodyCondition.WeightOfBody }}
-                                                <input value="{{.Subject.Screening.Anthropometry.WeightOfBodyCondition.WeightOfBody}}"
+                                            <div class="input-group mb-3" id="condition12" field-name="weight"
+                                                color-value="{{.Subject.Screening.Anthropometry.WeightOfBodyCondition.Color}}">
+                                                {{if .Subject.Screening.Anthropometry.WeightOfBodyCondition.WeightOfBody
+                                                }}
+                                                <input
+                                                    value="{{.Subject.Screening.Anthropometry.WeightOfBodyCondition.WeightOfBody}}"
                                                     name="weight" class="form-control" type="input">
                                                 {{else}}
                                                 <input name="weight" class="form-control" type="input">
                                                 {{end}}
-                                               
+
                                             </div>
                                         </div>
                                         <div class="mb-2">
                                             <label class="form-label">Рост</label>
-                                            <div class="input-group mb-3"  id="condition13" field-name="height"
-                                            color-value="{{.Subject.Screening.Anthropometry.HeightOfBodyCondition.Color}}" >
-                                                {{if .Subject.Screening.Anthropometry.HeightOfBodyCondition.HeightOfBody }}
-                                                <input value="{{.Subject.Screening.Anthropometry.HeightOfBodyCondition.HeightOfBody}}"
+                                            <div class="input-group mb-3" id="condition13" field-name="height"
+                                                color-value="{{.Subject.Screening.Anthropometry.HeightOfBodyCondition.Color}}">
+                                                {{if .Subject.Screening.Anthropometry.HeightOfBodyCondition.HeightOfBody
+                                                }}
+                                                <input
+                                                    value="{{.Subject.Screening.Anthropometry.HeightOfBodyCondition.HeightOfBody}}"
                                                     name="height" class="form-control" type="input">
                                                 {{else}}
                                                 <input name="height" class="form-control" type="input">
                                                 {{end}}
-                                               
+
                                             </div>
                                         </div>
                                         <div class="mb-2">
                                             <label class="form-label">Индекс массы тела(рассчетное значение)</label>
-                                            <div class="input-group mb-3"  id="condition14" field-name="index"
-                                            color-value="{{.Subject.Screening.Anthropometry.IndexWeigthOfBodyCondition.Color}}"  >
-                                                {{if .Subject.Screening.Anthropometry.IndexWeigthOfBodyCondition.IndexWeigthOfBody }}
-                                                <input value="{{.Subject.Screening.Anthropometry.IndexWeigthOfBodyCondition.IndexWeigthOfBody }}"
+                                            <div class="input-group mb-3" id="condition14" field-name="index"
+                                                color-value="{{.Subject.Screening.Anthropometry.IndexWeigthOfBodyCondition.Color}}">
+                                                {{if
+                                                .Subject.Screening.Anthropometry.IndexWeigthOfBodyCondition.IndexWeigthOfBody
+                                                }}
+                                                <input
+                                                    value="{{.Subject.Screening.Anthropometry.IndexWeigthOfBodyCondition.IndexWeigthOfBody }}"
                                                     name="index" class="form-control" type="input">
                                                 {{else}}
 
                                                 <input name="index" class="form-control" type="input">
                                                 {{end}}
-                                               
+
                                             </div>
                                         </div>
 
@@ -1397,7 +1413,8 @@
                                                 <div class="input-group">
                                                     <div class="input-group-text">
                                                         <div class="form-check form-check-inline">
-                                                            {{if eq .Subject.Screening.ExclusionСriteria.SteroidTherapyCondition.SteroidTherapy
+                                                            {{if eq
+                                                            .Subject.Screening.ExclusionСriteria.SteroidTherapyCondition.SteroidTherapy
                                                             1}}
                                                             <input class="form-check-input" type="radio"
                                                                 name="exclusion2" id="exclusion2Radio1" value="1"
@@ -1411,7 +1428,8 @@
                                                         </div>
 
                                                         <div class="form-check form-check-inline">
-                                                            {{if eq .Subject.Screening.ExclusionСriteria.SteroidTherapyCondition.SteroidTherapy
+                                                            {{if eq
+                                                            .Subject.Screening.ExclusionСriteria.SteroidTherapyCondition.SteroidTherapy
                                                             2}}
                                                             <input class="form-check-input" type="radio"
                                                                 name="exclusion2" id="exclusion2Radio2" value="2"
@@ -2493,25 +2511,25 @@
                 </div>
             </div>
         </div>
-{{else }}
-<div class="col - 8 ">
-<div class="bg-white rounded shadow-sm">
-    <br>
-    <h4 class="text-center" >
-        Для  того чтобы начать работать с протоколом создайте первый субъект
-    </h4>
-    <br>
-    <br>
-    <div class="d-grid gap-2">
-        <button type="button" class="btn btn-sm  btn-primary" data-bs-toggle="modal"
-            data-bs-target="#updateCenter">
-            Добавить субьект исследования
-        </button>
-    </div>
-</div>
-</div>
+        {{else }}
+        <div class="col - 8 ">
+            <div class="bg-white rounded shadow-sm">
+                <br>
+                <h4 class="text-center">
+                    Для того чтобы начать работать с протоколом создайте первый субъект
+                </h4>
+                <br>
+                <br>
+                <div class="d-grid gap-2">
+                    <button type="button" class="btn btn-sm  btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#updateCenter">
+                        Добавить субьект исследования
+                    </button>
+                </div>
+            </div>
+        </div>
 
-{{end}}
+        {{end}}
 
 
         </p>
@@ -2532,36 +2550,89 @@
         <div class="discussions" id="discussions">
             <div data-bs-spy="scroll" data-bs-target="discussions" data-bs-offset="0" tabindex="0">
                 <h5 class="text-center">Обсуждения</h5>
-                {{range .ConsentErrors }}
+                <div class="accordion" id="accordionExample">
+                    <h6 class="text-center"><strong>Информированное согласие</strong> </h6>
+                
+                    {{range $i, $error := .ConsentErrors}}
+                    
 
-                <div class="message-container">
-                    <h6>&nbsp;&nbsp;•&nbsp; {{.Field}}    </h6>
-                    <h8>&nbsp;&nbsp;•&nbsp;  {{.Reasons}} </h8>
-                    <h8>&nbsp;&nbsp;•&nbsp; {{.Comments}} </h8>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading1{{$i}}">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapse1{{$i}}" aria-expanded="false" aria-controls="collapse1{{$i}}">
+                                {{$error.Field}}
+                            </button>
+                        </h2>
+                        <div id="collapse1{{$i}}" class="accordion-collapse collapse " aria-labelledby="heading1{{$i}}"
+                            data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <ul class="list-unstyled">
+                                    <li><h6>Причина:&nbsp;&nbsp;{{$error.Reasons}}  </h6></li>
+                                  
+                                    <li><h6>Комментарий:&nbsp;&nbsp;{{$error.Comments}} </h6></li>
+                                   
+                                  </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{end}}
+                    <br>
+                    <h6 class="text-center"><strong>Демография</h6> </label>
+                 
+                    {{range $i, $error := .DemographyErrors }}
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading2{{$i}}">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapse2{{$i}}" aria-expanded="false" aria-controls="collapse2{{$i}}">
+                                {{$error.Field}}
+                            </button>
+                        </h2>
+                        <div id="collapse2{{$i}}" class="accordion-collapse collapse " aria-labelledby="heading2{{$i}}"
+                            data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <ul class="list-unstyled">
+                                    <li><h6>Причина:&nbsp;&nbsp;{{$error.Reasons}}  </h6></li>
+                                  
+                                    <li><h6>Комментарий:&nbsp;&nbsp;{{$error.Comments}} </h6></li>
+                                   
+                                  </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{end}}
+                    <br>
+                    <h6 class="text-center"><strong>&nbsp;&nbsp;&nbsp;&nbsp;Антропометрия</strong> </h6>
+                
+                    {{range $i, $error := .AnthropometryErrors }}
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading3{{$i}}">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapse3{{$i}}" aria-expanded="false" aria-controls="collapse3{{$i}}">
+                                {{.Field}}
+                            </button>
+                        </h2>
+                        <div id="collapse3{{$i}}" class="accordion-collapse collapse " aria-labelledby="heading3{{$i}}"
+                            data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <ul class="list-unstyled">
+                                    <li><h6>Причина:&nbsp;&nbsp;{{$error.Reasons}}  </h6></li>
+                                  
+                                    <li><h6>Комментарий:&nbsp;&nbsp;{{$error.Comments}} </h6></li>
+                                   
+                                  </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{end}}
+
+
                 </div>
-                <br>
 
-
-                {{end}}
-
-                {{range .DemographyErrors}}
-
-                <div class="message-container">
-                    <h6>&nbsp;&nbsp;•&nbsp; {{.Field}}    </h6>
-                    <h8>&nbsp;&nbsp;•&nbsp;  {{.Reasons}} </h8>
-                    <h8>&nbsp;&nbsp;•&nbsp; {{.Comments}} </h8>
-                </div>
-                <br>
-                {{end}}
-
-                {{range .AnthropometryErrors}}
-                <div class="message-container">
-                    <h6>&nbsp;&nbsp;•&nbsp; {{.Field}}    </h6>
-                    <h8>&nbsp;&nbsp;•&nbsp;  {{.Reasons}} </h8>
-                    <h8>&nbsp;&nbsp;•&nbsp; {{.Comments}} </h8>
-                </div>
-                <br>
-                {{end}}
 
             </div>
         </div>
@@ -2573,7 +2644,7 @@
         function updateColorWithComment(field, id, color) {
             let subjectNum = '{{.Subject.Number}}'
             let protocolId = '{{.Subject.ProtocolId}}'
-            console.log(field.name, id , color)
+            console.log(field.name, id, color)
             fetch('/subject/screening/updatecolorwithcomment', {
 
                 method: 'POST',
@@ -2616,14 +2687,14 @@
 
 
         (function () {
-            for (let i = 1; i <=  14; i++) {
+            for (let i = 1; i <= 14; i++) {
                 let t = document.getElementById("condition" + i)
 
                 let field = t.getAttribute("field-name")
 
                 let color = t.getAttribute("color-value")
 
-               
+
                 switch (color) {
                     case "1":
                         t.insertAdjacentHTML('beforeend', `
@@ -2770,7 +2841,7 @@
                         
                         </span>
                     `)
-                    t.insertAdjacentHTML('beforeend', `
+                        t.insertAdjacentHTML('beforeend', `
                                               <!-- Modal -->
                                             <div class="modal fade" id="denied_${i}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
                                                 aria-labelledby="denied_${i}" aria-hidden="true">
@@ -2971,7 +3042,7 @@
                               
                               </span>
                     `)
-                    t.insertAdjacentHTML('beforeend', `
+                        t.insertAdjacentHTML('beforeend', `
                                               <!-- Modal -->
                                             <div class="modal fade" id="denied_${i}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
                                                 aria-labelledby="denied_${i}" aria-hidden="true">
