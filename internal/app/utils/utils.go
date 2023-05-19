@@ -24,15 +24,18 @@ func GetFieldName(field string) string {
 	m["time_of_sign"] = "screening.informaionconsent.timeofsigncondition."
 	m["original"] = "screening.informaionconsent.receivedaninsurancepolicycondition."
 	m["consent"] = "screening.informaionconsent.receivedaninformaionconsentcondition."
+
 	m["sex"] = "screening.demography.sexcondition."
 	m["race"] = "screening.demography.racecondition."
 	m["birth_date"] = "screening.demography.birthdatecondition."
+
 	m["data_been_measured"] = "screening.anthropometry.anthropometricdatabeenmeasuredcondition."
 	m["if_not"] = "screening.anthropometry.reasonifnotcondition."
 	m["date_of_start"] = "screening.anthropometry.dateofstartmeasuredcondition."
 	m["weight"] = "screening.anthropometry.weightofbodycondition."
 	m["height"] = "screening.anthropometry.heightofbodycondition."
 	m["index"] = "screening.anthropometry.indexweigthofbodycondition."
+
 	m["inclusion1"] = "screening.inclusioncriteria.presenceofaninformationpanelcondition."
 	m["inclusion2"] = "screening.inclusioncriteria.aged18to55yearscondition."
 	m["inclusion3"] = "screening.inclusioncriteria.negativehivtestresultcondition."
@@ -47,6 +50,31 @@ func GetFieldName(field string) string {
 	m["inclusion12"] = "screening.inclusioncriteria.nomyocardialchangescondition."
 	m["inclusion13"] = "screening.inclusioncriteria.negativetestresultforcovidcondition."
 	m["inclusion14"] = "screening.inclusioncriteria.nocontraindicationstovaccinationcondition."
+
+	m["exclusion1"] = "screening.exclusionсriteria.lackofsignedinformedconsentcondition."
+	m["exclusion2"] = "screening.exclusionсriteria.steroidtherapycondition."
+	m["exclusion3"] = "screening.exclusionсriteria.therapywithimmunosuppressivedrugscondition."
+	m["exclusion4"] = "screening.exclusionсriteria.femalesubjectsduringpregnancycondition."
+	m["exclusion5"] = "screening.exclusionсriteria.strokeinlessthanoneyearcondition."
+	m["exclusion6"] = "screening.exclusionсriteria.chronicsystemicinfectionscondition."
+	m["exclusion7"] = "screening.exclusionсriteria.aggravatedallergichistorycondition."
+	m["exclusion8"] = "screening.exclusionсriteria.presenceofahistoryofneoplasmscondition."
+	m["exclusion9"] = "screening.exclusionсriteria.historyofsplenectomycondition."
+	m["exclusion10"] = "screening.exclusionсriteria.neutropeniacondition."
+	m["exclusion11"] = "screening.exclusionсriteria.subjectswithactivesyphiliscondition."
+	m["exclusion12"] = "screening.exclusionсriteria.anorexiacondition."
+	m["exclusion13"] = "screening.exclusionсriteria.extensivetattooscondition."
+	m["exclusion14"] = "screening.exclusionсriteria.takingnarcoticandpsychostimulantdrugscondition."
+	m["exclusion15"] = "screening.exclusionсriteria.smokingmoretthantencigarettesadaycondition."
+	m["exclusion16"] = "screening.exclusionсriteria.alcoholintakecondition."
+	m["exclusion17"] = "screening.exclusionсriteria.plannedhospitalizationconditiont."
+	m["exclusion18"] = "screening.exclusionсriteria.donorblooddonationcondition."
+	m["exclusion19"] = "screening.exclusionсriteria.subjectparticipationinanyotherstudycondition."
+	m["exclusion20"] = "screening.exclusionсriteria.anyvaccinationinthelastmonthcondition."
+	m["exclusion21"] = "screening.exclusionсriteria.inabilitytoreadinrussiancondition."
+	m["exclusion22"] = "screening.exclusionсriteria.researchcenterstaffcondition."
+	m["exclusion23"] = "screening.exclusionсriteria.anyotherstateofthesubjectofthestudycondition."
+
 	return m[field]
 }
 
@@ -242,4 +270,170 @@ func GetInclusionErrors(subject *model.Subject) []*model.InformationConsentError
 			Comments: subject.Screening.InclusionCriteria.NoContraindicationsToVaccinationCondition.Comment})
 	}
 	return errors
+}
+
+func GetExclusionErrors(subject *model.Subject) []*model.InformationConsentErrors {
+
+	var errors []*model.InformationConsentErrors
+	if subject.Screening.ExclusionСriteria.LackOfSignedInformedConsentCondition.Color == 3 || subject.Screening.ExclusionСriteria.LackOfSignedInformedConsentCondition.Color == 4 {
+		errors = append(errors, &model.InformationConsentErrors{
+			Field:    "Отсутствие подписанного информированного согласия",
+			Reasons:  subject.Screening.ExclusionСriteria.LackOfSignedInformedConsentCondition.Reason,
+			Comments: subject.Screening.ExclusionСriteria.LackOfSignedInformedConsentCondition.Comment})
+	}
+	if subject.Screening.ExclusionСriteria.SteroidTherapyCondition.Color == 3 || subject.Screening.ExclusionСriteria.SteroidTherapyCondition.Color == 4 {
+		errors = append(errors, &model.InformationConsentErrors{
+			Field:    "Терапия стероидами (за исключением гормональных контрацептивных препаратов) и/или иммуноглобулинами или другими препаратами крови, не завершившаяся за 30 дней до включения в исследование",
+			Reasons:  subject.Screening.ExclusionСriteria.SteroidTherapyCondition.Reason,
+			Comments: subject.Screening.ExclusionСriteria.SteroidTherapyCondition.Comment})
+	}
+
+	if subject.Screening.ExclusionСriteria.TherapyWithImmunosuppressiveDrugsCondition.Color == 3 || subject.Screening.ExclusionСriteria.TherapyWithImmunosuppressiveDrugsCondition.Color == 4 {
+		errors = append(errors, &model.InformationConsentErrors{
+			Field:    "Терапия иммуносупрессивными препаратами, завершившаяся менее чем за 3 месяца до включения в исследование",
+			Reasons:  subject.Screening.ExclusionСriteria.TherapyWithImmunosuppressiveDrugsCondition.Reason,
+			Comments: subject.Screening.ExclusionСriteria.TherapyWithImmunosuppressiveDrugsCondition.Comment})
+	}
+
+	if subject.Screening.ExclusionСriteria.FemaleSubjectsDuringPregnancyCondition.Color == 3 || subject.Screening.ExclusionСriteria.FemaleSubjectsDuringPregnancyCondition.Color == 4 {
+		errors = append(errors, &model.InformationConsentErrors{
+			Field:    "Субъекты женского пола в период беременности или кормления грудью",
+			Reasons:  subject.Screening.ExclusionСriteria.FemaleSubjectsDuringPregnancyCondition.Reason,
+			Comments: subject.Screening.ExclusionСriteria.FemaleSubjectsDuringPregnancyCondition.Comment})
+	}
+
+	if subject.Screening.ExclusionСriteria.StrokeInLessThanOneYearCondition.Color == 3 || subject.Screening.ExclusionСriteria.StrokeInLessThanOneYearCondition.Color == 4 {
+		errors = append(errors, &model.InformationConsentErrors{
+			Field:    "Перенесенный менее чем за один год до включения в исследование острый коронарный синдром или инсульт",
+			Reasons:  subject.Screening.ExclusionСriteria.StrokeInLessThanOneYearCondition.Reason,
+			Comments: subject.Screening.ExclusionСriteria.StrokeInLessThanOneYearCondition.Comment})
+	}
+
+	if subject.Screening.ExclusionСriteria.ChronicSystemicInfectionsCondition.Color == 3 || subject.Screening.ExclusionСriteria.ChronicSystemicInfectionsCondition.Color == 4 {
+		errors = append(errors, &model.InformationConsentErrors{
+			Field:    "Туберкулез, хронические системные инфекции ",
+			Reasons:  subject.Screening.ExclusionСriteria.ChronicSystemicInfectionsCondition.Reason,
+			Comments: subject.Screening.ExclusionСriteria.ChronicSystemicInfectionsCondition.Comment})
+	}
+
+	if subject.Screening.ExclusionСriteria.AggravatedAllergicHistoryCondition.Color == 3 || subject.Screening.ExclusionСriteria.AggravatedAllergicHistoryCondition.Color == 4 {
+		errors = append(errors, &model.InformationConsentErrors{
+			Field:    "Отягощенный аллергологический анамнез (наличие в анамнезе сведений об анафилактическом шоке, отеке Квинке, полиморфной экссудативной экземе, сывороточной болезни), гиперчувствительность или аллергические реакции на введение иммунобиологических препаратов, известные аллергические реакции на компоненты препарата, обострение аллергических заболеваний на день включения в исследование ",
+			Reasons:  subject.Screening.ExclusionСriteria.AggravatedAllergicHistoryCondition.Reason,
+			Comments: subject.Screening.ExclusionСriteria.AggravatedAllergicHistoryCondition.Comment})
+	}
+
+	if subject.Screening.ExclusionСriteria.PresenceOfAHistoryOfNeoplasmsCondition.Color == 3 || subject.Screening.ExclusionСriteria.PresenceOfAHistoryOfNeoplasmsCondition.Color == 4 {
+		errors = append(errors, &model.InformationConsentErrors{
+			Field:    "Наличие в анамнезе новообразований (коды МКБ C00-D09)",
+			Reasons:  subject.Screening.ExclusionСriteria.PresenceOfAHistoryOfNeoplasmsCondition.Reason,
+			Comments: subject.Screening.ExclusionСriteria.PresenceOfAHistoryOfNeoplasmsCondition.Comment})
+	}
+
+	if subject.Screening.ExclusionСriteria.HistoryOfSplenectomyCondition.Color == 3 || subject.Screening.ExclusionСriteria.HistoryOfSplenectomyCondition.Color == 4 {
+		errors = append(errors, &model.InformationConsentErrors{
+			Field:    "Спленэктомия в анамнезе",
+			Reasons:  subject.Screening.ExclusionСriteria.HistoryOfSplenectomyCondition.Reason,
+			Comments: subject.Screening.ExclusionСriteria.HistoryOfSplenectomyCondition.Comment})
+	}
+
+	if subject.Screening.ExclusionСriteria.NeutropeniaCondition.Color == 3 || subject.Screening.ExclusionСriteria.NeutropeniaCondition.Color == 4 {
+		errors = append(errors, &model.InformationConsentErrors{
+			Field:    "Нейтропения (снижение абсолютного числа нейтрофилов менее 1000/мм3), агранулоцитоз, значительная кровопотеря, тяжелая анемия (гемоглобин менее 80 г/л), иммунодефицит в анамнезе в течение 6 месяцев до включения в исследование ",
+			Reasons:  subject.Screening.ExclusionСriteria.NeutropeniaCondition.Reason,
+			Comments: subject.Screening.ExclusionСriteria.NeutropeniaCondition.Comment})
+	}
+
+	if subject.Screening.ExclusionСriteria.SubjectsWithActiveSyphilisCondition.Color == 3 || subject.Screening.ExclusionСriteria.SubjectsWithActiveSyphilisCondition.Color == 4 {
+		errors = append(errors, &model.InformationConsentErrors{
+			Field:    "Субъекты с активной формой сифилиса, ВИЧ/СПИД, гепатиты B и C",
+			Reasons:  subject.Screening.ExclusionСriteria.SubjectsWithActiveSyphilisCondition.Reason,
+			Comments: subject.Screening.ExclusionСriteria.SubjectsWithActiveSyphilisCondition.Comment})
+	}
+
+	if subject.Screening.ExclusionСriteria.AnorexiaCondition.Color == 3 || subject.Screening.ExclusionСriteria.AnorexiaCondition.Color == 4 {
+		errors = append(errors, &model.InformationConsentErrors{
+			Field:    "Анорексия, белковый дефицит любого происхождения",
+			Reasons:  subject.Screening.ExclusionСriteria.AnorexiaCondition.Reason,
+			Comments: subject.Screening.ExclusionСriteria.AnorexiaCondition.Comment})
+	}
+
+	if subject.Screening.ExclusionСriteria.ExtensiveTattoosCondition.Color == 3 || subject.Screening.ExclusionСriteria.ExtensiveTattoosCondition.Color == 4 {
+		errors = append(errors, &model.InformationConsentErrors{
+			Field:    "Обширные татуировки на местах введения препарата (область дельтовидной мышцы), не позволяющие оценить местную реакцию на введение ИЛП",
+			Reasons:  subject.Screening.ExclusionСriteria.ExtensiveTattoosCondition.Reason,
+			Comments: subject.Screening.ExclusionСriteria.ExtensiveTattoosCondition.Comment})
+	}
+
+	if subject.Screening.ExclusionСriteria.TakingNarcoticAndPsychostimulantDrugsCondition.Color == 3 || subject.Screening.ExclusionСriteria.TakingNarcoticAndPsychostimulantDrugsCondition.Color == 4 {
+		errors = append(errors, &model.InformationConsentErrors{
+			Field:    "Прием наркотических и психостимулирующих препаратов в настоящее время или в анамнезе",
+			Reasons:  subject.Screening.ExclusionСriteria.TakingNarcoticAndPsychostimulantDrugsCondition.Reason,
+			Comments: subject.Screening.ExclusionСriteria.TakingNarcoticAndPsychostimulantDrugsCondition.Comment})
+	}
+
+	if subject.Screening.ExclusionСriteria.SmokingMoretThanTenCigarettesADayCondition.Color == 3 || subject.Screening.ExclusionСriteria.SmokingMoretThanTenCigarettesADayCondition.Color == 4 {
+		errors = append(errors, &model.InformationConsentErrors{
+			Field:    "Курение: более 10 сигарет в день",
+			Reasons:  subject.Screening.ExclusionСriteria.SmokingMoretThanTenCigarettesADayCondition.Reason,
+			Comments: subject.Screening.ExclusionСriteria.SmokingMoretThanTenCigarettesADayCondition.Comment})
+	}
+	if subject.Screening.ExclusionСriteria.AlcoholIntakeCondition.Color == 3 || subject.Screening.ExclusionСriteria.AlcoholIntakeCondition.Color == 4 {
+		errors = append(errors, &model.InformationConsentErrors{
+			Field:    "Прием алкоголя превышающий уровень низкого риска: не более 20 граммов чистого алкоголя в день, не более 5 дней в неделю, прием алкоголя в течение 48 часов до введения исследуемого препарата",
+			Reasons:  subject.Screening.ExclusionСriteria.AlcoholIntakeCondition.Reason,
+			Comments: subject.Screening.ExclusionСriteria.AlcoholIntakeCondition.Comment})
+	}
+
+	if subject.Screening.ExclusionСriteria.PlannedHospitalizationConditiont.Color == 3 || subject.Screening.ExclusionСriteria.PlannedHospitalizationConditiont.Color == 4 {
+		errors = append(errors, &model.InformationConsentErrors{
+			Field:    "Плановая госпитализация и/или хирургическое вмешательство в период участия в исследовании, а также за 4 недели до предполагаемой даты вакцинации",
+			Reasons:  subject.Screening.ExclusionСriteria.PlannedHospitalizationConditiont.Reason,
+			Comments: subject.Screening.ExclusionСriteria.PlannedHospitalizationConditiont.Comment})
+	}
+	if subject.Screening.ExclusionСriteria.DonorBloodDonationCondition.Color == 3 || subject.Screening.ExclusionСriteria.DonorBloodDonationCondition.Color == 4 {
+		errors = append(errors, &model.InformationConsentErrors{
+			Field:    "Донорская сдача крови (450 мл и более крови или плазмы) менее чем за 2 месяца до начала исследования ",
+			Reasons:  subject.Screening.ExclusionСriteria.DonorBloodDonationCondition.Reason,
+			Comments: subject.Screening.ExclusionСriteria.DonorBloodDonationCondition.Comment})
+	}
+
+	if subject.Screening.ExclusionСriteria.SubjectParticipationInAnyOtherStudyCondition.Color == 3 || subject.Screening.ExclusionСriteria.SubjectParticipationInAnyOtherStudyCondition.Color == 4 {
+		errors = append(errors, &model.InformationConsentErrors{
+			Field:    "Участие субъекта в любом другом интервенционном клиническом исследовании за последние 90 дней",
+			Reasons:  subject.Screening.ExclusionСriteria.SubjectParticipationInAnyOtherStudyCondition.Reason,
+			Comments: subject.Screening.ExclusionСriteria.SubjectParticipationInAnyOtherStudyCondition.Comment})
+	}
+
+	if subject.Screening.ExclusionСriteria.AnyVaccinationInTheLastMonthCondition.Color == 3 || subject.Screening.ExclusionСriteria.AnyVaccinationInTheLastMonthCondition.Color == 4 {
+		errors = append(errors, &model.InformationConsentErrors{
+			Field:    "Любая вакцинация за последние 30 дней",
+			Reasons:  subject.Screening.ExclusionСriteria.AnyVaccinationInTheLastMonthCondition.Reason,
+			Comments: subject.Screening.ExclusionСriteria.AnyVaccinationInTheLastMonthCondition.Comment})
+	}
+
+	if subject.Screening.ExclusionСriteria.InabilityToReadInRussianCondition.Color == 3 || subject.Screening.ExclusionСriteria.InabilityToReadInRussianCondition.Color == 4 {
+		errors = append(errors, &model.InformationConsentErrors{
+			Field:    "Неспособность читать на русском языке; невозможность или нежелание понять суть исследования. Любые другие состояния, которые ограничивают правомерность получения информированного согласия или могут повлиять на способность добровольца принять участие в исследовании повлиять на способность добровольца принять участие в исследовании ",
+			Reasons:  subject.Screening.ExclusionСriteria.InabilityToReadInRussianCondition.Reason,
+			Comments: subject.Screening.ExclusionСriteria.InabilityToReadInRussianCondition.Comment})
+	}
+
+	if subject.Screening.ExclusionСriteria.ResearchCenterStaffCondition.Color == 3 || subject.Screening.ExclusionСriteria.ResearchCenterStaffCondition.Color == 4 {
+		errors = append(errors, &model.InformationConsentErrors{
+			Field:    "Персонал исследовательских центров и другие сотрудники, непосредственно участвующие в проведении исследования и члены их семей (главный исследователь и члены исследовательской команды)",
+			Reasons:  subject.Screening.ExclusionСriteria.ResearchCenterStaffCondition.Reason,
+			Comments: subject.Screening.ExclusionСriteria.ResearchCenterStaffCondition.Comment})
+	}
+
+	if subject.Screening.ExclusionСriteria.LackOfSignedInformedConsentCondition.Color == 3 || subject.Screening.ExclusionСriteria.LackOfSignedInformedConsentCondition.Color == 4 {
+		errors = append(errors, &model.InformationConsentErrors{
+			Field:    "Любое иное состояние субъекта исследования, которое, по мнению-врача- исследователя, может препятствовать завершению исследования в соответствии с протоколом ",
+			Reasons:  subject.Screening.ExclusionСriteria.AnyOtherStateOfTheSubjectOfTheStudyCondition.Reason,
+			Comments: subject.Screening.ExclusionСriteria.AnyOtherStateOfTheSubjectOfTheStudyCondition.Comment})
+
+	}
+
+	return errors
+
 }

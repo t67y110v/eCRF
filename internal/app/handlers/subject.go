@@ -23,7 +23,7 @@ func (h *Handlers) NewSubject() fiber.Handler {
 			return utils.ErrorPage(c, err)
 		}
 
-		return c.Redirect(fmt.Sprintf("/protocol/%s/1", c.FormValue("protocol_id")))
+		return c.Redirect(fmt.Sprintf("/protocol/%s/%s", c.FormValue("protocol_id"), c.FormValue("number")))
 	}
 }
 
