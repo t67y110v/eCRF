@@ -63,6 +63,7 @@ func (h *Pages) ProtocolPage() fiber.Handler {
 			"ConsentErrors":       utils.GetInformationConsentErrors(subject),
 			"DemographyErrors":    utils.GetDemographyErrorsErrors(subject),
 			"AnthropometryErrors": utils.GetAnthropometryErrors(subject),
+			"InclusionErrors":     utils.GetInclusionErrors(subject),
 		})
 
 	}

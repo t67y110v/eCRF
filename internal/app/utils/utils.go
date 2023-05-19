@@ -33,6 +33,20 @@ func GetFieldName(field string) string {
 	m["weight"] = "screening.anthropometry.weightofbodycondition."
 	m["height"] = "screening.anthropometry.heightofbodycondition."
 	m["index"] = "screening.anthropometry.indexweigthofbodycondition."
+	m["inclusion1"] = "screening.inclusioncriteria.presenceofaninformationpanelcondition."
+	m["inclusion2"] = "screening.inclusioncriteria.aged18to55yearscondition."
+	m["inclusion3"] = "screening.inclusioncriteria.negativehivtestresultcondition."
+	m["inclusion4"] = "screening.inclusioncriteria.bodymassindexcondition."
+	m["inclusion5"] = "screening.inclusioncriteria.absenceofacuteinfectiousdiseasescondition."
+	m["inclusion6"] = "screening.inclusioncriteria.consenttouseeffectivemethodsofcontraceptioncondition."
+	m["inclusion7"] = "screening.inclusioncriteria.negativepregnancytestcondition."
+	m["inclusion8"] = "screening.inclusioncriteria.negativedrugtestcondition."
+	m["inclusion9"] = "screening.inclusioncriteria.negativealcoholtestcondition."
+	m["inclusion10"] = "screening.inclusioncriteria.nohistoryofseverepostvaccinationreactionscondition."
+	m["inclusion11"] = "screening.inclusioncriteria.indicatorsbloodtestsatscreeningwithincondition."
+	m["inclusion12"] = "screening.inclusioncriteria.nomyocardialchangescondition."
+	m["inclusion13"] = "screening.inclusioncriteria.negativetestresultforcovidcondition."
+	m["inclusion14"] = "screening.inclusioncriteria.nocontraindicationstovaccinationcondition."
 	return m[field]
 }
 
@@ -137,6 +151,95 @@ func GetAnthropometryErrors(subject *model.Subject) []*model.InformationConsentE
 			Field:    "Индекс массы тела(рассчетное значение)",
 			Reasons:  subject.Screening.Anthropometry.IndexWeigthOfBodyCondition.Reason,
 			Comments: subject.Screening.Anthropometry.IndexWeigthOfBodyCondition.Comment})
+	}
+	return errors
+}
+
+func GetInclusionErrors(subject *model.Subject) []*model.InformationConsentErrors {
+	var errors []*model.InformationConsentErrors
+	if subject.Screening.InclusionCriteria.PresenceOfAnInformationPanelCondition.Color == 3 || subject.Screening.InclusionCriteria.PresenceOfAnInformationPanelCondition.Color == 4 {
+		errors = append(errors, &model.InformationConsentErrors{
+			Field:    "Наличие письменного информированного согласия субъекта на участие в исследовании  ",
+			Reasons:  subject.Screening.InclusionCriteria.PresenceOfAnInformationPanelCondition.Reason,
+			Comments: subject.Screening.InclusionCriteria.PresenceOfAnInformationPanelCondition.Comment})
+	}
+	if subject.Screening.InclusionCriteria.Aged18To55YearsCondition.Color == 3 || subject.Screening.InclusionCriteria.Aged18To55YearsCondition.Color == 4 {
+		errors = append(errors, &model.InformationConsentErrors{
+			Field:    "Мужчины и женщины в возрасте от 18 до 55 лет",
+			Reasons:  subject.Screening.InclusionCriteria.Aged18To55YearsCondition.Reason,
+			Comments: subject.Screening.InclusionCriteria.Aged18To55YearsCondition.Comment})
+	}
+	if subject.Screening.InclusionCriteria.NegativeHIVTestResultCondition.Color == 3 || subject.Screening.InclusionCriteria.NegativeHIVTestResultCondition.Color == 4 {
+		errors = append(errors, &model.InformationConsentErrors{
+			Field:    "Отрицательный результат исследования на ВИЧ, гепатиты, сифилис",
+			Reasons:  subject.Screening.InclusionCriteria.NegativeHIVTestResultCondition.Reason,
+			Comments: subject.Screening.InclusionCriteria.NegativeHIVTestResultCondition.Comment})
+	}
+	if subject.Screening.InclusionCriteria.BodyMassIndexCondition.Color == 3 || subject.Screening.InclusionCriteria.BodyMassIndexCondition.Color == 4 {
+		errors = append(errors, &model.InformationConsentErrors{
+			Field:    "Индекс массы тела (ИМТ) составляет 18.5≤ИМТ≤30  ",
+			Reasons:  subject.Screening.InclusionCriteria.BodyMassIndexCondition.Reason,
+			Comments: subject.Screening.InclusionCriteria.BodyMassIndexCondition.Comment})
+	}
+	if subject.Screening.InclusionCriteria.AbsenceOfAcuteInfectiousDiseasesCondition.Color == 3 || subject.Screening.InclusionCriteria.AbsenceOfAcuteInfectiousDiseasesCondition.Color == 4 {
+		errors = append(errors, &model.InformationConsentErrors{
+			Field:    "Отсутствие острых инфекционных и/или респираторных заболеваний по меньшей мере в течение 14-ти дней до включения в исследование",
+			Reasons:  subject.Screening.InclusionCriteria.ConsentToUseEffectiveMethodsOfContraceptionCondition.Reason,
+			Comments: subject.Screening.InclusionCriteria.ConsentToUseEffectiveMethodsOfContraceptionCondition.Comment})
+	}
+	if subject.Screening.InclusionCriteria.ConsentToUseEffectiveMethodsOfContraceptionCondition.Color == 3 || subject.Screening.InclusionCriteria.ConsentToUseEffectiveMethodsOfContraceptionCondition.Color == 4 {
+		errors = append(errors, &model.InformationConsentErrors{
+			Field:    "Согласие на использование эффективных методов контрацепции в ходе всего периода участия в исследовании",
+			Reasons:  subject.Screening.InclusionCriteria.ConsentToUseEffectiveMethodsOfContraceptionCondition.Reason,
+			Comments: subject.Screening.InclusionCriteria.ConsentToUseEffectiveMethodsOfContraceptionCondition.Comment})
+	}
+	if subject.Screening.InclusionCriteria.NegativePregnancyTestCondition.Color == 3 || subject.Screening.InclusionCriteria.NegativePregnancyTestCondition.Color == 4 {
+		errors = append(errors, &model.InformationConsentErrors{
+			Field:    "Отрицательный тест на беременность по результатам исследования мочи на визите скрининга (для женщин детородного возраста)",
+			Reasons:  subject.Screening.InclusionCriteria.NegativePregnancyTestCondition.Reason,
+			Comments: subject.Screening.InclusionCriteria.NegativePregnancyTestCondition.Comment})
+	}
+	if subject.Screening.InclusionCriteria.NegativeDrugTestCondition.Color == 3 || subject.Screening.InclusionCriteria.NegativeDrugTestCondition.Color == 4 {
+		errors = append(errors, &model.InformationConsentErrors{
+			Field:    "Отрицательный тест на наличие наркотических и психостимулирующих средств в моче на визите скрининга",
+			Reasons:  subject.Screening.InclusionCriteria.NegativeDrugTestCondition.Reason,
+			Comments: subject.Screening.InclusionCriteria.NegativeDrugTestCondition.Comment})
+	}
+	if subject.Screening.InclusionCriteria.NegativeAlcoholTestCondition.Color == 3 || subject.Screening.InclusionCriteria.NegativeAlcoholTestCondition.Color == 4 {
+		errors = append(errors, &model.InformationConsentErrors{
+			Field:    "Отрицательный тест на содержание алкоголя на визите скрининга",
+			Reasons:  subject.Screening.InclusionCriteria.NegativeAlcoholTestCondition.Reason,
+			Comments: subject.Screening.InclusionCriteria.NegativeAlcoholTestCondition.Comment})
+	}
+	if subject.Screening.InclusionCriteria.NoHistoryOfSeverePostVaccinationReactionsCondition.Color == 3 || subject.Screening.InclusionCriteria.NoHistoryOfSeverePostVaccinationReactionsCondition.Color == 4 {
+		errors = append(errors, &model.InformationConsentErrors{
+			Field:    "Отсутствие в анамнезе выраженных поствакцинальных реакций или поствакцинальных осложнений на предыдущее применение иммунобиологических препаратов ",
+			Reasons:  subject.Screening.InclusionCriteria.NoHistoryOfSeverePostVaccinationReactionsCondition.Reason,
+			Comments: subject.Screening.InclusionCriteria.NoHistoryOfSeverePostVaccinationReactionsCondition.Comment})
+	}
+	if subject.Screening.InclusionCriteria.IndicatorsBloodTestsAtScreeningWithinCondition.Color == 3 || subject.Screening.InclusionCriteria.IndicatorsBloodTestsAtScreeningWithinCondition.Color == 4 {
+		errors = append(errors, &model.InformationConsentErrors{
+			Field:    "Показатели общего и биохимического анализа крови на скрининге в пределах 1,1 х ВГРИ – 0,9 х НГРИ",
+			Reasons:  subject.Screening.InclusionCriteria.IndicatorsBloodTestsAtScreeningWithinCondition.Reason,
+			Comments: subject.Screening.InclusionCriteria.IndicatorsBloodTestsAtScreeningWithinCondition.Comment})
+	}
+	if subject.Screening.InclusionCriteria.NoMyocardialChangesCondition.Color == 3 || subject.Screening.InclusionCriteria.NoMyocardialChangesCondition.Color == 4 {
+		errors = append(errors, &model.InformationConsentErrors{
+			Field:    "Отсутствие изменений миокарда воспалительного или дистрофического характера по результатам ЭКГ на скрининге",
+			Reasons:  subject.Screening.InclusionCriteria.NoMyocardialChangesCondition.Reason,
+			Comments: subject.Screening.InclusionCriteria.NoMyocardialChangesCondition.Comment})
+	}
+	if subject.Screening.InclusionCriteria.NegativeTestResultForCOVIDCondition.Color == 3 || subject.Screening.InclusionCriteria.NegativeTestResultForCOVIDCondition.Color == 4 {
+		errors = append(errors, &model.InformationConsentErrors{
+			Field:    "Отрицательный результат исследования на COVID-2019, определяемый методом ПЦР или экспресс-методом за 3 дня до включения в исследование",
+			Reasons:  subject.Screening.InclusionCriteria.NegativeTestResultForCOVIDCondition.Reason,
+			Comments: subject.Screening.InclusionCriteria.NegativeTestResultForCOVIDCondition.Comment})
+	}
+	if subject.Screening.InclusionCriteria.NoContraindicationsToVaccinationCondition.Color == 3 || subject.Screening.InclusionCriteria.NoContraindicationsToVaccinationCondition.Color == 4 {
+		errors = append(errors, &model.InformationConsentErrors{
+			Field:    "Отсутствие противопоказаний к вакцинации",
+			Reasons:  subject.Screening.InclusionCriteria.NoContraindicationsToVaccinationCondition.Reason,
+			Comments: subject.Screening.InclusionCriteria.NoContraindicationsToVaccinationCondition.Comment})
 	}
 	return errors
 }
