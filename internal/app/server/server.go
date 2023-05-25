@@ -120,6 +120,7 @@ func (s *server) configureRouter() {
 	screening.Post("/anthropometry", s.handlers.AnthropometrySubject())
 	screening.Post("/inclusioncriteria", s.handlers.InclusionCriteriaSubject())
 	screening.Post("/exclusioncriteria", s.handlers.ExclusionСriteriaSubject())
+	screening.Post("/completion", s.handlers.CompletionOfScreening())
 	screening.Post("/updatecolor", s.handlers.UpdateColor())
 	screening.Post("/updatecolorwithcomment", s.handlers.UpdateColorWithComment())
 

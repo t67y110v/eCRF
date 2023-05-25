@@ -47,7 +47,7 @@ func (h *Handlers) InformaionConsentSubject() fiber.Handler {
 			return utils.ErrorPage(c, err)
 		}
 
-		return c.Redirect(fmt.Sprintf("/protocol/%d/%s#item-1-2", protocolId, subjectNumber))
+		return c.Redirect(fmt.Sprintf("/protocol/%d/%s#item-1-1", protocolId, subjectNumber))
 	}
 }
 
@@ -82,7 +82,7 @@ func (h *Handlers) DemographySubject() fiber.Handler {
 			h.logger.Warningln(err)
 			return utils.ErrorPage(c, err)
 		}
-		return c.Redirect(fmt.Sprintf("/protocol/%d/%s#item-1-3", protocolId, subjectNumber))
+		return c.Redirect(fmt.Sprintf("/protocol/%d/%s#item-1-2", protocolId, subjectNumber))
 	}
 }
 
@@ -124,7 +124,7 @@ func (h *Handlers) AnthropometrySubject() fiber.Handler {
 			return utils.ErrorPage(c, err)
 		}
 
-		return c.Redirect(fmt.Sprintf("/protocol/%d/%s#item-1-4", protocolId, subjectNumber))
+		return c.Redirect(fmt.Sprintf("/protocol/%d/%s#item-1-3", protocolId, subjectNumber))
 	}
 }
 
@@ -171,7 +171,7 @@ func (h *Handlers) InclusionCriteriaSubject() fiber.Handler {
 			h.logger.Warningln(err)
 			return utils.ErrorPage(c, err)
 		}
-		return c.Redirect(fmt.Sprintf("/protocol/%d/%s#item-1-5", protocolId, subjectNumber))
+		return c.Redirect(fmt.Sprintf("/protocol/%d/%s#item-1-4", protocolId, subjectNumber))
 	}
 }
 
@@ -234,8 +234,39 @@ func (h *Handlers) ExclusionСriteriaSubject() fiber.Handler {
 			return utils.ErrorPage(c, err)
 		}
 
-		return c.Redirect(fmt.Sprintf("/protocol/%d/%s#item-1-6", protocolId, subjectNumber))
+		return c.Redirect(fmt.Sprintf("/protocol/%d/%s#item-1-5", protocolId, subjectNumber))
 
+	}
+}
+
+func (h *Handlers) CompletionOfScreening() fiber.Handler {
+	return func(c *fiber.Ctx) error {
+
+		subjectNumber := c.FormValue("subject_number")
+		protocolId, err := strconv.Atoi(c.FormValue("protocol_id"))
+		if err != nil {
+			return utils.ErrorPage(c, err)
+		}
+		// TODO: add hidden input with current protocol number to correct redirect
+
+		subject, err := h.mgStore.Subject().GetSubjectByNumber(subjectNumber, protocolId)
+		if err != nil {
+			h.logger.Warningln(err)
+			return utils.ErrorPage(c, err)
+		}
+
+		completion1, _ := strconv.Atoi(c.FormValue("completion1"))
+		completion2, _ := strconv.Atoi(c.FormValue("completion2"))
+		completion3, _ := strconv.Atoi(c.FormValue("completion3"))
+		completion4, _ := strconv.Atoi(c.FormValue("completion4"))
+		completion5 := c.FormValue("completion5")
+		completion6 := c.FormValue("completion6")
+
+		if err := h.mgStore.Screening().CompletionOfScreening(c.Context(), subject.ID, completion1, completion2, completion3, completion4, completion5, completion6); err != nil {
+			h.logger.Warning(err)
+			return utils.ErrorPage(c, err)
+		}
+		return c.Redirect(fmt.Sprintf("/protocol/%d/%s#item-1-6", protocolId, subjectNumber))
 	}
 }
 
@@ -295,7 +326,7 @@ func (h *Handlers) UpdateColorWithComment() fiber.Handler {
 		reason := req.Reason
 		comment := req.Comment
 
-		fmt.Println("s - ", subject.ID, "p - ", protocolId, "field - ", field, "fieldNAme - ", fieldName, "v - ", value, "r - ", reason, "c - ", comment)
+		//fmt.Println("s - ", subject.ID, "p - ", protocolId, "field - ", field, "fieldNAme - ", fieldName, "v - ", value, "r - ", reason, "c - ", comment)
 		if err := h.mgStore.Screening().UpdateColorWithComment(c.Context(), subject.ID, fieldName, reason, comment, value); err != nil {
 			return utils.ErrorPage(c, err)
 		}

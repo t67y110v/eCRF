@@ -47,7 +47,6 @@ type Subject struct {
 				Comment                     string `bson:"comment"`
 			}
 		}
-
 		Anthropometry struct {
 			AnthropometricDataBeenMeasuredCondition struct {
 				AnthropometricDataBeenMeasured int    `bson:"anthropometric_data_been_measured"`
@@ -333,6 +332,44 @@ type Subject struct {
 				Color                               int    `bson:"color"`
 				Reason                              string `bson:"reason"`
 				Comment                             string `bson:"comment"`
+			}
+		}
+		CompletionOfScreening struct {
+			VolunteerEligibleCondition struct {
+				VolunteerEligible int    `bson:"volunteer_eligible"`
+				Color             int    `bson:"color"`
+				Reason            string `bson:"reason"`
+				Comment           string `bson:"comment"`
+			}
+			NoExclusionCriteriaCondition struct {
+				NoExclusionCriteria int    `bson:"no_exclusion_criteria"`
+				Color               int    `bson:"color"`
+				Reason              string `bson:"reason"`
+				Comment             string `bson:"comment"`
+			}
+			InformedOfTheRestrictionsCondition struct {
+				InformedOfTheRestrictions int    `bson:"informed_of_the_restrictions"`
+				Color                     int    `bson:"color"`
+				Reason                    string `bson:"reason"`
+				Comment                   string `bson:"comment"`
+			}
+			VolunteerIncludedCondition struct {
+				VolunteerIncluded int    `bson:"volunteer_included"`
+				Color             int    `bson:"color"`
+				Reason            string `bson:"reason"`
+				Comment           string `bson:"comment"`
+			}
+			ReasonIfNotCondition struct {
+				ReasonIfNot string `bson:"reason_if_not"`
+				Color       int    `bson:"color"`
+				Reason      string `bson:"reason"`
+				Comment     string `bson:"comment"`
+			}
+			CommentCondition struct {
+				CommentValue string `bson:"comment_value"`
+				Color        int    `bson:"color"`
+				Reason       string `bson:"reason"`
+				Comment      string `bson:"comment"`
 			}
 		}
 	}

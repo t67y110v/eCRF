@@ -255,6 +255,43 @@ func (r *MongoScreeningRepository) ExclusionСriteria(
 	return nil
 }
 
+func (r *MongoScreeningRepository) CompletionOfScreening(
+	ctx context.Context,
+	id primitive.ObjectID,
+	VolunteerEligible,
+	NoExclusionCriteria,
+	InformedOfTheRestrictions,
+	VolunteerIncluded int,
+	ReasonIfNot,
+	CommentValue string,
+) error {
+	collection := r.store.client.Database("eCRF").Collection("subjects")
+	filter := bson.M{"_id": id}
+	update := bson.M{
+		"$set": bson.M{
+			"screening.completionofscreening.volunteereligiblecondition.volunteer_eligible":                   VolunteerEligible,
+			"screening.completionofscreening.volunteereligiblecondition.color":                                1,
+			"screening.completionofscreening.noexclusioncriteriacondition.no_exclusion_criteria":              NoExclusionCriteria,
+			"screening.completionofscreening.noexclusioncriteriacondition.color":                              1,
+			"screening.completionofscreening.informedoftherestrictionscondition.informed_of_the_restrictions": InformedOfTheRestrictions,
+			"screening.completionofscreening.informedoftherestrictionscondition.color":                        1,
+			"screening.completionofscreening.volunteerincludedcondition.volunteer_included":                   VolunteerIncluded,
+			"screening.completionofscreening.volunteerincludedcondition.color":                                1,
+			"screening.completionofscreening.reasonifnotcondition.reason_if_not":                              ReasonIfNot,
+			"screening.completionofscreening.reasonifnotcondition.color":                                      1,
+			"screening.completionofscreening.commentcondition.comment_value":                                  CommentValue,
+			"screening.completionofscreening.commentcondition.color":                                          1,
+		},
+	}
+
+	_, err := collection.UpdateOne(ctx, filter, update)
+	if err != nil {
+		return err
+	}
+	return nil
+
+}
+
 func (r *MongoScreeningRepository) UpdateColor(ctx context.Context, id primitive.ObjectID, fieldToUpdate string, field int) error {
 	collection := r.store.client.Database("eCRF").Collection("subjects")
 

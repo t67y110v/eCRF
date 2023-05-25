@@ -65,6 +65,7 @@ func (h *Pages) ProtocolPage() fiber.Handler {
 			"AnthropometryErrors": utils.GetAnthropometryErrors(subject),
 			"InclusionErrors":     utils.GetInclusionErrors(subject),
 			"ExclusionErrors":     utils.GetExclusionErrors(subject),
+			"CompletionErros":     utils.GetCompletionErrors(subject),
 		})
 
 	}

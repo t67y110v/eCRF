@@ -75,6 +75,12 @@ func GetFieldName(field string) string {
 	m["exclusion22"] = "screening.exclusionсriteria.researchcenterstaffcondition."
 	m["exclusion23"] = "screening.exclusionсriteria.anyotherstateofthesubjectofthestudycondition."
 
+	m["completion1"] = "screening.completionofscreening.volunteereligiblecondition."
+	m["completion2"] = "screening.completionofscreening.noexclusioncriteriacondition."
+	m["completion3"] = "screening.completionofscreening.informedoftherestrictionscondition."
+	m["completion4"] = "screening.completionofscreening.volunteerincludedcondition."
+	m["completion5"] = "screening.completionofscreening.reasonifnotcondition."
+	m["completion6"] = "screening.completionofscreening.commentcondition."
 	return m[field]
 }
 
@@ -436,4 +442,47 @@ func GetExclusionErrors(subject *model.Subject) []*model.InformationConsentError
 
 	return errors
 
+}
+
+func GetCompletionErrors(subject *model.Subject) []*model.InformationConsentErrors {
+	var errors []*model.InformationConsentErrors
+	if subject.Screening.CompletionOfScreening.VolunteerEligibleCondition.Color == 3 || subject.Screening.CompletionOfScreening.VolunteerEligibleCondition.Color == 4 {
+		errors = append(errors, &model.InformationConsentErrors{
+			Field:    "Доброволец соответствует критериям включения? ",
+			Reasons:  subject.Screening.CompletionOfScreening.VolunteerEligibleCondition.Reason,
+			Comments: subject.Screening.CompletionOfScreening.VolunteerEligibleCondition.Comment})
+	}
+	if subject.Screening.CompletionOfScreening.NoExclusionCriteriaCondition.Color == 3 || subject.Screening.CompletionOfScreening.NoExclusionCriteriaCondition.Color == 4 {
+		errors = append(errors, &model.InformationConsentErrors{
+			Field:    "Критерии невключения отсутствуют?",
+			Reasons:  subject.Screening.CompletionOfScreening.NoExclusionCriteriaCondition.Reason,
+			Comments: subject.Screening.CompletionOfScreening.NoExclusionCriteriaCondition.Comment})
+
+	}
+	if subject.Screening.CompletionOfScreening.InformedOfTheRestrictionsCondition.Color == 3 || subject.Screening.CompletionOfScreening.InformedOfTheRestrictionsCondition.Color == 4 {
+		errors = append(errors, &model.InformationConsentErrors{
+			Field:    "Доброволец был проинформирован об ограничениях, требуемых протоколом и согласен их соблюдать в течение исследования?",
+			Reasons:  subject.Screening.CompletionOfScreening.InformedOfTheRestrictionsCondition.Reason,
+			Comments: subject.Screening.CompletionOfScreening.InformedOfTheRestrictionsCondition.Comment})
+	}
+	if subject.Screening.CompletionOfScreening.VolunteerIncludedCondition.Color == 3 || subject.Screening.CompletionOfScreening.VolunteerIncludedCondition.Color == 4 {
+		errors = append(errors, &model.InformationConsentErrors{
+			Field:    "Доброволец включен в исследование?",
+			Reasons:  subject.Screening.CompletionOfScreening.VolunteerIncludedCondition.Reason,
+			Comments: subject.Screening.CompletionOfScreening.VolunteerIncludedCondition.Comment})
+	}
+	if subject.Screening.CompletionOfScreening.ReasonIfNotCondition.Color == 3 || subject.Screening.CompletionOfScreening.ReasonIfNotCondition.Color == 4 {
+		errors = append(errors, &model.InformationConsentErrors{
+			Field:    "Если «НЕТ», необходимо указать причину",
+			Reasons:  subject.Screening.CompletionOfScreening.ReasonIfNotCondition.Reason,
+			Comments: subject.Screening.CompletionOfScreening.ReasonIfNotCondition.Comment})
+	}
+	if subject.Screening.CompletionOfScreening.CommentCondition.Color == 3 || subject.Screening.CompletionOfScreening.CommentCondition.Color == 4 {
+		errors = append(errors, &model.InformationConsentErrors{
+			Field:    "Поле «Комментарий» заполняется по желанию в произвольном тексте.",
+			Reasons:  subject.Screening.CompletionOfScreening.CommentCondition.Reason,
+			Comments: subject.Screening.CompletionOfScreening.CommentCondition.Comment})
+	}
+
+	return errors
 }
