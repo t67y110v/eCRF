@@ -97,12 +97,7 @@
                 </div>
             </div>
 
-            <style>
-                .nav-link.active {
 
-                    background-color: var(--color2) !important;
-                }
-            </style>
             <!-- Scrollspy -->
             <div id="navbar-example3" class="sticky-top">
                 <ul class="nav flex-column nav-pills menu-sidebar">
@@ -148,36 +143,6 @@
                 </ul>
             </div>
             <!-- Scrollspy -->
-
-            <style>
-                .navbar-example3 {
-                    position: relative;
-                    height: 800px;
-                    overflow: auto;
-                }
-
-                .subject-ul {
-                    display: block;
-                }
-
-                .subject-ul li.active> {
-                    display: visible;
-                }
-
-
-                .discussions {
-                    position: relative;
-                    height: 800px;
-                    overflow: auto;
-                }
-
-
-                hr {
-                    margin: 20px;
-                    border: 1px, solid #f00;
-                }
-            </style>
-
         </div>
 
         {{if .Subject}}
@@ -188,7 +153,7 @@
             <div data-bs-offset="0" class="navbar-example3 md-8" data-bs-spy="scroll" data-bs-target="#navbar-example3">
 
                 <section id="item-1">
-                    <div class="shadow-sm p-3 bg-white rounded h-100" id="item-1">
+                    <div class="shadow-sm p-3 bg-white rounded h-100">
 
                         <h1 class="text-center"> Скрининг</h1>
                     </div>
@@ -197,252 +162,253 @@
 
                 {{template "informaion_consent" .}}
 
-
-
                 {{template "demography" .}}
-    
-    
-    
-    
-    
+
                 {{ template "anthropometry" . }}
-    
-    
-    
-    
+
                 {{template "inclusion_criteria" .}}
-    
-    
-    
-    
+
                 {{ template "exclusion_criteria" .}}
-    
+
                 {{template "completion" .}}
+                <section id="item-2">
+                    <div class="shadow-sm p-3 bg-white rounded h-100">
+
+                        <h1 class="text-center"> Период 1</h1>
+                    </div>
+                </section>
+
+
+
 
             </div>
 
-            <section id="item-2">
 
-            </section>
 
 
         </div>
-        <style>
-            .message-container {
-                box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
-                padding-top: 20px;
-                padding-bottom: 20px;
-                border-radius: 50px;
-                background-color: rgb(218, 218, 218);
-    
-            }
-        </style>
-    
         <div class="col-2 shadow-sm p-3 bg-white rounded discussions  " id="right">
             <div class="discussions" id="discussions">
                 <div data-bs-spy="scroll" data-bs-target="discussions" data-bs-offset="0" tabindex="0">
                     <h5 class="text-center">Обсуждения</h5>
-    
-                    <hr />
+
                     <div class="accordion" id="accordionExample">
                         {{ if .ConsentErrors }}
+                        <hr />
                         <h6 class="text-center"><strong>Информированное согласие</strong> </h6>
-    
+
                         {{range $i, $error := .ConsentErrors}}
-    
-    
+
+
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="heading1{{$i}}">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapse1{{$i}}" aria-expanded="false" aria-controls="collapse1{{$i}}">
+                                    data-bs-target="#collapse1{{$i}}" aria-expanded="false"
+                                    aria-controls="collapse1{{$i}}">
                                     {{$error.Field}}
                                 </button>
                             </h2>
-                            <div id="collapse1{{$i}}" class="accordion-collapse collapse " aria-labelledby="heading1{{$i}}"
-                                data-bs-parent="#accordionExample">
+                            <div id="collapse1{{$i}}" class="accordion-collapse collapse "
+                                aria-labelledby="heading1{{$i}}" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
                                     <ul class="list-unstyled">
                                         <li>
                                             <h6>Причина:&nbsp;&nbsp;{{$error.Reasons}} </h6>
                                         </li>
-    
+
                                         <li>
                                             <h6>Комментарий:&nbsp;&nbsp;{{$error.Comments}} </h6>
                                         </li>
-    
+
                                     </ul>
                                 </div>
                             </div>
                         </div>
-    
+
                         {{end}}
                         {{end}}
-                        <br>
+              
+                    
                         {{ if .DemographyErrors }}
+                        <hr />
                         <h6 class="text-center"><strong>Демография</h6> </label>
-    
+
                         {{range $i, $error := .DemographyErrors }}
-    
+
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="heading2{{$i}}">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapse2{{$i}}" aria-expanded="false" aria-controls="collapse2{{$i}}">
+                                    data-bs-target="#collapse2{{$i}}" aria-expanded="false"
+                                    aria-controls="collapse2{{$i}}">
                                     {{$error.Field}}
                                 </button>
                             </h2>
-                            <div id="collapse2{{$i}}" class="accordion-collapse collapse " aria-labelledby="heading2{{$i}}"
-                                data-bs-parent="#accordionExample">
+                            <div id="collapse2{{$i}}" class="accordion-collapse collapse "
+                                aria-labelledby="heading2{{$i}}" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
                                     <ul class="list-unstyled">
                                         <li>
                                             <h6>Причина:&nbsp;&nbsp;{{$error.Reasons}} </h6>
                                         </li>
-    
+
                                         <li>
                                             <h6>Комментарий:&nbsp;&nbsp;{{$error.Comments}} </h6>
                                         </li>
-    
+
                                     </ul>
                                 </div>
                             </div>
                         </div>
-    
+
                         {{end}}
                         {{end}}
-                        <br>
+                       
+                    
                         {{ if .AnthropometryErrors }}
+                        <hr />
                         <h6 class="text-center"><strong>&nbsp;&nbsp;&nbsp;&nbsp;Антропометрия</strong> </h6>
-    
+
                         {{range $i, $error := .AnthropometryErrors }}
-    
+
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="heading3{{$i}}">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapse3{{$i}}" aria-expanded="false" aria-controls="collapse3{{$i}}">
+                                    data-bs-target="#collapse3{{$i}}" aria-expanded="false"
+                                    aria-controls="collapse3{{$i}}">
                                     {{.Field}}
                                 </button>
                             </h2>
-                            <div id="collapse3{{$i}}" class="accordion-collapse collapse " aria-labelledby="heading3{{$i}}"
-                                data-bs-parent="#accordionExample">
+                            <div id="collapse3{{$i}}" class="accordion-collapse collapse "
+                                aria-labelledby="heading3{{$i}}" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
                                     <ul class="list-unstyled">
                                         <li>
                                             <h6>Причина:&nbsp;&nbsp;{{$error.Reasons}} </h6>
                                         </li>
-    
+
                                         <li>
                                             <h6>Комментарий:&nbsp;&nbsp;{{$error.Comments}} </h6>
                                         </li>
-    
+
                                     </ul>
                                 </div>
                             </div>
                         </div>
-    
+
                         {{end}}
                         {{end}}
-                        <br>
+                   
+                      
                         {{ if .InclusionErrors }}
+                        <hr />
                         <h6 class="text-center"><strong>&nbsp;&nbsp;&nbsp;&nbsp;Критерии включения</strong> </h6>
                         {{range $i, $error := .InclusionErrors }}
-    
+
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="heading4{{$i}}">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapse4{{$i}}" aria-expanded="false" aria-controls="collapse4{{$i}}">
+                                    data-bs-target="#collapse4{{$i}}" aria-expanded="false"
+                                    aria-controls="collapse4{{$i}}">
                                     {{.Field}}
                                 </button>
                             </h2>
-                            <div id="collapse4{{$i}}" class="accordion-collapse collapse " aria-labelledby="heading4{{$i}}"
-                                data-bs-parent="#accordionExample">
+                            <div id="collapse4{{$i}}" class="accordion-collapse collapse "
+                                aria-labelledby="heading4{{$i}}" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
                                     <ul class="list-unstyled">
                                         <li>
                                             <h6>Причина:&nbsp;&nbsp;{{$error.Reasons}} </h6>
                                         </li>
-    
+
                                         <li>
                                             <h6>Комментарий:&nbsp;&nbsp;{{$error.Comments}} </h6>
                                         </li>
-    
+
                                     </ul>
                                 </div>
                             </div>
                         </div>
-    
+
                         {{end}}
                         {{end}}
+                      
+                      
                         {{ if .ExclusionErrors }}
+                        <hr />
                         <h6 class="text-center"><strong>&nbsp;&nbsp;&nbsp;&nbsp;Критерии невключения</strong> </h6>
                         {{range $i, $error := .ExclusionErrors }}
-    
+
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="heading5{{$i}}">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapse5{{$i}}" aria-expanded="false" aria-controls="collapse5{{$i}}">
+                                    data-bs-target="#collapse5{{$i}}" aria-expanded="false"
+                                    aria-controls="collapse5{{$i}}">
                                     {{.Field}}
                                 </button>
                             </h2>
-                            <div id="collapse5{{$i}}" class="accordion-collapse collapse " aria-labelledby="heading5{{$i}}"
-                                data-bs-parent="#accordionExample">
+                            <div id="collapse5{{$i}}" class="accordion-collapse collapse "
+                                aria-labelledby="heading5{{$i}}" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
                                     <ul class="list-unstyled">
                                         <li>
                                             <h6>Причина:&nbsp;&nbsp;{{$error.Reasons}} </h6>
                                         </li>
-    
+
                                         <li>
                                             <h6>Комментарий:&nbsp;&nbsp;{{$error.Comments}} </h6>
                                         </li>
-    
+
                                     </ul>
                                 </div>
                             </div>
                         </div>
-    
+
                         {{end}}
                         {{end}}
-    
-    
+
+                      
+                       
                         {{ if .CompletionErros }}
+                        <hr />
                         <h6 class="text-center"><strong>&nbsp;&nbsp;&nbsp;&nbsp;Завершение скрининга</strong> </h6>
                         {{range $i, $error := .CompletionErros }}
-    
+
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="heading6{{$i}}">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapse6{{$i}}" aria-expanded="false" aria-controls="collapse6{{$i}}">
+                                    data-bs-target="#collapse6{{$i}}" aria-expanded="false"
+                                    aria-controls="collapse6{{$i}}">
                                     {{.Field}}
                                 </button>
                             </h2>
-                            <div id="collapse6{{$i}}" class="accordion-collapse collapse " aria-labelledby="heading6{{$i}}"
-                                data-bs-parent="#accordionExample">
+                            <div id="collapse6{{$i}}" class="accordion-collapse collapse "
+                                aria-labelledby="heading6{{$i}}" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
                                     <ul class="list-unstyled">
                                         <li>
                                             <h6>Причина:&nbsp;&nbsp;{{$error.Reasons}} </h6>
                                         </li>
-    
+
                                         <li>
                                             <h6>Комментарий:&nbsp;&nbsp;{{$error.Comments}} </h6>
                                         </li>
-    
+
                                     </ul>
                                 </div>
                             </div>
                         </div>
-    
+
                         {{end}}
                         {{end}}
-    
-    
-    
+
+
+
                     </div>
-    
-    
+
+
                 </div>
             </div>
-    
+
         </div>
     </div>
     {{else }}
@@ -469,7 +435,7 @@
 
 
 
-  
+
     </div>
 </section>
 {{if .Name}}
