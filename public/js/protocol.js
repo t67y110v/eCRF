@@ -1,18 +1,10 @@
-function makeAjaxCall() {
-    fetch('/api/fruits')
-        .then(function (response) {
-            return response.text();
-        })
-        .then(function (text) {
-            alert(`we called out to the api via ajax and got this response => ${text}`);
-        });
-}
 
 
-function updateColorWithComment(field, id, color) {
-    let subjectNum = '{{.Subject.Number}}'
-    let protocolId = '{{.Subject.ProtocolId}}'
-
+function updateColorWithComment(id, color) {
+    let subjectNum = document.getElementById("protocol_id_for_js").getAttribute("value")
+    let protocolId = document.getElementById("subject_id_for_js").getAttribute("value")
+    let t = document.getElementById("condition" + id)
+    let field = t.getAttribute("field-name")
     fetch('/subject/screening/updatecolorwithcomment', {
 
         method: 'POST',
@@ -21,7 +13,7 @@ function updateColorWithComment(field, id, color) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            "field_name": field.name,
+            "field_name": field,
             "value": color,
             "subject_number": subjectNum,
             "protocol_id": protocolId,
@@ -34,10 +26,15 @@ function updateColorWithComment(field, id, color) {
 
 }
 
-function updateSecondColor(field, id, color) {
-    let subjectNum = '{{.Subject.Number}}'
-    let protocolId = '{{.Subject.ProtocolId}}'
+function updateSecondColor(id, color) {
+    let subjectNum = document.getElementById("protocol_id_for_js").getAttribute("value")
+    let protocolId = document.getElementById("subject_id_for_js").getAttribute("value")
+    
+    let t = document.getElementById("condition" + id)
 
+    let field = t.getAttribute("field-name")
+
+    console.log(field, color, subjectNum, protocolId)
     fetch('/subject/screening/updatecolor', {
 
         method: 'POST',
@@ -45,7 +42,7 @@ function updateSecondColor(field, id, color) {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ "field_name": field.name, "value": color, "subject_number": subjectNum, "protocol_id": protocolId })
+        body: JSON.stringify({ "field_name": field, "value": color, "subject_number": subjectNum, "protocol_id": protocolId })
     })
 
 
@@ -54,18 +51,15 @@ function updateSecondColor(field, id, color) {
 }
 
 
-function gotopage(selval) {
-    var value = selval.options[selval.selectedIndex].value;
-    window.location.href = value;
-}
-
-document.addEventListener('DOMContentLoaded',( function () {
-    for (let i = 1; i <= 5; i++) {
+(function () {
+    let subjectNum = document.getElementById("protocol_id_for_js").getAttribute("value")
+    let protocolId = document.getElementById("subject_id_for_js").getAttribute("value")
+    
+    for (let i = 1; i <= 57; i++) {
         let t = document.getElementById("condition" + i)
 
-        let field = t.getAttribute("field-name")
-
         let color = t.getAttribute("color-value")
+
         switch (color) {
             case "1":
                 t.insertAdjacentHTML('beforeend', `
@@ -85,7 +79,7 @@ document.addEventListener('DOMContentLoaded',( function () {
                            
                                  <li ><div class="d-grid gap-2">
 
-                                <button type="button" onclick="updateSecondColor(${field} ,${i},${2})"  class="btn  btn-outline-success">Принять</button>
+                                <button type="button" onclick="updateSecondColor(${i},${2})"  class="btn  btn-outline-success">Принять</button>
 
                             </div></li>
 
@@ -130,14 +124,14 @@ document.addEventListener('DOMContentLoaded',( function () {
                                                             <div class="m-3">
                                                                 <div class="mb-2">
                                                                 
-                                                                    <input class="form-control" type="hidden" placeholder="{{.Protocol.Id}}"
-                                                                        value="{{.Protocol.Id}}" name="protocol_id" id="protocol_id"
+                                                                    <input class="form-control" type="hidden" placeholder="${protocolId}"
+                                                                        value="${protocolId}" name="protocol_id" id="protocol_id"
                                                                         readonly>
                                                                 </div>
                                                                 <div class="mb-2">
                                                                
-                                                                    <input class="form-control" type="hidden" placeholder="{{.ClinicId}}"
-                                                                        value="{{.ClinicId}}" name="center_id" id="center_id" readonly>
+                                                                    <input class="form-control" type="hidden" placeholder="${subjectNum}"
+                                                                        value="${subjectNum}" name="center_id" id="center_id" readonly>
                                                                 </div>
                                                                 <div class="mb-2">
                                                                   
@@ -156,7 +150,7 @@ document.addEventListener('DOMContentLoaded',( function () {
 
                                                             <div class="d-grid gap-2">
                                                                 <br>
-                                                                <button type="button" onclick="updateColorWithComment(${field} ,${i},${3})"  class="btn  btn-outline-success " data-bs-dismiss="modal">Принять</button>
+                                                                <button type="button" onclick="updateColorWithComment(${i},${3})"  class="btn  btn-outline-success " data-bs-dismiss="modal">Принять</button>
                                                             </div>
                                                         </div>
                                             
@@ -190,7 +184,7 @@ document.addEventListener('DOMContentLoaded',( function () {
                            
                                  <li ><div class="d-grid gap-2">
 
-                                <button type="button" onclick="updateSecondColor(${field} ,${i},${5})"  class="btn btn-outline-success">Принять</button>
+                                <button type="button" onclick="updateSecondColor(${i},${5})"  class="btn btn-outline-success">Принять</button>
 
                             </div></li>
 
@@ -212,7 +206,7 @@ document.addEventListener('DOMContentLoaded',( function () {
                 
                 </span>
             `)
-            t.insertAdjacentHTML('beforeend', `
+                t.insertAdjacentHTML('beforeend', `
                                       <!-- Modal -->
                                     <div class="modal fade" id="denied_${i}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
                                         aria-labelledby="denied_${i}" aria-hidden="true">
@@ -230,14 +224,14 @@ document.addEventListener('DOMContentLoaded',( function () {
                                                             <div class="m-3">
                                                                 <div class="mb-2">
                                                                 
-                                                                    <input class="form-control" type="hidden" placeholder="{{.Protocol.Id}}"
-                                                                        value="{{.Protocol.Id}}" name="protocol_id" id="protocol_id"
+                                                                    <input class="form-control" type="hidden" placeholder="${protocolId}"
+                                                                        value="${protocolId}" name="protocol_id" id="protocol_id"
                                                                         readonly>
                                                                 </div>
                                                                 <div class="mb-2">
                                                                
-                                                                    <input class="form-control" type="hidden" placeholder="{{.ClinicId}}"
-                                                                        value="{{.ClinicId}}" name="center_id" id="center_id" readonly>
+                                                                    <input class="form-control" type="hidden" placeholder="${subjectNum}"
+                                                                        value="${subjectNum}" name="center_id" id="center_id" readonly>
                                                                 </div>
                                                                 <div class="mb-2">
                                                                   
@@ -256,12 +250,13 @@ document.addEventListener('DOMContentLoaded',( function () {
 
                                                             <div class="d-grid gap-2">
                                                                 <br>
-                                                                <button type="button" onclick="updateColorWithComment(${field} ,${i},${4})"  class="btn  btn-outline-success " data-bs-dismiss="modal">Принять</button>
+                                                               
                                                             </div>
                                                         </div>
                                             
                                                 </div>
                                                 <div class="modal-footer">
+                                                    <button type="button" onclick="updateColorWithComment(${i},${4})"  class="btn  btn-outline-success " data-bs-dismiss="modal">Принять</button>
                                                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Закрыть</button>
 
                                                 </div>
@@ -286,7 +281,7 @@ document.addEventListener('DOMContentLoaded',( function () {
                            
                                  <li ><div class="d-grid gap-2">
 
-                                <button type="button" onclick="updateSecondColor(${field} ,${i},${2})"  class="btn  btn-outline-success">Принять</button>
+                                <button type="button" onclick="updateSecondColor(${i},${2})"  class="btn  btn-outline-success">Принять</button>
 
                             </div></li>
 
@@ -331,14 +326,14 @@ document.addEventListener('DOMContentLoaded',( function () {
                                                             <div class="m-3">
                                                                 <div class="mb-2">
                                                                 
-                                                                    <input class="form-control" type="hidden" placeholder="{{.Protocol.Id}}"
-                                                                        value="{{.Protocol.Id}}" name="protocol_id" id="protocol_id"
+                                                                    <input class="form-control" type="hidden" placeholder="${protocolId}"
+                                                                        value="${protocolId}" name="protocol_id" id="protocol_id"
                                                                         readonly>
                                                                 </div>
                                                                 <div class="mb-2">
                                                                
-                                                                    <input class="form-control" type="hidden" placeholder="{{.ClinicId}}"
-                                                                        value="{{.ClinicId}}" name="center_id" id="center_id" readonly>
+                                                                    <input class="form-control" type="hidden" placeholder="${subjectNum}"
+                                                                        value="${subjectNum}" name="center_id" id="center_id" readonly>
                                                                 </div>
                                                                 <div class="mb-2">
                                                                   
@@ -357,7 +352,7 @@ document.addEventListener('DOMContentLoaded',( function () {
 
                                                             <div class="d-grid gap-2">
                                                                 <br>
-                                                                <button type="button" onclick="updateColorWithComment(${field} ,${i},${3})"  class="btn  btn-outline-success " data-bs-dismiss="modal">Принять</button>
+                                                                <button type="button" onclick="updateColorWithComment(${i},${3})"  class="btn  btn-outline-success " data-bs-dismiss="modal">Принять</button>
                                                             </div>
                                                         </div>
                                             
@@ -391,7 +386,7 @@ document.addEventListener('DOMContentLoaded',( function () {
                            
                                  <li ><div class="d-grid gap-2">
 
-                                <button type="button" onclick="updateSecondColor(${field} ,${i},${5})"  class="btn btn-outline-success">Принять</button>
+                                <button type="button" onclick="updateSecondColor(${i},${5})"  class="btn btn-outline-success">Принять</button>
 
                             </div></li>
 
@@ -413,7 +408,7 @@ document.addEventListener('DOMContentLoaded',( function () {
                       
                       </span>
             `)
-            t.insertAdjacentHTML('beforeend', `
+                t.insertAdjacentHTML('beforeend', `
                                       <!-- Modal -->
                                     <div class="modal fade" id="denied_${i}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
                                         aria-labelledby="denied_${i}" aria-hidden="true">
@@ -431,14 +426,14 @@ document.addEventListener('DOMContentLoaded',( function () {
                                                             <div class="m-3">
                                                                 <div class="mb-2">
                                                                 
-                                                                    <input class="form-control" type="hidden" placeholder="{{.Protocol.Id}}"
-                                                                        value="{{.Protocol.Id}}" name="protocol_id" id="protocol_id"
+                                                                    <input class="form-control" type="hidden" placeholder="${protocolId}"
+                                                                        value="${protocolId}" name="protocol_id" id="protocol_id"
                                                                         readonly>
                                                                 </div>
                                                                 <div class="mb-2">
                                                                
-                                                                    <input class="form-control" type="hidden" placeholder="{{.ClinicId}}"
-                                                                        value="{{.ClinicId}}" name="center_id" id="center_id" readonly>
+                                                                    <input class="form-control" type="hidden" placeholder="${subjectNum}"
+                                                                        value="${subjectNum}" name="center_id" id="center_id" readonly>
                                                                 </div>
                                                                 <div class="mb-2">
                                                                   
@@ -457,7 +452,7 @@ document.addEventListener('DOMContentLoaded',( function () {
 
                                                             <div class="d-grid gap-2">
                                                                 <br>
-                                                                <button type="button" onclick="updateColorWithComment(${field} ,${i},${4})"  class="btn  btn-outline-success " data-bs-dismiss="modal">Принять</button>
+                                                                <button type="button" onclick="updateColorWithComment(${i},${4})"  class="btn  btn-outline-success " data-bs-dismiss="modal">Принять</button>
                                                             </div>
                                                         </div>
                                             
@@ -501,8 +496,7 @@ document.addEventListener('DOMContentLoaded',( function () {
 
     }
 
-}), false);
-;
+})();
 
 
 

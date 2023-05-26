@@ -181,7 +181,10 @@
         </div>
 
         {{if .Subject}}
+        <div id="protocol_id_for_js" style="display: none;" value="{{.Subject.ProtocolId}}"> </div>
+        <div id="subject_id_for_js" style="display: none;" value="{{.Subject.Number}}"></div>
         <div class="col-8 " id="center">
+
             <div data-bs-offset="0" class="navbar-example3 md-8" data-bs-spy="scroll" data-bs-target="#navbar-example3">
 
                 <section id="item-1">
@@ -192,61 +195,38 @@
                 </section>
 
 
-
                 {{template "informaion_consent" .}}
 
 
 
                 {{template "demography" .}}
-
-
-
-
-
+    
+    
+    
+    
+    
                 {{ template "anthropometry" . }}
-
-
-
-
+    
+    
+    
+    
                 {{template "inclusion_criteria" .}}
-
-
-
-
+    
+    
+    
+    
                 {{ template "exclusion_criteria" .}}
-
+    
                 {{template "completion" .}}
-                <section id="item-2">
-
-                </section>
-
 
             </div>
+
+            <section id="item-2">
+
+            </section>
+
+
         </div>
-        {{else }}
-        <div class="col-8 ">
-            <div class="bg-white rounded shadow-sm">
-                <br>
-                <h4 class="text-center">
-                    Для того чтобы начать работать с протоколом создайте первый субъект
-                </h4>
-                <br>
-                <br>
-                <div class="d-grid gap-2">
-                    <button type="button" class="btn btn-sm  btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#updateCenter">
-                        Добавить субьект исследования
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        {{end}}
-
-
-
-
-
         <style>
             .message-container {
                 box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
@@ -254,735 +234,244 @@
                 padding-bottom: 20px;
                 border-radius: 50px;
                 background-color: rgb(218, 218, 218);
-
+    
             }
         </style>
-
+    
         <div class="col-2 shadow-sm p-3 bg-white rounded discussions  " id="right">
             <div class="discussions" id="discussions">
                 <div data-bs-spy="scroll" data-bs-target="discussions" data-bs-offset="0" tabindex="0">
                     <h5 class="text-center">Обсуждения</h5>
-
+    
                     <hr />
                     <div class="accordion" id="accordionExample">
                         {{ if .ConsentErrors }}
                         <h6 class="text-center"><strong>Информированное согласие</strong> </h6>
-
+    
                         {{range $i, $error := .ConsentErrors}}
-
-
+    
+    
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="heading1{{$i}}">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapse1{{$i}}" aria-expanded="false"
-                                    aria-controls="collapse1{{$i}}">
+                                    data-bs-target="#collapse1{{$i}}" aria-expanded="false" aria-controls="collapse1{{$i}}">
                                     {{$error.Field}}
                                 </button>
                             </h2>
-                            <div id="collapse1{{$i}}" class="accordion-collapse collapse "
-                                aria-labelledby="heading1{{$i}}" data-bs-parent="#accordionExample">
+                            <div id="collapse1{{$i}}" class="accordion-collapse collapse " aria-labelledby="heading1{{$i}}"
+                                data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
                                     <ul class="list-unstyled">
                                         <li>
                                             <h6>Причина:&nbsp;&nbsp;{{$error.Reasons}} </h6>
                                         </li>
-
+    
                                         <li>
                                             <h6>Комментарий:&nbsp;&nbsp;{{$error.Comments}} </h6>
                                         </li>
-
+    
                                     </ul>
                                 </div>
                             </div>
                         </div>
-
+    
                         {{end}}
                         {{end}}
                         <br>
                         {{ if .DemographyErrors }}
                         <h6 class="text-center"><strong>Демография</h6> </label>
-
+    
                         {{range $i, $error := .DemographyErrors }}
-
+    
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="heading2{{$i}}">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapse2{{$i}}" aria-expanded="false"
-                                    aria-controls="collapse2{{$i}}">
+                                    data-bs-target="#collapse2{{$i}}" aria-expanded="false" aria-controls="collapse2{{$i}}">
                                     {{$error.Field}}
                                 </button>
                             </h2>
-                            <div id="collapse2{{$i}}" class="accordion-collapse collapse "
-                                aria-labelledby="heading2{{$i}}" data-bs-parent="#accordionExample">
+                            <div id="collapse2{{$i}}" class="accordion-collapse collapse " aria-labelledby="heading2{{$i}}"
+                                data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
                                     <ul class="list-unstyled">
                                         <li>
                                             <h6>Причина:&nbsp;&nbsp;{{$error.Reasons}} </h6>
                                         </li>
-
+    
                                         <li>
                                             <h6>Комментарий:&nbsp;&nbsp;{{$error.Comments}} </h6>
                                         </li>
-
+    
                                     </ul>
                                 </div>
                             </div>
                         </div>
-
+    
                         {{end}}
                         {{end}}
                         <br>
                         {{ if .AnthropometryErrors }}
                         <h6 class="text-center"><strong>&nbsp;&nbsp;&nbsp;&nbsp;Антропометрия</strong> </h6>
-
+    
                         {{range $i, $error := .AnthropometryErrors }}
-
+    
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="heading3{{$i}}">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapse3{{$i}}" aria-expanded="false"
-                                    aria-controls="collapse3{{$i}}">
+                                    data-bs-target="#collapse3{{$i}}" aria-expanded="false" aria-controls="collapse3{{$i}}">
                                     {{.Field}}
                                 </button>
                             </h2>
-                            <div id="collapse3{{$i}}" class="accordion-collapse collapse "
-                                aria-labelledby="heading3{{$i}}" data-bs-parent="#accordionExample">
+                            <div id="collapse3{{$i}}" class="accordion-collapse collapse " aria-labelledby="heading3{{$i}}"
+                                data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
                                     <ul class="list-unstyled">
                                         <li>
                                             <h6>Причина:&nbsp;&nbsp;{{$error.Reasons}} </h6>
                                         </li>
-
+    
                                         <li>
                                             <h6>Комментарий:&nbsp;&nbsp;{{$error.Comments}} </h6>
                                         </li>
-
+    
                                     </ul>
                                 </div>
                             </div>
                         </div>
-
+    
                         {{end}}
                         {{end}}
                         <br>
                         {{ if .InclusionErrors }}
                         <h6 class="text-center"><strong>&nbsp;&nbsp;&nbsp;&nbsp;Критерии включения</strong> </h6>
                         {{range $i, $error := .InclusionErrors }}
-
+    
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="heading4{{$i}}">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapse4{{$i}}" aria-expanded="false"
-                                    aria-controls="collapse4{{$i}}">
+                                    data-bs-target="#collapse4{{$i}}" aria-expanded="false" aria-controls="collapse4{{$i}}">
                                     {{.Field}}
                                 </button>
                             </h2>
-                            <div id="collapse4{{$i}}" class="accordion-collapse collapse "
-                                aria-labelledby="heading4{{$i}}" data-bs-parent="#accordionExample">
+                            <div id="collapse4{{$i}}" class="accordion-collapse collapse " aria-labelledby="heading4{{$i}}"
+                                data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
                                     <ul class="list-unstyled">
                                         <li>
                                             <h6>Причина:&nbsp;&nbsp;{{$error.Reasons}} </h6>
                                         </li>
-
+    
                                         <li>
                                             <h6>Комментарий:&nbsp;&nbsp;{{$error.Comments}} </h6>
                                         </li>
-
+    
                                     </ul>
                                 </div>
                             </div>
                         </div>
-
+    
                         {{end}}
                         {{end}}
                         {{ if .ExclusionErrors }}
                         <h6 class="text-center"><strong>&nbsp;&nbsp;&nbsp;&nbsp;Критерии невключения</strong> </h6>
                         {{range $i, $error := .ExclusionErrors }}
-
+    
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="heading5{{$i}}">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapse5{{$i}}" aria-expanded="false"
-                                    aria-controls="collapse5{{$i}}">
+                                    data-bs-target="#collapse5{{$i}}" aria-expanded="false" aria-controls="collapse5{{$i}}">
                                     {{.Field}}
                                 </button>
                             </h2>
-                            <div id="collapse5{{$i}}" class="accordion-collapse collapse "
-                                aria-labelledby="heading5{{$i}}" data-bs-parent="#accordionExample">
+                            <div id="collapse5{{$i}}" class="accordion-collapse collapse " aria-labelledby="heading5{{$i}}"
+                                data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
                                     <ul class="list-unstyled">
                                         <li>
                                             <h6>Причина:&nbsp;&nbsp;{{$error.Reasons}} </h6>
                                         </li>
-
+    
                                         <li>
                                             <h6>Комментарий:&nbsp;&nbsp;{{$error.Comments}} </h6>
                                         </li>
-
+    
                                     </ul>
                                 </div>
                             </div>
                         </div>
-
+    
                         {{end}}
                         {{end}}
-
-
+    
+    
                         {{ if .CompletionErros }}
                         <h6 class="text-center"><strong>&nbsp;&nbsp;&nbsp;&nbsp;Завершение скрининга</strong> </h6>
                         {{range $i, $error := .CompletionErros }}
-
+    
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="heading6{{$i}}">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapse6{{$i}}" aria-expanded="false"
-                                    aria-controls="collapse6{{$i}}">
+                                    data-bs-target="#collapse6{{$i}}" aria-expanded="false" aria-controls="collapse6{{$i}}">
                                     {{.Field}}
                                 </button>
                             </h2>
-                            <div id="collapse6{{$i}}" class="accordion-collapse collapse "
-                                aria-labelledby="heading6{{$i}}" data-bs-parent="#accordionExample">
+                            <div id="collapse6{{$i}}" class="accordion-collapse collapse " aria-labelledby="heading6{{$i}}"
+                                data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
                                     <ul class="list-unstyled">
                                         <li>
                                             <h6>Причина:&nbsp;&nbsp;{{$error.Reasons}} </h6>
                                         </li>
-
+    
                                         <li>
                                             <h6>Комментарий:&nbsp;&nbsp;{{$error.Comments}} </h6>
                                         </li>
-
+    
                                     </ul>
                                 </div>
                             </div>
                         </div>
-
+    
                         {{end}}
                         {{end}}
-
-
-
+    
+    
+    
                     </div>
-
-
+    
+    
                 </div>
             </div>
-
+    
         </div>
     </div>
-    <script>
+    {{else }}
+    <div class="col-8 ">
+        <div class="bg-white rounded shadow-sm">
+            <br>
+            <h4 class="text-center">
+                Для того чтобы начать работать с протоколом создайте первый субъект
+            </h4>
+            <br>
+            <br>
+            <div class="d-grid gap-2">
+                <button type="button" class="btn btn-sm  btn-primary" data-bs-toggle="modal"
+                    data-bs-target="#updateCenter">
+                    Добавить субьект исследования
+                </button>
+            </div>
+        </div>
+    </div>
 
-        function updateColorWithComment(id, color) {
-            let subjectNum = '{{.Subject.Number}}'
-            let protocolId = '{{.Subject.ProtocolId}}'
-            let t = document.getElementById("condition" + id)
-            let field = t.getAttribute("field-name")
-            fetch('/subject/screening/updatecolorwithcomment', {
-
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    "field_name": field,
-                    "value": color,
-                    "subject_number": subjectNum,
-                    "protocol_id": protocolId,
-                    "reason": document.getElementById('reason' + id).value,
-                    "comment": document.getElementById('comment' + id).value,
-                })
-            })
-
-            $("#condition" + id).load(location.href + " #condition" + id + ">*", "");
-
-        }
-
-        function updateSecondColor(id, color) {
-            let subjectNum = '{{.Subject.Number}}'
-            let protocolId = '{{.Subject.ProtocolId}}'
-            let t = document.getElementById("condition" + id)
-            let field = t.getAttribute("field-name")
-
-            console.log(field, color)
-            fetch('/subject/screening/updatecolor', {
-
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ "field_name": field, "value": color, "subject_number": subjectNum, "protocol_id": protocolId })
-            })
-
-
-            $("#condition" + id).load(window.location.href + " #condition" + id);
-
-        }
-
-
-        (function () {
-            for (let i = 1; i <= 57; i++) {
-                let t = document.getElementById("condition" + i)
-
-
-
-                let color = t.getAttribute("color-value")
-
-                switch (color) {
-                    case "1":
-                        t.insertAdjacentHTML('beforeend', `
-                      
-                        <span title="Автоматическая валидация" class="input-group-text"
-                          id="basic-addon1">🟢</span>
-                          
-                         <span title="Автоматическая валидация" class="input-group-text"
-                             id="basic-addon1">
-                             
-                             <div class="dropdown">
-                                <button  class="btn btn-outline-secondary dropdown-toggle btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    ⚪
-                                     </button>
-                                <ul class="dropdown-menu">
-                                    
-                                   
-                                         <li ><div class="d-grid gap-2">
-
-                                        <button type="button" onclick="updateSecondColor(${i},${2})"  class="btn  btn-outline-success">Принять</button>
-
-                                    </div></li>
-
-                                         <li > <div class="d-grid gap-2">
-                                            <!-- Button trigger modal -->
-                                            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#denied_${i}">
-                                             Отклонить
-                                             </button>
-                                            
-
-                                                
-
-                                    </div></li>
-
-                                 
-                                   
-                        
-                                 </ul>
-                            </div>
-                        
-                        
-                        </span>
-                         <span title="Валидация монитором" class="input-group-text"
-                               id="basic-addon1">⚪</span>
-                       `)
-
-                        t.insertAdjacentHTML('beforeend', `
-                                              <!-- Modal -->
-                                            <div class="modal fade" id="denied_${i}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-                                                aria-labelledby="denied_${i}" aria-hidden="true">
-                                                <div class="modal-dialog modal-xl">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="denied_${i}">Причина отклонения
-                                                            </h5>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div class="row justify-content-center mt-3">
-                                                        
-                                                                <div class="m-3">
-                                                                    <div class="m-3">
-                                                                        <div class="mb-2">
-                                                                        
-                                                                            <input class="form-control" type="hidden" placeholder="{{.Protocol.Id}}"
-                                                                                value="{{.Protocol.Id}}" name="protocol_id" id="protocol_id"
-                                                                                readonly>
-                                                                        </div>
-                                                                        <div class="mb-2">
-                                                                       
-                                                                            <input class="form-control" type="hidden" placeholder="{{.ClinicId}}"
-                                                                                value="{{.ClinicId}}" name="center_id" id="center_id" readonly>
-                                                                        </div>
-                                                                        <div class="mb-2">
-                                                                          
-                                                                            <input class="form-control" type="hidden" placeholder={{.Subject.Number}}
-                                                                                value={{.Subject.Number}} readonly>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="mb-2">
-                                                                        <label class="form-label">Пожалуйста, укажите причину отказа в верификации:</label>
-                                                                        <input id="reason${i}" type="text" class="form-control" name="reason">
-                                                                    </div>
-                                                                    <div class="mb-2">
-                                                                        <label class="form-label">Комментарий:</label>
-                                                                        <input id="comment${i}" type="text" class="form-control" name="comment">
-                                                                    </div>
-
-                                                                    <div class="d-grid gap-2">
-                                                                        <br>
-                                                                        <button type="button" onclick="updateColorWithComment(${i},${3})"  class="btn  btn-outline-success " data-bs-dismiss="modal">Принять</button>
-                                                                    </div>
-                                                                </div>
-                                                    
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Закрыть</button>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>`)
-
-
-                        continue;
-                    case "2":
-                        t.insertAdjacentHTML('beforeend', `
-                         <span title="Автоматическая валидация" class="input-group-text"
-                           id="basic-addon1">🟢</span>
-                    
-                      <span title="Автоматическая валидация" class="input-group-text"
-                          id="basic-addon1">🟢</span>
-                          <span title="Автоматическая валидация" class="input-group-text"
-                             id="basic-addon1">
-                             
-                             <div class="dropdown">
-                                <button  class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    ⚪
-                                     </button>
-                                <ul class="dropdown-menu">
-                                    
-                                   
-                                         <li ><div class="d-grid gap-2">
-
-                                        <button type="button" onclick="updateSecondColor(${i},${5})"  class="btn btn-outline-success">Принять</button>
-
-                                    </div></li>
-
-                                         <li > <div class="d-grid gap-2">
-                                            <!-- Button trigger modal -->
-                                            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#denied_${i}">
-                                             Отклонить
-                                             </button>
-                                            
-
-                                                
-
-                                    </div>
-                                    </li>
-                        
-                                 </ul>
-                            </div>
-                        
-                        
-                        </span>
-                    `)
-                        t.insertAdjacentHTML('beforeend', `
-                                              <!-- Modal -->
-                                            <div class="modal fade" id="denied_${i}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-                                                aria-labelledby="denied_${i}" aria-hidden="true">
-                                                <div class="modal-dialog modal-xl">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="denied_${i}">Причина отклонения
-                                                            </h5>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div class="row justify-content-center mt-3">
-                                                        
-                                                                <div class="m-3">
-                                                                    <div class="m-3">
-                                                                        <div class="mb-2">
-                                                                        
-                                                                            <input class="form-control" type="hidden" placeholder="{{.Protocol.Id}}"
-                                                                                value="{{.Protocol.Id}}" name="protocol_id" id="protocol_id"
-                                                                                readonly>
-                                                                        </div>
-                                                                        <div class="mb-2">
-                                                                       
-                                                                            <input class="form-control" type="hidden" placeholder="{{.ClinicId}}"
-                                                                                value="{{.ClinicId}}" name="center_id" id="center_id" readonly>
-                                                                        </div>
-                                                                        <div class="mb-2">
-                                                                          
-                                                                            <input class="form-control" type="hidden" placeholder={{.Subject.Number}}
-                                                                                value={{.Subject.Number}} readonly>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="mb-2">
-                                                                        <label class="form-label">Пожалуйста, укажите причину отказа в верификации:</label>
-                                                                        <input id="reason${i}" type="text" class="form-control" name="reason">
-                                                                    </div>
-                                                                    <div class="mb-2">
-                                                                        <label class="form-label">Комментарий:</label>
-                                                                        <input id="comment${i}" type="text" class="form-control" name="comment">
-                                                                    </div>
-
-                                                                    <div class="d-grid gap-2">
-                                                                        <br>
-                                                                       
-                                                                    </div>
-                                                                </div>
-                                                    
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" onclick="updateColorWithComment(${i},${4})"  class="btn  btn-outline-success " data-bs-dismiss="modal">Принять</button>
-                                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Закрыть</button>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>`)
-                        continue;
-                    case "3":
-                        t.insertAdjacentHTML('beforeend', `
-                      <span title="Автоматическая валидация" class="input-group-text"
-                         id="basic-addon1">🟢</span>
-                    
-                         <span title="Автоматическая валидация" class="input-group-text"
-                             id="basic-addon1">
-                             
-                             <div class="dropdown">
-                                <button  class="btn btn-outline-secondary dropdown-toggle btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    🔴
-                                     </button>
-                                <ul class="dropdown-menu">
-                                    
-                                   
-                                         <li ><div class="d-grid gap-2">
-
-                                        <button type="button" onclick="updateSecondColor(${i},${2})"  class="btn  btn-outline-success">Принять</button>
-
-                                    </div></li>
-
-                                         <li > <div class="d-grid gap-2">
-                                            <!-- Button trigger modal -->
-                                            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#denied_${i}">
-                                             Отклонить
-                                             </button>
-                                            
-
-                                                
-
-                                    </div></li>
-
-                                 
-                                   
-                        
-                                 </ul>
-                            </div>
-                        
-                        
-                        </span>
-                      <span title="Валидация монитором" class="input-group-text"
-                              id="basic-addon1">⚪</span>
-                    `)
-
-                        t.insertAdjacentHTML('beforeend', `
-                                              <!-- Modal -->
-                                            <div class="modal fade" id="denied_${i}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-                                                aria-labelledby="denied_${i}" aria-hidden="true">
-                                                <div class="modal-dialog modal-xl">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="denied_${i}">Причина отклонения
-                                                            </h5>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div class="row justify-content-center mt-3">
-                                                        
-                                                                <div class="m-3">
-                                                                    <div class="m-3">
-                                                                        <div class="mb-2">
-                                                                        
-                                                                            <input class="form-control" type="hidden" placeholder="{{.Protocol.Id}}"
-                                                                                value="{{.Protocol.Id}}" name="protocol_id" id="protocol_id"
-                                                                                readonly>
-                                                                        </div>
-                                                                        <div class="mb-2">
-                                                                       
-                                                                            <input class="form-control" type="hidden" placeholder="{{.ClinicId}}"
-                                                                                value="{{.ClinicId}}" name="center_id" id="center_id" readonly>
-                                                                        </div>
-                                                                        <div class="mb-2">
-                                                                          
-                                                                            <input class="form-control" type="hidden" placeholder={{.Subject.Number}}
-                                                                                value={{.Subject.Number}} readonly>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="mb-2">
-                                                                        <label class="form-label">Пожалуйста, укажите причину отказа в верификации:</label>
-                                                                        <input id="reason${i}" type="text" class="form-control" name="reason">
-                                                                    </div>
-                                                                    <div class="mb-2">
-                                                                        <label class="form-label">Комментарий:</label>
-                                                                        <input id="comment${i}" type="text" class="form-control" name="comment">
-                                                                    </div>
-
-                                                                    <div class="d-grid gap-2">
-                                                                        <br>
-                                                                        <button type="button" onclick="updateColorWithComment(${i},${3})"  class="btn  btn-outline-success " data-bs-dismiss="modal">Принять</button>
-                                                                    </div>
-                                                                </div>
-                                                    
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Закрыть</button>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>`)
-
-                        continue;
-                    case "4":
-                        t.insertAdjacentHTML('beforeend', `
-                      <span title="Автоматическая валидация" class="input-group-text"
-                         id="basic-addon1">🟢</span>
-                    
-                      <span title="Автоматическая валидация" class="input-group-text"
-                          id="basic-addon1">🟢</span>
-                      <span title="Валидация монитором" class="input-group-text"
-                              id="basic-addon1">
-                              
-                              
-                              <div class="dropdown">
-                                <button  class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    🔴
-                                     </button>
-                                <ul class="dropdown-menu">
-                                    
-                                   
-                                         <li ><div class="d-grid gap-2">
-
-                                        <button type="button" onclick="updateSecondColor(${i},${5})"  class="btn btn-outline-success">Принять</button>
-
-                                    </div></li>
-
-                                         <li > <div class="d-grid gap-2">
-                                            <!-- Button trigger modal -->
-                                            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#denied_${i}">
-                                             Отклонить
-                                             </button>
-                                            
-
-                                                
-
-                                    </div>
-                                    </li>
-                        
-                                 </ul>
-                            </div>
-                              
-                              
-                              </span>
-                    `)
-                        t.insertAdjacentHTML('beforeend', `
-                                              <!-- Modal -->
-                                            <div class="modal fade" id="denied_${i}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-                                                aria-labelledby="denied_${i}" aria-hidden="true">
-                                                <div class="modal-dialog modal-xl">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="denied_${i}">Причина отклонения
-                                                            </h5>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div class="row justify-content-center mt-3">
-                                                        
-                                                                <div class="m-3">
-                                                                    <div class="m-3">
-                                                                        <div class="mb-2">
-                                                                        
-                                                                            <input class="form-control" type="hidden" placeholder="{{.Protocol.Id}}"
-                                                                                value="{{.Protocol.Id}}" name="protocol_id" id="protocol_id"
-                                                                                readonly>
-                                                                        </div>
-                                                                        <div class="mb-2">
-                                                                       
-                                                                            <input class="form-control" type="hidden" placeholder="{{.ClinicId}}"
-                                                                                value="{{.ClinicId}}" name="center_id" id="center_id" readonly>
-                                                                        </div>
-                                                                        <div class="mb-2">
-                                                                          
-                                                                            <input class="form-control" type="hidden" placeholder={{.Subject.Number}}
-                                                                                value={{.Subject.Number}} readonly>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="mb-2">
-                                                                        <label class="form-label">Пожалуйста, укажите причину отказа в верификации:</label>
-                                                                        <input id="reason${i}" type="text" class="form-control" name="reason">
-                                                                    </div>
-                                                                    <div class="mb-2">
-                                                                        <label class="form-label">Комментарий:</label>
-                                                                        <input id="comment${i}" type="text" class="form-control" name="comment">
-                                                                    </div>
-
-                                                                    <div class="d-grid gap-2">
-                                                                        <br>
-                                                                        <button type="button" onclick="updateColorWithComment(${i},${4})"  class="btn  btn-outline-success " data-bs-dismiss="modal">Принять</button>
-                                                                    </div>
-                                                                </div>
-                                                    
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Закрыть</button>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>`)
-
-                        continue;
-                    case "5":
-                        t.insertAdjacentHTML('beforeend', `
-                      <span title="Автоматическая валидация" class="input-group-text"
-                         id="basic-addon1">🟢</span>
-                    
-                      <span title="Автоматическая валидация" class="input-group-text"
-                          id="basic-addon1">🟢</span>
-                      <span title="Валидация монитором" class="input-group-text"
-                              id="basic-addon1">🟢</span>
-                    `)
-                        continue;
+    {{end}}
 
 
 
 
-                    default:
-                        t.insertAdjacentHTML('beforeend', `
-                       <span title="Автоматическая валидация" class="input-group-text"
-                              id="basic-addon1">⚪</span>
-                    
-                      <span title="Автоматическая валидация" class="input-group-text"
-                              id="basic-addon1">⚪</span>
-                         <span title="Валидация монитором" class="input-group-text"
-                          id="basic-addon1">⚪</span>
-                    `)
-                        continue;
-                }
 
-            }
-
-        })();
-
-
-
-
-    </script>
+  
+    </div>
 </section>
-
-<div class="modal fade" id="Modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="false">
-    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="ModalHeader"></h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body" id="ModalBody">
-            </div>
-        </div>
-    </div>
-</div>
+{{if .Name}}
+<script src="/public/js/protocol.js"></script>
+{{end}}
