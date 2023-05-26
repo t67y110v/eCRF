@@ -1,0 +1,109 @@
+{{define "demography"}}
+
+
+<section id="item-1-2">
+    <div class="shadow-sm p-3 bg-white rounded h-100">
+        <h5 class="text-center">Демография</h5>
+        <hr>
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-10">
+                <br>
+                <div class="mb-1">
+
+
+                    <form id="demography" method="POST" action="/subject/screening/demography">
+                        <div class="mb-2">
+                            <input class="form-control" type="hidden" placeholder="{{.Subject.Number}}"
+                                value="{{.Subject.Number}}" name="subject_number" id="id" readonly>
+                        </div>
+                        <div class="mb-2">
+                            <input class="form-control" type="hidden"
+                                placeholder="{{.Subject.ProtocolId}}" value="{{.Subject.ProtocolId}}"
+                                name="protocol_id" id="id" readonly>
+                        </div>
+                        <div class="mb-1">
+                            <div class="mb-1">
+                                <label class="form-label">Пол</label>
+                                <div class="input-group mb-3" id="condition6"
+                                    color-value="{{.Subject.Screening.Demography.SexCondition.Color}}"
+                                    field-name="sex">
+                                    <select id="sex" name="sex" class="form-select">
+                                        {{if eq .Subject.Screening.Demography.SexCondition.Sex 1}}
+                                        <option selected value="1">Мужчина</option>
+                                        <option value="2">Женщина</option>
+                                        {{else if eq .Subject.Screening.Demography.SexCondition.Sex 2 }}
+                                        <option value="1">Мужчина</option>
+                                        <option selected value="2">Женщина</option>
+
+                                        {{else}}
+                                        <option selected value="0">Не выбрано</option>
+                                        <option value="1">Мужчина</option>
+                                        <option value="2">Женщина</option>
+                                        {{end}}
+                                    </select>
+
+                                </div>
+                            </div>
+                            <div class="mb-2">
+
+
+                                <label class="form-label">Раса</label>
+                                <div class="input-group mb-3" id="condition7" field-name="race"
+                                    color-value="{{.Subject.Screening.Demography.RaceCondition.Color}}">
+                                    <select id="race" name="race" class="form-select">
+                                        {{if eq .Subject.Screening.Demography.RaceCondition.Race 1}}
+                                        <option selected value="1">Европеоидная</option>
+                                        {{else if eq .Subject.Screening.Demography.RaceCondition.Race
+                                        2}}
+                                        <option selected value="2">Негроидная</option>
+                                        {{else if eq .Subject.Screening.Demography.RaceCondition.Race
+                                        3}}
+                                        <option selected value="3">Монголоидная</option>
+                                        {{else if eq .Subject.Screening.Demography.RaceCondition.Race
+                                        4}}
+                                        <option selected value="4">Американоидная</option>
+                                        {{else if eq .Subject.Screening.Demography.RaceCondition.Race
+                                        5}}
+                                        <option selected value="5">Австралоидная</option>
+                                        {{else }}
+                                        <option selected value="0">Не выбрано</option>
+                                        {{end}}
+                                        <option value="1">Европеоидная</option>
+                                        <option value="2">Негроидная</option>
+                                        <option value="3">Монголоидная</option>
+                                        <option value="4">Американоидная</option>
+                                        <option value="5">Австралоидная</option>
+
+                                    </select>
+
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label">Дата рождения</label>
+                                <div class="input-group mb-3" id="condition8" field-name="birth_date"
+                                    color-value="{{.Subject.Screening.Demography.BirthDateCondition.Color}}">
+                                    {{if .Subject.Screening.Demography.BirthDateCondition.BirthDate }}
+                                    <input
+                                        value="{{.Subject.Screening.Demography.BirthDateCondition.BirthDate}}"
+                                        name="birth_date" class="form-control" type="data">
+                                    {{else}}
+                                    <input name="birth_date" class="form-control" type="date">
+                                    {{end}}
+                                </div>
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <input type="submit" value="Сохранить" class="btn btn-primary">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+</section>
+{{end}}

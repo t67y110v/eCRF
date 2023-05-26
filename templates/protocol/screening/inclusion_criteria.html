@@ -1,0 +1,722 @@
+{{define "inclusion_criteria"}}
+<section id="item-1-4">
+    <div class="shadow-sm p-3 bg-white rounded h-100">
+        <h5 class="text-center">Критерии включения в иследование</h5>
+        <hr>
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-10">
+                <br>
+                <div class="mb-1">
+
+
+                    <form id="demography" method="POST" action="/subject/screening/inclusioncriteria">
+
+                        <div class="mb-1">
+                            <div class="mb-2">
+                                <input class="form-control" type="hidden"
+                                    placeholder="{{.Subject.Number}}" value="{{.Subject.Number}}"
+                                    name="subject_number" id="id" readonly>
+                            </div>
+                            <div class="mb-2">
+                                <input class="form-control" type="hidden"
+                                    placeholder="{{.Subject.ProtocolId}}"
+                                    value="{{.Subject.ProtocolId}}" name="protocol_id" id="id" readonly>
+                            </div>
+                            <div class="mb-1">
+                                <div class="form-chek">
+
+                                    <label class="form-check-label"> Наличие письменного
+                                        информированного
+                                        согласия субъекта на участие в
+                                        исследовании &nbsp; </label>
+
+
+                                    <br>
+                                    <div class="input-group" id="condition15" field-name="inclusion1"
+                                        color-value="{{.Subject.Screening.InclusionCriteria.PresenceOfAnInformationPanelCondition.Color}}">
+                                        <div class="input-group-text">
+                                            <div class="form-check form-check-inline">
+                                                {{if eq
+                                                .Subject.Screening.InclusionCriteria.PresenceOfAnInformationPanelCondition.PresenceOfAnInformationPanel
+                                                1}}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion1" id="inclusion1Radio1" value="1"
+                                                    checked />
+                                                {{else}}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion1" id="inclusion1Radio1" value="1" />
+                                                {{end}}
+                                                <label class="form-check-label"
+                                                    for="inclusion1Radio1">Да</label>
+                                            </div>
+
+                                            <div class="form-check form-check-inline">
+                                                {{if eq
+                                                .Subject.Screening.InclusionCriteria.PresenceOfAnInformationPanelCondition.PresenceOfAnInformationPanel
+                                                2}}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion1" id="inclusion1Radio2" value="2"
+                                                    checked />
+                                                {{else}}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion1" id="inclusion1Radio2" value="2" />
+                                                {{end}}
+                                                <label class="form-check-label"
+                                                    for="inclusion1Radio2">Нет</label>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control" disabled
+                                            aria-label="Text input with radio button">
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="mb-1">
+                                <div class="form-radio">
+                                    <label class="radio-inline">Мужчины и женщины в возрасте от 18 до 55
+                                        лет&nbsp;
+                                    </label>
+                                    <br>
+                                    <div class="input-group" id="condition16" field-name="inclusion2"
+                                        color-value="{{.Subject.Screening.InclusionCriteria.Aged18To55YearsCondition.Color}}">
+                                        <div class="input-group-text">
+                                            <div class="form-check form-check-inline">
+                                                {{if eq
+                                                .Subject.Screening.InclusionCriteria.Aged18To55YearsCondition.Aged18To55Years
+                                                1}}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion2" id="inclusion2Radio1" value="1"
+                                                    checked />
+
+                                                {{else}}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion2" id="inclusion2Radio1" value="1" />
+                                                {{end}}
+                                                <label class="form-check-label"
+                                                    for="inclusion2Radio2">Да</label>
+                                            </div>
+
+                                            <div class="form-check form-check-inline">
+                                                {{if eq
+                                                .Subject.Screening.InclusionCriteria.Aged18To55YearsCondition.Aged18To55Years
+                                                2}}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion2" id="inclusion2Radio2" value="2"
+                                                    checked />
+                                                {{else}}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion2" id="inclusion2Radio2" value="2" />
+                                                {{end}}
+                                                <label class="form-check-label"
+                                                    for="inclusion2Radio2">Нет</label>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control" disabled
+                                            aria-label="Text input with radio button">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="mb-1">
+                                <div class="form-radio">
+                                    <label class="radio-inline">Отрицательный результат исследования на
+                                        ВИЧ,
+                                        гепатиты, сифилис &nbsp;</label>
+                                    <br>
+                                    <div class="input-group" id="condition17" field-name="inclusion3"
+                                        color-value="{{.Subject.Screening.InclusionCriteria.NegativeHIVTestResultCondition.Color}}">
+                                        <div class="input-group-text">
+                                            <div class="form-check form-check-inline">
+                                                {{if eq
+                                                .Subject.Screening.InclusionCriteria.NegativeHIVTestResultCondition.NegativeHIVTestResult
+                                                1}}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion3" id="inclusion3Radio1" value="1"
+                                                    checked />
+                                                {{else}}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion3" id="inclusion3Radio1" value="1" />
+                                                {{end}}
+
+                                                <label class="form-check-label"
+                                                    for="inclusion3Radio1">Да</label>
+                                            </div>
+
+                                            <div class="form-check form-check-inline">
+                                                {{if eq
+                                                .Subject.Screening.InclusionCriteria.NegativeHIVTestResultCondition.NegativeHIVTestResult
+                                                2}}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion3" id="inclusion3Radio2" value="2" />
+                                                {{else}}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion3" id="inclusion3Radio2" value="2" />
+                                                {{end}}
+                                                <label class="form-check-label"
+                                                    for="inclusion3Radio2">Нет</label>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control" disabled
+                                            aria-label="Text input with radio button">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="mb-1">
+                                <div class="form-radio">
+                                    <label class="radio-inline">Индекс массы тела (ИМТ) составляет
+                                        18.5≤ИМТ≤30 &nbsp;</label>
+                                    <br>
+                                    <div class="input-group" id="condition18" field-name="inclusion4"
+                                        color-value="{{.Subject.Screening.InclusionCriteria.BodyMassIndexCondition.Color}}">
+                                        <div class="input-group-text">
+                                            <div class="form-check form-check-inline">
+                                                {{if eq
+                                                .Subject.Screening.InclusionCriteria.BodyMassIndexCondition.BodyMassIndex
+                                                1}}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion4" id="inclusion4Radio1" value="1"
+                                                    checked />
+                                                {{else}}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion4" id="inclusion4Radio1" value="1" />
+                                                {{end}}
+                                                <label class="form-check-label"
+                                                    for="inclusion4Radio1">Да</label>
+                                            </div>
+
+                                            <div class="form-check form-check-inline">
+                                                {{if eq
+                                                .Subject.Screening.InclusionCriteria.BodyMassIndexCondition.BodyMassIndex
+                                                2}}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion4" id="inclusion4Radio2" value="2"
+                                                    checked />
+                                                {{else}}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion4" id="inclusion4Radio2" value="2" />
+                                                {{end}}
+                                                <label class="form-check-label"
+                                                    for="inclusion4Radio2">Нет</label>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control" disabled
+                                            aria-label="Text input with radio button">
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="mb-1">
+                                <div class="form-radio">
+                                    <label class="radio-inline">Отсутствие острых инфекционных и/или
+                                        респираторных заболеваний по
+                                        меньшей мере в течение 14-ти дней до включения в исследование
+                                        &nbsp;</label>
+                                    <br>
+                                    <div class="input-group" id="condition19" field-name="inclusion5"
+                                        color-value="{{.Subject.Screening.InclusionCriteria.AbsenceOfAcuteInfectiousDiseasesCondition.Color}}">
+                                        <div class="input-group-text">
+                                            <div class="form-check form-check-inline">
+                                                {{if eq
+                                                .Subject.Screening.InclusionCriteria.AbsenceOfAcuteInfectiousDiseasesCondition.AbsenceOfAcuteInfectiousDiseases
+                                                1}}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion5" id="inclusion5Radio1" value="1"
+                                                    checked />
+                                                {{else}}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion5" id="inclusion5Radio1" value="1" />
+                                                {{end}}
+                                                <label class="form-check-label"
+                                                    for="inclusion5Radio1">Да</label>
+                                            </div>
+
+                                            <div class="form-check form-check-inline">
+                                                {{if eq
+                                                .Subject.Screening.InclusionCriteria.AbsenceOfAcuteInfectiousDiseasesCondition.AbsenceOfAcuteInfectiousDiseases
+                                                2}}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion5" id="inclusion5Radio2" value="2"
+                                                    checked />
+                                                {{else}}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion5" id="inclusion5Radio2" value="2" />
+                                                {{end}}
+                                                <label class="form-check-label"
+                                                    for="inclusion5Radio2">Нет</label>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control" disabled
+                                            aria-label="Text input with radio button">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="mb-1">
+                                <div class="form-radio">
+                                    <label class="radio-inline">Согласие на использование эффективных
+                                        методов контрацепции в ходе
+                                        всего периода участия в исследовании
+                                        &nbsp;</label>
+                                    <br>
+                                    <div class="input-group" id="condition20" field-name="inclusion6"
+                                        color-value="{{.Subject.Screening.InclusionCriteria.ConsentToUseEffectiveMethodsOfContraceptionCondition.Color}}">
+                                        <div class="input-group-text">
+                                            <div class="form-check form-check-inline">
+                                                {{if eq
+                                                .Subject.Screening.InclusionCriteria.ConsentToUseEffectiveMethodsOfContraceptionCondition.ConsentToUseEffectiveMethodsOfContraception
+                                                1}}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion6" id="inclusion6Radio1" value="1"
+                                                    checked />
+                                                {{else}}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion6" id="inclusion6Radio1" value="1" />
+
+                                                {{end}}
+                                                <label class="form-check-label"
+                                                    for="inclusion6Radio1">Да</label>
+                                            </div>
+
+                                            <div class="form-check form-check-inline">
+                                                {{if eq
+                                                .Subject.Screening.InclusionCriteria.ConsentToUseEffectiveMethodsOfContraceptionCondition.ConsentToUseEffectiveMethodsOfContraception
+                                                2}}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion6" id="inclusion6Radio2" value="2"
+                                                    checked />
+                                                {{else}}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion6" id="inclusion6Radio2" value="2" />
+                                                {{end}}
+                                                <label class="form-check-label"
+                                                    for="inclusion6Radio2">Нет</label>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control" disabled
+                                            aria-label="Text input with radio button">
+                                    </div>
+
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="mb-1">
+                                <div class="form-radio">
+                                    <label class="radio-inline">Отрицательный тест на беременность по
+                                        результатам исследования мочи на
+                                        визите скрининга (для женщин детородного возраста) &nbsp;
+                                    </label>
+                                    <br>
+                                    <div class="input-group" id="condition21" field-name="inclusion7"
+                                        color-value="{{.Subject.Screening.InclusionCriteria.NegativePregnancyTestCondition.Color}}">
+                                        <div class="input-group-text">
+                                            <div class="form-check form-check-inline">
+                                                {{if eq
+                                                .Subject.Screening.InclusionCriteria.NegativePregnancyTestCondition.NegativePregnancyTest
+                                                1}}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion7" id="inclusion7Radio1" value="1"
+                                                    checked />
+                                                {{else}}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion7" id="inclusion7Radio1" value="1" />
+                                                {{end}}
+                                                <label class="form-check-label"
+                                                    for="inclusion7Radio1">Да</label>
+                                            </div>
+
+                                            <div class="form-check form-check-inline">
+                                                {{if eq
+                                                .Subject.Screening.InclusionCriteria.NegativePregnancyTestCondition.NegativePregnancyTest
+                                                2}}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion7" id="inclusion7Radio2" value="2"
+                                                    checked />
+                                                {{else }}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion7" id="inclusion7Radio2" value="2" />
+                                                {{end}}
+                                                <label class="form-check-label"
+                                                    for="inclusion7Radio2">Нет</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                {{if eq
+                                                .Subject.Screening.InclusionCriteria.NegativePregnancyTestCondition.NegativePregnancyTest
+                                                3}}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion7" id="inclusion7Radio3" value="3"
+                                                    checked />
+                                                {{else}}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion7" id="inclusion7Radio3" value="3" />
+                                                {{end}}
+                                                <label class="form-check-label"
+                                                    for="inclusion7Radio3">Неприменимо</label>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control" disabled
+                                            aria-label="Text input with radio button">
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="mb-1">
+                                <div class="form-radio">
+                                    <label class="radio-inline">Отрицательный тест на наличие
+                                        наркотических
+                                        и психостимулирующих
+                                        средств в моче на визите скрининга &nbsp;</label>
+                                    <br>
+                                    <div class="input-group" id="condition22" field-name="inclusion8"
+                                        color-value="{{.Subject.Screening.InclusionCriteria.NegativeDrugTestCondition.Color}}">
+                                        <div class="input-group-text">
+                                            <div class="form-check form-check-inline">
+                                                {{if eq
+                                                .Subject.Screening.InclusionCriteria.NegativeDrugTestCondition.NegativeDrugTest
+                                                1}}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion8" id="inclusion8Radio1" value="1"
+                                                    checked />
+                                                {{else}}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion8" id="inclusion8Radio1" value="1" />
+                                                {{end}}
+                                                <label class="form-check-label"
+                                                    for="inclusion8Radio1">Да</label>
+                                            </div>
+
+                                            <div class="form-check form-check-inline">
+                                                {{if eq
+                                                .Subject.Screening.InclusionCriteria.NegativeDrugTestCondition.NegativeDrugTest
+                                                2}}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion8" id="inclusion8Radio2" value="2"
+                                                    checked />
+                                                {{else}}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion8" id="inclusion8Radio2" value="2" />
+                                                {{end}}
+                                                <label class="form-check-label"
+                                                    for="inclusion8Radio2">Нет</label>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control" disabled
+                                            aria-label="Text input with radio button">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="mb-1">
+                                <div class="form-radio">
+                                    <label class="radio-inline">Отрицательный тест на содержание
+                                        алкоголя на
+                                        визите скрининга &nbsp;</label>
+                                    <br>
+                                    <div class="input-group" id="condition23" field-name="inclusion9"
+                                        color-value="{{.Subject.Screening.InclusionCriteria.NegativeAlcoholTestCondition.Color}}">
+                                        <div class="input-group-text">
+                                            <div class="form-check form-check-inline">
+                                                {{if eq
+                                                .Subject.Screening.InclusionCriteria.NegativeAlcoholTestCondition.NegativeAlcoholTest
+                                                1}}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion9" id="inclusion9Radio1" value="1"
+                                                    checked />
+                                                {{else }}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion9" id="inclusion9Radio1" value="1" />
+                                                {{end}}
+
+                                                <label class="form-check-label"
+                                                    for="inclusion9Radio1">Да</label>
+                                            </div>
+
+                                            <div class="form-check form-check-inline">
+                                                {{if eq
+                                                .Subject.Screening.InclusionCriteria.NegativeAlcoholTestCondition.NegativeAlcoholTest
+                                                2}}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion9" id="inclusion9Radio2" value="2"
+                                                    checked />
+                                                {{else }}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion9" id="inclusion9Radio2" value="2" />
+                                                {{end}}
+                                                <label class="form-check-label"
+                                                    for="inclusion9Radio2">Нет</label>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control" disabled
+                                            aria-label="Text input with radio button">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="mb-1">
+                                <div class="form-radio">
+                                    <label class="radio-inline">Отсутствие в анамнезе выраженных
+                                        поствакцинальных реакций или
+                                        поствакцинальных осложнений на предыдущее применение
+                                        иммунобиологических препаратов &nbsp;</label>
+                                    <br>
+                                    <div class="input-group" id="condition24" field-name="inclusion10"
+                                        color-value="{{.Subject.Screening.InclusionCriteria.NoHistoryOfSeverePostVaccinationReactionsCondition.Color}}">
+                                        <div class="input-group-text">
+                                            <div class="form-check form-check-inline">
+                                                {{if eq
+                                                .Subject.Screening.InclusionCriteria.NoHistoryOfSeverePostVaccinationReactionsCondition.NoHistoryOfSeverePostVaccinationReactions
+                                                1}}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion10" id="inclusion10Radio1" value="1"
+                                                    checked />
+                                                {{else}}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion10" id="inclusion10Radio1"
+                                                    value="1" />
+                                                {{end}}
+                                                <label class="form-check-label"
+                                                    for="inclusion10Radio1">Да</label>
+                                            </div>
+
+                                            <div class="form-check form-check-inline">
+                                                {{if eq
+                                                .Subject.Screening.InclusionCriteria.NoHistoryOfSeverePostVaccinationReactionsCondition.NoHistoryOfSeverePostVaccinationReactions
+                                                2}}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion10" id="inclusion10Radio2" value="2"
+                                                    checked />
+                                                {{else}}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion10" id="inclusion10Radio2"
+                                                    value="2" />
+                                                {{end}}
+                                                <label class="form-check-label"
+                                                    for="inclusion10Radio2">Нет</label>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control" disabled
+                                            aria-label="Text input with radio button">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="mb-1">
+                                <div class="form-radio">
+                                    <label class="radio-inline">Показатели общего и биохимического
+                                        анализа
+                                        крови на скрининге в
+                                        пределах 1,1 х ВГРИ – 0,9 х НГРИ &nbsp;</label>
+                                    <br>
+                                    <div class="input-group" id="condition25" field-name="inclusion11"
+                                        color-value="{{.Subject.Screening.InclusionCriteria.IndicatorsBloodTestsAtScreeningWithinCondition.Color}}">
+                                        <div class="input-group-text">
+                                            <div class="form-check form-check-inline">
+                                                {{if eq
+                                                .Subject.Screening.InclusionCriteria.IndicatorsBloodTestsAtScreeningWithinCondition.IndicatorsBloodTestsAtScreeningWithin
+                                                1}}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion11" id="inclusion11Radio1" value="1"
+                                                    checked />
+                                                {{else}}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion11" id="inclusion11Radio1"
+                                                    value="1" />
+                                                {{end}}
+
+                                                <label class="form-check-label"
+                                                    for="inclusion11Radio1">Да</label>
+                                            </div>
+
+                                            <div class="form-check form-check-inline">
+                                                {{if eq
+                                                .Subject.Screening.InclusionCriteria.IndicatorsBloodTestsAtScreeningWithinCondition.IndicatorsBloodTestsAtScreeningWithin
+                                                2}}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion11" id="inclusion11Radio2" value="2"
+                                                    checked />
+                                                {{else}}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion11" id="inclusion11Radio2"
+                                                    value="2" />
+                                                {{end}}
+
+                                                <label class="form-check-label"
+                                                    for="inclusion11Radio2">Нет</label>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control" disabled
+                                            aria-label="Text input with radio button">
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="mb-1">
+                                <div class="form-radio">
+                                    <label class="radio-inline">Отсутствие изменений миокарда
+                                        воспалительного или дистрофического
+                                        характера по результатам ЭКГ на скрининге &nbsp;</label>
+                                    <br>
+                                    <div class="input-group" id="condition26" field-name="inclusion12"
+                                        color-value="{{.Subject.Screening.InclusionCriteria.NoMyocardialChangesCondition.Color}}">
+                                        <div class="input-group-text">
+                                            <div class="form-check form-check-inline">
+                                                {{if eq
+                                                .Subject.Screening.InclusionCriteria.NoMyocardialChangesCondition.NoMyocardialChanges
+                                                1}}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion12" id="inclusion12Radio1" value="1"
+                                                    checked />
+                                                {{else}}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion12" id="inclusion12Radio1"
+                                                    value="1" />
+                                                {{end}}
+                                                <label class="form-check-label"
+                                                    for="inclusion12Radio1">Да</label>
+                                            </div>
+
+                                            <div class="form-check form-check-inline">
+                                                {{if eq
+                                                .Subject.Screening.InclusionCriteria.NoMyocardialChangesCondition.NoMyocardialChanges
+                                                2}}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion12" id="inclusion12Radio2" value="2"
+                                                    checked />
+                                                {{else}}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion12" id="inclusion12Radio2"
+                                                    value="2" />
+                                                {{end}}
+                                                <label class="form-check-label"
+                                                    for="inclusion12Radio2">Нет</label>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control" disabled
+                                            aria-label="Text input with radio button">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="mb-1">
+                                <div class="form-radio">
+                                    <label class="radio-inline">Отрицательный результат исследования на
+                                        COVID-2019, определяемый
+                                        методом ПЦР или экспресс-методом за 3 дня до включения в
+                                        исследование &nbsp;</label>
+                                    <br>
+                                    <div class="input-group" id="condition27" field-name="inclusion13"
+                                        color-value="{{.Subject.Screening.InclusionCriteria.NegativeTestResultForCOVIDCondition.Color}}">
+                                        <div class="input-group-text">
+                                            <div class="form-check form-check-inline">
+                                                {{if eq
+                                                .Subject.Screening.InclusionCriteria.NegativeTestResultForCOVIDCondition.NegativeTestResultForCOVID
+                                                1}}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion13" id="inclusion13Radio1" value="1"
+                                                    checked />
+                                                {{else}}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion13" id="inclusion13Radio1"
+                                                    value="1" />
+                                                {{end}}
+                                                <label class="form-check-label"
+                                                    for="inclusion13Radio1">Да</label>
+                                            </div>
+
+                                            <div class="form-check form-check-inline">
+                                                {{if eq
+                                                .Subject.Screening.InclusionCriteria.NegativeTestResultForCOVIDCondition.NegativeTestResultForCOVID
+                                                2}}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion13" id="inclusion13Radio2" value="2"
+                                                    checked />
+                                                {{else}}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion13" id="inclusion13Radio2"
+                                                    value="2" />
+                                                {{end}}
+                                                <label class="form-check-label"
+                                                    for="inclusion13Radio2">Нет</label>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control" disabled
+                                            aria-label="Text input with radio button">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="mb-1">
+                                <div class="form-radio">
+                                    <label class="radio-inline">Отсутствие противопоказаний к вакцинации
+                                        &nbsp;</label>
+                                    <br>
+                                    <div class="input-group" id="condition28" field-name="inclusion14"
+                                        color-value="{{.Subject.Screening.InclusionCriteria.NoContraindicationsToVaccinationCondition.Color}}">
+                                        <div class="input-group-text">
+                                            <div class="form-check form-check-inline">
+                                                {{if eq
+                                                .Subject.Screening.InclusionCriteria.NoContraindicationsToVaccinationCondition.NoContraindicationsToVaccination
+                                                1}}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion14" id="inclusion14Radio1" value="1"
+                                                    checked />
+                                                {{else}}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion14" id="inclusion14Radio1"
+                                                    value="1" />
+                                                {{end}}
+                                                <label class="form-check-label"
+                                                    for="inclusion14Radio1">Да</label>
+                                            </div>
+
+                                            <div class="form-check form-check-inline">
+                                                {{if eq
+                                                .Subject.Screening.InclusionCriteria.NoContraindicationsToVaccinationCondition.NoContraindicationsToVaccination
+                                                2}}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion14" id="inclusion14Radio2" value="2"
+                                                    checked />
+                                                {{else}}
+                                                <input class="form-check-input" type="radio"
+                                                    name="inclusion14" id="inclusion14Radio2"
+                                                    value="2" />
+                                                {{end}}
+                                                <label class="form-check-label"
+                                                    for="inclusion14Radio2">Нет</label>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control" disabled
+                                            aria-label="Text input with radio button">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <input type="submit" value="Сохранить" class="btn btn-primary">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+{{end}}

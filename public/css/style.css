@@ -3,6 +3,9 @@
     --color1: #184163;
 }
 
+
+
+
 .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
     background-color: var(--color1) !important;
 }
