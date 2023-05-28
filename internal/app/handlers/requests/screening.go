@@ -15,3 +15,11 @@ type UpdateColorWithCommentRequest struct {
 	Comment       string `json:"comment"`
 	Reason        string `json:"reason"`
 }
+
+type UpdateValueWithColor struct {
+	SubjectNumber string `json:"subject_number"`
+	ProtocolID    string `json:"protocol_id"`
+	FieldName     string `json:"field_name"`
+	Value         string `json:"value"`
+	Color         int    `json:"color"`
+}

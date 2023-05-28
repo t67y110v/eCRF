@@ -23,25 +23,25 @@ type Subject struct {
 				Comment string `bson:"comment"`
 			}
 			DateOfSignCondition struct {
-				DateOfSign string `bson:"date_of_sign"`
+				DateOfSign string `bson:"dateofsign"`
 				Color      int    `bson:"color"`
 				Reason     string `bson:"reason"`
 				Comment    string `bson:"comment"`
 			}
 			TimeOfSignCondition struct {
-				TimeOfSign string `bson:"time_of_sign"`
+				TimeOfSign string `bson:"timeofsign"`
 				Color      int    `bson:"color"`
 				Reason     string `bson:"reason"`
 				Comment    string `bson:"comment"`
 			}
 			ReceivedAnInsurancePolicyCondition struct {
-				ReceivedAnInsurancePolicy int    `bson:"received_an_insurance_policy"`
+				ReceivedAnInsurancePolicy int    `bson:"receivedaninsurancepolicy"`
 				Color                     int    `bson:"color"`
 				Reason                    string `bson:"reason"`
 				Comment                   string `bson:"comment"`
 			}
 			ReceivedAnInformaionConsentCondition struct {
-				ReceivedAnInformaionConsent int    `bson:"received_an_informaion_consent"`
+				ReceivedAnInformaionConsent int    `bson:"receivedaninformaionconsent"`
 				Color                       int    `bson:"color"`
 				Reason                      string `bson:"reason"`
 				Comment                     string `bson:"comment"`
@@ -49,39 +49,39 @@ type Subject struct {
 		}
 		Anthropometry struct {
 			AnthropometricDataBeenMeasuredCondition struct {
-				AnthropometricDataBeenMeasured int    `bson:"anthropometric_data_been_measured"`
+				AnthropometricDataBeenMeasured int    `bson:"anthropometricdatabeenmeasured"`
 				Color                          int    `bson:"color"`
 				Reason                         string `bson:"reason"`
 				Comment                        string `bson:"comment"`
 			}
 			ReasonIfNotCondition struct {
-				ReasonIfNot string `bson:"reason_if_not"`
+				ReasonIfNot string `bson:"reasonifnot"`
 				Color       int    `bson:"color"`
 				Reason      string `bson:"reason"`
 				Comment     string `bson:"comment"`
 			}
 			DateOfStartMeasuredCondition struct {
-				DateOfStartMeasured string `bson:"date_of_start_measured"`
+				DateOfStartMeasured string `bson:"dateofstartmeasured"`
 				Color               int    `bson:"color"`
 				Reason              string `bson:"reason"`
 				Comment             string `bson:"comment"`
 			}
 			WeightOfBodyCondition struct {
-				WeightOfBody int    `bson:"weight_of_body"`
+				WeightOfBody int    `bson:"weightofbody"`
 				Color        int    `bson:"color"`
 				Reason       string `bson:"reason"`
 				Comment      string `bson:"comment"`
 			}
 
 			HeightOfBodyCondition struct {
-				HeightOfBody int    `bson:"height_of_body"`
+				HeightOfBody int    `bson:"heightofbody"`
 				Color        int    `bson:"color"`
 				Reason       string `bson:"reason"`
 				Comment      string `bson:"comment"`
 			}
 
 			IndexWeigthOfBodyCondition struct {
-				IndexWeigthOfBody int    `bson:"index_weight_of_body"`
+				IndexWeigthOfBody int    `bson:"indexweightofbody"`
 				Color             int    `bson:"color"`
 				Reason            string `bson:"reason"`
 				Comment           string `bson:"comment"`
@@ -109,85 +109,85 @@ type Subject struct {
 		}
 		InclusionCriteria struct {
 			PresenceOfAnInformationPanelCondition struct {
-				PresenceOfAnInformationPanel int    `bson:"presence_of_an_information_panel"`
+				PresenceOfAnInformationPanel int    `bson:"presenceofaninformationpanel"`
 				Color                        int    `bson:"color"`
 				Reason                       string `bson:"reason"`
 				Comment                      string `bson:"comment"`
 			}
 			Aged18To55YearsCondition struct {
-				Aged18To55Years int    `bson:"aged_18_to_55_years"`
+				Aged18To55Years int    `bson:"aged18to55years"`
 				Color           int    `bson:"color"`
 				Reason          string `bson:"reason"`
 				Comment         string `bson:"comment"`
 			}
 			NegativeHIVTestResultCondition struct {
-				NegativeHIVTestResult int    `bson:"negative_hiv_test_result"`
+				NegativeHIVTestResult int    `bson:"negativehivtestresult"`
 				Color                 int    `bson:"color"`
 				Reason                string `bson:"reason"`
 				Comment               string `bson:"comment"`
 			}
 			BodyMassIndexCondition struct {
-				BodyMassIndex int    `bson:"body_mass_index"`
+				BodyMassIndex int    `bson:"bodymassindex"`
 				Color         int    `bson:"color"`
 				Reason        string `bson:"reason"`
 				Comment       string `bson:"comment"`
 			}
 			AbsenceOfAcuteInfectiousDiseasesCondition struct {
-				AbsenceOfAcuteInfectiousDiseases int    `bson:"absence_of_acute_infectious_diseases"`
+				AbsenceOfAcuteInfectiousDiseases int    `bson:"absenceofacuteinfectiousdiseases"`
 				Color                            int    `bson:"color"`
 				Reason                           string `bson:"reason"`
 				Comment                          string `bson:"comment"`
 			}
 			ConsentToUseEffectiveMethodsOfContraceptionCondition struct {
-				ConsentToUseEffectiveMethodsOfContraception int    `bson:"consent_to_use_effective_methods_of_contraception"`
+				ConsentToUseEffectiveMethodsOfContraception int    `bson:"consenttouseeffectivemethodsofcontraception"`
 				Color                                       int    `bson:"color"`
 				Reason                                      string `bson:"reason"`
 				Comment                                     string `bson:"comment"`
 			}
 			NegativePregnancyTestCondition struct {
-				NegativePregnancyTest int    `bson:"negative_pregnancy_test"`
+				NegativePregnancyTest int    `bson:"negativepregnancytest"`
 				Color                 int    `bson:"color"`
 				Reason                string `bson:"reason"`
 				Comment               string `bson:"comment"`
 			}
 			NegativeDrugTestCondition struct {
-				NegativeDrugTest int    `bson:"negative_drug_test"`
+				NegativeDrugTest int    `bson:"negativedrugtest"`
 				Color            int    `bson:"color"`
 				Reason           string `bson:"reason"`
 				Comment          string `bson:"comment"`
 			}
 			NegativeAlcoholTestCondition struct {
-				NegativeAlcoholTest int    `bson:"negative_alcohol_test"`
+				NegativeAlcoholTest int    `bson:"negativealcoholtest"`
 				Color               int    `bson:"color"`
 				Reason              string `bson:"reason"`
 				Comment             string `bson:"comment"`
 			}
 			NoHistoryOfSeverePostVaccinationReactionsCondition struct {
-				NoHistoryOfSeverePostVaccinationReactions int    `bson:"no_history_of_severe_post_vaccination_reactions"`
+				NoHistoryOfSeverePostVaccinationReactions int    `bson:"nohistoryofseverepostvaccinationreactions"`
 				Color                                     int    `bson:"color"`
 				Reason                                    string `bson:"reason"`
 				Comment                                   string `bson:"comment"`
 			}
 			IndicatorsBloodTestsAtScreeningWithinCondition struct {
-				IndicatorsBloodTestsAtScreeningWithin int    `bson:"indicators_blood_tests_at_screening_within"`
+				IndicatorsBloodTestsAtScreeningWithin int    `bson:"indicatorsbloodtestsatscreeningwithin"`
 				Color                                 int    `bson:"color"`
 				Reason                                string `bson:"reason"`
 				Comment                               string `bson:"comment"`
 			}
 			NoMyocardialChangesCondition struct {
-				NoMyocardialChanges int    `bson:"no_myocardial_changes"`
+				NoMyocardialChanges int    `bson:"nomyocardialchanges"`
 				Color               int    `bson:"color"`
 				Reason              string `bson:"reason"`
 				Comment             string `bson:"comment"`
 			}
 			NegativeTestResultForCOVIDCondition struct {
-				NegativeTestResultForCOVID int    `bson:"negative_test_result_for_COVID"`
+				NegativeTestResultForCOVID int    `bson:"negativetestresultforCOVID"`
 				Color                      int    `bson:"color"`
 				Reason                     string `bson:"reason"`
 				Comment                    string `bson:"comment"`
 			}
 			NoContraindicationsToVaccinationCondition struct {
-				NoContraindicationsToVaccination int    `bson:"no_contraindications_to_vaccination"`
+				NoContraindicationsToVaccination int    `bson:"nocontraindicationstovaccination"`
 				Color                            int    `bson:"color"`
 				Reason                           string `bson:"reason"`
 				Comment                          string `bson:"comment"`
@@ -196,55 +196,55 @@ type Subject struct {
 
 		ExclusionСriteria struct {
 			LackOfSignedInformedConsentCondition struct {
-				LackOfSignedInformedConsent int    `bson:"lack_of_signed_informed_consent"`
+				LackOfSignedInformedConsent int    `bson:"lackofsignedinformedconsent"`
 				Color                       int    `bson:"color"`
 				Reason                      string `bson:"reason"`
 				Comment                     string `bson:"comment"`
 			}
 			SteroidTherapyCondition struct {
-				SteroidTherapy int    `bson:"steroid_therapy"`
+				SteroidTherapy int    `bson:"steroidtherapy"`
 				Color          int    `bson:"color"`
 				Reason         string `bson:"reason"`
 				Comment        string `bson:"comment"`
 			}
 			TherapyWithImmunosuppressiveDrugsCondition struct {
-				TherapyWithImmunosuppressiveDrugs int    `bson:"therapy_with_immunosuppressive_drugs"`
+				TherapyWithImmunosuppressiveDrugs int    `bson:"therapywithimmunosuppressivedrugs"`
 				Color                             int    `bson:"color"`
 				Reason                            string `bson:"reason"`
 				Comment                           string `bson:"comment"`
 			}
 			FemaleSubjectsDuringPregnancyCondition struct {
-				FemaleSubjectsDuringPregnancy int    `bson:"female_subjects_during_pregnancy"`
+				FemaleSubjectsDuringPregnancy int    `bson:"femalesubjectsduringpregnancy"`
 				Color                         int    `bson:"color"`
 				Reason                        string `bson:"reason"`
 				Comment                       string `bson:"comment"`
 			}
 			StrokeInLessThanOneYearCondition struct {
-				StrokeInLessThanOneYear int    `bson:"stroke_in_less_than_one_year"`
+				StrokeInLessThanOneYear int    `bson:"strokeinlessthanoneyear"`
 				Color                   int    `bson:"color"`
 				Reason                  string `bson:"reason"`
 				Comment                 string `bson:"comment"`
 			}
 			ChronicSystemicInfectionsCondition struct {
-				ChronicSystemicInfections int    `bson:"chronic_systemic_infections"`
+				ChronicSystemicInfections int    `bson:"chronicsystemicinfections"`
 				Color                     int    `bson:"color"`
 				Reason                    string `bson:"reason"`
 				Comment                   string `bson:"comment"`
 			}
 			AggravatedAllergicHistoryCondition struct {
-				AggravatedAllergicHistory int    `bson:"aggravated_allergic_history"`
+				AggravatedAllergicHistory int    `bson:"aggravatedallergichistory"`
 				Color                     int    `bson:"color"`
 				Reason                    string `bson:"reason"`
 				Comment                   string `bson:"comment"`
 			}
 			PresenceOfAHistoryOfNeoplasmsCondition struct {
-				PresenceOfAHistoryOfNeoplasms int    `bson:"presence_of_a_history_of_neoplasms"`
+				PresenceOfAHistoryOfNeoplasms int    `bson:"presenceofahistoryofneoplasms"`
 				Color                         int    `bson:"color"`
 				Reason                        string `bson:"reason"`
 				Comment                       string `bson:"comment"`
 			}
 			HistoryOfSplenectomyCondition struct {
-				HistoryOfSplenectomy int    `bson:"history_of_splenectomy"`
+				HistoryOfSplenectomy int    `bson:"historyofsplenectomy"`
 				Color                int    `bson:"color"`
 				Reason               string `bson:"reason"`
 				Comment              string `bson:"comment"`
@@ -256,7 +256,7 @@ type Subject struct {
 				Comment     string `bson:"comment"`
 			}
 			SubjectsWithActiveSyphilisCondition struct {
-				SubjectsWithActiveSyphilis int    `bson:"subjects_with_active_syphilis"`
+				SubjectsWithActiveSyphilis int    `bson:"subjectswithactivesyphilis"`
 				Color                      int    `bson:"color"`
 				Reason                     string `bson:"reason"`
 				Comment                    string `bson:"comment"`
@@ -268,67 +268,67 @@ type Subject struct {
 				Comment  string `bson:"comment"`
 			}
 			ExtensiveTattoosCondition struct {
-				ExtensiveTattoos int    `bson:"extensive_tattoos"`
+				ExtensiveTattoos int    `bson:"extensivetattoos"`
 				Color            int    `bson:"color"`
 				Reason           string `bson:"reason"`
 				Comment          string `bson:"comment"`
 			}
 			TakingNarcoticAndPsychostimulantDrugsCondition struct {
-				TakingNarcoticAndPsychostimulantDrugs int    `bson:"taking_narcotic_and_psychostimulant_drugs"`
+				TakingNarcoticAndPsychostimulantDrugs int    `bson:"takingnarcoticandpsychostimulantdrugs"`
 				Color                                 int    `bson:"color"`
 				Reason                                string `bson:"reason"`
 				Comment                               string `bson:"comment"`
 			}
 			SmokingMoretThanTenCigarettesADayCondition struct {
-				SmokingMoretThanTenCigarettesADay int    `bson:"smoking_more_than_ten_cigarettes_a_day"`
+				SmokingMoretThanTenCigarettesADay int    `bson:"smokingmorethantencigarettesaday"`
 				Color                             int    `bson:"color"`
 				Reason                            string `bson:"reason"`
 				Comment                           string `bson:"comment"`
 			}
 			AlcoholIntakeCondition struct {
-				AlcoholIntake int    `bson:"alcohol_intake"`
+				AlcoholIntake int    `bson:"alcoholintake"`
 				Color         int    `bson:"color"`
 				Reason        string `bson:"reason"`
 				Comment       string `bson:"comment"`
 			}
 			PlannedHospitalizationConditiont struct {
-				PlannedHospitalization int    `bson:"planned_hospitalization"`
+				PlannedHospitalization int    `bson:"plannedhospitalization"`
 				Color                  int    `bson:"color"`
 				Reason                 string `bson:"reason"`
 				Comment                string `bson:"comment"`
 			}
 			DonorBloodDonationCondition struct {
-				DonorBloodDonation int    `bson:"donor_blood_donation"`
+				DonorBloodDonation int    `bson:"donorblooddonation"`
 				Color              int    `bson:"color"`
 				Reason             string `bson:"reason"`
 				Comment            string `bson:"comment"`
 			}
 			SubjectParticipationInAnyOtherStudyCondition struct {
-				SubjectParticipationInAnyOtherStudy int    `bson:"subject_participation_in_any_other_study"`
+				SubjectParticipationInAnyOtherStudy int    `bson:"subjectparticipationinanyotherstudy"`
 				Color                               int    `bson:"color"`
 				Reason                              string `bson:"reason"`
 				Comment                             string `bson:"comment"`
 			}
 			AnyVaccinationInTheLastMonthCondition struct {
-				AnyVaccinationInTheLastMonth int    `bson:"any_vaccination_in_the_last_month"`
+				AnyVaccinationInTheLastMonth int    `bson:"anyvaccinationinthelastmonth"`
 				Color                        int    `bson:"color"`
 				Reason                       string `bson:"reason"`
 				Comment                      string `bson:"comment"`
 			}
 			InabilityToReadInRussianCondition struct {
-				InabilityToReadInRussian int    `bson:"inability_to_read_in_russian"`
+				InabilityToReadInRussian int    `bson:"inabilitytoreadinrussian"`
 				Color                    int    `bson:"color"`
 				Reason                   string `bson:"reason"`
 				Comment                  string `bson:"comment"`
 			}
 			ResearchCenterStaffCondition struct {
-				ResearchCenterStaff int    `bson:"research_center_staff"`
+				ResearchCenterStaff int    `bson:"researchcenterstaff"`
 				Color               int    `bson:"color"`
 				Reason              string `bson:"reason"`
 				Comment             string `bson:"comment"`
 			}
 			AnyOtherStateOfTheSubjectOfTheStudyCondition struct {
-				AnyOtherStateOfTheSubjectOfTheStudy int    `bson:"any_other_state_of_the_subject_of_the_study"`
+				AnyOtherStateOfTheSubjectOfTheStudy int    `bson:"anyotherstateofthesubjectofthestudy"`
 				Color                               int    `bson:"color"`
 				Reason                              string `bson:"reason"`
 				Comment                             string `bson:"comment"`
@@ -336,37 +336,37 @@ type Subject struct {
 		}
 		CompletionOfScreening struct {
 			VolunteerEligibleCondition struct {
-				VolunteerEligible int    `bson:"volunteer_eligible"`
+				VolunteerEligible int    `bson:"volunteereligible"`
 				Color             int    `bson:"color"`
 				Reason            string `bson:"reason"`
 				Comment           string `bson:"comment"`
 			}
 			NoExclusionCriteriaCondition struct {
-				NoExclusionCriteria int    `bson:"no_exclusion_criteria"`
+				NoExclusionCriteria int    `bson:"noexclusioncriteria"`
 				Color               int    `bson:"color"`
 				Reason              string `bson:"reason"`
 				Comment             string `bson:"comment"`
 			}
 			InformedOfTheRestrictionsCondition struct {
-				InformedOfTheRestrictions int    `bson:"informed_of_the_restrictions"`
+				InformedOfTheRestrictions int    `bson:"informedoftherestrictions"`
 				Color                     int    `bson:"color"`
 				Reason                    string `bson:"reason"`
 				Comment                   string `bson:"comment"`
 			}
 			VolunteerIncludedCondition struct {
-				VolunteerIncluded int    `bson:"volunteer_included"`
+				VolunteerIncluded int    `bson:"volunteerincluded"`
 				Color             int    `bson:"color"`
 				Reason            string `bson:"reason"`
 				Comment           string `bson:"comment"`
 			}
 			ReasonIfNotCondition struct {
-				ReasonIfNot string `bson:"reason_if_not"`
+				ReasonIfNot string `bson:"reasonifnot"`
 				Color       int    `bson:"color"`
 				Reason      string `bson:"reason"`
 				Comment     string `bson:"comment"`
 			}
 			CommentCondition struct {
-				CommentValue string `bson:"comment_value"`
+				CommentValue string `bson:"commentvalue"`
 				Color        int    `bson:"color"`
 				Reason       string `bson:"reason"`
 				Comment      string `bson:"comment"`

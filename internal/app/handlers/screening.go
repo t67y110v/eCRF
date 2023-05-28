@@ -335,3 +335,38 @@ func (h *Handlers) UpdateColorWithComment() fiber.Handler {
 
 	}
 }
+
+func (h *Handlers) UpdateFieldValue() fiber.Handler {
+	return func(c *fiber.Ctx) error {
+		req := &requests.UpdateValueWithColor{}
+		reader := bytes.NewReader(c.Body())
+		if err := json.NewDecoder(reader).Decode(req); err != nil {
+			h.logger.Warningf("handle filter by category, status :%d, error :%e", fiber.StatusBadRequest, err)
+		}
+		subjectNumber := req.SubjectNumber
+		protocolId, err := strconv.Atoi(req.ProtocolID)
+		if err != nil {
+			return utils.ErrorPage(c, err)
+		}
+		subject, err := h.mgStore.Subject().GetSubjectByNumber(subjectNumber, protocolId)
+		if err != nil {
+			h.logger.Warningln(err)
+			return utils.ErrorPage(c, err)
+		}
+		color := req.Color
+		field := utils.GetFieldName(req.FieldName)
+		fieldValue := utils.GetFieldNameForUpdate(field)
+		value, err := strconv.Atoi(req.Value)
+		if err != nil {
+			if err := h.mgStore.Screening().UpdateFieldStringValue(c.Context(), subject.ID, field, fieldValue, req.Value, color); err != nil {
+				return utils.ErrorPage(c, err)
+			}
+		} else {
+			if err := h.mgStore.Screening().UpdateFieldIntValue(c.Context(), subject.ID, field, fieldValue, value, color); err != nil {
+				return utils.ErrorPage(c, err)
+			}
+		}
+
+		return nil
+	}
+}

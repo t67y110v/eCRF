@@ -26,16 +26,16 @@ func (r *MongoScreeningRepository) InformaionConsent(
 	filter := bson.M{"_id": id}
 	update := bson.M{
 		"$set": bson.M{
-			"screening.informaionconsent.signedcondition.signed":                                              isSigned,
-			"screening.informaionconsent.signedcondition.color":                                               1,
-			"screening.informaionconsent.dateofsigncondition.date_of_sign":                                    dateOfSign,
-			"screening.informaionconsent.dateofsigncondition.color":                                           1,
-			"screening.informaionconsent.timeofsigncondition.time_of_sign":                                    timeOfSign,
-			"screening.informaionconsent.timeofsigncondition.color":                                           1,
-			"screening.informaionconsent.receivedaninsurancepolicycondition.received_an_insurance_policy":     receivedAnInsurancePolicy,
-			"screening.informaionconsent.receivedaninsurancepolicycondition.color":                            1,
-			"screening.informaionconsent.receivedaninformaionconsentcondition.received_an_informaion_consent": receivedAnInformaionConsent,
-			"screening.informaionconsent.receivedaninformaionconsentcondition.color":                          1,
+			"screening.informaionconsent.signedcondition.signed":                                           isSigned,
+			"screening.informaionconsent.signedcondition.color":                                            1,
+			"screening.informaionconsent.dateofsigncondition.dateofsign":                                   dateOfSign,
+			"screening.informaionconsent.dateofsigncondition.color":                                        1,
+			"screening.informaionconsent.timeofsigncondition.timeofsign":                                   timeOfSign,
+			"screening.informaionconsent.timeofsigncondition.color":                                        1,
+			"screening.informaionconsent.receivedaninsurancepolicycondition.receivedaninsurancepolicy":     receivedAnInsurancePolicy,
+			"screening.informaionconsent.receivedaninsurancepolicycondition.color":                         1,
+			"screening.informaionconsent.receivedaninformaionconsentcondition.receivedaninformaionconsent": receivedAnInformaionConsent,
+			"screening.informaionconsent.receivedaninformaionconsentcondition.color":                       1,
 		},
 	}
 
@@ -83,18 +83,18 @@ func (r *MongoScreeningRepository) Anthropometry(
 	filter := bson.M{"_id": id}
 	update := bson.M{
 		"$set": bson.M{
-			"screening.anthropometry.anthropometricdatabeenmeasuredcondition.anthropometric_data_been_measured": anthropometricDataBeenMeasured,
-			"screening.anthropometry.anthropometricdatabeenmeasuredcondition.color":                             1,
-			"screening.anthropometry.reasonifnotcondition.reason_if_not":                                        reasonIfNot,
-			"screening.anthropometry.reasonifnotcondition.color":                                                1,
-			"screening.anthropometry.dateofstartmeasuredcondition.date_of_start_measured":                       dateOfStartMeasured,
-			"screening.anthropometry.dateofstartmeasuredcondition.color":                                        1,
-			"screening.anthropometry.weightofbodycondition.weight_of_body":                                      weightOfBody,
-			"screening.anthropometry.weightofbodycondition.color":                                               1,
-			"screening.anthropometry.heightofbodycondition.height_of_body":                                      heightOfBody,
-			"screening.anthropometry.heightofbodycondition.color":                                               1,
-			"screening.anthropometry.indexweigthofbodycondition.index_weight_of_body":                           indexWeigthOfBody,
-			"screening.anthropometry.indexweigthofbodycondition.color":                                          1,
+			"screening.anthropometry.anthropometricdatabeenmeasuredcondition.anthropometricdatabeenmeasured": anthropometricDataBeenMeasured,
+			"screening.anthropometry.anthropometricdatabeenmeasuredcondition.color":                          1,
+			"screening.anthropometry.reasonifnotcondition.reasonifnot":                                       reasonIfNot,
+			"screening.anthropometry.reasonifnotcondition.color":                                             1,
+			"screening.anthropometry.dateofstartmeasuredcondition.dateofstartmeasured":                       dateOfStartMeasured,
+			"screening.anthropometry.dateofstartmeasuredcondition.color":                                     1,
+			"screening.anthropometry.weightofbodycondition.weightofbody":                                     weightOfBody,
+			"screening.anthropometry.weightofbodycondition.color":                                            1,
+			"screening.anthropometry.heightofbodycondition.heightofbody":                                     heightOfBody,
+			"screening.anthropometry.heightofbodycondition.color":                                            1,
+			"screening.anthropometry.indexweigthofbodycondition.indexweightofbody":                           indexWeigthOfBody,
+			"screening.anthropometry.indexweigthofbodycondition.color":                                       1,
 		},
 	}
 
@@ -129,34 +129,34 @@ func (r *MongoScreeningRepository) InclusionCriteria(
 	filter := bson.M{"_id": id}
 	update := bson.M{
 		"$set": bson.M{
-			"screening.inclusioncriteria.presenceofaninformationpanelcondition.presence_of_an_information_panel":                                 presenceOfAnInformationPanel,
-			"screening.inclusioncriteria.presenceofaninformationpanelcondition.color":                                                            1,
-			"screening.inclusioncriteria.aged18to55yearscondition.aged_18_to_55_years":                                                           aged18To55Years,
-			"screening.inclusioncriteria.aged18to55yearscondition.color":                                                                         1,
-			"screening.inclusioncriteria.negativehivtestresultcondition.negative_hiv_test_result":                                                negativeHIVTestResult,
-			"screening.inclusioncriteria.negativehivtestresultcondition.color":                                                                   1,
-			"screening.inclusioncriteria.bodymassindexcondition.body_mass_index":                                                                 bodyMassIndex,
-			"screening.inclusioncriteria.bodymassindexcondition.color":                                                                           1,
-			"screening.inclusioncriteria.absenceofacuteinfectiousdiseasescondition.absence_of_acute_infectious_diseases":                         absenceOfAcuteInfectiousDiseases,
-			"screening.inclusioncriteria.absenceofacuteinfectiousdiseasescondition.color":                                                        1,
-			"screening.inclusioncriteria.consenttouseeffectivemethodsofcontraceptioncondition.consent_to_use_effective_methods_of_contraception": consentToUseEffectiveMethodsOfContraception,
-			"screening.inclusioncriteria.consenttouseeffectivemethodsofcontraceptioncondition.color":                                             1,
-			"screening.inclusioncriteria.negativepregnancytestcondition.negative_pregnancy_test":                                                 negativePregnancyTest,
-			"screening.inclusioncriteria.negativepregnancytestcondition.color":                                                                   1,
-			"screening.inclusioncriteria.negativedrugtestcondition.negative_drug_test":                                                           negativeDrugTest,
-			"screening.inclusioncriteria.negativedrugtestcondition.color":                                                                        1,
-			"screening.inclusioncriteria.negativealcoholtestcondition.negative_alcohol_test":                                                     negativeAlcoholTest,
-			"screening.inclusioncriteria.negativealcoholtestcondition.color":                                                                     1,
-			"screening.inclusioncriteria.nohistoryofseverepostvaccinationreactionscondition.no_history_of_severe_post_vaccination_reactions":     noHistoryOfSeverePostVaccinationReactions,
-			"screening.inclusioncriteria.nohistoryofseverepostvaccinationreactionscondition.color":                                               1,
-			"screening.inclusioncriteria.indicatorsbloodtestsatscreeningwithincondition.indicators_blood_tests_at_screening_within":              indicatorsBloodTestsAtScreeningWithin,
-			"screening.inclusioncriteria.indicatorsbloodtestsatscreeningwithincondition.color":                                                   1,
-			"screening.inclusioncriteria.nomyocardialchangescondition.no_myocardial_changes":                                                     noMyocardialChanges,
-			"screening.inclusioncriteria.nomyocardialchangescondition.color":                                                                     1,
-			"screening.inclusioncriteria.negativetestresultforcovidcondition.negative_test_result_for_COVID":                                     negativeTestResultForCOVID,
-			"screening.inclusioncriteria.negativetestresultforcovidcondition.color":                                                              1,
-			"screening.inclusioncriteria.nocontraindicationstovaccinationcondition.no_contraindications_to_vaccination":                          noContraindicationsToVaccination,
-			"screening.inclusioncriteria.nocontraindicationstovaccinationcondition.color":                                                        1,
+			"screening.inclusioncriteria.presenceofaninformationpanelcondition.presenceofaninformationpanel":                               presenceOfAnInformationPanel,
+			"screening.inclusioncriteria.presenceofaninformationpanelcondition.color":                                                      1,
+			"screening.inclusioncriteria.aged18to55yearscondition.aged18to55years":                                                         aged18To55Years,
+			"screening.inclusioncriteria.aged18to55yearscondition.color":                                                                   1,
+			"screening.inclusioncriteria.negativehivtestresultcondition.negativehivtestresult":                                             negativeHIVTestResult,
+			"screening.inclusioncriteria.negativehivtestresultcondition.color":                                                             1,
+			"screening.inclusioncriteria.bodymassindexcondition.bodymassindex":                                                             bodyMassIndex,
+			"screening.inclusioncriteria.bodymassindexcondition.color":                                                                     1,
+			"screening.inclusioncriteria.absenceofacuteinfectiousdiseasescondition.absenceofacuteinfectiousdiseases":                       absenceOfAcuteInfectiousDiseases,
+			"screening.inclusioncriteria.absenceofacuteinfectiousdiseasescondition.color":                                                  1,
+			"screening.inclusioncriteria.consenttouseeffectivemethodsofcontraceptioncondition.consenttouseeffectivemethodsofcontraception": consentToUseEffectiveMethodsOfContraception,
+			"screening.inclusioncriteria.consenttouseeffectivemethodsofcontraceptioncondition.color":                                       1,
+			"screening.inclusioncriteria.negativepregnancytestcondition.negativepregnancytest":                                             negativePregnancyTest,
+			"screening.inclusioncriteria.negativepregnancytestcondition.color":                                                             1,
+			"screening.inclusioncriteria.negativedrugtestcondition.negativedrugtest":                                                       negativeDrugTest,
+			"screening.inclusioncriteria.negativedrugtestcondition.color":                                                                  1,
+			"screening.inclusioncriteria.negativealcoholtestcondition.negativealcoholtest":                                                 negativeAlcoholTest,
+			"screening.inclusioncriteria.negativealcoholtestcondition.color":                                                               1,
+			"screening.inclusioncriteria.nohistoryofseverepostvaccinationreactionscondition.nohistoryofseverepostvaccinationreactions":     noHistoryOfSeverePostVaccinationReactions,
+			"screening.inclusioncriteria.nohistoryofseverepostvaccinationreactionscondition.color":                                         1,
+			"screening.inclusioncriteria.indicatorsbloodtestsatscreeningwithincondition.indicatorsbloodtestsatscreeningwithin":             indicatorsBloodTestsAtScreeningWithin,
+			"screening.inclusioncriteria.indicatorsbloodtestsatscreeningwithincondition.color":                                             1,
+			"screening.inclusioncriteria.nomyocardialchangescondition.nomyocardialchanges":                                                 noMyocardialChanges,
+			"screening.inclusioncriteria.nomyocardialchangescondition.color":                                                               1,
+			"screening.inclusioncriteria.negativetestresultforcovidcondition.negativetestresultforCOVID":                                   negativeTestResultForCOVID,
+			"screening.inclusioncriteria.negativetestresultforcovidcondition.color":                                                        1,
+			"screening.inclusioncriteria.nocontraindicationstovaccinationcondition.nocontraindicationstovaccination":                       noContraindicationsToVaccination,
+			"screening.inclusioncriteria.nocontraindicationstovaccinationcondition.color":                                                  1,
 		},
 	}
 
@@ -199,52 +199,52 @@ func (r *MongoScreeningRepository) ExclusionСriteria(
 	filter := bson.M{"_id": id}
 	update := bson.M{
 		"$set": bson.M{
-			"screening.exclusionсriteria.lackofsignedinformedconsentcondition.lack_of_signed_informed_consent":                     lackOfSignedInformedConsent,
-			"screening.exclusionсriteria.lackofsignedinformedconsentcondition.color":                                               1,
-			"screening.exclusionсriteria.steroidtherapycondition.steroid_therapy":                                                  steroidTherapy,
-			"screening.exclusionсriteria.steroidtherapycondition.color":                                                            1,
-			"screening.exclusionсriteria.therapywithimmunosuppressivedrugscondition.therapy_with_immunosuppressive_drugs":          therapyWithImmunosuppressiveDrugs,
-			"screening.exclusionсriteria.therapywithimmunosuppressivedrugscondition.color":                                         1,
-			"screening.exclusionсriteria.femalesubjectsduringpregnancycondition.female_subjects_during_pregnancy":                  femaleSubjectsDuringPregnancy,
-			"screening.exclusionсriteria.femalesubjectsduringpregnancycondition.color":                                             1,
-			"screening.exclusionсriteria.strokeinlessthanoneyearcondition.stroke_in_less_than_one_year":                            strokeInLessThanOneYear,
-			"screening.exclusionсriteria.strokeinlessthanoneyearcondition.color":                                                   1,
-			"screening.exclusionсriteria.chronicsystemicinfectionscondition.chronic_systemic_infections":                           chronicSystemicInfections,
-			"screening.exclusionсriteria.chronicsystemicinfectionscondition.color":                                                 1,
-			"screening.exclusionсriteria.aggravatedallergichistorycondition.aggravated_allergic_history":                           aggravatedAllergicHistory,
-			"screening.exclusionсriteria.aggravatedallergichistorycondition.color":                                                 1,
-			"screening.exclusionсriteria.presenceofahistoryofneoplasmscondition.presence_of_a_history_of_neoplasms":                presenceOfAHistoryOfNeoplasms,
-			"screening.exclusionсriteria.presenceofahistoryofneoplasmscondition.color":                                             1,
-			"screening.exclusionсriteria.historyofsplenectomycondition.history_of_splenectomy":                                     historyOfSplenectomy,
-			"screening.exclusionсriteria.historyofsplenectomycondition.color":                                                      1,
-			"screening.exclusionсriteria.neutropeniacondition.neutropenia":                                                         neutropenia,
-			"screening.exclusionсriteria.neutropeniacondition.color":                                                               1,
-			"screening.exclusionсriteria.subjectswithactivesyphiliscondition.subjects_with_active_syphilis":                        subjectsWithActiveSyphilis,
-			"screening.exclusionсriteria.subjectswithactivesyphiliscondition.color":                                                1,
-			"screening.exclusionсriteria.anorexiacondition.anorexia":                                                               anorexia,
-			"screening.exclusionсriteria.anorexiacondition.color":                                                                  1,
-			"screening.exclusionсriteria.extensivetattooscondition.extensive_tattoos":                                              extensiveTattoos,
-			"screening.exclusionсriteria.extensivetattooscondition.color":                                                          1,
-			"screening.exclusionсriteria.takingnarcoticandpsychostimulantdrugscondition.taking_narcotic_and_psychostimulant_drugs": takingNarcoticAndPsychostimulantDrugs,
-			"screening.exclusionсriteria.takingnarcoticandpsychostimulantdrugscondition.color":                                     1,
-			"screening.exclusionсriteria.smokingmoretthantencigarettesadaycondition.smoking_more_than_ten_cigarettes_a_day":        smokingMoretThanTenCigarettesADay,
-			"screening.exclusionсriteria.smokingmoretthantencigarettesadaycondition.color":                                         1,
-			"screening.exclusionсriteria.alcoholintakecondition.alcohol_intake":                                                    alcoholIntake,
-			"screening.exclusionсriteria.alcoholintakecondition.color":                                                             1,
-			"screening.exclusionсriteria.plannedhospitalizationconditiont.planned_hospitalization":                                 plannedHospitalization,
-			"screening.exclusionсriteria.plannedhospitalizationconditiont.color":                                                   1,
-			"screening.exclusionсriteria.donorblooddonationcondition.donor_blood_donation":                                         donorBloodDonation,
-			"screening.exclusionсriteria.donorblooddonationcondition.color":                                                        1,
-			"screening.exclusionсriteria.subjectparticipationinanyotherstudycondition.subject_participation_in_any_other_study":    subjectParticipationInAnyOtherStudy,
-			"screening.exclusionсriteria.subjectparticipationinanyotherstudycondition.color":                                       1,
-			"screening.exclusionсriteria.anyvaccinationinthelastmonthcondition.any_vaccination_in_the_last_month":                  anyVaccinationInTheLastMonth,
-			"screening.exclusionсriteria.anyvaccinationinthelastmonthcondition.color":                                              1,
-			"screening.exclusionсriteria.inabilitytoreadinrussiancondition.inability_to_read_in_russian":                           inabilityToReadInRussian,
-			"screening.exclusionсriteria.inabilitytoreadinrussiancondition.color":                                                  1,
-			"screening.exclusionсriteria.researchcenterstaffcondition.research_center_staff":                                       researchCenterStaff,
-			"screening.exclusionсriteria.researchcenterstaffcondition.color":                                                       1,
-			"screening.exclusionсriteria.anyotherstateofthesubjectofthestudycondition.any_other_state_of_the_subject_of_the_study": anyOtherStateOfTheSubjectOfTheStudy,
-			"screening.exclusionсriteria.anyotherstateofthesubjectofthestudycondition.color":                                       1,
+			"screening.exclusionсriteria.lackofsignedinformedconsentcondition.lackofsignedinformedconsent":                     lackOfSignedInformedConsent,
+			"screening.exclusionсriteria.lackofsignedinformedconsentcondition.color":                                           1,
+			"screening.exclusionсriteria.steroidtherapycondition.steroidtherapy":                                               steroidTherapy,
+			"screening.exclusionсriteria.steroidtherapycondition.color":                                                        1,
+			"screening.exclusionсriteria.therapywithimmunosuppressivedrugscondition.therapywithimmunosuppressivedrugs":         therapyWithImmunosuppressiveDrugs,
+			"screening.exclusionсriteria.therapywithimmunosuppressivedrugscondition.color":                                     1,
+			"screening.exclusionсriteria.femalesubjectsduringpregnancycondition.femalesubjectsduringpregnancy":                 femaleSubjectsDuringPregnancy,
+			"screening.exclusionсriteria.femalesubjectsduringpregnancycondition.color":                                         1,
+			"screening.exclusionсriteria.strokeinlessthanoneyearcondition.strokeinlessthanoneyear":                             strokeInLessThanOneYear,
+			"screening.exclusionсriteria.strokeinlessthanoneyearcondition.color":                                               1,
+			"screening.exclusionсriteria.chronicsystemicinfectionscondition.chronicsystemicinfections":                         chronicSystemicInfections,
+			"screening.exclusionсriteria.chronicsystemicinfectionscondition.color":                                             1,
+			"screening.exclusionсriteria.aggravatedallergichistorycondition.aggravatedallergichistory":                         aggravatedAllergicHistory,
+			"screening.exclusionсriteria.aggravatedallergichistorycondition.color":                                             1,
+			"screening.exclusionсriteria.presenceofahistoryofneoplasmscondition.presenceofahistoryofneoplasms":                 presenceOfAHistoryOfNeoplasms,
+			"screening.exclusionсriteria.presenceofahistoryofneoplasmscondition.color":                                         1,
+			"screening.exclusionсriteria.historyofsplenectomycondition.historyofsplenectomy":                                   historyOfSplenectomy,
+			"screening.exclusionсriteria.historyofsplenectomycondition.color":                                                  1,
+			"screening.exclusionсriteria.neutropeniacondition.neutropenia":                                                     neutropenia,
+			"screening.exclusionсriteria.neutropeniacondition.color":                                                           1,
+			"screening.exclusionсriteria.subjectswithactivesyphiliscondition.subjectswithactivesyphilis":                       subjectsWithActiveSyphilis,
+			"screening.exclusionсriteria.subjectswithactivesyphiliscondition.color":                                            1,
+			"screening.exclusionсriteria.anorexiacondition.anorexia":                                                           anorexia,
+			"screening.exclusionсriteria.anorexiacondition.color":                                                              1,
+			"screening.exclusionсriteria.extensivetattooscondition.extensivetattoos":                                           extensiveTattoos,
+			"screening.exclusionсriteria.extensivetattooscondition.color":                                                      1,
+			"screening.exclusionсriteria.takingnarcoticandpsychostimulantdrugscondition.takingnarcoticandpsychostimulantdrugs": takingNarcoticAndPsychostimulantDrugs,
+			"screening.exclusionсriteria.takingnarcoticandpsychostimulantdrugscondition.color":                                 1,
+			"screening.exclusionсriteria.smokingmoretthantencigarettesadaycondition.smokingmorethantencigarettesaday":          smokingMoretThanTenCigarettesADay,
+			"screening.exclusionсriteria.smokingmoretthantencigarettesadaycondition.color":                                     1,
+			"screening.exclusionсriteria.alcoholintakecondition.alcoholintake":                                                 alcoholIntake,
+			"screening.exclusionсriteria.alcoholintakecondition.color":                                                         1,
+			"screening.exclusionсriteria.plannedhospitalizationconditiont.plannedhospitalization":                              plannedHospitalization,
+			"screening.exclusionсriteria.plannedhospitalizationconditiont.color":                                               1,
+			"screening.exclusionсriteria.donorblooddonationcondition.donorblooddonation":                                       donorBloodDonation,
+			"screening.exclusionсriteria.donorblooddonationcondition.color":                                                    1,
+			"screening.exclusionсriteria.subjectparticipationinanyotherstudycondition.subjectparticipationinanyotherstudy":     subjectParticipationInAnyOtherStudy,
+			"screening.exclusionсriteria.subjectparticipationinanyotherstudycondition.color":                                   1,
+			"screening.exclusionсriteria.anyvaccinationinthelastmonthcondition.anyvaccinationinthelastmonth":                   anyVaccinationInTheLastMonth,
+			"screening.exclusionсriteria.anyvaccinationinthelastmonthcondition.color":                                          1,
+			"screening.exclusionсriteria.inabilitytoreadinrussiancondition.inabilitytoreadinrussian":                           inabilityToReadInRussian,
+			"screening.exclusionсriteria.inabilitytoreadinrussiancondition.color":                                              1,
+			"screening.exclusionсriteria.researchcenterstaffcondition.researchcenterstaff":                                     researchCenterStaff,
+			"screening.exclusionсriteria.researchcenterstaffcondition.color":                                                   1,
+			"screening.exclusionсriteria.anyotherstateofthesubjectofthestudycondition.anyotherstateofthesubjectofthestudy":     anyOtherStateOfTheSubjectOfTheStudy,
+			"screening.exclusionсriteria.anyotherstateofthesubjectofthestudycondition.color":                                   1,
 		},
 	}
 
@@ -269,18 +269,18 @@ func (r *MongoScreeningRepository) CompletionOfScreening(
 	filter := bson.M{"_id": id}
 	update := bson.M{
 		"$set": bson.M{
-			"screening.completionofscreening.volunteereligiblecondition.volunteer_eligible":                   VolunteerEligible,
-			"screening.completionofscreening.volunteereligiblecondition.color":                                1,
-			"screening.completionofscreening.noexclusioncriteriacondition.no_exclusion_criteria":              NoExclusionCriteria,
-			"screening.completionofscreening.noexclusioncriteriacondition.color":                              1,
-			"screening.completionofscreening.informedoftherestrictionscondition.informed_of_the_restrictions": InformedOfTheRestrictions,
-			"screening.completionofscreening.informedoftherestrictionscondition.color":                        1,
-			"screening.completionofscreening.volunteerincludedcondition.volunteer_included":                   VolunteerIncluded,
-			"screening.completionofscreening.volunteerincludedcondition.color":                                1,
-			"screening.completionofscreening.reasonifnotcondition.reason_if_not":                              ReasonIfNot,
-			"screening.completionofscreening.reasonifnotcondition.color":                                      1,
-			"screening.completionofscreening.commentcondition.comment_value":                                  CommentValue,
-			"screening.completionofscreening.commentcondition.color":                                          1,
+			"screening.completionofscreening.volunteereligiblecondition.volunteereligible":                 VolunteerEligible,
+			"screening.completionofscreening.volunteereligiblecondition.color":                             1,
+			"screening.completionofscreening.noexclusioncriteriacondition.noexclusioncriteria":             NoExclusionCriteria,
+			"screening.completionofscreening.noexclusioncriteriacondition.color":                           1,
+			"screening.completionofscreening.informedoftherestrictionscondition.informedoftherestrictions": InformedOfTheRestrictions,
+			"screening.completionofscreening.informedoftherestrictionscondition.color":                     1,
+			"screening.completionofscreening.volunteerincludedcondition.volunteerincluded":                 VolunteerIncluded,
+			"screening.completionofscreening.volunteerincludedcondition.color":                             1,
+			"screening.completionofscreening.reasonifnotcondition.reasonifnot":                             ReasonIfNot,
+			"screening.completionofscreening.reasonifnotcondition.color":                                   1,
+			"screening.completionofscreening.commentcondition.commentvalue":                                CommentValue,
+			"screening.completionofscreening.commentcondition.color":                                       1,
 		},
 	}
 
@@ -325,4 +325,36 @@ func (r *MongoScreeningRepository) UpdateColorWithComment(ctx context.Context, i
 	}
 	return nil
 
+}
+
+func (r *MongoScreeningRepository) UpdateFieldIntValue(ctx context.Context, id primitive.ObjectID, fieldToUpdate, fieldValue string, value, color int) error {
+	collection := r.store.client.Database("eCRF").Collection("subjects")
+	filter := bson.M{"_id": id}
+	update := bson.M{
+		"$set": bson.M{
+			fmt.Sprintf("%scolor", fieldToUpdate):          color,
+			fmt.Sprintf("%s%s", fieldToUpdate, fieldValue): value,
+		},
+	}
+	_, err := collection.UpdateOne(ctx, filter, update)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (r *MongoScreeningRepository) UpdateFieldStringValue(ctx context.Context, id primitive.ObjectID, fieldToUpdate, fieldValue, value string, color int) error {
+	collection := r.store.client.Database("eCRF").Collection("subjects")
+	filter := bson.M{"_id": id}
+	update := bson.M{
+		"$set": bson.M{
+			fmt.Sprintf("%scolor", fieldToUpdate):          color,
+			fmt.Sprintf("%s%s", fieldToUpdate, fieldValue): value,
+		},
+	}
+	_, err := collection.UpdateOne(ctx, filter, update)
+	if err != nil {
+		return err
+	}
+	return nil
 }

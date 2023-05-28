@@ -1,6 +1,9 @@
 package utils
 
 import (
+	"fmt"
+	"strings"
+
 	model "github.com/t67y110v/web/internal/app/model/subject"
 )
 
@@ -15,6 +18,14 @@ func GetUserRole(roleId int) string {
 	m[7] = "Медицинский монитор"
 	m[8] = "Специалист по фармаконадзору"
 	return m[roleId]
+}
+
+func GetFieldNameForUpdate(field string) string {
+	s := strings.Split(field, ".")
+	last := s[len(s)-2]
+	res, _ := strings.CutSuffix(last, "condition")
+	fmt.Println("here")
+	return res
 }
 
 func GetFieldName(field string) string {

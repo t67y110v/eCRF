@@ -19,13 +19,11 @@
 
                         <div class="mb-1">
                             <div class="mb-2">
-                                <input class="form-control" type="hidden"
-                                    placeholder="{{.Subject.Number}}" value="{{.Subject.Number}}"
-                                    name="subject_number" id="id" readonly>
+                                <input class="form-control" type="hidden" placeholder="{{.Subject.Number}}"
+                                    value="{{.Subject.Number}}" name="subject_number" id="id" readonly>
                             </div>
                             <div class="mb-2">
-                                <input class="form-control" type="hidden"
-                                    placeholder="{{.Subject.ProtocolId}}"
+                                <input class="form-control" type="hidden" placeholder="{{.Subject.ProtocolId}}"
                                     value="{{.Subject.ProtocolId}}" name="protocol_id" id="id" readonly>
                             </div>
 
@@ -35,23 +33,30 @@
                                 <div class="input-group mb-3" id="condition1"
                                     color-value="{{.Subject.Screening.InformaionConsent.SignedCondition.Color}}"
                                     field-name="signed">
+                                    {{if eq
+                                    .Subject.Screening.InformaionConsent.SignedCondition.Signed
+                                    1 }}
+                                    <input
+                                    value="Да" class="form-control" disabled>
 
+
+                                    {{else if eq
+                                    .Subject.Screening.InformaionConsent.SignedCondition.Signed 2}}
+                                    <input
+                                    value="Нет" class="form-control" disabled>
+                                    {{else }}
                                     <select id="signed" name="signed" class="form-select">
-                                        {{if eq
-                                        .Subject.Screening.InformaionConsent.SignedCondition.Signed
-                                        1 }}
-                                        <option selected value="1">Да</option>
-                                        <option value="2">Нет</option>
-                                        {{else if eq
-                                        .Subject.Screening.InformaionConsent.SignedCondition.Signed 2}}
-                                        <option value="1">Да</option>
-                                        <option selected value="2">Нет</option>
-                                        {{else }}
+
+
+
                                         <option value="0">Не выбрано</option>
                                         <option value="1">Да</option>
                                         <option value="2">Нет</option>
-                                        {{end}}
+
                                     </select>
+
+                                    {{end}}
+
                                 </div>
 
                             </div>
