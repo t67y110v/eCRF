@@ -32,18 +32,16 @@
                                     подписано?</label>
                                 <div class="input-group mb-3" id="condition1"
                                     color-value="{{.Subject.Screening.InformaionConsent.SignedCondition.Color}}"
-                                    field-name="signed">
+                                    field-name="signed" input-type="select" >
                                     {{if eq
                                     .Subject.Screening.InformaionConsent.SignedCondition.Signed
                                     1 }}
-                                    <input
-                                    value="Да" class="form-control" disabled>
+                                    <input value="Да" class="form-control" disabled>
 
 
                                     {{else if eq
                                     .Subject.Screening.InformaionConsent.SignedCondition.Signed 2}}
-                                    <input
-                                    value="Нет" class="form-control" disabled>
+                                    <input value="Нет" class="form-control" disabled>
                                     {{else }}
                                     <select id="signed" name="signed" class="form-select">
 
@@ -63,13 +61,13 @@
                             <div class="mb-2">
                                 <label class="form-label">Дата подписания</label>
                                 <div class="input-group mb-3" id="condition2" field-name="date_of_sign"
-                                    color-value="{{.Subject.Screening.InformaionConsent.DateOfSignCondition.Color}}">
+                                    color-value="{{.Subject.Screening.InformaionConsent.DateOfSignCondition.Color}}"  input-type="date" >
                                     {{if
                                     .Subject.Screening.InformaionConsent.DateOfSignCondition.DateOfSign
                                     }}
                                     <input
                                         value="{{.Subject.Screening.InformaionConsent.DateOfSignCondition.DateOfSign}}"
-                                        name="date_of_sign" class="form-control" type="data">
+                                        name="date_of_sign" class="form-control" type="data" disabled>
                                     {{else}}
                                     <input name="date_of_sign" class="form-control" type="date">
                                     {{end}}
@@ -81,13 +79,13 @@
                             <div class="mb-2">
                                 <label class="form-label">Время подписания</label>
                                 <div class="input-group mb-3" id="condition3" field-name="time_of_sign"
-                                    color-value="{{.Subject.Screening.InformaionConsent.TimeOfSignCondition.Color}}">
+                                    color-value="{{.Subject.Screening.InformaionConsent.TimeOfSignCondition.Color}}"  input-type="time" >
                                     {{if
                                     .Subject.Screening.InformaionConsent.TimeOfSignCondition.TimeOfSign
                                     }}
                                     <input
                                         value="{{.Subject.Screening.InformaionConsent.TimeOfSignCondition.TimeOfSign}}"
-                                        name="time_of_sign" class="form-control" type="time">
+                                        name="time_of_sign" class="form-control" type="time" disabled>
                                     {{else}}
                                     <input name="time_of_sign" class="form-control" type="time">
                                     {{end}}
@@ -97,26 +95,27 @@
                                 <label class="form-label">Доброволец получил на руки оригинал страхового
                                     Полиса участника исследования ?</label>
                                 <div class="input-group mb-3" id="condition4" field-name="original"
-                                    color-value="{{.Subject.Screening.InformaionConsent.ReceivedAnInsurancePolicyCondition.Color}}">
+                                    color-value="{{.Subject.Screening.InformaionConsent.ReceivedAnInsurancePolicyCondition.Color}}"  input-type="select">
+
+                                    {{if eq
+                                    .Subject.Screening.InformaionConsent.ReceivedAnInsurancePolicyCondition.ReceivedAnInsurancePolicy
+                                    1 }}
+                                    <input value="Да" class="form-control" disabled>
+                                    {{else if eq
+                                    .Subject.Screening.InformaionConsent.ReceivedAnInsurancePolicyCondition.ReceivedAnInsurancePolicy
+                                    2}}
+                                    <input value="Нет" class="form-control" disabled>
+                                    {{else }}
                                     <select id="sex" name="original" class="form-select">
-                                        {{if eq
-                                        .Subject.Screening.InformaionConsent.ReceivedAnInsurancePolicyCondition.ReceivedAnInsurancePolicy
-                                        1 }}
-                                        <option selected value="1">Да</option>
-                                        <option value="2">Нет</option>
-                                        {{else if eq
-                                        .Subject.Screening.InformaionConsent.ReceivedAnInsurancePolicyCondition.ReceivedAnInsurancePolicy
-                                        2}}
-                                        <option value="1">Да</option>
-                                        <option selected value="2">Нет</option>
-                                        {{else }}
                                         <option value="0">Не выбрано</option>
                                         <option value="1">Да</option>
                                         <option value="2">Нет</option>
-                                        {{end}}
-
-
                                     </select>
+
+                                    {{end}}
+
+
+
 
                                 </div>
                             </div>
@@ -124,33 +123,37 @@
                                 <label class="form-label">Доброволец получил на руки один экземпляр
                                     информированного согласия</label>
                                 <div class="input-group mb-3" id="condition5" field-name="consent"
-                                    color-value="{{.Subject.Screening.InformaionConsent.ReceivedAnInformaionConsentCondition.Color}}">
+                                    color-value="{{.Subject.Screening.InformaionConsent.ReceivedAnInformaionConsentCondition.Color}}"  input-type="select"  >
+
+                                    {{if eq
+                                    .Subject.Screening.InformaionConsent.ReceivedAnInformaionConsentCondition.ReceivedAnInformaionConsent
+                                    1
+                                    }}
+                                    <input value="Да" class="form-control" disabled>
+                                    {{else if eq
+                                    .Subject.Screening.InformaionConsent.ReceivedAnInformaionConsentCondition.ReceivedAnInformaionConsent
+                                    2}}
+                                    <input value="Нет" class="form-control" disabled>
+                                    {{else }}
                                     <select id="sex" name="consent" class="form-select">
-                                        {{if eq
-                                        .Subject.Screening.InformaionConsent.ReceivedAnInformaionConsentCondition.ReceivedAnInformaionConsent
-                                        1
-                                        }}
-                                        <option selected value="1">Да</option>
-                                        <option value="2">Нет</option>
-                                        {{else if eq
-                                        .Subject.Screening.InformaionConsent.ReceivedAnInformaionConsentCondition.ReceivedAnInformaionConsent
-                                        2}}
-                                        <option value="1">Да</option>
-                                        <option selected value="2">Нет</option>
-                                        {{else }}
                                         <option value="0">Не выбрано</option>
                                         <option value="1">Да</option>
                                         <option value="2">Нет</option>
-                                        {{end}}
-
                                     </select>
+                                    {{end}}
+
+
                                 </div>
                             </div>
+                            {{if gt .Subject.Screening.InformaionConsent.SignedCondition.Signed 0 }}
 
+                            {{else}}
 
                             <div class="d-grid gap-2">
                                 <input type="submit" value="Сохранить" class="btn btn-primary">
                             </div>
+
+                            {{end}}
                         </div>
                     </form>
                 </div>
