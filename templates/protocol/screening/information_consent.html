@@ -28,11 +28,13 @@
                             </div>
 
 
-                            <div class="mb-1"> <label class="form-label">Информированное согласие
-                                    подписано?</label>
+                            <div class="mb-1">
+                                <label class="form-label">Информированное согласие
+                                    подписано?
+                                </label>
                                 <div class="input-group mb-3" id="condition1"
                                     color-value="{{.Subject.Screening.InformaionConsent.SignedCondition.Color}}"
-                                    field-name="signed" input-type="select" >
+                                    field-name="signed" input-type="select">
                                     {{if eq
                                     .Subject.Screening.InformaionConsent.SignedCondition.Signed
                                     1 }}
@@ -61,7 +63,8 @@
                             <div class="mb-2">
                                 <label class="form-label">Дата подписания</label>
                                 <div class="input-group mb-3" id="condition2" field-name="date_of_sign"
-                                    color-value="{{.Subject.Screening.InformaionConsent.DateOfSignCondition.Color}}"  input-type="date" >
+                                    color-value="{{.Subject.Screening.InformaionConsent.DateOfSignCondition.Color}}"
+                                    input-type="date">
                                     {{if
                                     .Subject.Screening.InformaionConsent.DateOfSignCondition.DateOfSign
                                     }}
@@ -79,7 +82,8 @@
                             <div class="mb-2">
                                 <label class="form-label">Время подписания</label>
                                 <div class="input-group mb-3" id="condition3" field-name="time_of_sign"
-                                    color-value="{{.Subject.Screening.InformaionConsent.TimeOfSignCondition.Color}}"  input-type="time" >
+                                    color-value="{{.Subject.Screening.InformaionConsent.TimeOfSignCondition.Color}}"
+                                    input-type="time">
                                     {{if
                                     .Subject.Screening.InformaionConsent.TimeOfSignCondition.TimeOfSign
                                     }}
@@ -95,7 +99,8 @@
                                 <label class="form-label">Доброволец получил на руки оригинал страхового
                                     Полиса участника исследования ?</label>
                                 <div class="input-group mb-3" id="condition4" field-name="original"
-                                    color-value="{{.Subject.Screening.InformaionConsent.ReceivedAnInsurancePolicyCondition.Color}}"  input-type="select">
+                                    color-value="{{.Subject.Screening.InformaionConsent.ReceivedAnInsurancePolicyCondition.Color}}"
+                                    input-type="select">
 
                                     {{if eq
                                     .Subject.Screening.InformaionConsent.ReceivedAnInsurancePolicyCondition.ReceivedAnInsurancePolicy
@@ -123,7 +128,8 @@
                                 <label class="form-label">Доброволец получил на руки один экземпляр
                                     информированного согласия</label>
                                 <div class="input-group mb-3" id="condition5" field-name="consent"
-                                    color-value="{{.Subject.Screening.InformaionConsent.ReceivedAnInformaionConsentCondition.Color}}"  input-type="select"  >
+                                    color-value="{{.Subject.Screening.InformaionConsent.ReceivedAnInformaionConsentCondition.Color}}"
+                                    input-type="select">
 
                                     {{if eq
                                     .Subject.Screening.InformaionConsent.ReceivedAnInformaionConsentCondition.ReceivedAnInformaionConsent

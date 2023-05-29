@@ -1,14 +1,6 @@
 <section>
 
-    <div class="container-fluid mb-3">
-        <div class="row justify-content-center">
-            <div class="col-8 p-0">
-                <div class="shadow p-3 mb-3 bg-white rounded">
-                    <h2 class="text-center">{{.Protocol.Name}}</h2>
-                </div>
-            </div>
-        </div>
-    </div>
+
 
 
 
@@ -16,13 +8,7 @@
     <div class="row">
         <div class="col-2  shadow-sm p-3 bg-white rounded">
             <h5 class="text-center">Субъекты</h5>
-            <!-- Button trigger modal -->
-            <div class="d-grid gap-2">
-                <button type="button" class="btn btn-sm  btn-primary" data-bs-toggle="modal"
-                    data-bs-target="#updateCenter">
-                    Добавить субьект исследования
-                </button>
-            </div>
+
             <div id="subject-select">
                 <div class="d-flex" id="load">
                     <select class="form-select px-1" id="subject" onchange="gotopage(this)">
@@ -40,6 +26,26 @@
                     </script>
 
                 </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-12">
+                    <div class="btn-group" role="group">
+                        <button id="prevBtn" type="button" class="btn btn-primary" onclick="prev()">
+                            <img height="100%" width="30%" src="/public/img/back_arrow.png">
+                        </button>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#updateCenter">
+                            <img height="50%" width="50%" src="/public/img/plus.png">
+                        </button>
+
+                        <button id="nextBtn" type="button" class="btn btn-primary" onclick="next()">
+                            <img height="100%" width="30%" src="/public/img/next_arrow.png">
+                        </button>
+                    </div>
+                </div>
+
             </div>
 
 
@@ -146,12 +152,73 @@
         </div>
 
         {{if .Subject}}
+        <script>
+
+            function prev() {
+                let countSubject = `{{ len .Subjects}}`
+                console.log(countSubject)
+                var currentPage = window.location.href;
+                var index = currentPage.lastIndexOf("/");
+                var pageNum = parseInt(currentPage.substring(index + 1));
+                console.log(currentPage, index, pageNum)
+                if (pageNum > 1 && pageNum <= countSubject) {
+                    pageNum--;
+                    var newUrl = currentPage.substring(0, index + 1) + pageNum;
+                    window.location.href = newUrl;
+                } else {
+                    var newUrl = currentPage.substring(0, index + 1) + "1";
+                    window.location.href = newUrl;
+                }
+            };
+
+            function next() {
+                let countSubject = `{{ len .Subjects}}`
+                console.log(countSubject)
+                var currentPage = window.location.href;
+                var index = currentPage.lastIndexOf("/");
+                var pageNum = parseInt(currentPage.substring(index + 1));
+                if (pageNum < countSubject) {
+                    pageNum++;
+                    var newUrl = currentPage.substring(0, index + 1) + pageNum;
+                    window.location.href = newUrl;
+                } else {
+                    var newUrl = currentPage.substring(0, index + 1) + "1";
+                    window.location.href = newUrl;
+                }
+
+            };
+        </script>
 
         <div id="protocol_id_for_js" style="display: none;" value="{{.Protocol.Id}}"> </div>
         <div id="subject_id_for_js" style="display: none;" value="{{.Subject.Number}}"></div>
         <div class="col-8 " id="center">
 
             <div data-bs-offset="0" class="navbar-example3 md-8" data-bs-spy="scroll" data-bs-target="#navbar-example3">
+                <div class="shadow p-3 mb-3 bg-white rounded">
+                    <div class="row">
+                        <div class="col-2">
+                            <div class="d-grid gap-2">
+                                <button id="prevBtn" class="btn btn-primary btn-sm" onclick="prev()">
+                                    <img height="100%" width="20%" src="/public/img/back_arrow.png"></button>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <h2 class="text-center">{{.Protocol.Name}}</h2>
+
+                            <h4 class="text-center">Номер субъекта : {{.Subject.Number}}</h4>
+                            <h4 class="text-center">Инициалы субъекта : {{.Subject.Initials}}</h4>
+                        </div>
+                        <div class="col-2">
+                            <div class="d-grid gap-2">
+                                <button id="nextBtn" class="btn btn-primary btn-sm" onclick="next()">
+                                    <img height="100%" width="20%" src="/public/img/next_arrow.png"></button>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
 
                 <section id="item-1">
                     <div class="shadow-sm p-3 bg-white rounded h-100">
@@ -228,8 +295,8 @@
 
                         {{end}}
                         {{end}}
-              
-                    
+
+
                         {{ if .DemographyErrors }}
                         <hr />
                         <h6 class="text-center"><strong>Демография</h6> </label>
@@ -263,8 +330,8 @@
 
                         {{end}}
                         {{end}}
-                       
-                    
+
+
                         {{ if .AnthropometryErrors }}
                         <hr />
                         <h6 class="text-center"><strong>&nbsp;&nbsp;&nbsp;&nbsp;Антропометрия</strong> </h6>
@@ -298,8 +365,8 @@
 
                         {{end}}
                         {{end}}
-                   
-                      
+
+
                         {{ if .InclusionErrors }}
                         <hr />
                         <h6 class="text-center"><strong>&nbsp;&nbsp;&nbsp;&nbsp;Критерии включения</strong> </h6>
@@ -332,8 +399,8 @@
 
                         {{end}}
                         {{end}}
-                      
-                      
+
+
                         {{ if .ExclusionErrors }}
                         <hr />
                         <h6 class="text-center"><strong>&nbsp;&nbsp;&nbsp;&nbsp;Критерии невключения</strong> </h6>
@@ -367,8 +434,8 @@
                         {{end}}
                         {{end}}
 
-                      
-                       
+
+
                         {{ if .CompletionErros }}
                         <hr />
                         <h6 class="text-center"><strong>&nbsp;&nbsp;&nbsp;&nbsp;Завершение скрининга</strong> </h6>

@@ -355,7 +355,7 @@ function updateSecondColor(id, color) {
                                        
                                                  <option value="1">Да</option>
                                                 <option value="2">Нет</option>
-                                          </select>
+                                        </select>
                                       </div>
 
                                       <div class="d-grid gap-2">
