@@ -18,15 +18,15 @@ swag:
 	/home/${USER_NAME}/go/bin/swag init -g cmd/server/main.go
 
 docker.build:
-	sudo docker build -t api  .
+	sudo docker build -t server  .
 
 
 dc-build:
-	sudo docker-compose up --build api 
+	sudo docker-compose up --build server 
 
 
 dc-run:
-	sudo docker-compose up api
+	sudo docker-compose up server
 
 pr-up:
 	sudo docker run \

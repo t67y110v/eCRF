@@ -80,6 +80,7 @@ func (s *server) configureRouter() {
 	////////////////////////////////////
 	user := s.router.Group("/user")
 	user.Use(logger.New())
+	user.Get("/new", s.handlers.NewUser())
 	user.Post("/login", s.handlers.Login(), s.pages.AuthPage())
 	user.Use(middlewares.CheckJWT())
 	user.Post("/register", s.handlers.Register())

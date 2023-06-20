@@ -74,7 +74,7 @@ func (h *Handlers) DeleteProtocol() fiber.Handler {
 			return utils.ErrorPage(c, err)
 		}
 
-		go h.operations.SaveAction(c.Context(), "DeleteProtocol", "200", c.Locals("name").(string), "Удаление протокла")
+		go h.operations.SaveAction(c.Context(), "DeleteProtocol", "200", c.Locals("name").(string), "Удаление протокола")
 
 		return c.Redirect("/main/filter=0")
 	}

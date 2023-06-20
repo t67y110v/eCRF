@@ -23,6 +23,27 @@ import (
 // @Failure 400 {object} responses.Error
 // @Failure 500 {object} responses.Error
 // @Router /user/register [post]
+
+func (h *Handlers) NewUser() fiber.Handler {
+	return func(c *fiber.Ctx) error {
+		if err := h.pgStore.Repository().Create(&model.User{
+			Id:       2,
+			Email:    "admin@test.ru",
+			Password: "string",
+			Name:     "Admin",
+			Role:     1,
+			CenterID: 1,
+		}); err != nil {
+			return utils.ErrorPage(c, err)
+		}
+		if err := h.pgStore.Repository().AddNewCenter("FirstCenter"); err != nil {
+			return utils.ErrorPage(c, err)
+		}
+		return nil
+	}
+
+}
+
 func (h *Handlers) Register() fiber.Handler {
 
 	return func(c *fiber.Ctx) error {

@@ -46,7 +46,6 @@ func (h *Pages) ProtocolPage() fiber.Handler {
 					"CLinicCenter": cName,
 					"ClinicId":     user.CenterID,
 					"Protocol":     p,
-					"Subjects":     s,
 				})
 			}
 			return utils.ErrorPage(c, err)
