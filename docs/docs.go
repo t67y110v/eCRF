@@ -16,52 +16,6 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/user/check": {
-            "post": {
-                "description": "Validation user token",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "User"
-                ],
-                "summary": "Check session",
-                "parameters": [
-                    {
-                        "description": "Check token",
-                        "name": "data",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/requests.CheckToken"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/responses.Login"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/responses.Error"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/responses.Error"
-                        }
-                    }
-                }
-            }
-        },
         "/user/login": {
             "post": {
                 "description": "authentification user in the system",
@@ -156,14 +110,6 @@ const docTemplate = `{
         }
     },
     "definitions": {
-        "requests.CheckToken": {
-            "type": "object",
-            "properties": {
-                "token": {
-                    "type": "string"
-                }
-            }
-        },
         "requests.Login": {
             "type": "object",
             "properties": {
@@ -192,9 +138,6 @@ const docTemplate = `{
                 },
                 "role": {
                     "type": "integer"
-                },
-                "user_id": {
-                    "type": "integer"
                 }
             }
         },
@@ -209,13 +152,7 @@ const docTemplate = `{
         "responses.Login": {
             "type": "object",
             "properties": {
-                "Email": {
-                    "type": "string"
-                },
-                "Name": {
-                    "type": "string"
-                },
-                "token": {
+                "JWT": {
                     "type": "string"
                 }
             }
@@ -223,23 +160,20 @@ const docTemplate = `{
         "responses.Registration": {
             "type": "object",
             "properties": {
-                "Email": {
-                    "type": "string"
-                },
-                "ID": {
+                "center_id": {
                     "type": "integer"
                 },
-                "Isadmin": {
-                    "type": "boolean"
-                },
-                "Name": {
+                "email": {
                     "type": "string"
                 },
-                "Password": {
+                "name": {
                     "type": "string"
                 },
-                "SeccondName": {
-                    "type": "string"
+                "role": {
+                    "type": "integer"
+                },
+                "user_id": {
+                    "type": "integer"
                 }
             }
         }

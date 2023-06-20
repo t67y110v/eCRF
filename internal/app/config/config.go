@@ -4,6 +4,7 @@ import "github.com/spf13/viper"
 
 type Config struct {
 	Port      string `mapstructure:"PORT"`
+	FrontPORT string `mapstrucure:"FRONT_PORT"`
 	PG_DBHost string `mapstructure:"PG_DB_HOST"`
 	PG_DBUser string `mapstructure:"PG_DB_USER"`
 	PG_DBPass string `mapstructure:"PG_DB_PASS"`

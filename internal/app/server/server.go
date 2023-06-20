@@ -54,7 +54,7 @@ func newServer(
 			fiber.Config{
 				Views:        engine,
 				ViewsLayout:  "shared/main_layout",
-				ServerHeader: "software engineering course api",
+				ServerHeader: "eCRF API",
 				AppName:      "Api v1.0.1",
 			}),
 		logger:   log,
@@ -70,8 +70,10 @@ func newServer(
 }
 
 func (s *server) configureRouter() {
+
 	s.router.Use(cors.New(cors.Config{
 		AllowCredentials: true,
+		AllowOrigins:     s.config.FrontPORT,
 		AllowHeaders:     "Origin, Content-Type, Accept",
 	}))
 	s.router.Get("/swagger/*", swagger.HandlerDefault)
@@ -81,9 +83,9 @@ func (s *server) configureRouter() {
 	user := s.router.Group("/user")
 	user.Use(logger.New())
 	user.Get("/new", s.handlers.NewUser())
-	user.Post("/login", s.handlers.Login(), s.pages.AuthPage())
-	user.Use(middlewares.CheckJWT())
 	user.Post("/register", s.handlers.Register())
+	user.Post("/login", s.handlers.Login(), s.pages.AuthPage())
+
 	user.Post("/update", s.handlers.Update())
 	//////////////////////////////////////
 

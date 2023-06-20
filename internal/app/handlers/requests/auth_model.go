@@ -1,13 +1,11 @@
 package requests
 
 type Registration struct {
-	Id                int    `json:"user_id" gorm:"primaryKey"`
-	Email             string `json:"email"`
-	Name              string `json:"name"`
-	Role              int    `json:"role"`
-	CenterID          int    `json:"center_id" gorm:"primaryKey"`
-	Password          string `json:"password,omitempty"`
-	EncryptedPassword string `json:"-"`
+	Email    string `json:"email"`
+	Name     string `json:"name"`
+	Role     int    `json:"role"`
+	CenterID int    `json:"center_id"`
+	Password string `json:"password,omitempty"`
 }
 
 type Login struct {

@@ -1,9 +1,4 @@
 definitions:
-  requests.CheckToken:
-    properties:
-      token:
-        type: string
-    type: object
   requests.Login:
     properties:
       email:
@@ -23,8 +18,6 @@ definitions:
         type: string
       role:
         type: integer
-      user_id:
-        type: integer
     type: object
   responses.Error:
     properties:
@@ -33,61 +26,25 @@ definitions:
     type: object
   responses.Login:
     properties:
-      Email:
-        type: string
-      Name:
-        type: string
-      token:
+      JWT:
         type: string
     type: object
   responses.Registration:
     properties:
-      Email:
-        type: string
-      ID:
+      center_id:
         type: integer
-      Isadmin:
-        type: boolean
-      Name:
+      email:
         type: string
-      Password:
+      name:
         type: string
-      SeccondName:
-        type: string
+      role:
+        type: integer
+      user_id:
+        type: integer
     type: object
 info:
   contact: {}
 paths:
-  /user/check:
-    post:
-      consumes:
-      - application/json
-      description: Validation user token
-      parameters:
-      - description: Check token
-        in: body
-        name: data
-        required: true
-        schema:
-          $ref: '#/definitions/requests.CheckToken'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/responses.Login'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/responses.Error'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/responses.Error'
-      summary: Check session
-      tags:
-      - User
   /user/login:
     post:
       consumes:
