@@ -2,9 +2,6 @@ package handlers
 
 import (
 	"net/http"
-	"strconv"
-
-	"time"
 
 	"github.com/t67y110v/web/internal/app/handlers/requests"
 	model "github.com/t67y110v/web/internal/app/model/user"
@@ -25,7 +22,7 @@ import (
 // @Failure 400 {object} responses.Error
 // @Failure 500 {object} responses.Error
 // @Router /user/login [post]
-func (h *Handlers) Login() fiber.Handler {
+func (h *Handlers) UserLogin() fiber.Handler {
 
 	return func(c *fiber.Ctx) error {
 
@@ -46,7 +43,7 @@ func (h *Handlers) Login() fiber.Handler {
 
 		if !u.ComparePassword(req.Password) {
 			return c.JSON(fiber.Map{
-				"message": err.Error(),
+				"message": "wrong password",
 			})
 		}
 
@@ -62,7 +59,6 @@ func (h *Handlers) Login() fiber.Handler {
 				"message": err.Error(),
 			})
 		}
-
 		return c.JSON(fiber.Map{
 			"JWT": t,
 		})
@@ -82,7 +78,7 @@ func (h *Handlers) Login() fiber.Handler {
 // @Failure 400 {object} responses.Error
 // @Failure 500 {object} responses.Error
 // @Router /user/register [post]
-func (h *Handlers) Register() fiber.Handler {
+func (h *Handlers) UserRegister() fiber.Handler {
 
 	return func(c *fiber.Ctx) error {
 
@@ -113,47 +109,95 @@ func (h *Handlers) Register() fiber.Handler {
 
 }
 
-func (h *Handlers) Update() fiber.Handler {
+// @Summary User Update
+// @Description update of user
+// @Tags         User
+//
+//	@Accept       json
+//
+// @Produce json
+// @Param  data body requests.Update true "update"
+// @Success 200 {object} responses.Registration
+// @Failure 400 {object} responses.Error
+// @Failure 500 {object} responses.Error
+// @Router /user/update [patch]
+func (h *Handlers) UserUpdate() fiber.Handler {
 	return func(c *fiber.Ctx) error {
-
-		role, err := strconv.Atoi(c.FormValue("role"))
-		if err != nil {
-			return utils.ErrorPage(c, err)
-		}
-		centerID, err := strconv.Atoi(c.FormValue("center_id"))
-		if err != nil {
-			return utils.ErrorPage(c, err)
-		}
-		userID, err := strconv.Atoi(c.FormValue("user_id"))
-		if err != nil {
-			return utils.ErrorPage(c, err)
+		req := requests.Update{}
+		if err := c.BodyParser(&req); err != nil {
+			c.Status(http.StatusBadRequest)
+			return c.JSON(fiber.Map{
+				"message": err.Error(),
+			})
 		}
 
-		if err := h.pgStore.Repository().UpdateUser(userID, role, centerID, c.FormValue("email"), c.FormValue("name"), c.FormValue("password")); err != nil {
-			return utils.ErrorPage(c, err)
+		if err := h.pgStore.Repository().UpdateUser(req.ID, req.Role, req.CenterID, req.Email, req.Email, req.Paswword); err != nil {
+			c.Status(http.StatusBadRequest)
+			return c.JSON(fiber.Map{
+				"message": err.Error(),
+			})
 		}
-		return c.Redirect("/admin/panel")
+		return c.JSON(fiber.Map{
+			"message": "success",
+		})
 	}
 }
 
-func (h *Handlers) Logout() fiber.Handler {
-
+// @Summary User Delete
+// @Description delete of user
+// @Tags         User
+//
+//	@Accept       json
+//
+// @Produce json
+// @Param  data body requests.Delete true "delete"
+// @Success 200 {object} responses.Registration
+// @Failure 400 {object} responses.Error
+// @Failure 500 {object} responses.Error
+// @Router /user/delete [delete]
+func (h *Handlers) UserDelete() fiber.Handler {
 	return func(c *fiber.Ctx) error {
-
-		cookie := fiber.Cookie{
-			Name:     "jwt",
-			Value:    "",
-			Expires:  time.Now().Add(-time.Hour),
-			HTTPOnly: true,
+		req := requests.Delete{}
+		if err := c.BodyParser(&req); err != nil {
+			c.Status(http.StatusBadRequest)
+			return c.JSON(fiber.Map{
+				"message": err.Error(),
+			})
 		}
-
-		c.Cookie(&cookie)
+		if err := h.pgStore.Repository().DeleteUser(req.ID); err != nil {
+			return c.JSON(fiber.Map{
+				"message": err.Error(),
+			})
+		}
 
 		return c.JSON(fiber.Map{
 			"message": "success",
 		})
 	}
+}
 
+// @Summary Get Users
+// @Description getting all  of users
+// @Tags         User
+//
+//	@Accept       json
+//
+// @Produce json
+// @Success 200 {object} responses.Registration
+// @Failure 400 {object} responses.Error
+// @Failure 500 {object} responses.Error
+// @Router /user/all [get]
+func (h *Handlers) GetUsers() fiber.Handler {
+	return func(c *fiber.Ctx) error {
+		u, err := h.pgStore.Repository().GetUsers()
+		if err != nil {
+			c.Status(http.StatusBadRequest)
+			return c.JSON(fiber.Map{
+				"message": err.Error(),
+			})
+		}
+		return c.JSON(u)
+	}
 }
 
 func (h *Handlers) NewUser() fiber.Handler {

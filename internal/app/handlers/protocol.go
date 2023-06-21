@@ -19,7 +19,7 @@ import (
 // @Success 200 {object} responses.SaveProtocol
 // @Failure 400 {object} responses.Error
 // @Failure 500 {object} responses.Error
-// @Router /protocols/save [post]
+// @Router /protocols/save [patch]
 func (h *Handlers) SaveProtocol() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 

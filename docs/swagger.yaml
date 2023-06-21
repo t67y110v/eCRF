@@ -8,6 +8,11 @@ definitions:
       status:
         type: integer
     type: object
+  requests.Delete:
+    properties:
+      id:
+        type: integer
+    type: object
   requests.DeleteProtocol:
     properties:
       id:
@@ -42,6 +47,21 @@ definitions:
       name:
         type: string
       status:
+        type: integer
+    type: object
+  requests.Update:
+    properties:
+      center_id:
+        type: integer
+      email:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      password:
+        type: string
+      role:
         type: integer
     type: object
   responses.AddProtocol:
@@ -191,7 +211,7 @@ paths:
       tags:
       - Protocol
   /protocols/save:
-    post:
+    patch:
       consumes:
       - application/json
       description: saving of updating prtocol
@@ -220,6 +240,59 @@ paths:
       summary: Protocol Save
       tags:
       - Protocol
+  /user/all:
+    get:
+      consumes:
+      - application/json
+      description: getting all  of users
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.Registration'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.Error'
+      summary: Get Users
+      tags:
+      - User
+  /user/delete:
+    delete:
+      consumes:
+      - application/json
+      description: delete of user
+      parameters:
+      - description: delete
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/requests.Delete'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.Registration'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.Error'
+      summary: User Delete
+      tags:
+      - User
   /user/login:
     post:
       consumes:
@@ -278,6 +351,36 @@ paths:
           schema:
             $ref: '#/definitions/responses.Error'
       summary: User Registration
+      tags:
+      - User
+  /user/update:
+    patch:
+      consumes:
+      - application/json
+      description: update of user
+      parameters:
+      - description: update
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/requests.Update'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.Registration'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.Error'
+      summary: User Update
       tags:
       - User
 swagger: "2.0"

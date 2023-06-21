@@ -83,10 +83,11 @@ func (s *server) configureRouter() {
 	user := s.router.Group("/user")
 	user.Use(logger.New())
 	user.Get("/new", s.handlers.NewUser())
-	user.Post("/register", s.handlers.Register())
-	user.Post("/login", s.handlers.Login(), s.pages.AuthPage())
-
-	user.Post("/update", s.handlers.Update())
+	user.Post("/register", s.handlers.UserRegister())
+	user.Post("/login", s.handlers.UserLogin())
+	user.Patch("/update", s.handlers.UserUpdate())
+	user.Delete("/delete", s.handlers.UserDelete())
+	user.Get("/all", s.handlers.GetUsers())
 	//////////////////////////////////////
 
 	pages := s.router.Group("/")
