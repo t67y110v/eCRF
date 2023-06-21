@@ -1,4 +1,9 @@
 definitions:
+  requests.AddCenter:
+    properties:
+      name:
+        type: string
+    type: object
   requests.AddProtocol:
     properties:
       centerID:
@@ -11,6 +16,11 @@ definitions:
   requests.Delete:
     properties:
       id:
+        type: integer
+    type: object
+  requests.DeleteCenter:
+    properties:
+      center_id:
         type: integer
     type: object
   requests.DeleteProtocol:
@@ -64,9 +74,23 @@ definitions:
       role:
         type: integer
     type: object
+  requests.UpdateCenter:
+    properties:
+      center_id:
+        type: integer
+      name:
+        type: string
+    type: object
   responses.AddProtocol:
     properties:
       message:
+        type: string
+    type: object
+  responses.Center:
+    properties:
+      center_id:
+        type: integer
+      center_name:
         type: string
     type: object
   responses.DeleteProtocol:
@@ -116,6 +140,148 @@ definitions:
 info:
   contact: {}
 paths:
+  /center/add:
+    post:
+      consumes:
+      - application/json
+      description: add new center
+      parameters:
+      - description: addcenter
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/requests.AddCenter'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.DeleteProtocol'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.Error'
+      summary: Add new  center
+      tags:
+      - Center
+  /center/all:
+    get:
+      consumes:
+      - application/json
+      description: getting all  centers
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.Center'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.Error'
+      summary: Get all centers
+      tags:
+      - Center
+  /center/delete:
+    delete:
+      consumes:
+      - application/json
+      description: delete center
+      parameters:
+      - description: deletecenter
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/requests.DeleteCenter'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.DeleteProtocol'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.Error'
+      summary: Delete center
+      tags:
+      - Center
+  /center/name/{id}:
+    get:
+      consumes:
+      - application/json
+      description: getting center name by id
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.DeleteProtocol'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.Error'
+      summary: Get center name
+      tags:
+      - Center
+  /center/update:
+    patch:
+      consumes:
+      - application/json
+      description: update center
+      parameters:
+      - description: updatecenter
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/requests.UpdateCenter'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.DeleteProtocol'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.Error'
+      summary: Update center
+      tags:
+      - Center
   /protocols/{filter}/{center}:
     get:
       consumes:

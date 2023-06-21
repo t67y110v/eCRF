@@ -105,14 +105,15 @@ func (s *server) configureRouter() {
 	protocol.Delete("/delete", s.handlers.DeleteProtocol())
 
 	adminPanel := s.router.Group("/admin")
-	adminPanel.Use(middlewares.CheckJWT())
 	adminPanel.Get("/panel", s.pages.AdminPage())
 
 	center := s.router.Group("/center")
 	center.Use(logger.New())
-	center.Use(middlewares.CheckJWT())
-	center.Post("/new", s.handlers.AddNewCenter())
-	center.Post("/update", s.handlers.UpdateCenter())
+	center.Post("/add", s.handlers.AddNewCenter())
+	center.Patch("/update", s.handlers.UpdateCenter())
+	center.Get("/all", s.handlers.GetCenters())
+	center.Get("/name/:id", s.handlers.GetCenterName())
+	center.Delete("/delete", s.handlers.DeleteCenter())
 
 	subject := s.router.Group("/subject")
 	subject.Use(middlewares.CheckJWT())
