@@ -1,81 +1,151 @@
 package handlers
 
 import (
-	"fmt"
+	"net/http"
 	"strconv"
 
 	"github.com/gofiber/fiber/v2"
-	"github.com/t67y110v/web/internal/app/utils"
+	"github.com/t67y110v/web/internal/app/handlers/requests"
 )
 
+// @Summary Protocol Save
+// @Description saving of updating prtocol
+// @Tags         Protocol
+//
+//	@Accept       json
+//
+// @Produce json
+// @Param  data body requests.SaveProtocol true  "saveprotocol"
+// @Success 200 {object} responses.SaveProtocol
+// @Failure 400 {object} responses.Error
+// @Failure 500 {object} responses.Error
+// @Router /protocols/save [post]
 func (h *Handlers) SaveProtocol() fiber.Handler {
 	return func(c *fiber.Ctx) error {
-		name := c.FormValue("name")
-		status := c.FormValue("status")
-		centerId := c.FormValue("center")
-		protocolId := c.FormValue("id")
-		p_id, err := strconv.Atoi(protocolId)
-		if err != nil {
-			return c.Redirect(fmt.Sprintf("/protocol/edit/%s", protocolId))
+
+		req := requests.SaveProtocol{}
+		if err := c.BodyParser(&req); err != nil {
+			c.Status(http.StatusBadRequest)
+			return c.JSON(fiber.Map{
+				"message": err.Error(),
+			})
 		}
-		s, err := strconv.Atoi(status)
+		err := h.pgStore.Repository().UpdateProtocolById(req.ID, req.Status, req.Name, req.CenterId)
 		if err != nil {
-			return c.Redirect(fmt.Sprintf("/protocol/edit/%s", protocolId))
-		}
-		c_id, err := strconv.Atoi(centerId)
-		if err != nil {
-			return c.Redirect(fmt.Sprintf("/protocol/edit/%s", protocolId))
+			c.Status(http.StatusBadRequest)
+			return c.JSON(fiber.Map{
+				"message": err.Error(),
+			})
 		}
 
-		err = h.pgStore.Repository().UpdateProtocolById(p_id, s, name, c_id)
-		if err != nil {
-			return c.Redirect(fmt.Sprintf("/protocol/edit/%s", protocolId))
-		}
+		go h.operations.SaveAction(c.Context(), "SaveProtocol", "200", req.Name, "Обновление протокола")
 
-		go h.operations.SaveAction(c.Context(), "SaveProtocol", "200", c.Locals("name").(string), "Обновление протокола")
-
-		return c.Redirect("/main/filter=0")
+		return c.JSON(fiber.Map{
+			"message": "success",
+		})
 	}
 }
 
+// @Summary Protocol Add
+// @Description creating a new protocol
+// @Tags         Protocol
+//
+//	@Accept       json
+//
+// @Produce json
+// @Param  data body requests.AddProtocol true  "addprotocol"
+// @Success 200 {object} responses.AddProtocol
+// @Failure 400 {object} responses.Error
+// @Failure 500 {object} responses.Error
+// @Router /protocols/add [post]
 func (h *Handlers) AddProtocol() fiber.Handler {
 	return func(c *fiber.Ctx) error {
-		name := c.FormValue("name")
-		status := c.FormValue("status")
-		centerId := c.FormValue("center")
-
-		s, err := strconv.Atoi(status)
-		if err != nil {
-			return utils.ErrorPage(c, err)
+		req := requests.AddProtocol{}
+		if err := c.BodyParser(&req); err != nil {
+			c.Status(http.StatusBadRequest)
+			return c.JSON(fiber.Map{
+				"message": err.Error(),
+			})
 		}
-		c_id, err := strconv.Atoi(centerId)
+		err := h.pgStore.Repository().AddProtocol(req.Name, req.Status, req.CenterID)
 		if err != nil {
-			return utils.ErrorPage(c, err)
+			c.Status(http.StatusBadRequest)
+			return c.JSON(fiber.Map{
+				"message": err.Error(),
+			})
 		}
-		err = h.pgStore.Repository().AddProtocol(name, s, c_id)
-		if err != nil {
-			return utils.ErrorPage(c, err)
-		}
-		go h.operations.SaveAction(c.Context(), "AddProtocol", "200", c.Locals("name").(string), "Добавление протокола")
-		return c.Redirect("/main/filter=0")
+		go h.operations.SaveAction(c.Context(), "AddProtocol", "200", req.Name, "Добавление протокола")
+		c.Status(http.StatusBadRequest)
+		return c.JSON(fiber.Map{
+			"message": "success",
+		})
 	}
 }
 
+// @Summary Protocol Delete
+// @Description Deleting a  protocol  by id
+// @Tags         Protocol
+//
+//	@Accept       json
+//
+// @Produce json
+// @Param  data body requests.DeleteProtocol true  "deleteprotocol"
+// @Success 200 {object} responses.DeleteProtocol
+// @Failure 400 {object} responses.Error
+// @Failure 500 {object} responses.Error
+// @Router /protocols/delete [delete]
 func (h *Handlers) DeleteProtocol() fiber.Handler {
 	return func(c *fiber.Ctx) error {
+		req := requests.DeleteProtocol{}
+		if err := c.BodyParser(&req); err != nil {
+			c.Status(http.StatusBadRequest)
+			return c.JSON(fiber.Map{
+				"message": err.Error(),
+			})
+		}
 
-		protocolId, err := strconv.Atoi(c.FormValue("id"))
+		if err := h.pgStore.Repository().DeleteProtocol(req.ID); err != nil {
+			c.Status(http.StatusBadRequest)
+			return c.JSON(fiber.Map{
+				"message": err.Error(),
+			})
+		}
+
+		go h.operations.SaveAction(c.Context(), "DeleteProtocol", "200", "test", "Удаление протокола")
+
+		return c.JSON(fiber.Map{
+			"message": "success",
+		})
+	}
+}
+
+// @Summary Protocols Get
+// @Description Getting all protocols from users center id and filter params
+// @Tags         Protocol
+//
+//	@Accept       json
+//
+// @Produce json
+// @Param filter   path      string  true  "Filter"
+// @Param center   path      string  true  "Center"
+// @Success 200 {object} responses.GetProtocols
+// @Failure 400 {object} responses.Error
+// @Failure 500 {object} responses.Error
+// @Router /protocols/{filter}/{center}  [get]
+func (h *Handlers) GetProtocols() fiber.Handler {
+	return func(c *fiber.Ctx) error {
+
+		filter := c.Params("filter")
+		userCenter, _ := strconv.Atoi(c.Params("center"))
+
+		p, err := h.pgStore.Repository().GetProtocolsByFilter(filter, userCenter)
 		if err != nil {
-
-			return utils.ErrorPage(c, err)
+			c.Status(http.StatusBadRequest)
+			return c.JSON(fiber.Map{
+				"message": err.Error(),
+			})
 		}
 
-		if err := h.pgStore.Repository().DeleteProtocol(protocolId); err != nil {
-			return utils.ErrorPage(c, err)
-		}
-
-		go h.operations.SaveAction(c.Context(), "DeleteProtocol", "200", c.Locals("name").(string), "Удаление протокола")
-
-		return c.Redirect("/main/filter=0")
+		return c.JSON(p)
 	}
 }

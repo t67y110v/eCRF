@@ -1,4 +1,18 @@
 definitions:
+  requests.AddProtocol:
+    properties:
+      centerID:
+        type: integer
+      name:
+        type: string
+      status:
+        type: integer
+    type: object
+  requests.DeleteProtocol:
+    properties:
+      id:
+        type: integer
+    type: object
   requests.Login:
     properties:
       email:
@@ -19,10 +33,42 @@ definitions:
       role:
         type: integer
     type: object
+  requests.SaveProtocol:
+    properties:
+      centerId:
+        type: integer
+      id:
+        type: integer
+      name:
+        type: string
+      status:
+        type: integer
+    type: object
+  responses.AddProtocol:
+    properties:
+      message:
+        type: string
+    type: object
+  responses.DeleteProtocol:
+    properties:
+      message:
+        type: string
+    type: object
   responses.Error:
     properties:
       message:
         type: string
+    type: object
+  responses.GetProtocols:
+    properties:
+      center_id:
+        type: integer
+      name:
+        type: string
+      protocol_id:
+        type: integer
+      status:
+        type: integer
     type: object
   responses.Login:
     properties:
@@ -42,9 +88,138 @@ definitions:
       user_id:
         type: integer
     type: object
+  responses.SaveProtocol:
+    properties:
+      message:
+        type: string
+    type: object
 info:
   contact: {}
 paths:
+  /protocols/{filter}/{center}:
+    get:
+      consumes:
+      - application/json
+      description: Getting all protocols from users center id and filter params
+      parameters:
+      - description: Filter
+        in: path
+        name: filter
+        required: true
+        type: string
+      - description: Center
+        in: path
+        name: center
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.GetProtocols'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.Error'
+      summary: Protocols Get
+      tags:
+      - Protocol
+  /protocols/add:
+    post:
+      consumes:
+      - application/json
+      description: creating a new protocol
+      parameters:
+      - description: addprotocol
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/requests.AddProtocol'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.AddProtocol'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.Error'
+      summary: Protocol Add
+      tags:
+      - Protocol
+  /protocols/delete:
+    delete:
+      consumes:
+      - application/json
+      description: Deleting a  protocol  by id
+      parameters:
+      - description: deleteprotocol
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/requests.DeleteProtocol'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.DeleteProtocol'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.Error'
+      summary: Protocol Delete
+      tags:
+      - Protocol
+  /protocols/save:
+    post:
+      consumes:
+      - application/json
+      description: saving of updating prtocol
+      parameters:
+      - description: saveprotocol
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/requests.SaveProtocol'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.SaveProtocol'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.Error'
+      summary: Protocol Save
+      tags:
+      - Protocol
   /user/login:
     post:
       consumes:
