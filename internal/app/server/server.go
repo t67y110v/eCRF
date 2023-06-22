@@ -70,10 +70,9 @@ func newServer(
 }
 
 func (s *server) configureRouter() {
-
 	s.router.Use(cors.New(cors.Config{
 		AllowCredentials: true,
-		AllowOrigins:     s.config.FrontPORT,
+		AllowOrigins:     s.config.FrontURL,
 		AllowHeaders:     "Origin, Content-Type, Accept",
 	}))
 	s.router.Get("/swagger/*", swagger.HandlerDefault)
@@ -83,6 +82,7 @@ func (s *server) configureRouter() {
 	user := s.router.Group("/user")
 	user.Use(logger.New())
 	user.Get("/new", s.handlers.NewUser())
+	user.Use(middlewares.CheckJWT())
 	user.Post("/register", s.handlers.UserRegister())
 	user.Post("/login", s.handlers.UserLogin())
 	user.Patch("/update", s.handlers.UserUpdate())
@@ -99,6 +99,7 @@ func (s *server) configureRouter() {
 
 	protocol := s.router.Group("/protocols")
 	protocol.Use(logger.New())
+	protocol.Use(middlewares.CheckJWT())
 	protocol.Get("/:filter/:center", s.handlers.GetProtocols())
 	protocol.Patch("/save", s.handlers.SaveProtocol())
 	protocol.Post("/add", s.handlers.AddProtocol())
@@ -109,6 +110,7 @@ func (s *server) configureRouter() {
 
 	center := s.router.Group("/center")
 	center.Use(logger.New())
+	center.Use(middlewares.CheckJWT())
 	center.Post("/add", s.handlers.AddNewCenter())
 	center.Patch("/update", s.handlers.UpdateCenter())
 	center.Get("/all", s.handlers.GetCenters())
