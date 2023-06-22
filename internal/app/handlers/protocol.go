@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -60,6 +61,7 @@ func (h *Handlers) SaveProtocol() fiber.Handler {
 // @Router /protocols/add [post]
 func (h *Handlers) AddProtocol() fiber.Handler {
 	return func(c *fiber.Ctx) error {
+		fmt.Println(c.Cookies("token"))
 		req := requests.AddProtocol{}
 		if err := c.BodyParser(&req); err != nil {
 			c.Status(http.StatusBadRequest)
@@ -75,7 +77,7 @@ func (h *Handlers) AddProtocol() fiber.Handler {
 			})
 		}
 		go h.operations.SaveAction(c.Context(), "AddProtocol", "200", req.Name, "Добавление протокола")
-		c.Status(http.StatusBadRequest)
+
 		return c.JSON(fiber.Map{
 			"message": "success",
 		})

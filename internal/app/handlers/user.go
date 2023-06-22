@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/t67y110v/web/internal/app/handlers/requests"
@@ -25,7 +26,7 @@ import (
 func (h *Handlers) UserLogin() fiber.Handler {
 
 	return func(c *fiber.Ctx) error {
-
+		fmt.Println(c.Cookies("token"))
 		req := requests.Login{}
 		if err := c.BodyParser(&req); err != nil {
 			c.Status(http.StatusBadRequest)
