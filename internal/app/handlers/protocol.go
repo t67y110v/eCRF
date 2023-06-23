@@ -10,6 +10,7 @@ import (
 )
 
 // @Summary Protocol Save
+// @Security BasicAuth
 // @Description saving of updating prtocol
 // @Tags         Protocol
 //

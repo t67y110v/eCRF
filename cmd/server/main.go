@@ -6,6 +6,16 @@ import (
 	"github.com/t67y110v/web/internal/app/server"
 )
 
+//@title eCRF API
+//@version 0.1
+//@description API Server for eCRF Application
+
+// @host localhost:4000
+// @basePath /
+
+// @securityDefinitions.apikey  BasicAuth
+// @in Cookie
+// @name Cookie
 func main() {
 	logging.Init()
 	l := logging.GetLogger()

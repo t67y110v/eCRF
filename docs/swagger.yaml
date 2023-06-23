@@ -1,3 +1,4 @@
+basePath: /
 definitions:
   requests.AddCenter:
     properties:
@@ -137,8 +138,12 @@ definitions:
       message:
         type: string
     type: object
+host: localhost:4000
 info:
   contact: {}
+  description: API Server for eCRF Application
+  title: eCRF API
+  version: "0.1"
 paths:
   /center/add:
     post:
@@ -403,6 +408,8 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/responses.Error'
+      security:
+      - BasicAuth: []
       summary: Protocol Save
       tags:
       - Protocol
@@ -549,4 +556,9 @@ paths:
       summary: User Update
       tags:
       - User
+securityDefinitions:
+  BasicAuth:
+    in: Cookie
+    name: Cookie
+    type: apiKey
 swagger: "2.0"

@@ -1,8 +1,13 @@
 {
     "swagger": "2.0",
     "info": {
-        "contact": {}
+        "description": "API Server for eCRF Application",
+        "title": "eCRF API",
+        "contact": {},
+        "version": "0.1"
     },
+    "host": "localhost:4000",
+    "basePath": "/",
     "paths": {
         "/center/add": {
             "post": {
@@ -315,6 +320,11 @@
         },
         "/protocols/save": {
             "patch": {
+                "security": [
+                    {
+                        "BasicAuth": []
+                    }
+                ],
                 "description": "saving of updating prtocol",
                 "consumes": [
                     "application/json"
@@ -846,6 +856,13 @@
                     "type": "string"
                 }
             }
+        }
+    },
+    "securityDefinitions": {
+        "BasicAuth": {
+            "type": "apiKey",
+            "name": "Cookie",
+            "in": "Cookie"
         }
     }
 }

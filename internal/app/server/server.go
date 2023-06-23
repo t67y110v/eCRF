@@ -1,8 +1,6 @@
 package server
 
 import (
-	"html/template"
-
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	_ "github.com/t67y110v/web/docs"
@@ -10,12 +8,10 @@ import (
 	"github.com/t67y110v/web/internal/app/handlers"
 	"github.com/t67y110v/web/internal/app/logging"
 	"github.com/t67y110v/web/internal/app/middlewares"
-	"github.com/t67y110v/web/internal/app/pages"
 	"github.com/t67y110v/web/internal/app/store"
 
 	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/gofiber/swagger" // swagger handler
-	"github.com/gofiber/template/html"
 )
 
 type server struct {
@@ -25,7 +21,6 @@ type server struct {
 	mgStore  store.MongoStore
 	config   *config.Config
 	handlers *handlers.Handlers
-	pages    *pages.Pages
 }
 
 func newServer(
@@ -35,25 +30,9 @@ func newServer(
 	log logging.Logger,
 ) *server {
 
-	engine := html.New("./templates", ".html")
-	var st state
-	st.store = pgstore
-
-	var c counter
-	engine.AddFuncMap(template.FuncMap{
-		"setCounter": c.SetCounter,
-		"incCounter": c.IncCounter,
-		"set":        st.Set,
-		"inc":        st.Inc,
-		"com":        st.Com,
-		"role":       st.Role,
-		"center":     st.Center,
-	})
 	s := &server{
 		router: fiber.New(
 			fiber.Config{
-				Views:        engine,
-				ViewsLayout:  "shared/main_layout",
 				ServerHeader: "eCRF API",
 				AppName:      "Api v1.0.1",
 			}),
@@ -62,7 +41,6 @@ func newServer(
 		mgStore:  mgstore,
 		config:   config,
 		handlers: handlers.NewHandlers(pgstore, mgstore, log),
-		pages:    pages.NewPages(pgstore, mgstore, log),
 	}
 	s.configureRouter()
 
@@ -90,27 +68,27 @@ func (s *server) configureRouter() {
 	user.Get("/all", s.handlers.GetUsers())
 	//////////////////////////////////////
 
-	pages := s.router.Group("/")
-	pages.Static("/public", "./public")
-	pages.Get("auth", s.pages.AuthPage())
-	pages.Get("main/filter:filter", s.pages.MainPage())
-	pages.Get("protocol/:id/:number", s.pages.ProtocolPage())
-	pages.Get("journal", s.pages.JournalPage())
+	// pages := s.router.Group("/")
+
+	// pages.Get("auth", s.pages.AuthPage())
+	// pages.Get("main/filter:filter", s.pages.MainPage())
+	// pages.Get("protocol/:id/:number", s.pages.ProtocolPage())
+	// pages.Get("journal", s.pages.JournalPage())
 
 	protocol := s.router.Group("/protocols")
 	protocol.Use(logger.New())
-	protocol.Use(middlewares.CheckJWT())
+	//	protocol.Use(middlewares.CheckJWT())
 	protocol.Get("/:filter/:center", s.handlers.GetProtocols())
 	protocol.Patch("/save", s.handlers.SaveProtocol())
 	protocol.Post("/add", s.handlers.AddProtocol())
 	protocol.Delete("/delete", s.handlers.DeleteProtocol())
 
-	adminPanel := s.router.Group("/admin")
-	adminPanel.Get("/panel", s.pages.AdminPage())
+	// adminPanel := s.router.Group("/admin")
+	// adminPanel.Get("/panel", s.pages.AdminPage())
 
 	center := s.router.Group("/center")
 	center.Use(logger.New())
-	center.Use(middlewares.CheckJWT())
+	//	center.Use(middlewares.CheckJWT())
 	center.Post("/add", s.handlers.AddNewCenter())
 	center.Patch("/update", s.handlers.UpdateCenter())
 	center.Get("/all", s.handlers.GetCenters())
@@ -130,7 +108,7 @@ func (s *server) configureRouter() {
 	screening.Post("/updatecolor", s.handlers.UpdateColor())
 	screening.Post("/updatecolorwithcomment", s.handlers.UpdateColorWithComment())
 	screening.Post("/updatefield", s.handlers.UpdateFieldValue())
-	errors := s.router.Group("/error")
-	errors.Get("/", s.pages.ErrorPage())
+	// errors := s.router.Group("/error")
+	// errors.Get("/", s.pages.ErrorPage())
 
 }

@@ -327,6 +327,11 @@ const docTemplate = `{
         },
         "/protocols/save": {
             "patch": {
+                "security": [
+                    {
+                        "BasicAuth": []
+                    }
+                ],
                 "description": "saving of updating prtocol",
                 "consumes": [
                     "application/json"
@@ -859,17 +864,24 @@ const docTemplate = `{
                 }
             }
         }
+    },
+    "securityDefinitions": {
+        "BasicAuth": {
+            "type": "apiKey",
+            "name": "Cookie",
+            "in": "Cookie"
+        }
     }
 }`
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
-	Version:          "",
-	Host:             "",
-	BasePath:         "",
+	Version:          "0.1",
+	Host:             "localhost:4000",
+	BasePath:         "/",
 	Schemes:          []string{},
-	Title:            "",
-	Description:      "",
+	Title:            "eCRF API",
+	Description:      "API Server for eCRF Application",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 }
