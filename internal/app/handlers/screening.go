@@ -1,14 +1,10 @@
 package handlers
 
 import (
-	"bytes"
-	"encoding/json"
 	"net/http"
-	"strconv"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/t67y110v/web/internal/app/handlers/requests"
-	"github.com/t67y110v/web/internal/app/utils"
 )
 
 // @Summary InformaitonConsentSubject
@@ -22,7 +18,7 @@ import (
 // @Success 200 {object} responses.AddProtocol
 // @Failure 400 {object} responses.Error
 // @Failure 500 {object} responses.Error
-// @Router /subject/screening/informationconsenet [post]
+// @Router /subject/screening/informationconsenet [patch]
 func (h *Handlers) InformationConsentSubject() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		req := requests.InformationConsent{}
@@ -73,7 +69,7 @@ func (h *Handlers) InformationConsentSubject() fiber.Handler {
 // @Success 200 {object} responses.AddProtocol
 // @Failure 400 {object} responses.Error
 // @Failure 500 {object} responses.Error
-// @Router /subject/screening/demography [post]
+// @Router /subject/screening/demography [patch]
 func (h *Handlers) DemographySubject() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		req := requests.Demography{}
@@ -114,7 +110,7 @@ func (h *Handlers) DemographySubject() fiber.Handler {
 // @Success 200 {object} responses.AddProtocol
 // @Failure 400 {object} responses.Error
 // @Failure 500 {object} responses.Error
-// @Router /subject/screening/anthropometry [post]
+// @Router /subject/screening/anthropometry [patch]
 func (h *Handlers) AnthropometrySubject() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		req := requests.Anthropometry{}
@@ -164,7 +160,7 @@ func (h *Handlers) AnthropometrySubject() fiber.Handler {
 // @Success 200 {object} responses.AddProtocol
 // @Failure 400 {object} responses.Error
 // @Failure 500 {object} responses.Error
-// @Router /subject/screening/inclusioncriteria [post]
+// @Router /subject/screening/inclusioncriteria [patch]
 func (h *Handlers) InclusionCriteriaSubject() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		req := requests.InclusionCriteria{}
@@ -215,7 +211,7 @@ func (h *Handlers) InclusionCriteriaSubject() fiber.Handler {
 // @Success 200 {object} responses.AddProtocol
 // @Failure 400 {object} responses.Error
 // @Failure 500 {object} responses.Error
-// @Router /subject/screening/exclusioncriteria [post]
+// @Router /subject/screening/exclusioncriteria [patch]
 func (h *Handlers) ExclusionСriteriaSubject() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		req := requests.ExclusionСriteria{}
@@ -272,7 +268,7 @@ func (h *Handlers) ExclusionСriteriaSubject() fiber.Handler {
 // @Success 200 {object} responses.AddProtocol
 // @Failure 400 {object} responses.Error
 // @Failure 500 {object} responses.Error
-// @Router /subject/screening/completion [post]
+// @Router /subject/screening/completion [patch]
 func (h *Handlers) CompletionOfScreening() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		req := requests.CompletionOfScreening{}
@@ -306,106 +302,5 @@ func (h *Handlers) CompletionOfScreening() fiber.Handler {
 		return c.JSON(fiber.Map{
 			"message": "success",
 		})
-	}
-}
-
-func (h *Handlers) UpdateColor() fiber.Handler {
-	return func(c *fiber.Ctx) error {
-
-		req := &requests.UpdateColorRequest{}
-		reader := bytes.NewReader(c.Body())
-
-		if err := json.NewDecoder(reader).Decode(req); err != nil {
-			h.logger.Warningf("handle filter by category, status :%d, error :%e", fiber.StatusBadRequest, err)
-		}
-		subjectNumber := req.SubjectNumber
-		protocolId, err := strconv.Atoi(req.ProtocolID)
-		if err != nil {
-			return utils.ErrorPage(c, err)
-		}
-		subject, err := h.mgStore.Subject().GetSubjectByNumber(subjectNumber, protocolId)
-		if err != nil {
-			h.logger.Warningln(err)
-			return utils.ErrorPage(c, err)
-		}
-		field := req.FieldName
-		value := req.Value
-
-		fieldName := utils.GetFieldName(field)
-		if err := h.mgStore.Screening().UpdateColor(c.Context(), subject.ID, fieldName, value); err != nil {
-			return utils.ErrorPage(c, err)
-		}
-		return nil
-
-	}
-}
-
-func (h *Handlers) UpdateColorWithComment() fiber.Handler {
-	return func(c *fiber.Ctx) error {
-		req := &requests.UpdateColorWithCommentRequest{}
-		reader := bytes.NewReader(c.Body())
-		if err := json.NewDecoder(reader).Decode(req); err != nil {
-			h.logger.Warningf("handle filter by category, status :%d, error :%e", fiber.StatusBadRequest, err)
-		}
-		subjectNumber := req.SubjectNumber
-		protocolId, err := strconv.Atoi(req.ProtocolID)
-		if err != nil {
-			return utils.ErrorPage(c, err)
-		}
-		subject, err := h.mgStore.Subject().GetSubjectByNumber(subjectNumber, protocolId)
-		if err != nil {
-			h.logger.Warningln(err)
-			return utils.ErrorPage(c, err)
-		}
-		field := req.FieldName
-
-		value := req.Value
-		fieldName := utils.GetFieldName(field)
-
-		reason := req.Reason
-		comment := req.Comment
-
-		//fmt.Println("s - ", subject.ID, "p - ", protocolId, "field - ", field, "fieldNAme - ", fieldName, "v - ", value, "r - ", reason, "c - ", comment)
-		if err := h.mgStore.Screening().UpdateColorWithComment(c.Context(), subject.ID, fieldName, reason, comment, value); err != nil {
-			return utils.ErrorPage(c, err)
-		}
-
-		return nil
-
-	}
-}
-
-func (h *Handlers) UpdateFieldValue() fiber.Handler {
-	return func(c *fiber.Ctx) error {
-		req := &requests.UpdateValueWithColor{}
-		reader := bytes.NewReader(c.Body())
-		if err := json.NewDecoder(reader).Decode(req); err != nil {
-			h.logger.Warningf("handle filter by category, status :%d, error :%e", fiber.StatusBadRequest, err)
-		}
-		subjectNumber := req.SubjectNumber
-		protocolId, err := strconv.Atoi(req.ProtocolID)
-		if err != nil {
-			return utils.ErrorPage(c, err)
-		}
-		subject, err := h.mgStore.Subject().GetSubjectByNumber(subjectNumber, protocolId)
-		if err != nil {
-			h.logger.Warningln(err)
-			return utils.ErrorPage(c, err)
-		}
-		color := req.Color
-		field := utils.GetFieldName(req.FieldName)
-		fieldValue := utils.GetFieldNameForUpdate(field)
-		value, err := strconv.Atoi(req.Value)
-		if err != nil {
-			if err := h.mgStore.Screening().UpdateFieldStringValue(c.Context(), subject.ID, field, fieldValue, req.Value, color); err != nil {
-				return utils.ErrorPage(c, err)
-			}
-		} else {
-			if err := h.mgStore.Screening().UpdateFieldIntValue(c.Context(), subject.ID, field, fieldValue, value, color); err != nil {
-				return utils.ErrorPage(c, err)
-			}
-		}
-
-		return nil
 	}
 }

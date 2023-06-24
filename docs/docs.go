@@ -427,6 +427,144 @@ const docTemplate = `{
                 }
             }
         },
+        "/subject/action/updatecolor": {
+            "post": {
+                "description": "UpdateColor",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Subject.Action"
+                ],
+                "summary": "UpdateColor",
+                "parameters": [
+                    {
+                        "description": "UpdateColorRequest",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.UpdateColorRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.AddProtocol"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/responses.Error"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/responses.Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/subject/action/updatecolorwithcomment": {
+            "post": {
+                "description": "UpdateColorWithComment",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Subject.Action"
+                ],
+                "summary": "UpdateColorWithComment",
+                "parameters": [
+                    {
+                        "description": "UpdateColorWithCommentRequest",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.UpdateColorWithCommentRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.AddProtocol"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/responses.Error"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/responses.Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/subject/action/updatefield": {
+            "post": {
+                "description": "UpdateFieldValue",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Subject.Action"
+                ],
+                "summary": "UpdateFieldValue",
+                "parameters": [
+                    {
+                        "description": "UpdateFieldValue",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.UpdateValueWithColor"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.AddProtocol"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/responses.Error"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/responses.Error"
+                        }
+                    }
+                }
+            }
+        },
         "/subject/add": {
             "post": {
                 "description": "creating a new protocol",
@@ -474,7 +612,7 @@ const docTemplate = `{
             }
         },
         "/subject/screening/anthropometry": {
-            "post": {
+            "patch": {
                 "description": "AnthropometrySubject value of subject",
                 "consumes": [
                     "application/json"
@@ -520,7 +658,7 @@ const docTemplate = `{
             }
         },
         "/subject/screening/completion": {
-            "post": {
+            "patch": {
                 "description": "CompletionOfScreening value of subject",
                 "consumes": [
                     "application/json"
@@ -566,7 +704,7 @@ const docTemplate = `{
             }
         },
         "/subject/screening/demography": {
-            "post": {
+            "patch": {
                 "description": "DemographySubject value of subject",
                 "consumes": [
                     "application/json"
@@ -612,7 +750,7 @@ const docTemplate = `{
             }
         },
         "/subject/screening/exclusioncriteria": {
-            "post": {
+            "patch": {
                 "description": "ExclusionСriteriaSubject value of subject",
                 "consumes": [
                     "application/json"
@@ -658,7 +796,7 @@ const docTemplate = `{
             }
         },
         "/subject/screening/inclusioncriteria": {
-            "post": {
+            "patch": {
                 "description": "InclusionCriteriaSubject value of subject",
                 "consumes": [
                     "application/json"
@@ -704,7 +842,7 @@ const docTemplate = `{
             }
         },
         "/subject/screening/informationconsenet": {
-            "post": {
+            "patch": {
                 "description": "InformaitonConsentSubject value of subject",
                 "consumes": [
                     "application/json"
@@ -1443,6 +1581,66 @@ const docTemplate = `{
                     "type": "integer"
                 },
                 "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "requests.UpdateColorRequest": {
+            "type": "object",
+            "properties": {
+                "field_name": {
+                    "type": "string"
+                },
+                "protocol_id": {
+                    "type": "integer"
+                },
+                "subject_number": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "integer"
+                }
+            }
+        },
+        "requests.UpdateColorWithCommentRequest": {
+            "type": "object",
+            "properties": {
+                "comment": {
+                    "type": "string"
+                },
+                "field_name": {
+                    "type": "string"
+                },
+                "protocol_id": {
+                    "type": "integer"
+                },
+                "reason": {
+                    "type": "string"
+                },
+                "subject_number": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "integer"
+                }
+            }
+        },
+        "requests.UpdateValueWithColor": {
+            "type": "object",
+            "properties": {
+                "color": {
+                    "type": "integer"
+                },
+                "field_name": {
+                    "type": "string"
+                },
+                "protocol_id": {
+                    "type": "integer"
+                },
+                "subject_number": {
+                    "type": "string"
+                },
+                "value": {
                     "type": "string"
                 }
             }

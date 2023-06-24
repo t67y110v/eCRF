@@ -249,6 +249,45 @@ definitions:
       name:
         type: string
     type: object
+  requests.UpdateColorRequest:
+    properties:
+      field_name:
+        type: string
+      protocol_id:
+        type: integer
+      subject_number:
+        type: string
+      value:
+        type: integer
+    type: object
+  requests.UpdateColorWithCommentRequest:
+    properties:
+      comment:
+        type: string
+      field_name:
+        type: string
+      protocol_id:
+        type: integer
+      reason:
+        type: string
+      subject_number:
+        type: string
+      value:
+        type: integer
+    type: object
+  requests.UpdateValueWithColor:
+    properties:
+      color:
+        type: integer
+      field_name:
+        type: string
+      protocol_id:
+        type: integer
+      subject_number:
+        type: string
+      value:
+        type: string
+    type: object
   responses.AddProtocol:
     properties:
       message:
@@ -660,6 +699,96 @@ paths:
       summary: Subjects  Get
       tags:
       - Subject
+  /subject/action/updatecolor:
+    post:
+      consumes:
+      - application/json
+      description: UpdateColor
+      parameters:
+      - description: UpdateColorRequest
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/requests.UpdateColorRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.AddProtocol'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.Error'
+      summary: UpdateColor
+      tags:
+      - Subject.Action
+  /subject/action/updatecolorwithcomment:
+    post:
+      consumes:
+      - application/json
+      description: UpdateColorWithComment
+      parameters:
+      - description: UpdateColorWithCommentRequest
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/requests.UpdateColorWithCommentRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.AddProtocol'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.Error'
+      summary: UpdateColorWithComment
+      tags:
+      - Subject.Action
+  /subject/action/updatefield:
+    post:
+      consumes:
+      - application/json
+      description: UpdateFieldValue
+      parameters:
+      - description: UpdateFieldValue
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/requests.UpdateValueWithColor'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.AddProtocol'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.Error'
+      summary: UpdateFieldValue
+      tags:
+      - Subject.Action
   /subject/add:
     post:
       consumes:
@@ -691,7 +820,7 @@ paths:
       tags:
       - Subject
   /subject/screening/anthropometry:
-    post:
+    patch:
       consumes:
       - application/json
       description: AnthropometrySubject value of subject
@@ -721,7 +850,7 @@ paths:
       tags:
       - Subject.Screening
   /subject/screening/completion:
-    post:
+    patch:
       consumes:
       - application/json
       description: CompletionOfScreening value of subject
@@ -751,7 +880,7 @@ paths:
       tags:
       - Subject.Screening
   /subject/screening/demography:
-    post:
+    patch:
       consumes:
       - application/json
       description: DemographySubject value of subject
@@ -781,7 +910,7 @@ paths:
       tags:
       - Subject.Screening
   /subject/screening/exclusioncriteria:
-    post:
+    patch:
       consumes:
       - application/json
       description: ExclusionСriteriaSubject value of subject
@@ -811,7 +940,7 @@ paths:
       tags:
       - Subject.Screening
   /subject/screening/inclusioncriteria:
-    post:
+    patch:
       consumes:
       - application/json
       description: InclusionCriteriaSubject value of subject
@@ -841,7 +970,7 @@ paths:
       tags:
       - Subject.Screening
   /subject/screening/informationconsenet:
-    post:
+    patch:
       consumes:
       - application/json
       description: InformaitonConsentSubject value of subject
