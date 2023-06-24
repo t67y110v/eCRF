@@ -473,6 +473,282 @@ const docTemplate = `{
                 }
             }
         },
+        "/subject/screening/anthropometry": {
+            "post": {
+                "description": "AnthropometrySubject value of subject",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Subject.Screening"
+                ],
+                "summary": "AnthropometrySubject",
+                "parameters": [
+                    {
+                        "description": "AnthropometrySubject",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.Anthropometry"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.AddProtocol"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/responses.Error"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/responses.Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/subject/screening/completion": {
+            "post": {
+                "description": "CompletionOfScreening value of subject",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Subject.Screening"
+                ],
+                "summary": "CompletionOfScreening",
+                "parameters": [
+                    {
+                        "description": "CompletionOfScreening",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.CompletionOfScreening"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.AddProtocol"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/responses.Error"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/responses.Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/subject/screening/demography": {
+            "post": {
+                "description": "DemographySubject value of subject",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Subject.Screening"
+                ],
+                "summary": "DemographySubject",
+                "parameters": [
+                    {
+                        "description": "DemographySubject",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.Demography"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.AddProtocol"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/responses.Error"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/responses.Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/subject/screening/exclusioncriteria": {
+            "post": {
+                "description": "ExclusionСriteriaSubject value of subject",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Subject.Screening"
+                ],
+                "summary": "ExclusionСriteriaSubject",
+                "parameters": [
+                    {
+                        "description": "ExclusionСriteriaSubject",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.Exclusion%D0%A1riteria"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.AddProtocol"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/responses.Error"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/responses.Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/subject/screening/inclusioncriteria": {
+            "post": {
+                "description": "InclusionCriteriaSubject value of subject",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Subject.Screening"
+                ],
+                "summary": "InclusionCriteriaSubject",
+                "parameters": [
+                    {
+                        "description": "InclusionCriteriaSubject",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.InclusionCriteria"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.AddProtocol"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/responses.Error"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/responses.Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/subject/screening/informationconsenet": {
+            "post": {
+                "description": "InformaitonConsentSubject value of subject",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Subject.Screening"
+                ],
+                "summary": "InformaitonConsentSubject",
+                "parameters": [
+                    {
+                        "description": "InformaionConsent",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.InformationConsent"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.AddProtocol"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/responses.Error"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/responses.Error"
+                        }
+                    }
+                }
+            }
+        },
         "/subject/{protocol_id}": {
             "get": {
                 "description": "Getting all subjects by protocol id",
@@ -828,6 +1104,64 @@ const docTemplate = `{
                 }
             }
         },
+        "requests.Anthropometry": {
+            "type": "object",
+            "properties": {
+                "anthropometricdatabeenmeasured": {
+                    "type": "integer"
+                },
+                "dateofstartmeasured": {
+                    "type": "string"
+                },
+                "heightofbody": {
+                    "type": "integer"
+                },
+                "indexweightofbody": {
+                    "type": "integer"
+                },
+                "protocol_id": {
+                    "type": "integer"
+                },
+                "reasonifnot": {
+                    "type": "string"
+                },
+                "subject_num": {
+                    "type": "string"
+                },
+                "weightofbody": {
+                    "type": "integer"
+                }
+            }
+        },
+        "requests.CompletionOfScreening": {
+            "type": "object",
+            "properties": {
+                "commentvalue": {
+                    "type": "string"
+                },
+                "informedoftherestrictions": {
+                    "type": "integer"
+                },
+                "noexclusioncriteria": {
+                    "type": "integer"
+                },
+                "protocol_id": {
+                    "type": "integer"
+                },
+                "reasonifnot": {
+                    "type": "string"
+                },
+                "subject_num": {
+                    "type": "string"
+                },
+                "volunteereligible": {
+                    "type": "integer"
+                },
+                "volunteerincluded": {
+                    "type": "integer"
+                }
+            }
+        },
         "requests.Delete": {
             "type": "object",
             "properties": {
@@ -849,6 +1183,185 @@ const docTemplate = `{
             "properties": {
                 "id": {
                     "type": "integer"
+                }
+            }
+        },
+        "requests.Demography": {
+            "type": "object",
+            "properties": {
+                "date_of_birth": {
+                    "type": "string"
+                },
+                "protocol_id": {
+                    "type": "integer"
+                },
+                "race": {
+                    "type": "integer"
+                },
+                "sex": {
+                    "type": "integer"
+                },
+                "subject_num": {
+                    "type": "string"
+                }
+            }
+        },
+        "requests.ExclusionСriteria": {
+            "type": "object",
+            "properties": {
+                "aggravatedallergichistory": {
+                    "type": "integer"
+                },
+                "alcoholintake": {
+                    "type": "integer"
+                },
+                "anorexia": {
+                    "type": "integer"
+                },
+                "anyotherstateofthesubjectofthestudy": {
+                    "type": "integer"
+                },
+                "anyvaccinationinthelastmonth": {
+                    "type": "integer"
+                },
+                "chronicsystemicinfections": {
+                    "type": "integer"
+                },
+                "donorblooddonation": {
+                    "type": "integer"
+                },
+                "extensivetattoos": {
+                    "type": "integer"
+                },
+                "femalesubjectsduringpregnancy": {
+                    "type": "integer"
+                },
+                "historyofsplenectomy": {
+                    "type": "integer"
+                },
+                "inabilitytoreadinrussian": {
+                    "type": "integer"
+                },
+                "lackofsignedinformedconsent": {
+                    "type": "integer"
+                },
+                "neutropenia": {
+                    "type": "integer"
+                },
+                "plannedhospitalization": {
+                    "type": "integer"
+                },
+                "presenceofahistoryofneoplasms": {
+                    "type": "integer"
+                },
+                "protocol_id": {
+                    "type": "integer"
+                },
+                "researchcenterstaff": {
+                    "type": "integer"
+                },
+                "smokingmorethantencigarettesaday": {
+                    "type": "integer"
+                },
+                "steroidtherapy": {
+                    "type": "integer"
+                },
+                "strokeinlessthanoneyear": {
+                    "type": "integer"
+                },
+                "subject_num": {
+                    "type": "string"
+                },
+                "subjectparticipationinanyotherstudy": {
+                    "type": "integer"
+                },
+                "subjectswithactivesyphilis": {
+                    "type": "integer"
+                },
+                "takingnarcoticandpsychostimulantdrugs": {
+                    "type": "integer"
+                },
+                "therapywithimmunosuppressivedrugs": {
+                    "type": "integer"
+                }
+            }
+        },
+        "requests.InclusionCriteria": {
+            "type": "object",
+            "properties": {
+                "absenceofacuteinfectiousdiseases": {
+                    "type": "integer"
+                },
+                "aged18to55years": {
+                    "type": "integer"
+                },
+                "bodymassindex": {
+                    "type": "integer"
+                },
+                "consenttouseeffectivemethodsofcontraception": {
+                    "type": "integer"
+                },
+                "indicatorsbloodtestsatscreeningwithin": {
+                    "type": "integer"
+                },
+                "negativealcoholtest": {
+                    "type": "integer"
+                },
+                "negativedrugtest": {
+                    "type": "integer"
+                },
+                "negativehivtestresult": {
+                    "type": "integer"
+                },
+                "negativepregnancytest": {
+                    "type": "integer"
+                },
+                "negativetestresultforCOVID": {
+                    "type": "integer"
+                },
+                "nocontraindicationstovaccination": {
+                    "type": "integer"
+                },
+                "nohistoryofseverepostvaccinationreactions": {
+                    "type": "integer"
+                },
+                "nomyocardialchanges": {
+                    "type": "integer"
+                },
+                "presenceofaninformationpanel": {
+                    "type": "integer"
+                },
+                "protocol_id": {
+                    "type": "integer"
+                },
+                "subject_num": {
+                    "type": "string"
+                }
+            }
+        },
+        "requests.InformationConsent": {
+            "type": "object",
+            "properties": {
+                "date_of_sign": {
+                    "type": "string"
+                },
+                "information_consent": {
+                    "type": "integer"
+                },
+                "insurance_policy": {
+                    "type": "integer"
+                },
+                "is_signed": {
+                    "type": "integer"
+                },
+                "protocol_id": {
+                    "type": "integer"
+                },
+                "subject_num": {
+                    "type": "string"
+                },
+                "time_of_sign": {
+                    "type": "string"
                 }
             }
         },

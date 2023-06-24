@@ -25,6 +25,44 @@ definitions:
       protocol_id:
         type: integer
     type: object
+  requests.Anthropometry:
+    properties:
+      anthropometricdatabeenmeasured:
+        type: integer
+      dateofstartmeasured:
+        type: string
+      heightofbody:
+        type: integer
+      indexweightofbody:
+        type: integer
+      protocol_id:
+        type: integer
+      reasonifnot:
+        type: string
+      subject_num:
+        type: string
+      weightofbody:
+        type: integer
+    type: object
+  requests.CompletionOfScreening:
+    properties:
+      commentvalue:
+        type: string
+      informedoftherestrictions:
+        type: integer
+      noexclusioncriteria:
+        type: integer
+      protocol_id:
+        type: integer
+      reasonifnot:
+        type: string
+      subject_num:
+        type: string
+      volunteereligible:
+        type: integer
+      volunteerincluded:
+        type: integer
+    type: object
   requests.Delete:
     properties:
       id:
@@ -39,6 +77,124 @@ definitions:
     properties:
       id:
         type: integer
+    type: object
+  requests.Demography:
+    properties:
+      date_of_birth:
+        type: string
+      protocol_id:
+        type: integer
+      race:
+        type: integer
+      sex:
+        type: integer
+      subject_num:
+        type: string
+    type: object
+  requests.ExclusionСriteria:
+    properties:
+      aggravatedallergichistory:
+        type: integer
+      alcoholintake:
+        type: integer
+      anorexia:
+        type: integer
+      anyotherstateofthesubjectofthestudy:
+        type: integer
+      anyvaccinationinthelastmonth:
+        type: integer
+      chronicsystemicinfections:
+        type: integer
+      donorblooddonation:
+        type: integer
+      extensivetattoos:
+        type: integer
+      femalesubjectsduringpregnancy:
+        type: integer
+      historyofsplenectomy:
+        type: integer
+      inabilitytoreadinrussian:
+        type: integer
+      lackofsignedinformedconsent:
+        type: integer
+      neutropenia:
+        type: integer
+      plannedhospitalization:
+        type: integer
+      presenceofahistoryofneoplasms:
+        type: integer
+      protocol_id:
+        type: integer
+      researchcenterstaff:
+        type: integer
+      smokingmorethantencigarettesaday:
+        type: integer
+      steroidtherapy:
+        type: integer
+      strokeinlessthanoneyear:
+        type: integer
+      subject_num:
+        type: string
+      subjectparticipationinanyotherstudy:
+        type: integer
+      subjectswithactivesyphilis:
+        type: integer
+      takingnarcoticandpsychostimulantdrugs:
+        type: integer
+      therapywithimmunosuppressivedrugs:
+        type: integer
+    type: object
+  requests.InclusionCriteria:
+    properties:
+      absenceofacuteinfectiousdiseases:
+        type: integer
+      aged18to55years:
+        type: integer
+      bodymassindex:
+        type: integer
+      consenttouseeffectivemethodsofcontraception:
+        type: integer
+      indicatorsbloodtestsatscreeningwithin:
+        type: integer
+      negativealcoholtest:
+        type: integer
+      negativedrugtest:
+        type: integer
+      negativehivtestresult:
+        type: integer
+      negativepregnancytest:
+        type: integer
+      negativetestresultforCOVID:
+        type: integer
+      nocontraindicationstovaccination:
+        type: integer
+      nohistoryofseverepostvaccinationreactions:
+        type: integer
+      nomyocardialchanges:
+        type: integer
+      presenceofaninformationpanel:
+        type: integer
+      protocol_id:
+        type: integer
+      subject_num:
+        type: string
+    type: object
+  requests.InformationConsent:
+    properties:
+      date_of_sign:
+        type: string
+      information_consent:
+        type: integer
+      insurance_policy:
+        type: integer
+      is_signed:
+        type: integer
+      protocol_id:
+        type: integer
+      subject_num:
+        type: string
+      time_of_sign:
+        type: string
     type: object
   requests.Login:
     properties:
@@ -534,6 +690,186 @@ paths:
       summary: Subject Add
       tags:
       - Subject
+  /subject/screening/anthropometry:
+    post:
+      consumes:
+      - application/json
+      description: AnthropometrySubject value of subject
+      parameters:
+      - description: AnthropometrySubject
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/requests.Anthropometry'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.AddProtocol'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.Error'
+      summary: AnthropometrySubject
+      tags:
+      - Subject.Screening
+  /subject/screening/completion:
+    post:
+      consumes:
+      - application/json
+      description: CompletionOfScreening value of subject
+      parameters:
+      - description: CompletionOfScreening
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/requests.CompletionOfScreening'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.AddProtocol'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.Error'
+      summary: CompletionOfScreening
+      tags:
+      - Subject.Screening
+  /subject/screening/demography:
+    post:
+      consumes:
+      - application/json
+      description: DemographySubject value of subject
+      parameters:
+      - description: DemographySubject
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/requests.Demography'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.AddProtocol'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.Error'
+      summary: DemographySubject
+      tags:
+      - Subject.Screening
+  /subject/screening/exclusioncriteria:
+    post:
+      consumes:
+      - application/json
+      description: ExclusionСriteriaSubject value of subject
+      parameters:
+      - description: ExclusionСriteriaSubject
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/requests.Exclusion%D0%A1riteria'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.AddProtocol'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.Error'
+      summary: ExclusionСriteriaSubject
+      tags:
+      - Subject.Screening
+  /subject/screening/inclusioncriteria:
+    post:
+      consumes:
+      - application/json
+      description: InclusionCriteriaSubject value of subject
+      parameters:
+      - description: InclusionCriteriaSubject
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/requests.InclusionCriteria'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.AddProtocol'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.Error'
+      summary: InclusionCriteriaSubject
+      tags:
+      - Subject.Screening
+  /subject/screening/informationconsenet:
+    post:
+      consumes:
+      - application/json
+      description: InformaitonConsentSubject value of subject
+      parameters:
+      - description: InformaionConsent
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/requests.InformationConsent'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.AddProtocol'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.Error'
+      summary: InformaitonConsentSubject
+      tags:
+      - Subject.Screening
   /user/all:
     get:
       consumes:

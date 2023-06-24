@@ -3,7 +3,7 @@ package handlers
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
+	"net/http"
 	"strconv"
 
 	"github.com/gofiber/fiber/v2"
@@ -11,262 +11,301 @@ import (
 	"github.com/t67y110v/web/internal/app/utils"
 )
 
-func (h *Handlers) InformaionConsentSubject() fiber.Handler {
+// @Summary InformaitonConsentSubject
+// @Description InformaitonConsentSubject value of subject
+// @Tags         Subject.Screening
+//
+//	@Accept       json
+//
+// @Produce json
+// @Param  data body requests.InformationConsent true  "InformaionConsent"
+// @Success 200 {object} responses.AddProtocol
+// @Failure 400 {object} responses.Error
+// @Failure 500 {object} responses.Error
+// @Router /subject/screening/informationconsenet [post]
+func (h *Handlers) InformationConsentSubject() fiber.Handler {
 	return func(c *fiber.Ctx) error {
-		subjectNumber := c.FormValue("subject_number")
-		protocolId, err := strconv.Atoi(c.FormValue("protocol_id"))
+		req := requests.InformationConsent{}
+		if err := c.BodyParser(&req); err != nil {
+			c.Status(http.StatusBadRequest)
+			return c.JSON(fiber.Map{
+				"message": err.Error(),
+			})
+		}
+
+		subject, err := h.mgStore.Subject().GetSubjectByNumber(req.SubjectNumber, req.ProtocolID)
 		if err != nil {
-			return utils.ErrorPage(c, err)
+			c.Status(http.StatusBadRequest)
+			return c.JSON(fiber.Map{
+				"message": err.Error(),
+			})
 		}
 
-		signed, err := strconv.Atoi(c.FormValue("signed"))
-		if err != nil {
-			return utils.ErrorPage(c, err)
-		}
-		dateOfSign := c.FormValue("date_of_sign")
-		timeOfSign := c.FormValue("time_of_sign")
-
-		original, err := strconv.Atoi(c.FormValue("original"))
-		if err != nil {
-			return utils.ErrorPage(c, err)
-		}
-		consent, err := strconv.Atoi(c.FormValue("consent"))
-		if err != nil {
-			return utils.ErrorPage(c, err)
-		}
-
-		subject, err := h.mgStore.Subject().GetSubjectByNumber(subjectNumber, protocolId)
-		if err != nil {
-
-			h.logger.Warningln(err)
-			return utils.ErrorPage(c, err)
+		if err := h.mgStore.Screening().InformaionConsent(
+			c.Context(),
+			subject.ID,
+			req.DateOfSign,
+			req.TimeOfSign,
+			req.IsSigned,
+			req.ReceivedAnInsurancePolicy,
+			req.ReceivedAnInformaionConsent,
+		); err != nil {
+			c.Status(http.StatusBadRequest)
+			return c.JSON(fiber.Map{
+				"message": err.Error(),
+			})
 		}
 
-		if err := h.mgStore.Screening().InformaionConsent(c.Context(), subject.ID, dateOfSign, timeOfSign, signed, original, consent); err != nil {
-			h.logger.Warningln(err)
-			return utils.ErrorPage(c, err)
-		}
-
-		return c.Redirect(fmt.Sprintf("/protocol/%d/%s#item-1-1", protocolId, subjectNumber))
+		return c.JSON(fiber.Map{
+			"message": "success",
+		})
 	}
 }
 
+// @Summary DemographySubject
+// @Description DemographySubject value of subject
+// @Tags         Subject.Screening
+//
+//	@Accept       json
+//
+// @Produce json
+// @Param  data body requests.Demography true  "DemographySubject"
+// @Success 200 {object} responses.AddProtocol
+// @Failure 400 {object} responses.Error
+// @Failure 500 {object} responses.Error
+// @Router /subject/screening/demography [post]
 func (h *Handlers) DemographySubject() fiber.Handler {
 	return func(c *fiber.Ctx) error {
-		subjectNumber := c.FormValue("subject_number")
-		protocolId, err := strconv.Atoi(c.FormValue("protocol_id"))
-		if err != nil {
-			return utils.ErrorPage(c, err)
+		req := requests.Demography{}
+		if err := c.BodyParser(&req); err != nil {
+			c.Status(http.StatusBadRequest)
+			return c.JSON(fiber.Map{
+				"message": err.Error(),
+			})
 		}
-		// TODO: add hidden input with current protocol number to correct redirect
+		subject, err := h.mgStore.Subject().GetSubjectByNumber(req.SubjectNumber, req.ProtocolID)
+		if err != nil {
 
-		subject, err := h.mgStore.Subject().GetSubjectByNumber(subjectNumber, protocolId)
-		if err != nil {
-
-			h.logger.Warningln(err)
-			return utils.ErrorPage(c, err)
+			c.Status(http.StatusBadRequest)
+			return c.JSON(fiber.Map{
+				"message": err.Error(),
+			})
 		}
-		sexSubject, err := strconv.Atoi(c.FormValue("sex"))
-		if err != nil {
-			h.logger.Warningln(err)
-			return utils.ErrorPage(c, err)
+		if err := h.mgStore.Screening().Demography(c.Context(), subject.ID, req.Sex, req.Race, req.Date); err != nil {
+			c.Status(http.StatusBadRequest)
+			return c.JSON(fiber.Map{
+				"message": err.Error(),
+			})
 		}
-		raceSubject, err := strconv.Atoi(c.FormValue("race"))
-		if err != nil {
-			h.logger.Warningln(err)
-			return utils.ErrorPage(c, err)
-		}
-		birthDateSubject := c.FormValue("birth_date")
-
-		if err := h.mgStore.Screening().Demography(c.Context(), subject.ID, sexSubject, raceSubject, birthDateSubject); err != nil {
-			h.logger.Warningln(err)
-			return utils.ErrorPage(c, err)
-		}
-		return c.Redirect(fmt.Sprintf("/protocol/%d/%s#item-1-2", protocolId, subjectNumber))
+		return c.JSON(fiber.Map{
+			"message": "success",
+		})
 	}
 }
 
+// @Summary AnthropometrySubject
+// @Description AnthropometrySubject value of subject
+// @Tags         Subject.Screening
+//
+//	@Accept       json
+//
+// @Produce json
+// @Param  data body requests.Anthropometry true  "AnthropometrySubject"
+// @Success 200 {object} responses.AddProtocol
+// @Failure 400 {object} responses.Error
+// @Failure 500 {object} responses.Error
+// @Router /subject/screening/anthropometry [post]
 func (h *Handlers) AnthropometrySubject() fiber.Handler {
 	return func(c *fiber.Ctx) error {
-		subjectNumber := c.FormValue("subject_number")
-		protocolId, err := strconv.Atoi(c.FormValue("protocol_id"))
-		if err != nil {
-			return utils.ErrorPage(c, err)
+		req := requests.Anthropometry{}
+		if err := c.BodyParser(&req); err != nil {
+			c.Status(http.StatusBadRequest)
+			return c.JSON(fiber.Map{
+				"message": err.Error(),
+			})
 		}
-		subject, err := h.mgStore.Subject().GetSubjectByNumber(subjectNumber, protocolId)
+		subject, err := h.mgStore.Subject().GetSubjectByNumber(req.SubjectNumber, req.ProtocolID)
 		if err != nil {
 
-			h.logger.Warningln(err)
-			return utils.ErrorPage(c, err)
-		}
-		measured, err := strconv.Atoi(c.FormValue("data_been_measured"))
-		if err != nil {
-			return utils.ErrorPage(c, err)
-		}
-		ifNot := c.FormValue("if_not")
-		dateOfStart := c.FormValue("date_of_start")
-		weight, err := strconv.Atoi(c.FormValue("weight"))
-		if err != nil {
-			return utils.ErrorPage(c, err)
+			c.Status(http.StatusBadRequest)
+			return c.JSON(fiber.Map{
+				"message": err.Error(),
+			})
 		}
 
-		height, err := strconv.Atoi(c.FormValue("height"))
-		if err != nil {
-			return utils.ErrorPage(c, err)
-		}
-		index, err := strconv.Atoi(c.FormValue("index"))
-		if err != nil {
-			return utils.ErrorPage(c, err)
+		if err := h.mgStore.Screening().Anthropometry(c.Context(),
+			subject.ID, req.AnthropometricDataBeenMeasured,
+			req.ReasonIfNot,
+			req.DateOfStartMeasured,
+			req.WeightOfBody,
+			req.HightOfBody,
+			req.IndexWeigthOfBody,
+		); err != nil {
+			c.Status(http.StatusBadRequest)
+			return c.JSON(fiber.Map{
+				"message": err.Error(),
+			})
 		}
 
-		if err := h.mgStore.Screening().Anthropometry(c.Context(), subject.ID, measured, ifNot, dateOfStart, weight, height, index); err != nil {
-			h.logger.Warningln(err)
-			return utils.ErrorPage(c, err)
-		}
-
-		return c.Redirect(fmt.Sprintf("/protocol/%d/%s#item-1-3", protocolId, subjectNumber))
+		return c.JSON(fiber.Map{
+			"message": "success",
+		})
 	}
 }
 
+// @Summary InclusionCriteriaSubject
+// @Description InclusionCriteriaSubject value of subject
+// @Tags         Subject.Screening
+//
+//	@Accept       json
+//
+// @Produce json
+// @Param  data body requests.InclusionCriteria true  "InclusionCriteriaSubject"
+// @Success 200 {object} responses.AddProtocol
+// @Failure 400 {object} responses.Error
+// @Failure 500 {object} responses.Error
+// @Router /subject/screening/inclusioncriteria [post]
 func (h *Handlers) InclusionCriteriaSubject() fiber.Handler {
 	return func(c *fiber.Ctx) error {
-		subjectNumber := c.FormValue("subject_number")
-		protocolId, err := strconv.Atoi(c.FormValue("protocol_id"))
-		if err != nil {
-			return utils.ErrorPage(c, err)
+		req := requests.InclusionCriteria{}
+		if err := c.BodyParser(&req); err != nil {
+			c.Status(http.StatusBadRequest)
+			return c.JSON(fiber.Map{
+				"message": err.Error(),
+			})
 		}
-		// TODO: add hidden input with current protocol number to correct redirect
-
-		subject, err := h.mgStore.Subject().GetSubjectByNumber(subjectNumber, protocolId)
+		subject, err := h.mgStore.Subject().GetSubjectByNumber(req.SubjectNumber, req.ProtocolID)
 		if err != nil {
-			h.logger.Warningln(err)
-			return utils.ErrorPage(c, err)
+			c.Status(http.StatusBadRequest)
+			return c.JSON(fiber.Map{
+				"message": err.Error(),
+			})
 		}
-		inclusion1, _ := strconv.Atoi(c.FormValue("inclusion1"))
-		inclusion2, _ := strconv.Atoi(c.FormValue("inclusion2"))
-		inclusion3, _ := strconv.Atoi(c.FormValue("inclusion3"))
-		inclusion4, _ := strconv.Atoi(c.FormValue("inclusion4"))
-		inclusion5, _ := strconv.Atoi(c.FormValue("inclusion5"))
-		inclusion6, _ := strconv.Atoi(c.FormValue("inclusion6"))
-		inclusion7, _ := strconv.Atoi(c.FormValue("inclusion7"))
-		inclusion8, _ := strconv.Atoi(c.FormValue("inclusion8"))
-		inclusion9, _ := strconv.Atoi(c.FormValue("inclusion9"))
-		inclusion10, _ := strconv.Atoi(c.FormValue("inclusion10"))
-		inclusion11, _ := strconv.Atoi(c.FormValue("inclusion11"))
-		inclusion12, _ := strconv.Atoi(c.FormValue("inclusion12"))
-		inclusion13, _ := strconv.Atoi(c.FormValue("inclusion13"))
-		inclusion14, _ := strconv.Atoi(c.FormValue("inclusion14"))
 
 		if err := h.mgStore.Screening().InclusionCriteria(
 			c.Context(),
 			subject.ID,
-			inclusion1, inclusion2,
-			inclusion3, inclusion4,
-			inclusion5, inclusion6,
-			inclusion7, inclusion8,
-			inclusion9, inclusion10,
-			inclusion11, inclusion12,
-			inclusion13, inclusion14,
+			req.PresenceOfAnInformationPanel, req.Aged18To55Years,
+			req.NegativeHIVTestResult, req.BodyMassIndex,
+			req.AbsenceOfAcuteInfectiousDiseases, req.ConsentToUseEffectiveMethodsOfContraception,
+			req.NegativePregnancyTest, req.NegativeDrugTest,
+			req.NegativeAlcoholTest, req.NoHistoryOfSeverePostVaccinationReactions,
+			req.IndicatorsBloodTestsAtScreeningWithin, req.NoMyocardialChanges,
+			req.NegativeTestResultForCOVID, req.NoContraindicationsToVaccination,
 		); err != nil {
-			h.logger.Warningln(err)
-			return utils.ErrorPage(c, err)
+			c.Status(http.StatusBadRequest)
+			return c.JSON(fiber.Map{
+				"message": err.Error(),
+			})
 		}
-		return c.Redirect(fmt.Sprintf("/protocol/%d/%s#item-1-4", protocolId, subjectNumber))
+		return c.JSON(fiber.Map{
+			"message": "success",
+		})
 	}
 }
 
+// @Summary ExclusionСriteriaSubject
+// @Description ExclusionСriteriaSubject value of subject
+// @Tags         Subject.Screening
+//
+//	@Accept       json
+//
+// @Produce json
+// @Param  data body requests.ExclusionСriteria true  "ExclusionСriteriaSubject"
+// @Success 200 {object} responses.AddProtocol
+// @Failure 400 {object} responses.Error
+// @Failure 500 {object} responses.Error
+// @Router /subject/screening/exclusioncriteria [post]
 func (h *Handlers) ExclusionСriteriaSubject() fiber.Handler {
 	return func(c *fiber.Ctx) error {
-		subjectNumber := c.FormValue("subject_number")
-		protocolId, err := strconv.Atoi(c.FormValue("protocol_id"))
-		if err != nil {
-			return utils.ErrorPage(c, err)
+		req := requests.ExclusionСriteria{}
+		if err := c.BodyParser(&req); err != nil {
+			c.Status(http.StatusBadRequest)
+			return c.JSON(fiber.Map{
+				"message": err.Error(),
+			})
 		}
-		// TODO: add hidden input with current protocol number to correct redirect
-
-		subject, err := h.mgStore.Subject().GetSubjectByNumber(subjectNumber, protocolId)
+		subject, err := h.mgStore.Subject().GetSubjectByNumber(req.SubjectNumber, req.ProtocolID)
 		if err != nil {
-			h.logger.Warningln(err)
-			return utils.ErrorPage(c, err)
+			c.Status(http.StatusBadRequest)
+			return c.JSON(fiber.Map{
+				"message": err.Error(),
+			})
 		}
-
-		exclusion1, _ := strconv.Atoi(c.FormValue("exclusion1"))
-		exclusion2, _ := strconv.Atoi(c.FormValue("exclusion2"))
-		exclusion3, _ := strconv.Atoi(c.FormValue("exclusion3"))
-		exclusion4, _ := strconv.Atoi(c.FormValue("exclusion4"))
-		exclusion5, _ := strconv.Atoi(c.FormValue("exclusion5"))
-		exclusion6, _ := strconv.Atoi(c.FormValue("exclusion6"))
-		exclusion7, _ := strconv.Atoi(c.FormValue("exclusion7"))
-		exclusion8, _ := strconv.Atoi(c.FormValue("exclusion8"))
-		exclusion9, _ := strconv.Atoi(c.FormValue("exclusion9"))
-		exclusion10, _ := strconv.Atoi(c.FormValue("exclusion10"))
-		exclusion11, _ := strconv.Atoi(c.FormValue("exclusion11"))
-		exclusion12, _ := strconv.Atoi(c.FormValue("exclusion12"))
-		exclusion13, _ := strconv.Atoi(c.FormValue("exclusion13"))
-		exclusion14, _ := strconv.Atoi(c.FormValue("exclusion14"))
-		exclusion15, _ := strconv.Atoi(c.FormValue("exclusion15"))
-		exclusion16, _ := strconv.Atoi(c.FormValue("exclusion16"))
-		exclusion17, _ := strconv.Atoi(c.FormValue("exclusion17"))
-		exclusion18, _ := strconv.Atoi(c.FormValue("exclusion18"))
-		exclusion19, _ := strconv.Atoi(c.FormValue("exclusion19"))
-		exclusion20, _ := strconv.Atoi(c.FormValue("exclusion20"))
-		exclusion21, _ := strconv.Atoi(c.FormValue("exclusion21"))
-		exclusion22, _ := strconv.Atoi(c.FormValue("exclusion22"))
-		exclusion23, _ := strconv.Atoi(c.FormValue("exclusion23"))
-
 		if err := h.mgStore.Screening().ExclusionСriteria(
 			c.Context(),
 			subject.ID,
-			exclusion1, exclusion2,
-			exclusion3, exclusion4,
-			exclusion5, exclusion6,
-			exclusion7, exclusion8,
-			exclusion9, exclusion10,
-			exclusion11, exclusion12,
-			exclusion13, exclusion14,
-			exclusion15, exclusion16,
-			exclusion17, exclusion18,
-			exclusion19, exclusion20,
-			exclusion21, exclusion22,
-			exclusion23,
+			req.LackOfSignedInformedConsent, req.SteroidTherapy,
+			req.TherapyWithImmunosuppressiveDrugs, req.FemaleSubjectsDuringPregnancy,
+			req.StrokeInLessThanOneYear, req.ChronicSystemicInfections,
+			req.AggravatedAllergicHistory, req.PresenceOfAHistoryOfNeoplasms,
+			req.HistoryOfSplenectomy, req.Neutropenia,
+			req.SubjectsWithActiveSyphilis, req.Anorexia,
+			req.ExtensiveTattoos, req.TakingNarcoticAndPsychostimulantDrugs,
+			req.SmokingMoretThanTenCigarettesADay, req.AlcoholIntake,
+			req.PlannedHospitalization, req.DonorBloodDonation,
+			req.SubjectParticipationInAnyOtherStudy, req.AnyVaccinationInTheLastMonth,
+			req.InabilityToReadInRussian, req.ResearchCenterStaff,
+			req.AnyOtherStateOfTheSubjectOfTheStudy,
 		); err != nil {
-			h.logger.Warningln(err)
-			return utils.ErrorPage(c, err)
+			c.Status(http.StatusBadRequest)
+			return c.JSON(fiber.Map{
+				"message": err.Error(),
+			})
 		}
 
-		return c.Redirect(fmt.Sprintf("/protocol/%d/%s#item-1-5", protocolId, subjectNumber))
+		return c.JSON(fiber.Map{
+			"message": "success",
+		})
 
 	}
 }
 
+// @Summary CompletionOfScreening
+// @Description CompletionOfScreening value of subject
+// @Tags         Subject.Screening
+//
+//	@Accept       json
+//
+// @Produce json
+// @Param  data body requests.CompletionOfScreening true  "CompletionOfScreening"
+// @Success 200 {object} responses.AddProtocol
+// @Failure 400 {object} responses.Error
+// @Failure 500 {object} responses.Error
+// @Router /subject/screening/completion [post]
 func (h *Handlers) CompletionOfScreening() fiber.Handler {
 	return func(c *fiber.Ctx) error {
-
-		subjectNumber := c.FormValue("subject_number")
-		protocolId, err := strconv.Atoi(c.FormValue("protocol_id"))
+		req := requests.CompletionOfScreening{}
+		if err := c.BodyParser(&req); err != nil {
+			c.Status(http.StatusBadRequest)
+			return c.JSON(fiber.Map{
+				"message": err.Error(),
+			})
+		}
+		subject, err := h.mgStore.Subject().GetSubjectByNumber(req.SubjectNumber, req.ProtocolID)
 		if err != nil {
-			return utils.ErrorPage(c, err)
-		}
-		// TODO: add hidden input with current protocol number to correct redirect
-
-		subject, err := h.mgStore.Subject().GetSubjectByNumber(subjectNumber, protocolId)
-		if err != nil {
-			h.logger.Warningln(err)
-			return utils.ErrorPage(c, err)
+			c.Status(http.StatusBadRequest)
+			return c.JSON(fiber.Map{
+				"message": err.Error(),
+			})
 		}
 
-		completion1, _ := strconv.Atoi(c.FormValue("completion1"))
-		completion2, _ := strconv.Atoi(c.FormValue("completion2"))
-		completion3, _ := strconv.Atoi(c.FormValue("completion3"))
-		completion4, _ := strconv.Atoi(c.FormValue("completion4"))
-		completion5 := c.FormValue("completion5")
-		completion6 := c.FormValue("completion6")
-
-		if err := h.mgStore.Screening().CompletionOfScreening(c.Context(), subject.ID, completion1, completion2, completion3, completion4, completion5, completion6); err != nil {
-			h.logger.Warning(err)
-			return utils.ErrorPage(c, err)
+		if err := h.mgStore.Screening().CompletionOfScreening(c.Context(),
+			subject.ID, req.VolunteerEligible,
+			req.NoExclusionCriteria,
+			req.InformedOfTheRestrictions,
+			req.VolunteerIncluded,
+			req.ReasonIfNot,
+			req.CommentValue,
+		); err != nil {
+			c.Status(http.StatusBadRequest)
+			return c.JSON(fiber.Map{
+				"message": err.Error(),
+			})
 		}
-		return c.Redirect(fmt.Sprintf("/protocol/%d/%s#item-1-6", protocolId, subjectNumber))
+		return c.JSON(fiber.Map{
+			"message": "success",
+		})
 	}
 }
 
