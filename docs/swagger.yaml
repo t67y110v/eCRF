@@ -470,6 +470,40 @@ paths:
       summary: Subjects  Get
       tags:
       - Subject
+  /subject/{protocol_id}/{subject_num}:
+    get:
+      consumes:
+      - application/json
+      description: Getting all subjects by protocol id
+      parameters:
+      - description: protocol_id
+        in: path
+        name: protocol_id
+        required: true
+        type: string
+      - description: subject_num
+        in: path
+        name: subject_num
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.GetSubject'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.Error'
+      summary: Subjects  Get
+      tags:
+      - Subject
   /subject/add:
     post:
       consumes:

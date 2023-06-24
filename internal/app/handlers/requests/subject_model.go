@@ -10,3 +10,7 @@ type AddSubject struct {
 	CenterId   int    `json:"center_id"`
 	ProtocolId int    `json:"protocol_id"`
 }
+
+type GetSubjectByNumber struct {
+	Number string `json:"number"`
+}

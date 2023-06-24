@@ -88,6 +88,7 @@ func (s *server) configureRouter() {
 	//subject.Use(middlewares.CheckJWT())
 	subject.Post("/add", s.handlers.AddSubject())
 	subject.Get("/:protocol_id", s.handlers.GetSubjects())
+	subject.Get("/:protocol_id/:subject_num", s.handlers.GetSubjectByNumber())
 	screening := subject.Group("/screening")
 	screening.Post("/informaionconsent", s.handlers.InformaionConsentSubject())
 	screening.Post("/demography", s.handlers.DemographySubject())

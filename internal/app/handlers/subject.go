@@ -34,6 +34,34 @@ func (h *Handlers) GetSubjects() fiber.Handler {
 	}
 }
 
+// @Summary Subjects  Get
+// @Description Getting all subjects by protocol id
+// @Tags         Subject
+//
+//	@Accept       json
+//
+// @Produce json
+// @Param protocol_id   path      string  true  "protocol_id"
+// @Param subject_num   path      string  true  "subject_num"
+// @Success 200 {object} responses.GetSubject
+// @Failure 400 {object} responses.Error
+// @Failure 500 {object} responses.Error
+// @Router /subject/{protocol_id}/{subject_num} [get]
+func (h *Handlers) GetSubjectByNumber() fiber.Handler {
+	return func(c *fiber.Ctx) error {
+		protocolID, _ := strconv.Atoi(c.Params("protocol_id"))
+
+		s, err := h.mgStore.Subject().GetSubjectByNumber(c.Params("subject_num"), protocolID)
+		if err != nil {
+			c.Status(http.StatusBadRequest)
+			return c.JSON(fiber.Map{
+				"message": err.Error(),
+			})
+		}
+		return c.JSON(s)
+	}
+}
+
 // @Summary Subject Add
 // @Description creating a new protocol
 // @Tags         Subject
