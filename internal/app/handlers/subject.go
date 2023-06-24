@@ -1,37 +1,70 @@
 package handlers
 
 import (
-	"fmt"
+	"net/http"
 	"strconv"
 
 	"github.com/gofiber/fiber/v2"
-	"github.com/t67y110v/web/internal/app/utils"
+	"github.com/t67y110v/web/internal/app/handlers/requests"
 )
 
-func (h *Handlers) NewSubject() fiber.Handler {
+// @Summary Subjects  Get
+// @Description Getting all subjects by protocol id
+// @Tags         Subject
+//
+//	@Accept       json
+//
+// @Produce json
+// @Param protocol_id   path      string  true  "protocol_id"
+// @Success 200 {object} responses.GetSubject
+// @Failure 400 {object} responses.Error
+// @Failure 500 {object} responses.Error
+// @Router /subject/{protocol_id} [get]
+func (h *Handlers) GetSubjects() fiber.Handler {
 	return func(c *fiber.Ctx) error {
-
-		centerId, err := strconv.Atoi(c.FormValue("center_id"))
+		protocolID, _ := strconv.Atoi(c.Params("protocol_id"))
+		s, err := h.mgStore.Subject().GetSubjectsByProtocolId(protocolID)
 		if err != nil {
-			return utils.ErrorPage(c, err)
+			c.Status(http.StatusBadRequest)
+			return c.JSON(fiber.Map{
+				"message": err.Error(),
+			})
 		}
-		protocolId, err := strconv.Atoi(c.FormValue("protocol_id"))
-		if err != nil {
-			return utils.ErrorPage(c, err)
-		}
-		if err := h.mgStore.Subject().AddSubject(c.FormValue("number"), c.FormValue("initials"), centerId, protocolId); err != nil {
-			return utils.ErrorPage(c, err)
-		}
-
-		return c.Redirect(fmt.Sprintf("/protocol/%s/%s", c.FormValue("protocol_id"), c.FormValue("number")))
+		return c.JSON(s)
 	}
 }
 
-func (h *Handlers) DeleteSubject() fiber.Handler {
+// @Summary Subject Add
+// @Description creating a new protocol
+// @Tags         Subject
+//
+//	@Accept       json
+//
+// @Produce json
+// @Param  data body requests.AddSubject true  "addsubject"
+// @Success 200 {object} responses.AddProtocol
+// @Failure 400 {object} responses.Error
+// @Failure 500 {object} responses.Error
+// @Router /subject/add [post]
+func (h *Handlers) AddSubject() fiber.Handler {
 	return func(c *fiber.Ctx) error {
-		if err := h.mgStore.Subject().DeleteSubject(c.FormValue("number")); err != nil {
-			return utils.ErrorPage(c, err)
+		req := requests.AddSubject{}
+		if err := c.BodyParser(&req); err != nil {
+			c.Status(http.StatusBadRequest)
+			return c.JSON(fiber.Map{
+				"message": err.Error(),
+			})
 		}
-		return c.Redirect(fmt.Sprintf("/protocol/%s/1", c.FormValue("protocol_id")))
+
+		if err := h.mgStore.Subject().AddSubject(req.Number, req.Initials, req.CenterId, req.ProtocolId); err != nil {
+			c.Status(http.StatusBadRequest)
+			return c.JSON(fiber.Map{
+				"message": err.Error(),
+			})
+		}
+
+		return c.JSON(fiber.Map{
+			"message": "success",
+		})
 	}
 }

@@ -427,6 +427,96 @@ const docTemplate = `{
                 }
             }
         },
+        "/subject/add": {
+            "post": {
+                "description": "creating a new protocol",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Subject"
+                ],
+                "summary": "Subject Add",
+                "parameters": [
+                    {
+                        "description": "addsubject",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.AddSubject"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.AddProtocol"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/responses.Error"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/responses.Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/subject/{protocol_id}": {
+            "get": {
+                "description": "Getting all subjects by protocol id",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Subject"
+                ],
+                "summary": "Subjects  Get",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "protocol_id",
+                        "name": "protocol_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.GetSubject"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/responses.Error"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/responses.Error"
+                        }
+                    }
+                }
+            }
+        },
         "/user/all": {
             "get": {
                 "description": "getting all  of users",
@@ -670,6 +760,23 @@ const docTemplate = `{
                 }
             }
         },
+        "requests.AddSubject": {
+            "type": "object",
+            "properties": {
+                "center_id": {
+                    "type": "integer"
+                },
+                "initials": {
+                    "type": "string"
+                },
+                "number": {
+                    "type": "string"
+                },
+                "protocol_id": {
+                    "type": "integer"
+                }
+            }
+        },
         "requests.Delete": {
             "type": "object",
             "properties": {
@@ -825,6 +932,32 @@ const docTemplate = `{
                 },
                 "status": {
                     "type": "integer"
+                }
+            }
+        },
+        "responses.GetSubject": {
+            "type": "object",
+            "properties": {
+                "_id": {
+                    "type": "string"
+                },
+                "center_id": {
+                    "type": "integer"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "initials": {
+                    "type": "string"
+                },
+                "number": {
+                    "type": "string"
+                },
+                "protocol_id": {
+                    "type": "integer"
+                },
+                "updated_at": {
+                    "type": "string"
                 }
             }
         },

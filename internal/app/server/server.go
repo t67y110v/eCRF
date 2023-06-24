@@ -7,7 +7,6 @@ import (
 	"github.com/t67y110v/web/internal/app/config"
 	"github.com/t67y110v/web/internal/app/handlers"
 	"github.com/t67y110v/web/internal/app/logging"
-	"github.com/t67y110v/web/internal/app/middlewares"
 	"github.com/t67y110v/web/internal/app/store"
 
 	"github.com/gofiber/fiber/v2/middleware/logger"
@@ -61,19 +60,12 @@ func (s *server) configureRouter() {
 	user.Use(logger.New())
 	user.Get("/new", s.handlers.NewUser())
 	user.Post("/login", s.handlers.UserLogin())
-	user.Use(middlewares.CheckJWT())
+	//user.Use(middlewares.CheckJWT())
 	user.Post("/register", s.handlers.UserRegister())
 	user.Patch("/update", s.handlers.UserUpdate())
 	user.Delete("/delete", s.handlers.UserDelete())
 	user.Get("/all", s.handlers.GetUsers())
 	//////////////////////////////////////
-
-	// pages := s.router.Group("/")
-
-	// pages.Get("auth", s.pages.AuthPage())
-	// pages.Get("main/filter:filter", s.pages.MainPage())
-	// pages.Get("protocol/:id/:number", s.pages.ProtocolPage())
-	// pages.Get("journal", s.pages.JournalPage())
 
 	protocol := s.router.Group("/protocols")
 	protocol.Use(logger.New())
@@ -82,9 +74,6 @@ func (s *server) configureRouter() {
 	protocol.Patch("/save", s.handlers.SaveProtocol())
 	protocol.Post("/add", s.handlers.AddProtocol())
 	protocol.Delete("/delete", s.handlers.DeleteProtocol())
-
-	// adminPanel := s.router.Group("/admin")
-	// adminPanel.Get("/panel", s.pages.AdminPage())
 
 	center := s.router.Group("/center")
 	center.Use(logger.New())
@@ -96,8 +85,9 @@ func (s *server) configureRouter() {
 	center.Delete("/delete", s.handlers.DeleteCenter())
 
 	subject := s.router.Group("/subject")
-	subject.Use(middlewares.CheckJWT())
-	subject.Post("/new", s.handlers.NewSubject())
+	//subject.Use(middlewares.CheckJWT())
+	subject.Post("/add", s.handlers.AddSubject())
+	subject.Get("/:protocol_id", s.handlers.GetSubjects())
 	screening := subject.Group("/screening")
 	screening.Post("/informaionconsent", s.handlers.InformaionConsentSubject())
 	screening.Post("/demography", s.handlers.DemographySubject())
