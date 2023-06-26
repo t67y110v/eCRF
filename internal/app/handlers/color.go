@@ -40,7 +40,7 @@ func (h *Handlers) UpdateColor() fiber.Handler {
 		}
 
 		fieldName := utils.GetFieldName(req.FieldName)
-		if err := h.mgStore.Screening().UpdateColor(c.Context(), subject.ID, fieldName, req.Value); err != nil {
+		if err := h.mgStore.Color().UpdateColor(c.Context(), subject.ID, fieldName, req.Value); err != nil {
 			c.Status(http.StatusBadRequest)
 			return c.JSON(fiber.Map{
 				"message": err.Error(),
@@ -83,7 +83,7 @@ func (h *Handlers) UpdateColorWithComment() fiber.Handler {
 			})
 		}
 
-		if err := h.mgStore.Screening().UpdateColorWithComment(c.Context(), subject.ID, utils.GetFieldName(req.FieldName), req.Reason, req.Comment, req.Value); err != nil {
+		if err := h.mgStore.Color().UpdateColorWithComment(c.Context(), subject.ID, utils.GetFieldName(req.FieldName), req.Reason, req.Comment, req.Value); err != nil {
 			return utils.ErrorPage(c, err)
 		}
 		return c.JSON(fiber.Map{
@@ -127,14 +127,14 @@ func (h *Handlers) UpdateFieldValue() fiber.Handler {
 		fieldValue := utils.GetFieldNameForUpdate(field)
 		value, err := strconv.Atoi(req.Value)
 		if err != nil {
-			if err := h.mgStore.Screening().UpdateFieldStringValue(c.Context(), subject.ID, field, fieldValue, req.Value, req.Color); err != nil {
+			if err := h.mgStore.Color().UpdateFieldStringValue(c.Context(), subject.ID, field, fieldValue, req.Value, req.Color); err != nil {
 				c.Status(http.StatusBadRequest)
 				return c.JSON(fiber.Map{
 					"message": err.Error(),
 				})
 			}
 		} else {
-			if err := h.mgStore.Screening().UpdateFieldIntValue(c.Context(), subject.ID, field, fieldValue, value, req.Color); err != nil {
+			if err := h.mgStore.Color().UpdateFieldIntValue(c.Context(), subject.ID, field, fieldValue, value, req.Color); err != nil {
 				c.Status(http.StatusBadRequest)
 				return c.JSON(fiber.Map{
 					"message": err.Error(),

@@ -8,4 +8,5 @@ type MongoStore interface {
 	Subject() MongoSubjectRepository
 	Screening() MongoScreeningRepository
 	Journal() MongoJournalRepository
+	Color() MongoColorRepository
 }

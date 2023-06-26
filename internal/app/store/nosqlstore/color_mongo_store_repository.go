@@ -8,7 +8,11 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-func (r *MongoScreeningRepository) UpdateColor(ctx context.Context, id primitive.ObjectID, fieldToUpdate string, field int) error {
+type MongoColorRepository struct {
+	store *Store
+}
+
+func (r *MongoColorRepository) UpdateColor(ctx context.Context, id primitive.ObjectID, fieldToUpdate string, field int) error {
 	collection := r.store.client.Database("eCRF").Collection("subjects")
 
 	filter := bson.M{"_id": id}
@@ -25,7 +29,7 @@ func (r *MongoScreeningRepository) UpdateColor(ctx context.Context, id primitive
 	return nil
 }
 
-func (r *MongoScreeningRepository) UpdateColorWithComment(ctx context.Context, id primitive.ObjectID, fieldToUpdate, reason, comment string, color int) error {
+func (r *MongoColorRepository) UpdateColorWithComment(ctx context.Context, id primitive.ObjectID, fieldToUpdate, reason, comment string, color int) error {
 	collection := r.store.client.Database("eCRF").Collection("subjects")
 	filter := bson.M{"_id": id}
 	update := bson.M{
@@ -43,7 +47,7 @@ func (r *MongoScreeningRepository) UpdateColorWithComment(ctx context.Context, i
 
 }
 
-func (r *MongoScreeningRepository) UpdateFieldIntValue(ctx context.Context, id primitive.ObjectID, fieldToUpdate, fieldValue string, value, color int) error {
+func (r *MongoColorRepository) UpdateFieldIntValue(ctx context.Context, id primitive.ObjectID, fieldToUpdate, fieldValue string, value, color int) error {
 	collection := r.store.client.Database("eCRF").Collection("subjects")
 	filter := bson.M{"_id": id}
 	update := bson.M{
@@ -59,7 +63,7 @@ func (r *MongoScreeningRepository) UpdateFieldIntValue(ctx context.Context, id p
 	return nil
 }
 
-func (r *MongoScreeningRepository) UpdateFieldStringValue(ctx context.Context, id primitive.ObjectID, fieldToUpdate, fieldValue, value string, color int) error {
+func (r *MongoColorRepository) UpdateFieldStringValue(ctx context.Context, id primitive.ObjectID, fieldToUpdate, fieldValue, value string, color int) error {
 	collection := r.store.client.Database("eCRF").Collection("subjects")
 	filter := bson.M{"_id": id}
 	update := bson.M{

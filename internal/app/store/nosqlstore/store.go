@@ -13,6 +13,7 @@ type Store struct {
 	mongoStoreRepository     *MongoSubjectRepository
 	mongoScreeningRepository *MongoScreeningRepository
 	mongoJournalRepository   *MongoJournalRepository
+	mongoColorRepository     *MongoColorRepository
 }
 
 func NewMongoDB(client *mongo.Client) *Store {
@@ -52,4 +53,14 @@ func (s *Store) Journal() store.MongoJournalRepository {
 		store: s,
 	}
 	return s.mongoJournalRepository
+}
+
+func (s *Store) Color() store.MongoColorRepository {
+	if s.mongoColorRepository != nil {
+		return s.mongoColorRepository
+	}
+	s.mongoColorRepository = &MongoColorRepository{
+		store: s,
+	}
+	return s.mongoColorRepository
 }
