@@ -15,6 +15,20 @@ type Subject struct {
 	ProtocolId int                `bson:"protocol_id"`
 	Initials   string             `bson:"initials"`
 	Screening  struct {
+		StartOfScreening struct {
+			DateStartOfScreeningCondition struct {
+				DateStartOfScreening string `bson:"dateofstart"`
+				Color                string `bson:"color"`
+				Reason               string `bson:"reason"`
+				Comment              string `bson:"comment"`
+			}
+			TimeStartOfScreeningCondition struct {
+				TimeStartOfScreening string `bson:"timeofstart"`
+				Color                string `bson:"color"`
+				Reason               string `bson:"reason"`
+				Comment              string `bson:"comment"`
+			}
+		}
 		InformaionConsent struct {
 			SignedCondition struct {
 				Signed  int    `bson:"signed"`

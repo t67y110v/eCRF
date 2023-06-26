@@ -7,6 +7,47 @@ import (
 	"github.com/t67y110v/web/internal/app/handlers/requests"
 )
 
+// @Summary StartOfScreeningSubject
+// @Description StartOfScreeningSubject value of subject
+// @Tags         Subject.Screening
+//
+//	@Accept       json
+//
+// @Produce json
+// @Param  data body requests.StartOfScreening true  "StartOfScreening"
+// @Success 200 {object} responses.AddProtocol
+// @Failure 400 {object} responses.Error
+// @Failure 500 {object} responses.Error
+// @Router /subject/screening/startofscreening [patch]
+func (h *Handlers) StartOfScreeningSubject() fiber.Handler {
+	return func(c *fiber.Ctx) error {
+		req := requests.StartOfScreening{}
+		if err := c.BodyParser(&req); err != nil {
+			c.Status(http.StatusBadRequest)
+			return c.JSON(fiber.Map{
+				"message": err.Error(),
+			})
+		}
+		subject, err := h.mgStore.Subject().GetSubjectByNumber(req.SubjectNumber, req.ProtocolID)
+		if err != nil {
+			c.Status(http.StatusBadRequest)
+			return c.JSON(fiber.Map{
+				"message": err.Error(),
+			})
+		}
+		if err := h.mgStore.Screening().StartScreening(c.Context(), subject.ID, req.DateStartOfScreening, req.TimeStartOfScreening); err != nil {
+			c.Status(http.StatusBadRequest)
+			return c.JSON(fiber.Map{
+				"message": err.Error(),
+			})
+		}
+
+		return c.JSON(fiber.Map{
+			"message": "success",
+		})
+	}
+}
+
 // @Summary InformaitonConsentSubject
 // @Description InformaitonConsentSubject value of subject
 // @Tags         Subject.Screening

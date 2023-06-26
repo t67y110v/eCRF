@@ -887,6 +887,52 @@ const docTemplate = `{
                 }
             }
         },
+        "/subject/screening/startofscreening": {
+            "patch": {
+                "description": "StartOfScreeningSubject value of subject",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Subject.Screening"
+                ],
+                "summary": "StartOfScreeningSubject",
+                "parameters": [
+                    {
+                        "description": "StartOfScreening",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.StartOfScreening"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.AddProtocol"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/responses.Error"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/responses.Error"
+                        }
+                    }
+                }
+            }
+        },
         "/subject/{protocol_id}": {
             "get": {
                 "description": "Getting all subjects by protocol id",
@@ -1548,6 +1594,23 @@ const docTemplate = `{
                 },
                 "status": {
                     "type": "integer"
+                }
+            }
+        },
+        "requests.StartOfScreening": {
+            "type": "object",
+            "properties": {
+                "date_of_start": {
+                    "type": "string"
+                },
+                "protocol_id": {
+                    "type": "integer"
+                },
+                "subject_num": {
+                    "type": "string"
+                },
+                "time_of_start": {
+                    "type": "string"
                 }
             }
         },

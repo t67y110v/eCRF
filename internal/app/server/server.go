@@ -90,6 +90,7 @@ func (s *server) configureRouter() {
 	subject.Get("/:protocol_id", s.handlers.GetSubjects())
 	subject.Get("/:protocol_id/:subject_num", s.handlers.GetSubjectByNumber())
 	screening := subject.Group("/screening")
+	screening.Patch("/startofscreening", s.handlers.StartOfScreeningSubject())
 	screening.Patch("/informaionconsent", s.handlers.InformationConsentSubject())
 	screening.Patch("/demography", s.handlers.DemographySubject())
 	screening.Patch("/anthropometry", s.handlers.AnthropometrySubject())
