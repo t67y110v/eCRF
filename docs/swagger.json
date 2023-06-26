@@ -421,7 +421,7 @@
             }
         },
         "/subject/action/updatecolor": {
-            "post": {
+            "patch": {
                 "description": "UpdateColor",
                 "consumes": [
                     "application/json"
@@ -467,7 +467,7 @@
             }
         },
         "/subject/action/updatecolorwithcomment": {
-            "post": {
+            "patch": {
                 "description": "UpdateColorWithComment",
                 "consumes": [
                     "application/json"
@@ -513,7 +513,7 @@
             }
         },
         "/subject/action/updatefield": {
-            "post": {
+            "patch": {
                 "description": "UpdateFieldValue",
                 "consumes": [
                     "application/json"
@@ -834,7 +834,7 @@
                 }
             }
         },
-        "/subject/screening/informationconsenet": {
+        "/subject/screening/informationconsent": {
             "patch": {
                 "description": "InformaitonConsentSubject value of subject",
                 "consumes": [

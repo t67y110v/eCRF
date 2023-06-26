@@ -18,13 +18,13 @@ type Subject struct {
 		StartOfScreening struct {
 			DateStartOfScreeningCondition struct {
 				DateStartOfScreening string `bson:"dateofstart"`
-				Color                string `bson:"color"`
+				Color                int    `bson:"color"`
 				Reason               string `bson:"reason"`
 				Comment              string `bson:"comment"`
 			}
 			TimeStartOfScreeningCondition struct {
 				TimeStartOfScreening string `bson:"timeofstart"`
-				Color                string `bson:"color"`
+				Color                int    `bson:"color"`
 				Reason               string `bson:"reason"`
 				Comment              string `bson:"comment"`
 			}
@@ -384,6 +384,111 @@ type Subject struct {
 				Color        int    `bson:"color"`
 				Reason       string `bson:"reason"`
 				Comment      string `bson:"comment"`
+			}
+		}
+	}
+
+	OffSiteBlock struct {
+		AdverseEvents struct {
+			AdverseEventsRegisteredCondition struct {
+				AdverseEventsRegistered int    `bson:"adverseeventsregistered"`
+				Color                   int    `bson:"color"`
+				Reason                  string `bson:"reason"`
+				Comment                 string `bson:"comment"`
+			}
+			DescriptionOfTheAdverseEventCondition struct {
+				DescriptionOfTheAdverseEvent string `bson:"descriptionoftheadverseevent"`
+				Color                        int    `bson:"color"`
+				Reason                       string `bson:"reason"`
+				Comment                      string `bson:"comment"`
+			}
+			DateOfStartAECondition struct {
+				DateOfStartAE string `bson:"dateofstartaecondition"`
+				Color         int    `bson:"color"`
+				Reason        string `bson:"reason"`
+				Comment       string `bson:"comment"`
+			}
+			DateOfEndAECondition struct {
+				DateOfEndAE string `bson:"dateofendaecondition"`
+				IsContinues int    `bson:"iscontinius"`
+				Color       int    `bson:"color"`
+				Reason      string `bson:"reason"`
+				Comment     string `bson:"comment"`
+			}
+			SeverityCondition struct {
+				Severity int    `bson:"severity"`
+				Color    int    `bson:"color"`
+				Reason   string `bson:"reason"`
+				Comment  string `bson:"comment"`
+			}
+			RecurringPhenomenonCondition struct {
+				RecurringPhenomenon int    `bson:"recurringphenomenon"`
+				Color               int    `bson:"color"`
+				Reason              string `bson:"reason"`
+				Comment             string `bson:"comment"`
+			}
+
+			AssociationWithTheDrugUsedCondition struct {
+				AssociationWithTheDrugUsed int    `bson:"associationwiththedrugused"`
+				Color                      int    `bson:"color"`
+				Reason                     string `bson:"reason"`
+				Comment                    string `bson:"comment"`
+			}
+			ForesightCondition struct {
+				Foresight int    `bson:"foresight"`
+				Color     int    `bson:"color"`
+				Reason    string `bson:"reason"`
+				Comment   string `bson:"comment"`
+			}
+
+			ConnectionBetweenAEAndDUCondition struct {
+				ConnectionBetweenAEAndDU int    `bson:"ConnectionBetweenAEAndDU"`
+				Color                    int    `bson:"color"`
+				Reason                   string `bson:"reason"`
+				Comment                  string `bson:"comment"`
+			}
+			RenewalAfterUseCondition struct {
+				RenewalAfterUse int    `bson:"renewalafteruse"`
+				Color           int    `bson:"color"`
+				Reason          string `bson:"reason"`
+				Comment         string `bson:"comment"`
+			}
+			LocalReactionCondition struct {
+				LocalReaction int    `bson:"LocalReaction"`
+				Color         int    `bson:"color"`
+				Reason        string `bson:"reason"`
+				Comment       string `bson:"comment"`
+			}
+
+			SubjectDropoutCondition struct {
+				SubjectDropout int    `bson:"SubjectDropout"`
+				Color          int    `bson:"color"`
+				Reason         string `bson:"reason"`
+				Comment        string `bson:"comment"`
+			}
+			MeasuresTakenCondition struct {
+				MeasuresTaken int    `bson:"MeasuresTaken"`
+				Color         int    `bson:"color"`
+				Reason        string `bson:"reason"`
+				Comment       string `bson:"comment"`
+			}
+			MeasuresTakenOnUDCondition struct {
+				MeasuresTakenOnUD int    `bson:"MeasuresTakenOnUD"`
+				Color             int    `bson:"color"`
+				Reason            string `bson:"reason"`
+				Comment           string `bson:"comment"`
+			}
+			ExodusCondition struct {
+				Exodus  int    `bson:"Exodus"`
+				Color   int    `bson:"color"`
+				Reason  string `bson:"reason"`
+				Comment string `bson:"comment"`
+			}
+			IsItSeriousCondition struct {
+				IsItSerious int    `bson:"IsItSerious"`
+				Color       int    `bson:"color"`
+				Reason      string `bson:"reason"`
+				Comment     string `bson:"comment"`
 			}
 		}
 	}

@@ -711,7 +711,7 @@ paths:
       tags:
       - Subject
   /subject/action/updatecolor:
-    post:
+    patch:
       consumes:
       - application/json
       description: UpdateColor
@@ -741,7 +741,7 @@ paths:
       tags:
       - Subject.Action
   /subject/action/updatecolorwithcomment:
-    post:
+    patch:
       consumes:
       - application/json
       description: UpdateColorWithComment
@@ -771,7 +771,7 @@ paths:
       tags:
       - Subject.Action
   /subject/action/updatefield:
-    post:
+    patch:
       consumes:
       - application/json
       description: UpdateFieldValue
@@ -980,7 +980,7 @@ paths:
       summary: InclusionCriteriaSubject
       tags:
       - Subject.Screening
-  /subject/screening/informationconsenet:
+  /subject/screening/informationconsent:
     patch:
       consumes:
       - application/json

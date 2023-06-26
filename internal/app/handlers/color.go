@@ -20,7 +20,7 @@ import (
 // @Success 200 {object} responses.AddProtocol
 // @Failure 400 {object} responses.Error
 // @Failure 500 {object} responses.Error
-// @Router /subject/action/updatecolor [post]
+// @Router /subject/action/updatecolor [patch]
 func (h *Handlers) UpdateColor() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		req := requests.UpdateColorRequest{}
@@ -64,7 +64,7 @@ func (h *Handlers) UpdateColor() fiber.Handler {
 // @Success 200 {object} responses.AddProtocol
 // @Failure 400 {object} responses.Error
 // @Failure 500 {object} responses.Error
-// @Router /subject/action/updatecolorwithcomment [post]
+// @Router /subject/action/updatecolorwithcomment [patch]
 func (h *Handlers) UpdateColorWithComment() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		req := requests.UpdateColorWithCommentRequest{}
@@ -104,7 +104,7 @@ func (h *Handlers) UpdateColorWithComment() fiber.Handler {
 // @Success 200 {object} responses.AddProtocol
 // @Failure 400 {object} responses.Error
 // @Failure 500 {object} responses.Error
-// @Router /subject/action/updatefield [post]
+// @Router /subject/action/updatefield [patch]
 func (h *Handlers) UpdateFieldValue() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		req := requests.UpdateValueWithColor{}

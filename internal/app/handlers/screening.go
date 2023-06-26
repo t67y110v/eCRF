@@ -59,7 +59,7 @@ func (h *Handlers) StartOfScreeningSubject() fiber.Handler {
 // @Success 200 {object} responses.AddProtocol
 // @Failure 400 {object} responses.Error
 // @Failure 500 {object} responses.Error
-// @Router /subject/screening/informationconsenet [patch]
+// @Router /subject/screening/informationconsent [patch]
 func (h *Handlers) InformationConsentSubject() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		req := requests.InformationConsent{}

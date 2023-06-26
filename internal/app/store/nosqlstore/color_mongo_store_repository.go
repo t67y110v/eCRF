@@ -53,6 +53,8 @@ func (r *MongoColorRepository) UpdateFieldIntValue(ctx context.Context, id primi
 	update := bson.M{
 		"$set": bson.M{
 			fmt.Sprintf("%scolor", fieldToUpdate):          color,
+			fmt.Sprintf("%sreason", fieldToUpdate):         "",
+			fmt.Sprintf("%scomment", fieldToUpdate):        "",
 			fmt.Sprintf("%s%s", fieldToUpdate, fieldValue): value,
 		},
 	}
@@ -69,6 +71,8 @@ func (r *MongoColorRepository) UpdateFieldStringValue(ctx context.Context, id pr
 	update := bson.M{
 		"$set": bson.M{
 			fmt.Sprintf("%scolor", fieldToUpdate):          color,
+			fmt.Sprintf("%sreason", fieldToUpdate):         "",
+			fmt.Sprintf("%scomment", fieldToUpdate):        "",
 			fmt.Sprintf("%s%s", fieldToUpdate, fieldValue): value,
 		},
 	}

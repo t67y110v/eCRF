@@ -53,11 +53,11 @@ func (s *server) configureRouter() {
 		AllowHeaders:     "Origin, Content-Type, Accept",
 	}))
 	s.router.Get("/swagger/*", swagger.HandlerDefault)
-
+	logg := logger.New()
 	///////// USER GROUP ///////////////
 	////////////////////////////////////
 	user := s.router.Group("/user")
-	user.Use(logger.New())
+	user.Use(logg)
 	user.Get("/new", s.handlers.NewUser())
 	user.Post("/login", s.handlers.UserLogin())
 	//user.Use(middlewares.CheckJWT())
@@ -68,7 +68,7 @@ func (s *server) configureRouter() {
 	//////////////////////////////////////
 
 	protocol := s.router.Group("/protocols")
-	protocol.Use(logger.New())
+	protocol.Use(logg)
 	//	protocol.Use(middlewares.CheckJWT())
 	protocol.Get("/:filter/:center", s.handlers.GetProtocols())
 	protocol.Patch("/save", s.handlers.SaveProtocol())
@@ -76,7 +76,7 @@ func (s *server) configureRouter() {
 	protocol.Delete("/delete", s.handlers.DeleteProtocol())
 
 	center := s.router.Group("/center")
-	center.Use(logger.New())
+	center.Use(logg)
 	//	center.Use(middlewares.CheckJWT())
 	center.Post("/add", s.handlers.AddNewCenter())
 	center.Patch("/update", s.handlers.UpdateCenter())
@@ -90,14 +90,16 @@ func (s *server) configureRouter() {
 	subject.Get("/:protocol_id", s.handlers.GetSubjects())
 	subject.Get("/:protocol_id/:subject_num", s.handlers.GetSubjectByNumber())
 	screening := subject.Group("/screening")
+	screening.Use(logg)
 	screening.Patch("/startofscreening", s.handlers.StartOfScreeningSubject())
-	screening.Patch("/informaionconsent", s.handlers.InformationConsentSubject())
+	screening.Patch("/informationconsent", s.handlers.InformationConsentSubject())
 	screening.Patch("/demography", s.handlers.DemographySubject())
 	screening.Patch("/anthropometry", s.handlers.AnthropometrySubject())
 	screening.Patch("/inclusioncriteria", s.handlers.InclusionCriteriaSubject())
 	screening.Patch("/exclusioncriteria", s.handlers.ExclusionСriteriaSubject())
 	screening.Patch("/completion", s.handlers.CompletionOfScreening())
 	action := subject.Group("/action")
+	action.Use(logg)
 	action.Patch("/updatecolor", s.handlers.UpdateColor())
 	action.Patch("/updatecolorwithcomment", s.handlers.UpdateColorWithComment())
 	action.Patch("/updatefield", s.handlers.UpdateFieldValue())

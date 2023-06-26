@@ -428,7 +428,7 @@ const docTemplate = `{
             }
         },
         "/subject/action/updatecolor": {
-            "post": {
+            "patch": {
                 "description": "UpdateColor",
                 "consumes": [
                     "application/json"
@@ -474,7 +474,7 @@ const docTemplate = `{
             }
         },
         "/subject/action/updatecolorwithcomment": {
-            "post": {
+            "patch": {
                 "description": "UpdateColorWithComment",
                 "consumes": [
                     "application/json"
@@ -520,7 +520,7 @@ const docTemplate = `{
             }
         },
         "/subject/action/updatefield": {
-            "post": {
+            "patch": {
                 "description": "UpdateFieldValue",
                 "consumes": [
                     "application/json"
@@ -841,7 +841,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/subject/screening/informationconsenet": {
+        "/subject/screening/informationconsent": {
             "patch": {
                 "description": "InformaitonConsentSubject value of subject",
                 "consumes": [
