@@ -25,6 +25,8 @@ type UpdateColorRequest struct {
 type UpdateColorWithCommentRequest struct {
 	SubjectNumber string `json:"subject_number"`
 	ProtocolID    int    `json:"protocol_id"`
+	Sender        string `json:"sender"`
+	SendersRole   string `json:"sendersrole"`
 	FieldName     string `json:"field_name"`
 	Value         int    `json:"value"`
 	Comment       string `json:"comment"`

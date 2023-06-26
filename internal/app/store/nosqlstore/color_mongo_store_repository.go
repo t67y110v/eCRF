@@ -29,14 +29,16 @@ func (r *MongoColorRepository) UpdateColor(ctx context.Context, id primitive.Obj
 	return nil
 }
 
-func (r *MongoColorRepository) UpdateColorWithComment(ctx context.Context, id primitive.ObjectID, fieldToUpdate, reason, comment string, color int) error {
+func (r *MongoColorRepository) UpdateColorWithComment(ctx context.Context, id primitive.ObjectID, fieldToUpdate, reason, comment, sender, sendersRole string, color int) error {
 	collection := r.store.client.Database("eCRF").Collection("subjects")
 	filter := bson.M{"_id": id}
 	update := bson.M{
 		"$set": bson.M{
-			fmt.Sprintf("%scolor", fieldToUpdate):   color,
-			fmt.Sprintf("%sreason", fieldToUpdate):  reason,
-			fmt.Sprintf("%scomment", fieldToUpdate): comment,
+			fmt.Sprintf("%scolor", fieldToUpdate):       color,
+			fmt.Sprintf("%sreason", fieldToUpdate):      reason,
+			fmt.Sprintf("%scomment", fieldToUpdate):     comment,
+			fmt.Sprintf("%ssender", fieldToUpdate):      sender,
+			fmt.Sprintf("%ssendersrole", fieldToUpdate): sendersRole,
 		},
 	}
 	_, err := collection.UpdateOne(ctx, filter, update)

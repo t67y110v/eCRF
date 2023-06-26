@@ -83,7 +83,7 @@ func (h *Handlers) UpdateColorWithComment() fiber.Handler {
 			})
 		}
 
-		if err := h.mgStore.Color().UpdateColorWithComment(c.Context(), subject.ID, utils.GetFieldName(req.FieldName), req.Reason, req.Comment, req.Value); err != nil {
+		if err := h.mgStore.Color().UpdateColorWithComment(c.Context(), subject.ID, utils.GetFieldName(req.FieldName), req.Reason, req.Comment, req.Sender, req.SendersRole, req.Value); err != nil {
 			return utils.ErrorPage(c, err)
 		}
 		return c.JSON(fiber.Map{

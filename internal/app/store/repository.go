@@ -34,7 +34,7 @@ type MongoColorRepository interface {
 	UpdateFieldIntValue(ctx context.Context, id primitive.ObjectID, fieldToUpdate, fieldValue string, value, color int) error
 	UpdateFieldStringValue(ctx context.Context, id primitive.ObjectID, fieldToUpdate, fieldValue, value string, color int) error
 	UpdateColor(ctx context.Context, id primitive.ObjectID, fieldToUpdate string, field int) error
-	UpdateColorWithComment(ctx context.Context, id primitive.ObjectID, fieldToUpdate, reason, comment string, color int) error
+	UpdateColorWithComment(ctx context.Context, id primitive.ObjectID, fieldToUpdate, reason, comment, sender, sendersRole string, color int) error
 }
 
 type MongoScreeningRepository interface {

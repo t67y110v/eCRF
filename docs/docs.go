@@ -1680,6 +1680,12 @@ const docTemplate = `{
                 "reason": {
                     "type": "string"
                 },
+                "sender": {
+                    "type": "string"
+                },
+                "sendersrole": {
+                    "type": "string"
+                },
                 "subject_number": {
                     "type": "string"
                 },
