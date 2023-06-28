@@ -20,13 +20,13 @@ func (r *PostgresStoreRepository) GetProtocols() ([]model.Protocol, error) {
 func (r *PostgresStoreRepository) GetProtocolsByFilter(filter string, centerId int) ([]model.Protocol, error) {
 	p := []model.Protocol{}
 	var f string
-	if filter == "=1" {
+	if filter == "1" {
 		//name
 		f = "name"
-	} else if filter == "=2" {
+	} else if filter == "2" {
 		//status
 		f = "status"
-	} else if filter == "=3" {
+	} else if filter == "3" {
 		//center
 		f = "center_id"
 	} else {

@@ -640,6 +640,55 @@ type Subject struct {
 				Sender      string `bson:"sender"`
 				SendersRole string `bson:"sendersrole"`
 			}
+			SeverityCriterionCondition struct {
+				SeverityCriterion int    `bson:"severitycriterion"`
+				Color             int    `bson:"color"`
+				Reason            string `bson:"reason"`
+				Comment           string `bson:"comment"`
+				Sender            string `bson:"sender"`
+				SendersRole       string `bson:"sendersrole"`
+			}
+			TestImpactCondition struct {
+				TestImpact  int    `bson:"testimpact"`
+				Color       int    `bson:"color"`
+				Reason      string `bson:"reason"`
+				Comment     string `bson:"comment"`
+				Sender      string `bson:"sender"`
+				SendersRole string `bson:"sendersrole"`
+			}
+
+			DoseEffectCondition struct {
+				DoseEffect  int    `bson:"DoseEffect"`
+				Color       int    `bson:"color"`
+				Reason      string `bson:"reason"`
+				Comment     string `bson:"comment"`
+				Sender      string `bson:"sender"`
+				SendersRole string `bson:"sendersrole"`
+			}
+			ImpactOnHospitalStayCondition struct {
+				ImpactOnHospitalStay int    `bson:"impactonhospitalstay"`
+				Color                int    `bson:"color"`
+				Reason               string `bson:"reason"`
+				Comment              string `bson:"comment"`
+				Sender               string `bson:"sender"`
+				SendersRole          string `bson:"sendersrole"`
+			}
+			RelationshipWithMedicationCondition struct {
+				RelationshipWithMedication int    `bson:"relationshipwithmedication"`
+				Color                      int    `bson:"color"`
+				Reason                     string `bson:"reason"`
+				Comment                    string `bson:"comment"`
+				Sender                     string `bson:"sender"`
+				SendersRole                string `bson:"sendersrole"`
+			}
+			ExpectancyCondition struct {
+				Expectancy  int    `bson:"expectancy"`
+				Color       int    `bson:"color"`
+				Reason      string `bson:"reason"`
+				Comment     string `bson:"comment"`
+				Sender      string `bson:"sender"`
+				SendersRole string `bson:"sendersrole"`
+			}
 		}
 	}
 }
