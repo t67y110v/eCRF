@@ -3,8 +3,8 @@ package requests
 type StartOfScreening struct {
 	ProtocolID           int    `json:"protocol_id"`
 	SubjectNumber        string `json:"subject_num"`
-	DateStartOfScreening string `json:"date_of_start"`
-	TimeStartOfScreening string `json:"time_of_start"`
+	DateStartOfScreening string `json:"dateofstart"`
+	TimeStartOfScreening string `json:"timeofstart"`
 }
 
 type InformationConsent struct {

@@ -1600,7 +1600,7 @@ const docTemplate = `{
         "requests.StartOfScreening": {
             "type": "object",
             "properties": {
-                "date_of_start": {
+                "dateofstart": {
                     "type": "string"
                 },
                 "protocol_id": {
@@ -1609,7 +1609,7 @@ const docTemplate = `{
                 "subject_num": {
                     "type": "string"
                 },
-                "time_of_start": {
+                "timeofstart": {
                     "type": "string"
                 }
             }

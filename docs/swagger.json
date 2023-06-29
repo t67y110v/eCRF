@@ -1593,7 +1593,7 @@
         "requests.StartOfScreening": {
             "type": "object",
             "properties": {
-                "date_of_start": {
+                "dateofstart": {
                     "type": "string"
                 },
                 "protocol_id": {
@@ -1602,7 +1602,7 @@
                 "subject_num": {
                     "type": "string"
                 },
-                "time_of_start": {
+                "timeofstart": {
                     "type": "string"
                 }
             }

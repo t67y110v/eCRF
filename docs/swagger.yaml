@@ -229,13 +229,13 @@ definitions:
     type: object
   requests.StartOfScreening:
     properties:
-      date_of_start:
+      dateofstart:
         type: string
       protocol_id:
         type: integer
       subject_num:
         type: string
-      time_of_start:
+      timeofstart:
         type: string
     type: object
   requests.Update:
