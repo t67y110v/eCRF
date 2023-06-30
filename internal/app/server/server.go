@@ -86,6 +86,7 @@ func (s *server) configureRouter() {
 
 	subject := s.router.Group("/subject")
 	//subject.Use(middlewares.CheckJWT())
+	subject.Use(logg)
 	subject.Post("/add", s.handlers.AddSubject())
 	subject.Get("/:protocol_id", s.handlers.GetSubjects())
 	subject.Get("/:protocol_id/:subject_num", s.handlers.GetSubjectByNumber())

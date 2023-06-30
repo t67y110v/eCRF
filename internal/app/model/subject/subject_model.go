@@ -17,20 +17,20 @@ type Subject struct {
 	Screening  struct {
 		StartOfScreening struct {
 			DateStartOfScreeningCondition struct {
-				DateStartOfScreening string `bson:"dateofstart"`
-				Color                int    `bson:"color"`
-				Reason               string `bson:"reason"`
-				Comment              string `bson:"comment"`
-				Sender               string `bson:"sender"`
-				SendersRole          string `bson:"sendersrole"`
+				DateOfStart string `bson:"dateofstart"`
+				Color       int    `bson:"color"`
+				Reason      string `bson:"reason"`
+				Comment     string `bson:"comment"`
+				Sender      string `bson:"sender"`
+				SendersRole string `bson:"sendersrole"`
 			}
 			TimeStartOfScreeningCondition struct {
-				TimeStartOfScreening string `bson:"timeofstart"`
-				Color                int    `bson:"color"`
-				Reason               string `bson:"reason"`
-				Comment              string `bson:"comment"`
-				Sender               string `bson:"sender"`
-				SendersRole          string `bson:"sendersrole"`
+				TimeOfStart string `bson:"timeofstart"`
+				Color       int    `bson:"color"`
+				Reason      string `bson:"reason"`
+				Comment     string `bson:"comment"`
+				Sender      string `bson:"sender"`
+				SendersRole string `bson:"sendersrole"`
 			}
 		}
 		InformaionConsent struct {
