@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -36,7 +37,7 @@ func (h *Handlers) AddNewCenter() fiber.Handler {
 				"message": err.Error(),
 			})
 		}
-
+		go h.journal.SaveAction(c.Context(), fmt.Sprintf("Добавление центра %s", req.Name), c.Cookies("token_name"), c.Cookies("token_role"), "Центры", req)
 		return c.JSON(fiber.Map{
 			"message": "success",
 		})
@@ -67,12 +68,20 @@ func (h *Handlers) UpdateCenter() fiber.Handler {
 				"message": err.Error(),
 			})
 		}
+		center, err := h.pgStore.Repository().GetCenterName(req.CenterID)
+		if err != nil {
+			c.Status(http.StatusBadRequest)
+			return c.JSON(fiber.Map{
+				"message": err.Error(),
+			})
+		}
 		if err := h.pgStore.Repository().UpdateCenter(req.CenterID, req.Name); err != nil {
 			c.Status(http.StatusBadRequest)
 			return c.JSON(fiber.Map{
 				"message": err.Error(),
 			})
 		}
+		go h.journal.SaveAction(c.Context(), fmt.Sprintf("Обновление центра %s|id:%d", req.Name, req.CenterID), c.Cookies("token_name"), c.Cookies("token_role"), "Пользователи", req, center)
 		return c.JSON(fiber.Map{
 			"message": "success",
 		})
@@ -100,13 +109,20 @@ func (h *Handlers) DeleteCenter() fiber.Handler {
 				"message": err.Error(),
 			})
 		}
-
+		center, err := h.pgStore.Repository().GetCenterName(req.ID)
+		if err != nil {
+			c.Status(http.StatusBadRequest)
+			return c.JSON(fiber.Map{
+				"message": err.Error(),
+			})
+		}
 		if err := h.pgStore.Repository().DeleteCenter(req.ID); err != nil {
 			c.Status(http.StatusBadRequest)
 			return c.JSON(fiber.Map{
 				"message": err.Error(),
 			})
 		}
+		go h.journal.SaveAction(c.Context(), fmt.Sprintf("Удаление центра %s|id:%d", center, req.ID), c.Cookies("token_name"), c.Cookies("token_role"), "Пользователи", req)
 		return c.JSON(fiber.Map{
 			"message": "success",
 		})

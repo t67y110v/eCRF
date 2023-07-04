@@ -1,4 +1,4 @@
-package model
+package responses
 
 import (
 	"time"
@@ -6,7 +6,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-type Operation struct {
+type GetJournal struct {
 	ID            primitive.ObjectID `bson:"_id"`
 	CreatedAt     time.Time          `bson:"created_at"`
 	Method        string             `bson:"method"`

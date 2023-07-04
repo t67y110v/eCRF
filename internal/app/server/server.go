@@ -107,6 +107,9 @@ func (s *server) configureRouter() {
 	action.Patch("/updatecolorwithcomment", s.handlers.UpdateColorWithComment())
 	action.Patch("/updatefield", s.handlers.UpdateFieldValue())
 
+	journal := api.Group("/journal")
+	journal.Use(logg)
+	journal.Get("/all", s.handlers.GetJournal())
 	// errors := s.router.Group("/error")
 	// errors.Get("/", s.pages.ErrorPage())
 

@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/t67y110v/web/internal/app/handlers/requests"
@@ -58,6 +59,7 @@ func (h *Handlers) UserLogin() fiber.Handler {
 				"message": err.Error(),
 			})
 		}
+
 		return c.JSON(fiber.Map{
 			"JWT": t,
 		})
@@ -102,7 +104,7 @@ func (h *Handlers) UserRegister() fiber.Handler {
 			})
 		}
 		u.Sanitize()
-
+		go h.journal.SaveAction(c.Context(), fmt.Sprintf("Регистрация пользователя %s", req.Name), c.Cookies("token_name"), c.Cookies("token_role"), "Пользователи", u)
 		return c.JSON(u)
 	}
 
@@ -129,13 +131,19 @@ func (h *Handlers) UserUpdate() fiber.Handler {
 				"message": err.Error(),
 			})
 		}
-
-		if err := h.pgStore.Repository().UpdateUser(req.ID, req.Role, req.CenterID, req.Email, req.Email, req.Paswword); err != nil {
+		u, err := h.pgStore.Repository().FindByID(req.ID)
+		if err != nil {
+			return c.JSON(fiber.Map{
+				"message": err.Error(),
+			})
+		}
+		if err := h.pgStore.Repository().UpdateUser(req.ID, req.Role, req.CenterID, req.Email, req.Name, req.Paswword); err != nil {
 			c.Status(http.StatusBadRequest)
 			return c.JSON(fiber.Map{
 				"message": err.Error(),
 			})
 		}
+		go h.journal.SaveAction(c.Context(), fmt.Sprintf("Обновление пользователя %s|id:%d", req.Name, req.ID), c.Cookies("token_name"), c.Cookies("token_role"), "Пользователи", req, u)
 		return c.JSON(fiber.Map{
 			"message": "success",
 		})
@@ -163,12 +171,20 @@ func (h *Handlers) UserDelete() fiber.Handler {
 				"message": err.Error(),
 			})
 		}
+
+		u, err := h.pgStore.Repository().FindByID(req.ID)
+		if err != nil {
+			return c.JSON(fiber.Map{
+				"message": err.Error(),
+			})
+		}
+		u.ClearPswd()
 		if err := h.pgStore.Repository().DeleteUser(req.ID); err != nil {
 			return c.JSON(fiber.Map{
 				"message": err.Error(),
 			})
 		}
-
+		go h.journal.SaveAction(c.Context(), fmt.Sprintf("Удаление пользователя %s", u.Email), c.Cookies("token_name"), c.Cookies("token_role"), "Пользователи", u)
 		return c.JSON(fiber.Map{
 			"message": "success",
 		})
@@ -209,10 +225,16 @@ func (h *Handlers) NewUser() fiber.Handler {
 			Role:     1,
 			CenterID: 1,
 		}); err != nil {
-			return utils.ErrorPage(c, err)
+			c.Status(http.StatusBadRequest)
+			return c.JSON(fiber.Map{
+				"message": err.Error(),
+			})
 		}
 		if err := h.pgStore.Repository().AddNewCenter("FirstCenter"); err != nil {
-			return utils.ErrorPage(c, err)
+			c.Status(http.StatusBadRequest)
+			return c.JSON(fiber.Map{
+				"message": err.Error(),
+			})
 		}
 		return nil
 	}

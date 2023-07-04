@@ -32,6 +32,10 @@ func (u *User) BeforeCreate(tx *gorm.DB) error {
 func (u *User) Sanitize() {
 	u.Password = ""
 }
+func (u *User) ClearPswd() {
+	u.Password = ""
+	u.EncryptedPassword = ""
+}
 
 func (u *User) ComparePassword(password string) bool {
 

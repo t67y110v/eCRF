@@ -1,8 +1,6 @@
 package store
 
 import (
-	"strconv"
-
 	model "github.com/t67y110v/web/internal/app/model/user"
 )
 
@@ -33,15 +31,10 @@ func (r *PostgresStoreRepository) FindByEmail(email string) (*model.User, error)
 
 }
 
-func (r *PostgresStoreRepository) FindByID(ID string) (*model.User, error) {
+func (r *PostgresStoreRepository) FindByID(ID int) (*model.User, error) {
 	u := &model.User{}
 
-	id, err := strconv.Atoi(ID)
-	if err != nil {
-		return nil, err
-	}
-
-	if result := r.store.db.Where(model.User{Id: id}).First(&u); result.Error != nil {
+	if result := r.store.db.Where(model.User{Id: ID}).First(&u); result.Error != nil {
 		return nil, result.Error
 	}
 

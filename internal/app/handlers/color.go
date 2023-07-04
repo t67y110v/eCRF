@@ -84,7 +84,10 @@ func (h *Handlers) UpdateColorWithComment() fiber.Handler {
 		}
 
 		if err := h.mgStore.Color().UpdateColorWithComment(c.Context(), subject.ID, utils.GetFieldName(req.FieldName), req.Reason, req.Comment, req.Sender, req.SendersRole, req.Value); err != nil {
-			return utils.ErrorPage(c, err)
+			c.Status(http.StatusBadRequest)
+			return c.JSON(fiber.Map{
+				"message": err.Error(),
+			})
 		}
 		return c.JSON(fiber.Map{
 			"message": "success",

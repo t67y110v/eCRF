@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -31,7 +32,14 @@ func (h *Handlers) SaveProtocol() fiber.Handler {
 				"message": err.Error(),
 			})
 		}
-		err := h.pgStore.Repository().UpdateProtocolById(req.ID, req.Status, req.Name, req.CenterId)
+		oldV, err := h.pgStore.Repository().GetProtocolById(req.ID)
+		if err != nil {
+			c.Status(http.StatusBadRequest)
+			return c.JSON(fiber.Map{
+				"message": err.Error(),
+			})
+		}
+		err = h.pgStore.Repository().UpdateProtocolById(req.ID, req.Status, req.Name, req.CenterId)
 		if err != nil {
 			c.Status(http.StatusBadRequest)
 			return c.JSON(fiber.Map{
@@ -39,7 +47,7 @@ func (h *Handlers) SaveProtocol() fiber.Handler {
 			})
 		}
 
-		go h.operations.SaveAction(c.Context(), "SaveProtocol", "200", req.Name, "Обновление протокола")
+		go h.journal.SaveAction(c.Context(), fmt.Sprintf("Обновление протокола %d", req.ID), c.Cookies("token_name"), c.Cookies("token_role"), "Протокол", req, oldV)
 
 		return c.JSON(fiber.Map{
 			"message": "success",
@@ -76,7 +84,7 @@ func (h *Handlers) AddProtocol() fiber.Handler {
 				"message": err.Error(),
 			})
 		}
-		go h.operations.SaveAction(c.Context(), "AddProtocol", "200", req.Name, "Добавление протокола")
+		go h.journal.SaveAction(c.Context(), fmt.Sprintf("Добавление протокола %s", req.Name), c.Cookies("token_name"), c.Cookies("token_role"), "Протокол", req)
 
 		return c.JSON(fiber.Map{
 			"message": "success",
@@ -113,7 +121,7 @@ func (h *Handlers) DeleteProtocol() fiber.Handler {
 			})
 		}
 
-		go h.operations.SaveAction(c.Context(), "DeleteProtocol", "200", "test", "Удаление протокола")
+		go h.journal.SaveAction(c.Context(), fmt.Sprintf("Удаление протокола %d", req.ID), c.Cookies("token_name"), c.Cookies("token_role"), "Протокол", req)
 
 		return c.JSON(fiber.Map{
 			"message": "success",

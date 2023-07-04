@@ -233,6 +233,41 @@ const docTemplate = `{
                 }
             }
         },
+        "/api/journal/all": {
+            "get": {
+                "description": "gettning jouranl of operations",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Journal"
+                ],
+                "summary": "Journal Get",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.GetJournal"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/responses.Error"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/responses.Error"
+                        }
+                    }
+                }
+            }
+        },
         "/api/protocols/add": {
             "post": {
                 "description": "creating a new protocol",
@@ -1745,6 +1780,30 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "responses.GetJournal": {
+            "type": "object",
+            "properties": {
+                "actionType": {
+                    "type": "string"
+                },
+                "body": {},
+                "createdAt": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "initiator": {
+                    "type": "string"
+                },
+                "initiatorRole": {
+                    "type": "string"
+                },
+                "method": {
                     "type": "string"
                 }
             }

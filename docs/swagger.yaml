@@ -325,6 +325,22 @@ definitions:
       message:
         type: string
     type: object
+  responses.GetJournal:
+    properties:
+      actionType:
+        type: string
+      body: {}
+      createdAt:
+        type: string
+      id:
+        type: string
+      initiator:
+        type: string
+      initiatorRole:
+        type: string
+      method:
+        type: string
+    type: object
   responses.GetProtocols:
     properties:
       center_id:
@@ -525,6 +541,29 @@ paths:
       summary: Update center
       tags:
       - Center
+  /api/journal/all:
+    get:
+      consumes:
+      - application/json
+      description: gettning jouranl of operations
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.GetJournal'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.Error'
+      summary: Journal Get
+      tags:
+      - Journal
   /api/protocols/{filter}/{center}:
     get:
       consumes:

@@ -58,7 +58,7 @@ type CenterStoreRepository interface {
 type UserStoreRepository interface {
 	Create(*modelUser.User) error
 	FindByEmail(string) (*modelUser.User, error)
-	FindByID(string) (*modelUser.User, error)
+	FindByID(int) (*modelUser.User, error)
 	GetUsers() ([]modelUser.User, error)
 	UpdateUser(ID, role, centerId int, email, name, paswword string) error
 	DeleteUser(Id int) error

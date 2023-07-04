@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -90,7 +91,7 @@ func (h *Handlers) AddSubject() fiber.Handler {
 				"message": err.Error(),
 			})
 		}
-
+		go h.journal.SaveAction(c.Context(), fmt.Sprintf("Добавление субьекта  %s-%s в протокол %d", req.Number, req.Initials, req.ProtocolId), c.Cookies("token_name"), c.Cookies("token_role"), "Пользователи", req)
 		return c.JSON(fiber.Map{
 			"message": "success",
 		})
