@@ -19,7 +19,7 @@ import (
 // @Success 200 {object} responses.GetSubject
 // @Failure 400 {object} responses.Error
 // @Failure 500 {object} responses.Error
-// @Router /subject/{protocol_id} [get]
+// @Router /api/subject/{protocol_id} [get]
 func (h *Handlers) GetSubjects() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		protocolID, _ := strconv.Atoi(c.Params("protocol_id"))
@@ -46,7 +46,7 @@ func (h *Handlers) GetSubjects() fiber.Handler {
 // @Success 200 {object} responses.GetSubject
 // @Failure 400 {object} responses.Error
 // @Failure 500 {object} responses.Error
-// @Router /subject/{protocol_id}/{subject_num} [get]
+// @Router /api/subject/{protocol_id}/{subject_num} [get]
 func (h *Handlers) GetSubjectByNumber() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		protocolID, _ := strconv.Atoi(c.Params("protocol_id"))
@@ -73,7 +73,7 @@ func (h *Handlers) GetSubjectByNumber() fiber.Handler {
 // @Success 200 {object} responses.AddProtocol
 // @Failure 400 {object} responses.Error
 // @Failure 500 {object} responses.Error
-// @Router /subject/add [post]
+// @Router /api/subject/add [post]
 func (h *Handlers) AddSubject() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		req := requests.AddSubject{}

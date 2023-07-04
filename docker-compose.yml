@@ -10,7 +10,17 @@ services:
     depends_on:
       - postgres
       - mongodb
+      - front
 
+
+  front:
+    build: 
+      context: ../eCRF-front/frontend
+      dockerfile: ./Dockerfile
+    ports:
+      - 5173:5173
+    volumes:
+      - .:/front
 
   postgres:
     restart: always 

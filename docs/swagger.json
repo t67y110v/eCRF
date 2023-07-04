@@ -9,7 +9,7 @@
     "host": "localhost:4000",
     "basePath": "/",
     "paths": {
-        "/center/add": {
+        "/api/center/add": {
             "post": {
                 "description": "add new center",
                 "consumes": [
@@ -55,7 +55,7 @@
                 }
             }
         },
-        "/center/all": {
+        "/api/center/all": {
             "get": {
                 "description": "getting all  centers",
                 "consumes": [
@@ -90,7 +90,7 @@
                 }
             }
         },
-        "/center/delete": {
+        "/api/center/delete": {
             "delete": {
                 "description": "delete center",
                 "consumes": [
@@ -136,7 +136,7 @@
                 }
             }
         },
-        "/center/name/{id}": {
+        "/api/center/name/{id}": {
             "get": {
                 "description": "getting center name by id",
                 "consumes": [
@@ -180,7 +180,7 @@
                 }
             }
         },
-        "/center/update": {
+        "/api/center/update": {
             "patch": {
                 "description": "update center",
                 "consumes": [
@@ -226,7 +226,7 @@
                 }
             }
         },
-        "/protocols/add": {
+        "/api/protocols/add": {
             "post": {
                 "description": "creating a new protocol",
                 "consumes": [
@@ -272,7 +272,7 @@
                 }
             }
         },
-        "/protocols/delete": {
+        "/api/protocols/delete": {
             "delete": {
                 "description": "Deleting a  protocol  by id",
                 "consumes": [
@@ -318,7 +318,7 @@
                 }
             }
         },
-        "/protocols/save": {
+        "/api/protocols/save": {
             "patch": {
                 "security": [
                     {
@@ -369,7 +369,7 @@
                 }
             }
         },
-        "/protocols/{filter}/{center}": {
+        "/api/protocols/{filter}/{center}": {
             "get": {
                 "description": "Getting all protocols from users center id and filter params",
                 "consumes": [
@@ -420,7 +420,7 @@
                 }
             }
         },
-        "/subject/action/updatecolor": {
+        "/api/subject/action/updatecolor": {
             "patch": {
                 "description": "UpdateColor",
                 "consumes": [
@@ -466,7 +466,7 @@
                 }
             }
         },
-        "/subject/action/updatecolorwithcomment": {
+        "/api/subject/action/updatecolorwithcomment": {
             "patch": {
                 "description": "UpdateColorWithComment",
                 "consumes": [
@@ -512,7 +512,7 @@
                 }
             }
         },
-        "/subject/action/updatefield": {
+        "/api/subject/action/updatefield": {
             "patch": {
                 "description": "UpdateFieldValue",
                 "consumes": [
@@ -558,7 +558,7 @@
                 }
             }
         },
-        "/subject/add": {
+        "/api/subject/add": {
             "post": {
                 "description": "creating a new protocol",
                 "consumes": [
@@ -604,7 +604,7 @@
                 }
             }
         },
-        "/subject/screening/anthropometry": {
+        "/api/subject/screening/anthropometry": {
             "patch": {
                 "description": "AnthropometrySubject value of subject",
                 "consumes": [
@@ -650,7 +650,7 @@
                 }
             }
         },
-        "/subject/screening/completion": {
+        "/api/subject/screening/completion": {
             "patch": {
                 "description": "CompletionOfScreening value of subject",
                 "consumes": [
@@ -696,7 +696,7 @@
                 }
             }
         },
-        "/subject/screening/demography": {
+        "/api/subject/screening/demography": {
             "patch": {
                 "description": "DemographySubject value of subject",
                 "consumes": [
@@ -742,7 +742,7 @@
                 }
             }
         },
-        "/subject/screening/exclusioncriteria": {
+        "/api/subject/screening/exclusioncriteria": {
             "patch": {
                 "description": "ExclusionСriteriaSubject value of subject",
                 "consumes": [
@@ -788,7 +788,7 @@
                 }
             }
         },
-        "/subject/screening/inclusioncriteria": {
+        "/api/subject/screening/inclusioncriteria": {
             "patch": {
                 "description": "InclusionCriteriaSubject value of subject",
                 "consumes": [
@@ -834,7 +834,7 @@
                 }
             }
         },
-        "/subject/screening/informationconsent": {
+        "/api/subject/screening/informationconsent": {
             "patch": {
                 "description": "InformaitonConsentSubject value of subject",
                 "consumes": [
@@ -880,7 +880,7 @@
                 }
             }
         },
-        "/subject/screening/startofscreening": {
+        "/api/subject/screening/startofscreening": {
             "patch": {
                 "description": "StartOfScreeningSubject value of subject",
                 "consumes": [
@@ -926,7 +926,7 @@
                 }
             }
         },
-        "/subject/{protocol_id}": {
+        "/api/subject/{protocol_id}": {
             "get": {
                 "description": "Getting all subjects by protocol id",
                 "consumes": [
@@ -970,7 +970,7 @@
                 }
             }
         },
-        "/subject/{protocol_id}/{subject_num}": {
+        "/api/subject/{protocol_id}/{subject_num}": {
             "get": {
                 "description": "Getting all subjects by protocol id",
                 "consumes": [
@@ -1021,7 +1021,7 @@
                 }
             }
         },
-        "/user/all": {
+        "/api/user/all": {
             "get": {
                 "description": "getting all  of users",
                 "consumes": [
@@ -1056,7 +1056,7 @@
                 }
             }
         },
-        "/user/delete": {
+        "/api/user/delete": {
             "delete": {
                 "description": "delete of user",
                 "consumes": [
@@ -1102,7 +1102,7 @@
                 }
             }
         },
-        "/user/login": {
+        "/api/user/login": {
             "post": {
                 "description": "authentification user in the system",
                 "consumes": [
@@ -1148,7 +1148,7 @@
                 }
             }
         },
-        "/user/register": {
+        "/api/user/register": {
             "post": {
                 "description": "registration of user",
                 "consumes": [
@@ -1194,7 +1194,7 @@
                 }
             }
         },
-        "/user/update": {
+        "/api/user/update": {
             "patch": {
                 "description": "update of user",
                 "consumes": [

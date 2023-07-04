@@ -21,7 +21,7 @@ import (
 // @Success 200 {object} responses.Login
 // @Failure 400 {object} responses.Error
 // @Failure 500 {object} responses.Error
-// @Router /user/login [post]
+// @Router /api/user/login [post]
 func (h *Handlers) UserLogin() fiber.Handler {
 
 	return func(c *fiber.Ctx) error {
@@ -76,7 +76,7 @@ func (h *Handlers) UserLogin() fiber.Handler {
 // @Success 200 {object} responses.Registration
 // @Failure 400 {object} responses.Error
 // @Failure 500 {object} responses.Error
-// @Router /user/register [post]
+// @Router /api/user/register [post]
 func (h *Handlers) UserRegister() fiber.Handler {
 
 	return func(c *fiber.Ctx) error {
@@ -119,7 +119,7 @@ func (h *Handlers) UserRegister() fiber.Handler {
 // @Success 200 {object} responses.Registration
 // @Failure 400 {object} responses.Error
 // @Failure 500 {object} responses.Error
-// @Router /user/update [patch]
+// @Router /api/user/update [patch]
 func (h *Handlers) UserUpdate() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		req := requests.Update{}
@@ -153,7 +153,7 @@ func (h *Handlers) UserUpdate() fiber.Handler {
 // @Success 200 {object} responses.Registration
 // @Failure 400 {object} responses.Error
 // @Failure 500 {object} responses.Error
-// @Router /user/delete [delete]
+// @Router /api/user/delete [delete]
 func (h *Handlers) UserDelete() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		req := requests.Delete{}
@@ -185,7 +185,7 @@ func (h *Handlers) UserDelete() fiber.Handler {
 // @Success 200 {object} responses.Registration
 // @Failure 400 {object} responses.Error
 // @Failure 500 {object} responses.Error
-// @Router /user/all [get]
+// @Router /api/user/all [get]
 func (h *Handlers) GetUsers() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		u, err := h.pgStore.Repository().GetUsers()

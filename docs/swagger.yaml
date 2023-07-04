@@ -383,7 +383,7 @@ info:
   title: eCRF API
   version: "0.1"
 paths:
-  /center/add:
+  /api/center/add:
     post:
       consumes:
       - application/json
@@ -413,7 +413,7 @@ paths:
       summary: Add new  center
       tags:
       - Center
-  /center/all:
+  /api/center/all:
     get:
       consumes:
       - application/json
@@ -436,7 +436,7 @@ paths:
       summary: Get all centers
       tags:
       - Center
-  /center/delete:
+  /api/center/delete:
     delete:
       consumes:
       - application/json
@@ -466,7 +466,7 @@ paths:
       summary: Delete center
       tags:
       - Center
-  /center/name/{id}:
+  /api/center/name/{id}:
     get:
       consumes:
       - application/json
@@ -495,7 +495,7 @@ paths:
       summary: Get center name
       tags:
       - Center
-  /center/update:
+  /api/center/update:
     patch:
       consumes:
       - application/json
@@ -525,7 +525,7 @@ paths:
       summary: Update center
       tags:
       - Center
-  /protocols/{filter}/{center}:
+  /api/protocols/{filter}/{center}:
     get:
       consumes:
       - application/json
@@ -559,7 +559,7 @@ paths:
       summary: Protocols Get
       tags:
       - Protocol
-  /protocols/add:
+  /api/protocols/add:
     post:
       consumes:
       - application/json
@@ -589,7 +589,7 @@ paths:
       summary: Protocol Add
       tags:
       - Protocol
-  /protocols/delete:
+  /api/protocols/delete:
     delete:
       consumes:
       - application/json
@@ -619,7 +619,7 @@ paths:
       summary: Protocol Delete
       tags:
       - Protocol
-  /protocols/save:
+  /api/protocols/save:
     patch:
       consumes:
       - application/json
@@ -651,7 +651,7 @@ paths:
       summary: Protocol Save
       tags:
       - Protocol
-  /subject/{protocol_id}:
+  /api/subject/{protocol_id}:
     get:
       consumes:
       - application/json
@@ -680,7 +680,7 @@ paths:
       summary: Subjects  Get
       tags:
       - Subject
-  /subject/{protocol_id}/{subject_num}:
+  /api/subject/{protocol_id}/{subject_num}:
     get:
       consumes:
       - application/json
@@ -714,7 +714,7 @@ paths:
       summary: Subjects  Get
       tags:
       - Subject
-  /subject/action/updatecolor:
+  /api/subject/action/updatecolor:
     patch:
       consumes:
       - application/json
@@ -744,7 +744,7 @@ paths:
       summary: UpdateColor
       tags:
       - Subject.Action
-  /subject/action/updatecolorwithcomment:
+  /api/subject/action/updatecolorwithcomment:
     patch:
       consumes:
       - application/json
@@ -774,7 +774,7 @@ paths:
       summary: UpdateColorWithComment
       tags:
       - Subject.Action
-  /subject/action/updatefield:
+  /api/subject/action/updatefield:
     patch:
       consumes:
       - application/json
@@ -804,7 +804,7 @@ paths:
       summary: UpdateFieldValue
       tags:
       - Subject.Action
-  /subject/add:
+  /api/subject/add:
     post:
       consumes:
       - application/json
@@ -834,7 +834,7 @@ paths:
       summary: Subject Add
       tags:
       - Subject
-  /subject/screening/anthropometry:
+  /api/subject/screening/anthropometry:
     patch:
       consumes:
       - application/json
@@ -864,7 +864,7 @@ paths:
       summary: AnthropometrySubject
       tags:
       - Subject.Screening
-  /subject/screening/completion:
+  /api/subject/screening/completion:
     patch:
       consumes:
       - application/json
@@ -894,7 +894,7 @@ paths:
       summary: CompletionOfScreening
       tags:
       - Subject.Screening
-  /subject/screening/demography:
+  /api/subject/screening/demography:
     patch:
       consumes:
       - application/json
@@ -924,7 +924,7 @@ paths:
       summary: DemographySubject
       tags:
       - Subject.Screening
-  /subject/screening/exclusioncriteria:
+  /api/subject/screening/exclusioncriteria:
     patch:
       consumes:
       - application/json
@@ -954,7 +954,7 @@ paths:
       summary: ExclusionСriteriaSubject
       tags:
       - Subject.Screening
-  /subject/screening/inclusioncriteria:
+  /api/subject/screening/inclusioncriteria:
     patch:
       consumes:
       - application/json
@@ -984,7 +984,7 @@ paths:
       summary: InclusionCriteriaSubject
       tags:
       - Subject.Screening
-  /subject/screening/informationconsent:
+  /api/subject/screening/informationconsent:
     patch:
       consumes:
       - application/json
@@ -1014,7 +1014,7 @@ paths:
       summary: InformaitonConsentSubject
       tags:
       - Subject.Screening
-  /subject/screening/startofscreening:
+  /api/subject/screening/startofscreening:
     patch:
       consumes:
       - application/json
@@ -1044,7 +1044,7 @@ paths:
       summary: StartOfScreeningSubject
       tags:
       - Subject.Screening
-  /user/all:
+  /api/user/all:
     get:
       consumes:
       - application/json
@@ -1067,7 +1067,7 @@ paths:
       summary: Get Users
       tags:
       - User
-  /user/delete:
+  /api/user/delete:
     delete:
       consumes:
       - application/json
@@ -1097,7 +1097,7 @@ paths:
       summary: User Delete
       tags:
       - User
-  /user/login:
+  /api/user/login:
     post:
       consumes:
       - application/json
@@ -1127,7 +1127,7 @@ paths:
       summary: User Login
       tags:
       - User
-  /user/register:
+  /api/user/register:
     post:
       consumes:
       - application/json
@@ -1157,7 +1157,7 @@ paths:
       summary: User Registration
       tags:
       - User
-  /user/update:
+  /api/user/update:
     patch:
       consumes:
       - application/json

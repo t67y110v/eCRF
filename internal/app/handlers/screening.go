@@ -18,7 +18,7 @@ import (
 // @Success 200 {object} responses.AddProtocol
 // @Failure 400 {object} responses.Error
 // @Failure 500 {object} responses.Error
-// @Router /subject/screening/startofscreening [patch]
+// @Router /api/subject/screening/startofscreening [patch]
 func (h *Handlers) StartOfScreeningSubject() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		req := requests.StartOfScreening{}
@@ -59,7 +59,7 @@ func (h *Handlers) StartOfScreeningSubject() fiber.Handler {
 // @Success 200 {object} responses.AddProtocol
 // @Failure 400 {object} responses.Error
 // @Failure 500 {object} responses.Error
-// @Router /subject/screening/informationconsent [patch]
+// @Router /api/subject/screening/informationconsent [patch]
 func (h *Handlers) InformationConsentSubject() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		req := requests.InformationConsent{}
@@ -110,7 +110,7 @@ func (h *Handlers) InformationConsentSubject() fiber.Handler {
 // @Success 200 {object} responses.AddProtocol
 // @Failure 400 {object} responses.Error
 // @Failure 500 {object} responses.Error
-// @Router /subject/screening/demography [patch]
+// @Router /api/subject/screening/demography [patch]
 func (h *Handlers) DemographySubject() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		req := requests.Demography{}
@@ -151,7 +151,7 @@ func (h *Handlers) DemographySubject() fiber.Handler {
 // @Success 200 {object} responses.AddProtocol
 // @Failure 400 {object} responses.Error
 // @Failure 500 {object} responses.Error
-// @Router /subject/screening/anthropometry [patch]
+// @Router /api/subject/screening/anthropometry [patch]
 func (h *Handlers) AnthropometrySubject() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		req := requests.Anthropometry{}
@@ -201,7 +201,7 @@ func (h *Handlers) AnthropometrySubject() fiber.Handler {
 // @Success 200 {object} responses.AddProtocol
 // @Failure 400 {object} responses.Error
 // @Failure 500 {object} responses.Error
-// @Router /subject/screening/inclusioncriteria [patch]
+// @Router /api/subject/screening/inclusioncriteria [patch]
 func (h *Handlers) InclusionCriteriaSubject() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		req := requests.InclusionCriteria{}
@@ -252,7 +252,7 @@ func (h *Handlers) InclusionCriteriaSubject() fiber.Handler {
 // @Success 200 {object} responses.AddProtocol
 // @Failure 400 {object} responses.Error
 // @Failure 500 {object} responses.Error
-// @Router /subject/screening/exclusioncriteria [patch]
+// @Router /api/subject/screening/exclusioncriteria [patch]
 func (h *Handlers) ExclusionСriteriaSubject() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		req := requests.ExclusionСriteria{}
@@ -309,7 +309,7 @@ func (h *Handlers) ExclusionСriteriaSubject() fiber.Handler {
 // @Success 200 {object} responses.AddProtocol
 // @Failure 400 {object} responses.Error
 // @Failure 500 {object} responses.Error
-// @Router /subject/screening/completion [patch]
+// @Router /api/subject/screening/completion [patch]
 func (h *Handlers) CompletionOfScreening() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		req := requests.CompletionOfScreening{}

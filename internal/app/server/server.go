@@ -56,7 +56,9 @@ func (s *server) configureRouter() {
 	logg := logger.New()
 	///////// USER GROUP ///////////////
 	////////////////////////////////////
-	user := s.router.Group("/user")
+	api := s.router.Group("/api")
+
+	user := api.Group("/user")
 	user.Use(logg)
 	user.Get("/new", s.handlers.NewUser())
 	user.Post("/login", s.handlers.UserLogin())
@@ -67,7 +69,7 @@ func (s *server) configureRouter() {
 	user.Get("/all", s.handlers.GetUsers())
 	//////////////////////////////////////
 
-	protocol := s.router.Group("/protocols")
+	protocol := api.Group("/protocols")
 	protocol.Use(logg)
 	//	protocol.Use(middlewares.CheckJWT())
 	protocol.Get("/:filter/:center", s.handlers.GetProtocols())
@@ -75,7 +77,7 @@ func (s *server) configureRouter() {
 	protocol.Post("/add", s.handlers.AddProtocol())
 	protocol.Delete("/delete", s.handlers.DeleteProtocol())
 
-	center := s.router.Group("/center")
+	center := api.Group("/center")
 	center.Use(logg)
 	//	center.Use(middlewares.CheckJWT())
 	center.Post("/add", s.handlers.AddNewCenter())
@@ -84,7 +86,7 @@ func (s *server) configureRouter() {
 	center.Get("/name/:id", s.handlers.GetCenterName())
 	center.Delete("/delete", s.handlers.DeleteCenter())
 
-	subject := s.router.Group("/subject")
+	subject := api.Group("/subject")
 	//subject.Use(middlewares.CheckJWT())
 	subject.Use(logg)
 	subject.Post("/add", s.handlers.AddSubject())

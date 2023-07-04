@@ -19,7 +19,7 @@ import (
 // @Success 200 {object} responses.DeleteProtocol
 // @Failure 400 {object} responses.Error
 // @Failure 500 {object} responses.Error
-// @Router /center/add [post]
+// @Router /api/center/add [post]
 func (h *Handlers) AddNewCenter() fiber.Handler {
 
 	return func(c *fiber.Ctx) error {
@@ -56,7 +56,7 @@ func (h *Handlers) AddNewCenter() fiber.Handler {
 // @Success 200 {object} responses.DeleteProtocol
 // @Failure 400 {object} responses.Error
 // @Failure 500 {object} responses.Error
-// @Router /center/update [patch]
+// @Router /api/center/update [patch]
 func (h *Handlers) UpdateCenter() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 
@@ -90,7 +90,7 @@ func (h *Handlers) UpdateCenter() fiber.Handler {
 // @Success 200 {object} responses.DeleteProtocol
 // @Failure 400 {object} responses.Error
 // @Failure 500 {object} responses.Error
-// @Router /center/delete [delete]
+// @Router /api/center/delete [delete]
 func (h *Handlers) DeleteCenter() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		req := requests.DeleteCenter{}
@@ -123,7 +123,7 @@ func (h *Handlers) DeleteCenter() fiber.Handler {
 // @Success 200 {object} responses.Center
 // @Failure 400 {object} responses.Error
 // @Failure 500 {object} responses.Error
-// @Router /center/all [get]
+// @Router /api/center/all [get]
 func (h *Handlers) GetCenters() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		centers, err := h.pgStore.Repository().GetAllCenters()
@@ -148,7 +148,7 @@ func (h *Handlers) GetCenters() fiber.Handler {
 // @Success 200 {object} responses.DeleteProtocol
 // @Failure 400 {object} responses.Error
 // @Failure 500 {object} responses.Error
-// @Router /center/name/{id} [get]
+// @Router /api/center/name/{id} [get]
 func (h *Handlers) GetCenterName() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		centerID, _ := strconv.Atoi(c.Params("id"))

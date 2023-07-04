@@ -20,7 +20,7 @@ import (
 // @Success 200 {object} responses.SaveProtocol
 // @Failure 400 {object} responses.Error
 // @Failure 500 {object} responses.Error
-// @Router /protocols/save [patch]
+// @Router /api/protocols/save [patch]
 func (h *Handlers) SaveProtocol() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 
@@ -58,7 +58,7 @@ func (h *Handlers) SaveProtocol() fiber.Handler {
 // @Success 200 {object} responses.AddProtocol
 // @Failure 400 {object} responses.Error
 // @Failure 500 {object} responses.Error
-// @Router /protocols/add [post]
+// @Router /api/protocols/add [post]
 func (h *Handlers) AddProtocol() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 
@@ -95,7 +95,7 @@ func (h *Handlers) AddProtocol() fiber.Handler {
 // @Success 200 {object} responses.DeleteProtocol
 // @Failure 400 {object} responses.Error
 // @Failure 500 {object} responses.Error
-// @Router /protocols/delete [delete]
+// @Router /api/protocols/delete [delete]
 func (h *Handlers) DeleteProtocol() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		req := requests.DeleteProtocol{}
@@ -133,7 +133,7 @@ func (h *Handlers) DeleteProtocol() fiber.Handler {
 // @Success 200 {object} responses.GetProtocols
 // @Failure 400 {object} responses.Error
 // @Failure 500 {object} responses.Error
-// @Router /protocols/{filter}/{center}  [get]
+// @Router /api/protocols/{filter}/{center}  [get]
 func (h *Handlers) GetProtocols() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 
