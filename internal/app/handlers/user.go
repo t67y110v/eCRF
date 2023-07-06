@@ -104,7 +104,7 @@ func (h *Handlers) UserRegister() fiber.Handler {
 			})
 		}
 		u.Sanitize()
-		go h.journal.SaveAction(c.Context(), fmt.Sprintf("Регистрация пользователя %s", req.Name), c.Cookies("token_name"), c.Cookies("token_role"), "Пользователи", u)
+		go h.journal.SaveAction(c.Context(), fmt.Sprintf("Регистрация пользователя %s", req.Name), c.Cookies("token_name"), c.Cookies("token_role"), "create", u)
 		return c.JSON(u)
 	}
 
@@ -143,7 +143,7 @@ func (h *Handlers) UserUpdate() fiber.Handler {
 				"message": err.Error(),
 			})
 		}
-		go h.journal.SaveAction(c.Context(), fmt.Sprintf("Обновление пользователя %s|id:%d", req.Name, req.ID), c.Cookies("token_name"), c.Cookies("token_role"), "Пользователи", req, u)
+		go h.journal.SaveAction(c.Context(), fmt.Sprintf("Обновление пользователя %s|id:%d", req.Name, req.ID), c.Cookies("token_name"), c.Cookies("token_role"), "update", req, u)
 		return c.JSON(fiber.Map{
 			"message": "success",
 		})
@@ -184,7 +184,7 @@ func (h *Handlers) UserDelete() fiber.Handler {
 				"message": err.Error(),
 			})
 		}
-		go h.journal.SaveAction(c.Context(), fmt.Sprintf("Удаление пользователя %s", u.Email), c.Cookies("token_name"), c.Cookies("token_role"), "Пользователи", u)
+		go h.journal.SaveAction(c.Context(), fmt.Sprintf("Удаление пользователя %s", u.Email), c.Cookies("token_name"), c.Cookies("token_role"), "delete", u)
 		return c.JSON(fiber.Map{
 			"message": "success",
 		})

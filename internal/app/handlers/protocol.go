@@ -47,7 +47,7 @@ func (h *Handlers) SaveProtocol() fiber.Handler {
 			})
 		}
 
-		go h.journal.SaveAction(c.Context(), fmt.Sprintf("Обновление протокола %d", req.ID), c.Cookies("token_name"), c.Cookies("token_role"), "Протокол", req, oldV)
+		go h.journal.SaveAction(c.Context(), fmt.Sprintf("Обновление протокола %d", req.ID), c.Cookies("token_name"), c.Cookies("token_role"), "update", req, oldV)
 
 		return c.JSON(fiber.Map{
 			"message": "success",
@@ -84,7 +84,7 @@ func (h *Handlers) AddProtocol() fiber.Handler {
 				"message": err.Error(),
 			})
 		}
-		go h.journal.SaveAction(c.Context(), fmt.Sprintf("Добавление протокола %s", req.Name), c.Cookies("token_name"), c.Cookies("token_role"), "Протокол", req)
+		go h.journal.SaveAction(c.Context(), fmt.Sprintf("Добавление протокола %s", req.Name), c.Cookies("token_name"), c.Cookies("token_role"), "create", req)
 
 		return c.JSON(fiber.Map{
 			"message": "success",
@@ -121,7 +121,7 @@ func (h *Handlers) DeleteProtocol() fiber.Handler {
 			})
 		}
 
-		go h.journal.SaveAction(c.Context(), fmt.Sprintf("Удаление протокола %d", req.ID), c.Cookies("token_name"), c.Cookies("token_role"), "Протокол", req)
+		go h.journal.SaveAction(c.Context(), fmt.Sprintf("Удаление протокола %d", req.ID), c.Cookies("token_name"), c.Cookies("token_role"), "delete", req)
 
 		return c.JSON(fiber.Map{
 			"message": "success",

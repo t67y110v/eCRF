@@ -37,7 +37,7 @@ func (h *Handlers) AddNewCenter() fiber.Handler {
 				"message": err.Error(),
 			})
 		}
-		go h.journal.SaveAction(c.Context(), fmt.Sprintf("Добавление центра %s", req.Name), c.Cookies("token_name"), c.Cookies("token_role"), "Центры", req)
+		go h.journal.SaveAction(c.Context(), fmt.Sprintf("Добавление центра %s", req.Name), c.Cookies("token_name"), c.Cookies("token_role"), "create", req)
 		return c.JSON(fiber.Map{
 			"message": "success",
 		})
@@ -81,7 +81,7 @@ func (h *Handlers) UpdateCenter() fiber.Handler {
 				"message": err.Error(),
 			})
 		}
-		go h.journal.SaveAction(c.Context(), fmt.Sprintf("Обновление центра %s|id:%d", req.Name, req.CenterID), c.Cookies("token_name"), c.Cookies("token_role"), "Пользователи", req, center)
+		go h.journal.SaveAction(c.Context(), fmt.Sprintf("Обновление центра %s|id:%d", req.Name, req.CenterID), c.Cookies("token_name"), c.Cookies("token_role"), "update", req, center)
 		return c.JSON(fiber.Map{
 			"message": "success",
 		})
@@ -122,7 +122,7 @@ func (h *Handlers) DeleteCenter() fiber.Handler {
 				"message": err.Error(),
 			})
 		}
-		go h.journal.SaveAction(c.Context(), fmt.Sprintf("Удаление центра %s|id:%d", center, req.ID), c.Cookies("token_name"), c.Cookies("token_role"), "Пользователи", req)
+		go h.journal.SaveAction(c.Context(), fmt.Sprintf("Удаление центра %s|id:%d", center, req.ID), c.Cookies("token_name"), c.Cookies("token_role"), "delete", req)
 		return c.JSON(fiber.Map{
 			"message": "success",
 		})
