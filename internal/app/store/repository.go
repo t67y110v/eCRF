@@ -5,6 +5,7 @@ import (
 
 	modelCenter "github.com/t67y110v/web/internal/app/model/center"
 	modelOperation "github.com/t67y110v/web/internal/app/model/operation"
+	"github.com/t67y110v/web/internal/app/model/organization"
 	modelProtocol "github.com/t67y110v/web/internal/app/model/protocol"
 	modelSubject "github.com/t67y110v/web/internal/app/model/subject"
 	modelUser "github.com/t67y110v/web/internal/app/model/user"
@@ -15,6 +16,7 @@ type PostgresStoreRepository interface {
 	ProtocolStoreRepository
 	UserStoreRepository
 	CenterStoreRepository
+	OrganizationStoreRepository
 }
 
 type MongoSubjectRepository interface {
@@ -47,12 +49,21 @@ type MongoScreeningRepository interface {
 	CompletionOfScreening(ctx context.Context, id primitive.ObjectID, VolunteerEligible, NoExclusionCriteria, InformedOfTheRestrictions, VolunteerIncluded int, ReasonIfNot, CommentValue string) error
 }
 
+type OrganizationStoreRepository interface {
+	GetOrganizationName(orgainzationID int) (string, error)
+	GetAllOrganizations() ([]organization.Organization, error)
+	AddNewOrganization(name string) error
+	UpdateOrganization(organizationID int, name string) error
+	DeleteOrganization(organizationID int) error
+}
+
 type CenterStoreRepository interface {
 	GetCenterName(centerId int) (string, error)
 	GetAllCenters() ([]modelCenter.Center, error)
-	AddNewCenter(name string) error
-	UpdateCenter(centerId int, name string) error
+	AddNewCenter(name string, organizationID int) error
+	UpdateCenter(centerId, orgainzationID int, name string) error
 	DeleteCenter(centerId int) error
+	GetCentersByOrganization(organizationID int) ([]modelCenter.Center, error)
 }
 
 type UserStoreRepository interface {
@@ -68,7 +79,7 @@ type ProtocolStoreRepository interface {
 	GetProtocols() ([]modelProtocol.Protocol, error)
 	GetProtocolById(ID int) (*modelProtocol.Protocol, error)
 	UpdateProtocolById(ID, status int, name string, centerId int) error
-	AddProtocol(name string, status, centerID int) error
+	AddProtocol(name string, organizationID, status, centerID, number int) error
 	GetProtocolsByFilter(filter string, centerId int) ([]modelProtocol.Protocol, error)
 	DeleteProtocol(Id int) error
 }

@@ -8,9 +8,11 @@ type SaveProtocol struct {
 }
 
 type AddProtocol struct {
-	Name     string
-	Status   int
-	CenterID int
+	Name         string `json:"name"`
+	Status       int    `json:"status"`
+	CenterID     int    `json:"center_id"`
+	Number       int    `json:"number"`
+	Organization int    `json:"organization_id"`
 }
 
 type DeleteProtocol struct {

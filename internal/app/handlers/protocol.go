@@ -77,7 +77,7 @@ func (h *Handlers) AddProtocol() fiber.Handler {
 				"message": err.Error(),
 			})
 		}
-		err := h.pgStore.Repository().AddProtocol(req.Name, req.Status, req.CenterID)
+		err := h.pgStore.Repository().AddProtocol(req.Name, req.Organization, req.Status, req.CenterID, req.Number)
 		if err != nil {
 			c.Status(http.StatusBadRequest)
 			return c.JSON(fiber.Map{

@@ -11,6 +11,7 @@ type User struct {
 	Name              string `json:"name"`
 	Role              int    `json:"role"`
 	CenterID          int    `json:"center_id" gorm:"primaryKey"`
+	OrganizationID    int    `json:"organization_id" gorm:"primaryKey"`
 	Password          string `json:"password,omitempty"`
 	EncryptedPassword string `json:"-"`
 }

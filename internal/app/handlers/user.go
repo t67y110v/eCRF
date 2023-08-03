@@ -92,11 +92,12 @@ func (h *Handlers) UserRegister() fiber.Handler {
 		}
 
 		u := &model.User{
-			Email:    req.Email,
-			Password: req.Password,
-			Name:     req.Name,
-			Role:     req.Role,
-			CenterID: req.CenterID,
+			Email:          req.Email,
+			Password:       req.Password,
+			Name:           req.Name,
+			Role:           req.Role,
+			CenterID:       req.CenterID,
+			OrganizationID: req.OrganizationID,
 		}
 		if err := h.pgStore.Repository().Create(u); err != nil {
 			return c.JSON(fiber.Map{
@@ -230,7 +231,7 @@ func (h *Handlers) NewUser() fiber.Handler {
 				"message": err.Error(),
 			})
 		}
-		if err := h.pgStore.Repository().AddNewCenter("FirstCenter"); err != nil {
+		if err := h.pgStore.Repository().AddNewCenter("FirstCenter", 1); err != nil {
 			c.Status(http.StatusBadRequest)
 			return c.JSON(fiber.Map{
 				"message": err.Error(),

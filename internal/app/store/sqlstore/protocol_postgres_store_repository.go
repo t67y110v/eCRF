@@ -61,15 +61,17 @@ func (r *PostgresStoreRepository) UpdateProtocolById(ID, status int, name string
 
 }
 
-func (r *PostgresStoreRepository) AddProtocol(name string, status, centerID int) error {
+func (r *PostgresStoreRepository) AddProtocol(name string, organizationID, status, centerID, number int) error {
 
 	if name == "" {
 		return errors.New("empty protocol name")
 	}
 	p := &model.Protocol{
-		Name:     name,
-		Status:   status,
-		CenterId: centerID,
+		Name:           name,
+		Status:         status,
+		CenterId:       centerID,
+		OrganizationID: organizationID,
+		Number:         number,
 	}
 	if result := r.store.db.Create(p); result.Error != nil {
 		return result.Error

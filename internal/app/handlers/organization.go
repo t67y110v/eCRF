@@ -9,29 +9,29 @@ import (
 	"github.com/t67y110v/web/internal/app/handlers/requests"
 )
 
-// @Summary Add new  center
-// @Description add new center
-// @Tags         Center
+// @Summary Add new  organization
+// @Description add new organization
+// @Tags         Organization
 //
 //	@Accept       json
 //
 // @Produce json
-// @Param  data body requests.AddCenter true  "addcenter"
+// @Param  data body requests.AddNewOrganization true  "addorganizatione"
 // @Success 200 {object} responses.DeleteProtocol
 // @Failure 400 {object} responses.Error
 // @Failure 500 {object} responses.Error
-// @Router /api/center/add [post]
-func (h *Handlers) AddNewCenter() fiber.Handler {
+// @Router /api/organization/add [post]
+func (h *Handlers) AddNewOrganization() fiber.Handler {
 
 	return func(c *fiber.Ctx) error {
-		req := requests.AddCenter{}
+		req := requests.AddNewOrganization{}
 		if err := c.BodyParser(&req); err != nil {
 			c.Status(http.StatusBadRequest)
 			return c.JSON(fiber.Map{
 				"message": err.Error(),
 			})
 		}
-		if err := h.pgStore.Repository().AddNewCenter(req.Name, req.OrganizationID); err != nil {
+		if err := h.pgStore.Repository().AddNewOrganization(req.Name); err != nil {
 			c.Status(http.StatusBadRequest)
 			return c.JSON(fiber.Map{
 				"message": err.Error(),
@@ -46,36 +46,36 @@ func (h *Handlers) AddNewCenter() fiber.Handler {
 
 }
 
-// @Summary Update center
-// @Description update center
-// @Tags         Center
+// @Summary Update organization
+// @Description update organization
+// @Tags         Organization
 //
 //	@Accept       json
 //
 // @Produce json
-// @Param  data body requests.UpdateCenter true  "updatecenter"
+// @Param  data body requests.UpdateOrganization true  "organization"
 // @Success 200 {object} responses.DeleteProtocol
 // @Failure 400 {object} responses.Error
 // @Failure 500 {object} responses.Error
-// @Router /api/center/update [patch]
-func (h *Handlers) UpdateCenter() fiber.Handler {
+// @Router /api/organization/update [patch]
+func (h *Handlers) UpdateOrganization() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 
-		req := requests.UpdateCenter{}
+		req := requests.UpdateOrganization{}
 		if err := c.BodyParser(&req); err != nil {
 			c.Status(http.StatusBadRequest)
 			return c.JSON(fiber.Map{
 				"message": err.Error(),
 			})
 		}
-		center, err := h.pgStore.Repository().GetCenterName(req.CenterID)
+		center, err := h.pgStore.Repository().GetOrganizationName(req.CenterID)
 		if err != nil {
 			c.Status(http.StatusBadRequest)
 			return c.JSON(fiber.Map{
 				"message": err.Error(),
 			})
 		}
-		if err := h.pgStore.Repository().UpdateCenter(req.CenterID, req.OrganizationID, req.Name); err != nil {
+		if err := h.pgStore.Repository().UpdateOrganization(req.CenterID, req.Name); err != nil {
 			c.Status(http.StatusBadRequest)
 			return c.JSON(fiber.Map{
 				"message": err.Error(),
@@ -88,35 +88,35 @@ func (h *Handlers) UpdateCenter() fiber.Handler {
 	}
 }
 
-// @Summary Delete center
-// @Description delete center
-// @Tags         Center
+// @Summary Delete organization
+// @Description delete organization
+// @Tags         Organization
 //
 //	@Accept       json
 //
 // @Produce json
-// @Param  data body requests.DeleteCenter true  "deletecenter"
+// @Param  data body requests.DeleteOrganization true  "organization"
 // @Success 200 {object} responses.DeleteProtocol
 // @Failure 400 {object} responses.Error
 // @Failure 500 {object} responses.Error
-// @Router /api/center/delete [delete]
-func (h *Handlers) DeleteCenter() fiber.Handler {
+// @Router /api/organization/delete [delete]
+func (h *Handlers) DeleteOrganization() fiber.Handler {
 	return func(c *fiber.Ctx) error {
-		req := requests.DeleteCenter{}
+		req := requests.DeleteOrganization{}
 		if err := c.BodyParser(&req); err != nil {
 			c.Status(http.StatusBadRequest)
 			return c.JSON(fiber.Map{
 				"message": err.Error(),
 			})
 		}
-		center, err := h.pgStore.Repository().GetCenterName(req.ID)
+		center, err := h.pgStore.Repository().GetOrganizationName(req.ID)
 		if err != nil {
 			c.Status(http.StatusBadRequest)
 			return c.JSON(fiber.Map{
 				"message": err.Error(),
 			})
 		}
-		if err := h.pgStore.Repository().DeleteCenter(req.ID); err != nil {
+		if err := h.pgStore.Repository().DeleteOrganization(req.ID); err != nil {
 			c.Status(http.StatusBadRequest)
 			return c.JSON(fiber.Map{
 				"message": err.Error(),
@@ -129,20 +129,20 @@ func (h *Handlers) DeleteCenter() fiber.Handler {
 	}
 }
 
-// @Summary Get all centers
-// @Description getting all  centers
-// @Tags         Center
+// @Summary Get all organization
+// @Description getting all  organization
+// @Tags         Organization
 //
 //	@Accept       json
 //
 // @Produce json
-// @Success 200 {object} responses.Center
+// @Success 200 {object} responses.Organization
 // @Failure 400 {object} responses.Error
 // @Failure 500 {object} responses.Error
-// @Router /api/center/all [get]
-func (h *Handlers) GetCenters() fiber.Handler {
+// @Router /api/organization/all [get]
+func (h *Handlers) GetOrganizations() fiber.Handler {
 	return func(c *fiber.Ctx) error {
-		centers, err := h.pgStore.Repository().GetAllCenters()
+		centers, err := h.pgStore.Repository().GetAllOrganizations()
 		if err != nil {
 			c.Status(http.StatusBadRequest)
 			return c.JSON(fiber.Map{
@@ -153,35 +153,9 @@ func (h *Handlers) GetCenters() fiber.Handler {
 	}
 }
 
-// @Summary Get centers by organization id
-// @Description getting center  by organization id
-// @Tags         Center
-//
-//	@Accept       json
-//
-// @Produce json
-// @Param id   path      string  true  "ID"
-// @Success 200 {object} responses.Center
-// @Failure 400 {object} responses.Error
-// @Failure 500 {object} responses.Error
-// @Router /api/center/organization/{id} [get]
-func (h *Handlers) GetCentersByOrganization() fiber.Handler {
-	return func(c *fiber.Ctx) error {
-		centerID, _ := strconv.Atoi(c.Params("id"))
-		centers, err := h.pgStore.Repository().GetCentersByOrganization(centerID)
-		if err != nil {
-			c.Status(http.StatusBadRequest)
-			return c.JSON(fiber.Map{
-				"message": err.Error(),
-			})
-		}
-		return c.JSON(centers)
-	}
-}
-
-// @Summary Get center name
-// @Description getting center name by id
-// @Tags         Center
+// @Summary Get organization name
+// @Description getting organization name by id
+// @Tags         Organization
 //
 //	@Accept       json
 //
@@ -190,11 +164,11 @@ func (h *Handlers) GetCentersByOrganization() fiber.Handler {
 // @Success 200 {object} responses.DeleteProtocol
 // @Failure 400 {object} responses.Error
 // @Failure 500 {object} responses.Error
-// @Router /api/center/name/{id} [get]
-func (h *Handlers) GetCenterName() fiber.Handler {
+// @Router /api/organization/name/{id} [get]
+func (h *Handlers) GetOrganizationName() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		centerID, _ := strconv.Atoi(c.Params("id"))
-		name, err := h.pgStore.Repository().GetCenterName(centerID)
+		name, err := h.pgStore.Repository().GetOrganizationName(centerID)
 		if err != nil {
 			c.Status(http.StatusBadRequest)
 			return c.JSON(fiber.Map{

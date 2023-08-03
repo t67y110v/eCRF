@@ -4,13 +4,24 @@ definitions:
     properties:
       name:
         type: string
+      organization_id:
+        type: integer
+    type: object
+  requests.AddNewOrganization:
+    properties:
+      name:
+        type: string
     type: object
   requests.AddProtocol:
     properties:
-      centerID:
+      center_id:
         type: integer
       name:
         type: string
+      number:
+        type: integer
+      organization_id:
+        type: integer
       status:
         type: integer
     type: object
@@ -71,6 +82,11 @@ definitions:
   requests.DeleteCenter:
     properties:
       center_id:
+        type: integer
+    type: object
+  requests.DeleteOrganization:
+    properties:
+      organization_id:
         type: integer
     type: object
   requests.DeleteProtocol:
@@ -211,6 +227,8 @@ definitions:
         type: string
       name:
         type: string
+      organization_id:
+        type: integer
       password:
         type: string
       role:
@@ -248,6 +266,8 @@ definitions:
         type: integer
       name:
         type: string
+      organization_id:
+        type: integer
       password:
         type: string
       role:
@@ -259,6 +279,8 @@ definitions:
         type: integer
       name:
         type: string
+      organization_id:
+        type: integer
     type: object
   requests.UpdateColorRequest:
     properties:
@@ -290,6 +312,13 @@ definitions:
       value:
         type: integer
     type: object
+  requests.UpdateOrganization:
+    properties:
+      name:
+        type: string
+      organization_id:
+        type: integer
+    type: object
   requests.UpdateValueWithColor:
     properties:
       color:
@@ -314,6 +343,8 @@ definitions:
         type: integer
       center_name:
         type: string
+      organization_id:
+        type: integer
     type: object
   responses.DeleteProtocol:
     properties:
@@ -374,6 +405,13 @@ definitions:
       JWT:
         type: string
     type: object
+  responses.Organization:
+    properties:
+      name:
+        type: string
+      organization_id:
+        type: integer
+    type: object
   responses.Registration:
     properties:
       center_id:
@@ -382,6 +420,8 @@ definitions:
         type: string
       name:
         type: string
+      organization_id:
+        type: integer
       role:
         type: integer
       user_id:
@@ -511,6 +551,35 @@ paths:
       summary: Get center name
       tags:
       - Center
+  /api/center/organization/{id}:
+    get:
+      consumes:
+      - application/json
+      description: getting center  by organization id
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.Center'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.Error'
+      summary: Get centers by organization id
+      tags:
+      - Center
   /api/center/update:
     patch:
       consumes:
@@ -564,6 +633,148 @@ paths:
       summary: Journal Get
       tags:
       - Journal
+  /api/organization/add:
+    post:
+      consumes:
+      - application/json
+      description: add new organization
+      parameters:
+      - description: addorganizatione
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/requests.AddNewOrganization'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.DeleteProtocol'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.Error'
+      summary: Add new  organization
+      tags:
+      - Organization
+  /api/organization/all:
+    get:
+      consumes:
+      - application/json
+      description: getting all  organization
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.Organization'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.Error'
+      summary: Get all organization
+      tags:
+      - Organization
+  /api/organization/delete:
+    delete:
+      consumes:
+      - application/json
+      description: delete organization
+      parameters:
+      - description: organization
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/requests.DeleteOrganization'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.DeleteProtocol'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.Error'
+      summary: Delete organization
+      tags:
+      - Organization
+  /api/organization/name/{id}:
+    get:
+      consumes:
+      - application/json
+      description: getting organization name by id
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.DeleteProtocol'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.Error'
+      summary: Get organization name
+      tags:
+      - Organization
+  /api/organization/update:
+    patch:
+      consumes:
+      - application/json
+      description: update organization
+      parameters:
+      - description: organization
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/requests.UpdateOrganization'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.DeleteProtocol'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.Error'
+      summary: Update organization
+      tags:
+      - Organization
   /api/protocols/{filter}/{center}:
     get:
       consumes:

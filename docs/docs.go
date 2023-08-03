@@ -187,6 +187,50 @@ const docTemplate = `{
                 }
             }
         },
+        "/api/center/organization/{id}": {
+            "get": {
+                "description": "getting center  by organization id",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Center"
+                ],
+                "summary": "Get centers by organization id",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.Center"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/responses.Error"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/responses.Error"
+                        }
+                    }
+                }
+            }
+        },
         "/api/center/update": {
             "patch": {
                 "description": "update center",
@@ -251,6 +295,223 @@ const docTemplate = `{
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/responses.GetJournal"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/responses.Error"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/responses.Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/organization/add": {
+            "post": {
+                "description": "add new organization",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Organization"
+                ],
+                "summary": "Add new  organization",
+                "parameters": [
+                    {
+                        "description": "addorganizatione",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.AddNewOrganization"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.DeleteProtocol"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/responses.Error"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/responses.Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/organization/all": {
+            "get": {
+                "description": "getting all  organization",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Organization"
+                ],
+                "summary": "Get all organization",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.Organization"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/responses.Error"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/responses.Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/organization/delete": {
+            "delete": {
+                "description": "delete organization",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Organization"
+                ],
+                "summary": "Delete organization",
+                "parameters": [
+                    {
+                        "description": "organization",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.DeleteOrganization"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.DeleteProtocol"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/responses.Error"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/responses.Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/organization/name/{id}": {
+            "get": {
+                "description": "getting organization name by id",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Organization"
+                ],
+                "summary": "Get organization name",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.DeleteProtocol"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/responses.Error"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/responses.Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/organization/update": {
+            "patch": {
+                "description": "update organization",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Organization"
+                ],
+                "summary": "Update organization",
+                "parameters": [
+                    {
+                        "description": "organization",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.UpdateOrganization"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.DeleteProtocol"
                         }
                     },
                     "400": {
@@ -1289,17 +1550,34 @@ const docTemplate = `{
             "properties": {
                 "name": {
                     "type": "string"
+                },
+                "organization_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "requests.AddNewOrganization": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
                 }
             }
         },
         "requests.AddProtocol": {
             "type": "object",
             "properties": {
-                "centerID": {
+                "center_id": {
                     "type": "integer"
                 },
                 "name": {
                     "type": "string"
+                },
+                "number": {
+                    "type": "integer"
+                },
+                "organization_id": {
+                    "type": "integer"
                 },
                 "status": {
                     "type": "integer"
@@ -1393,6 +1671,14 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "center_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "requests.DeleteOrganization": {
+            "type": "object",
+            "properties": {
+                "organization_id": {
                     "type": "integer"
                 }
             }
@@ -1607,6 +1893,9 @@ const docTemplate = `{
                 "name": {
                     "type": "string"
                 },
+                "organization_id": {
+                    "type": "integer"
+                },
                 "password": {
                     "type": "string"
                 },
@@ -1664,6 +1953,9 @@ const docTemplate = `{
                 "name": {
                     "type": "string"
                 },
+                "organization_id": {
+                    "type": "integer"
+                },
                 "password": {
                     "type": "string"
                 },
@@ -1680,6 +1972,9 @@ const docTemplate = `{
                 },
                 "name": {
                     "type": "string"
+                },
+                "organization_id": {
+                    "type": "integer"
                 }
             }
         },
@@ -1729,6 +2024,17 @@ const docTemplate = `{
                 }
             }
         },
+        "requests.UpdateOrganization": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "organization_id": {
+                    "type": "integer"
+                }
+            }
+        },
         "requests.UpdateValueWithColor": {
             "type": "object",
             "properties": {
@@ -1765,6 +2071,9 @@ const docTemplate = `{
                 },
                 "center_name": {
                     "type": "string"
+                },
+                "organization_id": {
+                    "type": "integer"
                 }
             }
         },
@@ -1859,6 +2168,17 @@ const docTemplate = `{
                 }
             }
         },
+        "responses.Organization": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "organization_id": {
+                    "type": "integer"
+                }
+            }
+        },
         "responses.Registration": {
             "type": "object",
             "properties": {
@@ -1870,6 +2190,9 @@ const docTemplate = `{
                 },
                 "name": {
                     "type": "string"
+                },
+                "organization_id": {
+                    "type": "integer"
                 },
                 "role": {
                     "type": "integer"

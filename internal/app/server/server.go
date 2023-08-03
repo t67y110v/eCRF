@@ -84,7 +84,16 @@ func (s *server) configureRouter() {
 	center.Patch("/update", s.handlers.UpdateCenter())
 	center.Get("/all", s.handlers.GetCenters())
 	center.Get("/name/:id", s.handlers.GetCenterName())
+	center.Get("/organization/:id", s.handlers.GetCentersByOrganization())
 	center.Delete("/delete", s.handlers.DeleteCenter())
+
+	organization := api.Group("/organization")
+	//organization.Use(middlewares.CheckJWT())
+	organization.Post("/add", s.handlers.AddNewOrganization())
+	organization.Patch("/update", s.handlers.UpdateOrganization())
+	organization.Get("/all", s.handlers.GetOrganizations())
+	organization.Get("/name/:id", s.handlers.GetOrganizationName())
+	organization.Delete("/delete", s.handlers.DeleteOrganization())
 
 	subject := api.Group("/subject")
 	//subject.Use(middlewares.CheckJWT())
