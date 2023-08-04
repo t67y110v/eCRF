@@ -9,11 +9,12 @@ import (
 )
 
 type Store struct {
-	client                   *mongo.Client
-	mongoStoreRepository     *MongoSubjectRepository
-	mongoScreeningRepository *MongoScreeningRepository
-	mongoJournalRepository   *MongoJournalRepository
-	mongoColorRepository     *MongoColorRepository
+	client                      *mongo.Client
+	mongoStoreRepository        *MongoSubjectRepository
+	mongoScreeningRepository    *MongoScreeningRepository
+	mongoJournalRepository      *MongoJournalRepository
+	mongoColorRepository        *MongoColorRepository
+	mongoOffSiteBlockRepository *MongoOffSiteBlockRepository
 }
 
 func NewMongoDB(client *mongo.Client) *Store {
@@ -63,4 +64,14 @@ func (s *Store) Color() store.MongoColorRepository {
 		store: s,
 	}
 	return s.mongoColorRepository
+}
+
+func (s *Store) OffSiteBlock() store.MongoOffSiteBlockRepository {
+	if s.mongoOffSiteBlockRepository != nil {
+		return s.mongoOffSiteBlockRepository
+	}
+	s.mongoOffSiteBlockRepository = &MongoOffSiteBlockRepository{
+		store: s,
+	}
+	return s.mongoOffSiteBlockRepository
 }

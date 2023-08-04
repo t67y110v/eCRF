@@ -525,7 +525,7 @@ type Subject struct {
 				SendersRole                  string `bson:"sendersrole"`
 			}
 			DateOfStartAECondition struct {
-				DateOfStartAE string `bson:"dateofstartaecondition"`
+				DateOfStartAE string `bson:"dateofstartae"`
 				Color         int    `bson:"color"`
 				Reason        string `bson:"reason"`
 				Comment       string `bson:"comment"`
@@ -533,7 +533,7 @@ type Subject struct {
 				SendersRole   string `bson:"sendersrole"`
 			}
 			DateOfEndAECondition struct {
-				DateOfEndAE string `bson:"dateofendaecondition"`
+				DateOfEndAE string `bson:"dateofendae"`
 				IsContinues int    `bson:"iscontinius"`
 				Color       int    `bson:"color"`
 				Reason      string `bson:"reason"`

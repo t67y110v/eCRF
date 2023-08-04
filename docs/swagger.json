@@ -900,6 +900,52 @@
                 }
             }
         },
+        "/api/subject/offsiteblock/adverseevent": {
+            "patch": {
+                "description": "AdverseEventSubject value of subject",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Subject.Adverse"
+                ],
+                "summary": "AdverseEventsSubject",
+                "parameters": [
+                    {
+                        "description": "adverseevents",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.AdverseEvents"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.AddProtocol"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/responses.Error"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/responses.Error"
+                        }
+                    }
+                }
+            }
+        },
         "/api/subject/screening/anthropometry": {
             "patch": {
                 "description": "AnthropometrySubject value of subject",
@@ -1590,6 +1636,86 @@
                     "type": "string"
                 },
                 "protocol_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "requests.AdverseEvents": {
+            "type": "object",
+            "properties": {
+                "ConnectionBetweenAEAndDU": {
+                    "type": "integer"
+                },
+                "DoseEffect": {
+                    "type": "integer"
+                },
+                "Exodus": {
+                    "type": "integer"
+                },
+                "IsItSerious": {
+                    "type": "integer"
+                },
+                "LocalReaction": {
+                    "type": "integer"
+                },
+                "MeasuresTaken": {
+                    "type": "integer"
+                },
+                "MeasuresTakenOnUD": {
+                    "type": "integer"
+                },
+                "SubjectDropout": {
+                    "type": "integer"
+                },
+                "adverseeventsregistered": {
+                    "type": "integer"
+                },
+                "associationwiththedrugused": {
+                    "type": "integer"
+                },
+                "dateofendae": {
+                    "type": "string"
+                },
+                "dateofstartae": {
+                    "type": "string"
+                },
+                "descriptionoftheadverseevent": {
+                    "type": "string"
+                },
+                "expectancy": {
+                    "type": "integer"
+                },
+                "foresight": {
+                    "type": "integer"
+                },
+                "impactonhospitalstay": {
+                    "type": "integer"
+                },
+                "iscontinius": {
+                    "type": "integer"
+                },
+                "protocol_id": {
+                    "type": "integer"
+                },
+                "recurringphenomenon": {
+                    "type": "integer"
+                },
+                "relationshipwithmedication": {
+                    "type": "integer"
+                },
+                "renewalafteruse": {
+                    "type": "integer"
+                },
+                "severity": {
+                    "type": "integer"
+                },
+                "severitycriterion": {
+                    "type": "integer"
+                },
+                "subject_num": {
+                    "type": "string"
+                },
+                "testimpact": {
                     "type": "integer"
                 }
             }

@@ -9,4 +9,5 @@ type MongoStore interface {
 	Screening() MongoScreeningRepository
 	Journal() MongoJournalRepository
 	Color() MongoColorRepository
+	OffSiteBlock() MongoOffSiteBlockRepository
 }

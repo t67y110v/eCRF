@@ -36,6 +36,59 @@ definitions:
       protocol_id:
         type: integer
     type: object
+  requests.AdverseEvents:
+    properties:
+      ConnectionBetweenAEAndDU:
+        type: integer
+      DoseEffect:
+        type: integer
+      Exodus:
+        type: integer
+      IsItSerious:
+        type: integer
+      LocalReaction:
+        type: integer
+      MeasuresTaken:
+        type: integer
+      MeasuresTakenOnUD:
+        type: integer
+      SubjectDropout:
+        type: integer
+      adverseeventsregistered:
+        type: integer
+      associationwiththedrugused:
+        type: integer
+      dateofendae:
+        type: string
+      dateofstartae:
+        type: string
+      descriptionoftheadverseevent:
+        type: string
+      expectancy:
+        type: integer
+      foresight:
+        type: integer
+      impactonhospitalstay:
+        type: integer
+      iscontinius:
+        type: integer
+      protocol_id:
+        type: integer
+      recurringphenomenon:
+        type: integer
+      relationshipwithmedication:
+        type: integer
+      renewalafteruse:
+        type: integer
+      severity:
+        type: integer
+      severitycriterion:
+        type: integer
+      subject_num:
+        type: string
+      testimpact:
+        type: integer
+    type: object
   requests.Anthropometry:
     properties:
       anthropometricdatabeenmeasured:
@@ -1084,6 +1137,36 @@ paths:
       summary: Subject Add
       tags:
       - Subject
+  /api/subject/offsiteblock/adverseevent:
+    patch:
+      consumes:
+      - application/json
+      description: AdverseEventSubject value of subject
+      parameters:
+      - description: adverseevents
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/requests.AdverseEvents'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.AddProtocol'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.Error'
+      summary: AdverseEventsSubject
+      tags:
+      - Subject.Adverse
   /api/subject/screening/anthropometry:
     patch:
       consumes:

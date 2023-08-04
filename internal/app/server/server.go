@@ -110,6 +110,10 @@ func (s *server) configureRouter() {
 	screening.Patch("/inclusioncriteria", s.handlers.InclusionCriteriaSubject())
 	screening.Patch("/exclusioncriteria", s.handlers.ExclusionСriteriaSubject())
 	screening.Patch("/completion", s.handlers.CompletionOfScreening())
+
+	offsiteblock := subject.Group("/offsiteblock")
+	offsiteblock.Patch("/adverseevent", s.handlers.AdverseEventsSubject())
+
 	action := subject.Group("/action")
 	action.Use(logg)
 	action.Patch("/updatecolor", s.handlers.UpdateColor())
