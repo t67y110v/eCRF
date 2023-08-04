@@ -12,17 +12,17 @@ type AdverseEvents struct {
 	RecurringPhenomenon          int    `json:"recurringphenomenon"`
 	AssociationWithTheDrugUsed   int    `json:"associationwiththedrugused"`
 	Foresight                    int    `json:"foresight"`
-	ConnectionBetweenAEAndDU     int    `json:"ConnectionBetweenAEAndDU"`
+	ConnectionBetweenAEAndDU     int    `json:"connectionbetweenaeanddu"`
 	RenewalAfterUse              int    `json:"renewalafteruse"`
-	LocalReaction                int    `json:"LocalReaction"`
-	SubjectDropout               int    `json:"SubjectDropout"`
-	MeasuresTaken                int    `json:"MeasuresTaken"`
-	MeasuresTakenOnUD            int    `json:"MeasuresTakenOnUD"`
-	Exodus                       int    `json:"Exodus"`
-	IsItSerious                  int    `json:"IsItSerious"`
+	LocalReaction                int    `json:"localreaction"`
+	SubjectDropout               int    `json:"subjectdropout"`
+	MeasuresTaken                int    `json:"measurestaken"`
+	MeasuresTakenOnUD            int    `json:"measurestakenonud"`
+	Exodus                       int    `json:"exodus"`
+	IsItSerious                  int    `json:"isitserious"`
 	SeverityCriterion            int    `json:"severitycriterion"`
 	TestImpact                   int    `json:"testimpact"`
-	DoseEffect                   int    `json:"DoseEffect"`
+	DoseEffect                   int    `json:"doseeffect"`
 	ImpactOnHospitalStay         int    `json:"impactonhospitalstay"`
 	RelationshipWithMedication   int    `json:"relationshipwithmedication"`
 	Expectancy                   int    `json:"expectancy"`

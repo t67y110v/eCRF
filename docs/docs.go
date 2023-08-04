@@ -1650,34 +1650,13 @@ const docTemplate = `{
         "requests.AdverseEvents": {
             "type": "object",
             "properties": {
-                "ConnectionBetweenAEAndDU": {
-                    "type": "integer"
-                },
-                "DoseEffect": {
-                    "type": "integer"
-                },
-                "Exodus": {
-                    "type": "integer"
-                },
-                "IsItSerious": {
-                    "type": "integer"
-                },
-                "LocalReaction": {
-                    "type": "integer"
-                },
-                "MeasuresTaken": {
-                    "type": "integer"
-                },
-                "MeasuresTakenOnUD": {
-                    "type": "integer"
-                },
-                "SubjectDropout": {
-                    "type": "integer"
-                },
                 "adverseeventsregistered": {
                     "type": "integer"
                 },
                 "associationwiththedrugused": {
+                    "type": "integer"
+                },
+                "connectionbetweenaeanddu": {
                     "type": "integer"
                 },
                 "dateofendae": {
@@ -1689,6 +1668,12 @@ const docTemplate = `{
                 "descriptionoftheadverseevent": {
                     "type": "string"
                 },
+                "doseeffect": {
+                    "type": "integer"
+                },
+                "exodus": {
+                    "type": "integer"
+                },
                 "expectancy": {
                     "type": "integer"
                 },
@@ -1699,6 +1684,18 @@ const docTemplate = `{
                     "type": "integer"
                 },
                 "iscontinius": {
+                    "type": "integer"
+                },
+                "isitserious": {
+                    "type": "integer"
+                },
+                "localreaction": {
+                    "type": "integer"
+                },
+                "measurestaken": {
+                    "type": "integer"
+                },
+                "measurestakenonud": {
                     "type": "integer"
                 },
                 "protocol_id": {
@@ -1721,6 +1718,9 @@ const docTemplate = `{
                 },
                 "subject_num": {
                     "type": "string"
+                },
+                "subjectdropout": {
+                    "type": "integer"
                 },
                 "testimpact": {
                     "type": "integer"
