@@ -1377,6 +1377,35 @@ paths:
       summary: StartOfScreeningSubject
       tags:
       - Subject.Screening
+  /api/user/{id}:
+    get:
+      consumes:
+      - application/json
+      description: getting user by id
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.Registration'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.Error'
+      summary: Get User By Id
+      tags:
+      - User
   /api/user/all:
     get:
       consumes:

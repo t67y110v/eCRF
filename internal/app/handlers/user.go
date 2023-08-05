@@ -3,6 +3,7 @@ package handlers
 import (
 	"fmt"
 	"net/http"
+	"strconv"
 
 	"github.com/t67y110v/web/internal/app/handlers/requests"
 	model "github.com/t67y110v/web/internal/app/model/user"
@@ -206,6 +207,32 @@ func (h *Handlers) UserDelete() fiber.Handler {
 func (h *Handlers) GetUsers() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		u, err := h.pgStore.Repository().GetUsers()
+		if err != nil {
+			c.Status(http.StatusBadRequest)
+			return c.JSON(fiber.Map{
+				"message": err.Error(),
+			})
+		}
+		return c.JSON(u)
+	}
+}
+
+// @Summary Get User By Id
+// @Description getting user by id
+// @Tags         User
+//
+//	@Accept       json
+//
+// @Produce json
+// @Param id   path      string  true  "ID"
+// @Success 200 {object} responses.Registration
+// @Failure 400 {object} responses.Error
+// @Failure 500 {object} responses.Error
+// @Router /api/user/{id} [get]
+func (h *Handlers) GetUserByID() fiber.Handler {
+	return func(c *fiber.Ctx) error {
+		id, _ := strconv.Atoi(c.Params("id"))
+		u, err := h.pgStore.Repository().FindByID(id)
 		if err != nil {
 			c.Status(http.StatusBadRequest)
 			return c.JSON(fiber.Map{

@@ -67,6 +67,7 @@ func (s *server) configureRouter() {
 	user.Patch("/update", s.handlers.UserUpdate())
 	user.Delete("/delete", s.handlers.UserDelete())
 	user.Get("/all", s.handlers.GetUsers())
+	user.Get("/:id", s.handlers.GetUserByID())
 	//////////////////////////////////////
 
 	protocol := api.Group("/protocols")
