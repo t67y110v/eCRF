@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/gofiber/fiber/v2"
@@ -53,7 +54,7 @@ func (h *Handlers) AdverseEventsSubject() fiber.Handler {
 				"message": err.Error(),
 			})
 		}
-
+		go h.journal.SaveAction(c.Context(), fmt.Sprintf("Протокол:%d Субьект:%s, Вневизитный блок - Нежелательные явления, первый ввод данных", req.ProtocolID, req.SubjectNumber), c.Cookies("token_name"), c.Cookies("token_role"), "patch", req)
 		return c.JSON(fiber.Map{
 			"message": "success",
 		})

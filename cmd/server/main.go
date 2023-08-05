@@ -10,7 +10,7 @@ import (
 //@version 0.1
 //@description API Server for eCRF Application
 
-// @host localhost:4000
+// @host 127.0.0.1:4000
 // @basePath /
 
 // @securityDefinitions.apikey  BasicAuth

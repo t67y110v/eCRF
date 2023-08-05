@@ -9,8 +9,8 @@ type AddNewOrganization struct {
 }
 
 type UpdateOrganization struct {
-	CenterID int    `json:"organization_id"`
-	Name     string `json:"name"`
+	OrganizationId int    `json:"organization_id"`
+	Name           string `json:"name"`
 }
 
 type GetOrganizationName struct {

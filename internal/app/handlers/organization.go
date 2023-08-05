@@ -37,7 +37,7 @@ func (h *Handlers) AddNewOrganization() fiber.Handler {
 				"message": err.Error(),
 			})
 		}
-		go h.journal.SaveAction(c.Context(), fmt.Sprintf("Добавление центра %s", req.Name), c.Cookies("token_name"), c.Cookies("token_role"), "create", req)
+		go h.journal.SaveAction(c.Context(), fmt.Sprintf("Добавление организации %s", req.Name), c.Cookies("token_name"), c.Cookies("token_role"), "create", req)
 		return c.JSON(fiber.Map{
 			"message": "success",
 		})
@@ -68,20 +68,20 @@ func (h *Handlers) UpdateOrganization() fiber.Handler {
 				"message": err.Error(),
 			})
 		}
-		center, err := h.pgStore.Repository().GetOrganizationName(req.CenterID)
+		organization, err := h.pgStore.Repository().GetOrganizationName(req.OrganizationId)
 		if err != nil {
 			c.Status(http.StatusBadRequest)
 			return c.JSON(fiber.Map{
 				"message": err.Error(),
 			})
 		}
-		if err := h.pgStore.Repository().UpdateOrganization(req.CenterID, req.Name); err != nil {
+		if err := h.pgStore.Repository().UpdateOrganization(req.OrganizationId, req.Name); err != nil {
 			c.Status(http.StatusBadRequest)
 			return c.JSON(fiber.Map{
 				"message": err.Error(),
 			})
 		}
-		go h.journal.SaveAction(c.Context(), fmt.Sprintf("Обновление центра %s|id:%d", req.Name, req.CenterID), c.Cookies("token_name"), c.Cookies("token_role"), "update", req, center)
+		go h.journal.SaveAction(c.Context(), fmt.Sprintf("Обновление организации %s|id:%d", req.Name, req.OrganizationId), c.Cookies("token_name"), c.Cookies("token_role"), "update", req, organization)
 		return c.JSON(fiber.Map{
 			"message": "success",
 		})
@@ -109,7 +109,7 @@ func (h *Handlers) DeleteOrganization() fiber.Handler {
 				"message": err.Error(),
 			})
 		}
-		center, err := h.pgStore.Repository().GetOrganizationName(req.ID)
+		organization, err := h.pgStore.Repository().GetOrganizationName(req.ID)
 		if err != nil {
 			c.Status(http.StatusBadRequest)
 			return c.JSON(fiber.Map{
@@ -122,7 +122,7 @@ func (h *Handlers) DeleteOrganization() fiber.Handler {
 				"message": err.Error(),
 			})
 		}
-		go h.journal.SaveAction(c.Context(), fmt.Sprintf("Удаление центра %s|id:%d", center, req.ID), c.Cookies("token_name"), c.Cookies("token_role"), "delete", req)
+		go h.journal.SaveAction(c.Context(), fmt.Sprintf("Удаление организации %s|id:%d", organization, req.ID), c.Cookies("token_name"), c.Cookies("token_role"), "delete", req)
 		return c.JSON(fiber.Map{
 			"message": "success",
 		})

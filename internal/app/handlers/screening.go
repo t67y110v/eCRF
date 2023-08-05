@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/gofiber/fiber/v2"
@@ -41,6 +42,7 @@ func (h *Handlers) StartOfScreeningSubject() fiber.Handler {
 				"message": err.Error(),
 			})
 		}
+		go h.journal.SaveAction(c.Context(), fmt.Sprintf("Протокол:%d Субьект:%s, Скриннинг - Начало скриннинга, первый ввод данных", req.ProtocolID, req.SubjectNumber), c.Cookies("token_name"), c.Cookies("token_role"), "patch", req)
 
 		return c.JSON(fiber.Map{
 			"message": "success",
@@ -92,7 +94,7 @@ func (h *Handlers) InformationConsentSubject() fiber.Handler {
 				"message": err.Error(),
 			})
 		}
-
+		go h.journal.SaveAction(c.Context(), fmt.Sprintf("Протокол:%d Субьект:%s, Скриннинг - Информационное согласие, первый ввод данных", req.ProtocolID, req.SubjectNumber), c.Cookies("token_name"), c.Cookies("token_role"), "patch", req)
 		return c.JSON(fiber.Map{
 			"message": "success",
 		})
@@ -134,6 +136,7 @@ func (h *Handlers) DemographySubject() fiber.Handler {
 				"message": err.Error(),
 			})
 		}
+		go h.journal.SaveAction(c.Context(), fmt.Sprintf("Протокол:%d Субьект:%s, Скриннинг - Демография, первый ввод данных", req.ProtocolID, req.SubjectNumber), c.Cookies("token_name"), c.Cookies("token_role"), "patch", req)
 		return c.JSON(fiber.Map{
 			"message": "success",
 		})
@@ -183,7 +186,7 @@ func (h *Handlers) AnthropometrySubject() fiber.Handler {
 				"message": err.Error(),
 			})
 		}
-
+		go h.journal.SaveAction(c.Context(), fmt.Sprintf("Протокол:%d Субьект:%s, Скриннинг - Антропометрия, первый ввод данных", req.ProtocolID, req.SubjectNumber), c.Cookies("token_name"), c.Cookies("token_role"), "patch", req)
 		return c.JSON(fiber.Map{
 			"message": "success",
 		})
@@ -235,6 +238,7 @@ func (h *Handlers) InclusionCriteriaSubject() fiber.Handler {
 				"message": err.Error(),
 			})
 		}
+		go h.journal.SaveAction(c.Context(), fmt.Sprintf("Протокол:%d Субьект:%s, Скриннинг - Критерии включения , первый ввод данных", req.ProtocolID, req.SubjectNumber), c.Cookies("token_name"), c.Cookies("token_role"), "patch", req)
 		return c.JSON(fiber.Map{
 			"message": "success",
 		})
@@ -290,7 +294,7 @@ func (h *Handlers) ExclusionСriteriaSubject() fiber.Handler {
 				"message": err.Error(),
 			})
 		}
-
+		go h.journal.SaveAction(c.Context(), fmt.Sprintf("Протокол:%d Субьект:%s, Скриннинг - Критерии невключения, первый ввод данных", req.ProtocolID, req.SubjectNumber), c.Cookies("token_name"), c.Cookies("token_role"), "patch", req)
 		return c.JSON(fiber.Map{
 			"message": "success",
 		})
@@ -340,6 +344,7 @@ func (h *Handlers) CompletionOfScreening() fiber.Handler {
 				"message": err.Error(),
 			})
 		}
+		go h.journal.SaveAction(c.Context(), fmt.Sprintf("Протокол:%d Субьект:%s, Скриннинг - Завершение скриннинга, первый ввод данных", req.ProtocolID, req.SubjectNumber), c.Cookies("token_name"), c.Cookies("token_role"), "patch", req)
 		return c.JSON(fiber.Map{
 			"message": "success",
 		})
