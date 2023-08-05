@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -46,6 +47,7 @@ func (h *Handlers) UpdateColor() fiber.Handler {
 				"message": err.Error(),
 			})
 		}
+		go h.journal.SaveAction(c.Context(), fmt.Sprintf("Протокол:%d Субьект:%s, Обновление статуса - %d в поле %s", req.ProtocolID, req.SubjectNumber, req.Value, req.FieldName), c.Cookies("token_name"), c.Cookies("token_role"), "patch", req)
 		return c.JSON(fiber.Map{
 			"message": "success",
 		})
@@ -89,6 +91,7 @@ func (h *Handlers) UpdateColorWithComment() fiber.Handler {
 				"message": err.Error(),
 			})
 		}
+		go h.journal.SaveAction(c.Context(), fmt.Sprintf("Протокол:%d Субьект:%s, Обновление статуса - %d в поле %s с комментарием: %s", req.ProtocolID, req.SubjectNumber, req.Value, req.FieldName, req.Comment), c.Cookies("token_name"), c.Cookies("token_role"), "patch", req)
 		return c.JSON(fiber.Map{
 			"message": "success",
 		})
@@ -135,7 +138,9 @@ func (h *Handlers) UpdateFieldValue() fiber.Handler {
 				return c.JSON(fiber.Map{
 					"message": err.Error(),
 				})
+
 			}
+			go h.journal.SaveAction(c.Context(), fmt.Sprintf("Протокол:%d Субьект:%s, Обновление значения - %s в поле %s", req.ProtocolID, req.SubjectNumber, req.Value, req.FieldName), c.Cookies("token_name"), c.Cookies("token_role"), "patch", req)
 		} else {
 			if err := h.mgStore.Color().UpdateFieldIntValue(c.Context(), subject.ID, field, fieldValue, value, req.Color); err != nil {
 				c.Status(http.StatusBadRequest)
@@ -143,6 +148,7 @@ func (h *Handlers) UpdateFieldValue() fiber.Handler {
 					"message": err.Error(),
 				})
 			}
+			go h.journal.SaveAction(c.Context(), fmt.Sprintf("Протокол:%d Субьект:%s, Обновление значения - %s в поле %s", req.ProtocolID, req.SubjectNumber, req.Value, req.FieldName), c.Cookies("token_name"), c.Cookies("token_role"), "patch", req)
 		}
 
 		return c.JSON(fiber.Map{
