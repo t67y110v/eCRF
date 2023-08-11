@@ -18,7 +18,7 @@ jobs:
   # This workflow contains a single job called "build"
   deploy:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/master'
     steps:
       - name: deploy
         uses: D3rHase/ssh-command-action@v0.2.2
@@ -32,5 +32,5 @@ jobs:
             git checkout master;
             git pull;
             docker ps;
-            docker compose --file docker-compose.yml up  server -d;
+            docker compose --file docker-compose.yml up -d --build server;
       
