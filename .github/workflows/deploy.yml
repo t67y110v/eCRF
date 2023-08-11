@@ -32,5 +32,5 @@ jobs:
             git checkout master;
             git pull;
             docker ps;
-            docker compose --file docker-compose.yml up  server -d;
+            docker compose up --build -d server;
       
