@@ -1696,6 +1696,9 @@
                 "connectionbetweenaeanddu": {
                     "type": "integer"
                 },
+                "count": {
+                    "type": "integer"
+                },
                 "dateofendae": {
                     "type": "string"
                 },
@@ -2144,6 +2147,9 @@
         "requests.UpdateColorRequest": {
             "type": "object",
             "properties": {
+                "count": {
+                    "type": "integer"
+                },
                 "field_name": {
                     "type": "string"
                 },
@@ -2163,6 +2169,9 @@
             "properties": {
                 "comment": {
                     "type": "string"
+                },
+                "count": {
+                    "type": "integer"
                 },
                 "field_name": {
                     "type": "string"
@@ -2202,6 +2211,9 @@
             "type": "object",
             "properties": {
                 "color": {
+                    "type": "integer"
+                },
+                "count": {
                     "type": "integer"
                 },
                 "field_name": {

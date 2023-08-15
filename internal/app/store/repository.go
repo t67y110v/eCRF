@@ -20,7 +20,7 @@ type PostgresStoreRepository interface {
 }
 
 type MongoOffSiteBlockRepository interface {
-	AdverseEvents(ctx context.Context, id primitive.ObjectID, AdverseEventsRegistered int, DescriptionOfTheAdverseEvent string, DateOfStartAE string, isContinuesStart int, DateOfEndAE string, Severity int, RecurringPhenomenon int, AssociationWithTheDrugUsed int, Foresight int, ConnectionBetweenAEAndDU int, RenewalAfterUse int, LocalReaction int, SubjectDropout int, MeasuresTaken int, MeasuresTakenOnUDCondition int, Exodus int, IsItSerious int, SeverityCriterion int, TestImpact int, DoseEffect int, ImpactOnHospitalStay int, RelationshipWithMedication int, Expectancy int) error
+	AdverseEvents(ctx context.Context, id primitive.ObjectID, AdverseEventsRegistered int, DescriptionOfTheAdverseEvent string, DateOfStartAE string, isContinuesStart int, DateOfEndAE string, Severity int, RecurringPhenomenon int, AssociationWithTheDrugUsed int, Foresight int, ConnectionBetweenAEAndDU int, RenewalAfterUse int, LocalReaction int, SubjectDropout int, MeasuresTaken int, MeasuresTakenOnUDCondition int, Exodus int, IsItSerious int, SeverityCriterion int, TestImpact int, DoseEffect int, ImpactOnHospitalStay int, RelationshipWithMedication int, Expectancy int, count int) error
 }
 
 type MongoSubjectRepository interface {

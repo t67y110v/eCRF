@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"fmt"
 	"strings"
 )
 
@@ -24,7 +25,7 @@ func GetFieldNameForUpdate(field string) string {
 	return res
 }
 
-func GetFieldName(field string) string {
+func GetFieldName(field string, count int) string {
 	m := make(map[string]string)
 
 	m["dateofstart"] = "screening.startofscreening.datestartofscreeningcondition."
@@ -93,27 +94,29 @@ func GetFieldName(field string) string {
 	m["reasonifnot"] = "screening.completionofscreening.reasonifnotcondition."
 	m["commentvalue"] = "screening.completionofscreening.commentcondition."
 
-	m["connectionbetweenaeAnddu"] = "OffSiteBlock.AdverseEvents.ConnectionBetweenAEAndDUcondition."
-	m["doseeffect"] = "OffSiteBlock.AdverseEvents.DoseEffectcondition."
-	m["exodus"] = "OffSiteBlock.AdverseEvents.Exoduscondition."
-	m["localreaction"] = "OffSiteBlock.AdverseEvents.localreactioncondition."
-	m["measurestaken"] = "OffSiteBlock.AdverseEvents.measurestakencondition."
-	m["measurestakenOnUD"] = "OffSiteBlock.AdverseEvents.measurestakenOnUDcondition."
-	m["subjectdropout"] = "OffSiteBlock.AdverseEvents.subjectdropoutcondition."
-	m["adverseeventsregistered"] = "OffSiteBlock.AdverseEvents.adverseeventsregisteredcondition."
-	m["associationwiththedrugused"] = "OffSiteBlock.AdverseEvents.associationwiththedrugusedcondition."
-	m["dateofendae"] = "OffSiteBlock.AdverseEvents.dateofendaecondition."
-	m["dateofstartae"] = "OffSiteBlock.AdverseEvents.dateofstartaecondition."
-	m["descriptionoftheadverseevent"] = "OffSiteBlock.AdverseEvents.descriptionoftheadverseeventcondition."
-	m["expectancy"] = "OffSiteBlock.AdverseEvents.expectancycondition."
-	m["foresight"] = "OffSiteBlock.AdverseEvents.foresightcondition."
-	m["impactonhospitalstay"] = "OffSiteBlock.AdverseEvents.impactonhospitalstaycondition."
-	m["iscontinius"] = "OffSiteBlock.AdverseEvents.iscontiniuscondition."
-	m["recurringphenomenon"] = "OffSiteBlock.AdverseEvents.recurringphenomenoncondition."
-	m["relationshipwithmedication"] = "OffSiteBlock.AdverseEvents.relationshipwithmedicationcondition."
-	m["renewalafteruse"] = "OffSiteBlock.AdverseEvents.renewalafterusecondition."
-	m["severity"] = "OffSiteBlock.AdverseEvents.severitycondition."
-	m["severitycriterion"] = "OffSiteBlock.AdverseEvents.severitycriterioncondition."
-	m["testimpact"] = "OffSiteBlock.AdverseEvents.testimpactcondition."
-	return m[field]
+	m["connectionbetweenaeanddu"] = fmt.Sprintf("OffSiteBlock.AdverseEvents.%d.ConnectionBetweenAEAndDUcondition.", count)
+	m["doseeffect"] = fmt.Sprintf("OffSiteBlock.AdverseEvents.%d.doseeffectcondition.", count)
+	m["exodus"] = fmt.Sprintf("OffSiteBlock.AdverseEvents.%d.exoduscondition.", count)
+	m["localreaction"] = fmt.Sprintf("OffSiteBlock.AdverseEvents.%d.localreactioncondition.", count)
+	m["measurestaken"] = fmt.Sprintf("OffSiteBlock.AdverseEvents.%d.measurestakencondition.", count)
+	m["measurestakenonud"] = fmt.Sprintf("OffSiteBlock.AdverseEvents.%d.measurestakenOnUDcondition.", count)
+	m["subjectdropout"] = fmt.Sprintf("OffSiteBlock.AdverseEvents.%d.subjectdropoutcondition.", count)
+	m["adverseeventsregistered"] = fmt.Sprintf("OffSiteBlock.AdverseEvents..%dadverseeventsregisteredcondition.", count)
+	m["associationwiththedrugused"] = fmt.Sprintf("OffSiteBlock.AdverseEvents.%d.associationwiththedrugusedcondition.", count)
+	m["dateofendae"] = fmt.Sprintf("OffSiteBlock.AdverseEvents.%d.dateofendaecondition.", count)
+	m["dateofstartae"] = fmt.Sprintf("OffSiteBlock.AdverseEvents.%d.dateofstartaecondition.", count)
+	m["descriptionoftheadverseevent"] = fmt.Sprintf("OffSiteBlock.AdverseEvents.%d.descriptionoftheadverseeventcondition.", count)
+	m["expectancy"] = fmt.Sprintf("OffSiteBlock.AdverseEvents.%d.expectancycondition.", count)
+	m["foresight"] = fmt.Sprintf("OffSiteBlock.AdverseEvents.%d.foresightcondition.", count)
+	m["impactonhospitalstay"] = fmt.Sprintf("OffSiteBlock.AdverseEvents.%d.impactonhospitalstaycondition.", count)
+	m["iscontinius"] = fmt.Sprintf("OffSiteBlock.AdverseEvents.%d.iscontiniuscondition.", count)
+	m["recurringphenomenon"] = fmt.Sprintf("OffSiteBlock.AdverseEvents.%d.recurringphenomenoncondition.", count)
+	m["relationshipwithmedication"] = fmt.Sprintf("OffSiteBlock.AdverseEvents.%d.relationshipwithmedicationcondition.", count)
+	m["renewalafteruse"] = fmt.Sprintf("OffSiteBlock.AdverseEvents.%d.renewalafterusecondition.", count)
+	m["severity"] = fmt.Sprintf("OffSiteBlock.AdverseEvents.%d.severitycondition.", count)
+	m["severitycriterion"] = fmt.Sprintf("OffSiteBlock.AdverseEvents.%d.severitycriterioncondition.", count)
+	m["testimpact"] = fmt.Sprintf("OffSiteBlock.AdverseEvents.%d.testimpactcondition.", count)
+
+	result := strings.ToLower(m[field])
+	return result
 }

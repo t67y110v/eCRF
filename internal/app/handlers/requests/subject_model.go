@@ -20,9 +20,11 @@ type UpdateColorRequest struct {
 	ProtocolID    int    `json:"protocol_id"`
 	FieldName     string `json:"field_name"`
 	Value         int    `json:"value"`
+	Count         int    `json:"count"`
 }
 
 type UpdateColorWithCommentRequest struct {
+	Count         int    `json:"count"`
 	SubjectNumber string `json:"subject_number"`
 	ProtocolID    int    `json:"protocol_id"`
 	Sender        string `json:"sender"`
@@ -34,6 +36,7 @@ type UpdateColorWithCommentRequest struct {
 }
 
 type UpdateValueWithColor struct {
+	Count         int    `json:"count "`
 	SubjectNumber string `json:"subject_number"`
 	ProtocolID    int    `json:"protocol_id"`
 	FieldName     string `json:"field_name"`

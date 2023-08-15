@@ -1703,6 +1703,9 @@ const docTemplate = `{
                 "connectionbetweenaeanddu": {
                     "type": "integer"
                 },
+                "count": {
+                    "type": "integer"
+                },
                 "dateofendae": {
                     "type": "string"
                 },
@@ -2151,6 +2154,9 @@ const docTemplate = `{
         "requests.UpdateColorRequest": {
             "type": "object",
             "properties": {
+                "count": {
+                    "type": "integer"
+                },
                 "field_name": {
                     "type": "string"
                 },
@@ -2170,6 +2176,9 @@ const docTemplate = `{
             "properties": {
                 "comment": {
                     "type": "string"
+                },
+                "count": {
+                    "type": "integer"
                 },
                 "field_name": {
                     "type": "string"
@@ -2209,6 +2218,9 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "color": {
+                    "type": "integer"
+                },
+                "count": {
                     "type": "integer"
                 },
                 "field_name": {

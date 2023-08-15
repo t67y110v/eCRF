@@ -48,6 +48,7 @@ func (h *Handlers) AdverseEventsSubject() fiber.Handler {
 			req.SeverityCriterion, req.TestImpact,
 			req.DoseEffect, req.ImpactOnHospitalStay,
 			req.RelationshipWithMedication, req.Expectancy,
+			req.Count,
 		); err != nil {
 			c.Status(http.StatusBadRequest)
 			return c.JSON(fiber.Map{

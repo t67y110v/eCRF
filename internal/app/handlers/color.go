@@ -40,7 +40,7 @@ func (h *Handlers) UpdateColor() fiber.Handler {
 			})
 		}
 
-		fieldName := utils.GetFieldName(req.FieldName)
+		fieldName := utils.GetFieldName(req.FieldName, req.Count)
 		if err := h.mgStore.Color().UpdateColor(c.Context(), subject.ID, fieldName, req.Value); err != nil {
 			c.Status(http.StatusBadRequest)
 			return c.JSON(fiber.Map{
@@ -85,7 +85,7 @@ func (h *Handlers) UpdateColorWithComment() fiber.Handler {
 			})
 		}
 
-		if err := h.mgStore.Color().UpdateColorWithComment(c.Context(), subject.ID, utils.GetFieldName(req.FieldName), req.Reason, req.Comment, req.Sender, req.SendersRole, req.Value); err != nil {
+		if err := h.mgStore.Color().UpdateColorWithComment(c.Context(), subject.ID, utils.GetFieldName(req.FieldName, req.Count), req.Reason, req.Comment, req.Sender, req.SendersRole, req.Value); err != nil {
 			c.Status(http.StatusBadRequest)
 			return c.JSON(fiber.Map{
 				"message": err.Error(),
@@ -129,7 +129,7 @@ func (h *Handlers) UpdateFieldValue() fiber.Handler {
 			})
 		}
 
-		field := utils.GetFieldName(req.FieldName)
+		field := utils.GetFieldName(req.FieldName, req.Count)
 		fieldValue := utils.GetFieldNameForUpdate(field)
 		value, err := strconv.Atoi(req.Value)
 		if err != nil {

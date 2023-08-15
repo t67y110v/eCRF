@@ -26,4 +26,5 @@ type AdverseEvents struct {
 	ImpactOnHospitalStay         int    `json:"impactonhospitalstay"`
 	RelationshipWithMedication   int    `json:"relationshipwithmedication"`
 	Expectancy                   int    `json:"expectancy"`
+	Count                        int    `json:"count"`
 }
