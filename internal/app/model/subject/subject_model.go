@@ -507,7 +507,7 @@ type Subject struct {
 	}
 }
 
-type AdverseEvents struct {
+type AdverseEventsAr struct {
 	AdverseEventsRegisteredCondition struct {
 		AdverseEventsRegistered int    `bson:"adverseeventsregistered"`
 		Color                   int    `bson:"color"`

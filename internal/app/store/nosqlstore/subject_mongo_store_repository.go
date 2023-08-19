@@ -2,6 +2,7 @@ package nosqlstore
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"time"
 
@@ -69,6 +70,35 @@ func (r *MongoSubjectRepository) GetSubjectsByProtocolId(protocolId int) ([]*mod
 		return subjects, nil
 	}
 	return subjects, nil
+}
+
+func (r *MongoSubjectRepository) GetSubjectResponce(number string, protocolID int) ([]byte, error) {
+	filter := bson.D{
+		primitive.E{
+			Key:   "number",
+			Value: number,
+		},
+		primitive.E{
+			Key:   "protocol_id",
+			Value: protocolID,
+		},
+	}
+	ctx := context.TODO()
+	collection := r.store.client.Database("eCRF").Collection("subjects")
+
+	var s bson.M = bson.M{}
+	err := collection.FindOne(ctx, filter).Decode(s)
+
+	if err != nil {
+		return nil, err
+	}
+
+	res, err := json.Marshal(s)
+	if err != nil {
+		return nil, err
+	}
+	return res, nil
+
 }
 
 func (r *MongoSubjectRepository) GetSubjectByNumber(number string, protocolID int) (*model.Subject, error) {

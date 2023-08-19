@@ -52,14 +52,15 @@ func (h *Handlers) GetSubjectByNumber() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		protocolID, _ := strconv.Atoi(c.Params("protocol_id"))
 
-		s, err := h.mgStore.Subject().GetSubjectByNumber(c.Params("subject_num"), protocolID)
+		s, err := h.mgStore.Subject().GetSubjectResponce(c.Params("subject_num"), protocolID)
 		if err != nil {
 			c.Status(http.StatusBadRequest)
 			return c.JSON(fiber.Map{
 				"message": err.Error(),
 			})
 		}
-		return c.JSON(s)
+
+		return c.Send(s)
 	}
 }
 

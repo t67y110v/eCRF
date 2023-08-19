@@ -25,6 +25,7 @@ type MongoOffSiteBlockRepository interface {
 
 type MongoSubjectRepository interface {
 	AddSubject(number, initials string, centerId, protocolId int) error
+	GetSubjectResponce(number string, protocolID int) ([]byte, error)
 	GetSubjectsByProtocolId(protocolId int) ([]*modelSubject.Subject, error)
 	GetSubjectByNumber(number string, protocolID int) (*modelSubject.Subject, error)
 	DeleteSubject(number string) error
